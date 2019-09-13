@@ -169,7 +169,7 @@ document.addEventListener('click', onClick)
       <table class="formulario" border="0" cellspacing="0" cellpadding="0">
           <tr height="40">
               <td colspan="2" valign="middle" align="center">
-                  Form Edit
+                  Form New post
               </td>
           </tr>
           <tr height="60">
@@ -193,7 +193,7 @@ document.addEventListener('click', onClick)
             $nombrecampostatus="status1";
             $nombrebarraprogreso="progressBar1";
             $maximotamanofichero="0"; //en Bytes, "0" para ilimitado. 1000000 Bytes = 1000Kb = 1Mb
-            $tiposficheropermitidos="0"; //  Por ejemplo "jpg,doc,png", separados por comas y poner "0" para permitir todos los tipos
+            $tiposficheropermitidos="jpg,png"; //  Por ejemplo "jpg,doc,png", separados por comas y poner "0" para permitir todos los tipos
             $limiteancho="0"; // En píxels, "0" significa cualquier tamaño permitido
             $limitealto="0"; // En píxels, "0" significa cualquier tamaño permitido
                                                 
@@ -211,9 +211,7 @@ document.addEventListener('click', onClick)
                     <progress id="<?php echo $nombrebarraprogreso;?>" value="0" max="80" style="width: 80%;"></progress>
                     <h5 id="<?php echo $nombrecampostatus;?>"></h5>
                     <img src="" alt="" id="<?php echo $nombrecampoimagenmostrar;?>" height="150">
-              
             <?php /*?>
-            
             //******************FIN BLOQUE INSERCION IMAGEN*************************
             <?php */?>  
                 </td>
@@ -283,7 +281,7 @@ document.addEventListener('click', onClick)
             $nombrecampostatus="status1";
             $nombrebarraprogreso="progressBar1";
             $maximotamanofichero="0"; //en Bytes, "0" para ilimitado. 1000000 Bytes = 1000Kb = 1Mb
-            $tiposficheropermitidos="0"; //  Por ejemplo "jpg,doc,png", separados por comas y poner "0" para permitir todos los tipos
+            $tiposficheropermitidos="jpg,png"; //  Por ejemplo "jpg,doc,png", separados por comas y poner "0" para permitir todos los tipos
             $limiteancho="0"; // En píxels, "0" significa cualquier tamaño permitido
             $limitealto="0"; // En píxels, "0" significa cualquier tamaño permitido
                                                 
@@ -291,7 +289,7 @@ document.addEventListener('click', onClick)
 
             //$cadenadeparametros="";                                 
             ?>
-                    <input type="hidden" class="textf" size="40" name="<?php echo $nombrecampoimagen;?>" id="<?php echo $nombrecampoimagen;?>">
+                    <input type="hidden" class="textf" size="40" name="<?php echo $nombrecampoimagen;?>" id="<?php echo $nombrecampoimagen;?>" value="<?php echo $row_DatosEdit['foto'];?>">
                     <br>
                     <br>
                     <input type="file" name="<?php echo $nombrecampofichero;?>" id="<?php echo $nombrecampofichero;?>">
@@ -300,7 +298,7 @@ document.addEventListener('click', onClick)
                     <br>
                     <progress id="<?php echo $nombrebarraprogreso;?>" value="0" max="80" style="width: 80%;"></progress>
                     <h5 id="<?php echo $nombrecampostatus;?>"></h5>
-                    <img src="" alt="" id="<?php echo $nombrecampoimagenmostrar;?>" height="150">
+                    <img src="<?php echo $nombrecarpetadestino.$row_DatosEdit['foto']; ?>" alt="" id="<?php echo $nombrecampoimagenmostrar;?>" height="150">
               
             <?php /*?>
             
@@ -336,7 +334,7 @@ document.addEventListener('click', onClick)
                   
               </td>
           </tr>
-          <input type="hidden" name="MM_insert" id="MM_insert" value="formrequest" />
+          <input type="hidden" name="MM_insert" id="MM_insert" value="formedit" />
           <input type="hidden" name="id_publications" id="id_publications" value="<?php echo $_GET["edit"];?>"/>
       </table>
     </form>

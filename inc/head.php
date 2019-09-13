@@ -1,6 +1,6 @@
 <div class="head">
     <div class="logo">
-        <img src="img/yandali.png" width="" height="70%" style="margin: 0 auto;"> 
+        <a href="index.php"><img src="img/yandali_dance_studio.svg" width="" height="70%" style="margin: 0 auto;"></a>
     </div>
     <div id="menu">
         <ul>

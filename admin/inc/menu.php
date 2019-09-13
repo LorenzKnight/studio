@@ -39,7 +39,7 @@ window.onclick = function(event) {
           <div class="dropdown2-content">
             <ul>
               <li><a href="#">Schedule</a></li>
-              <li><a href="#">menu 2.2</a></li>
+              <li><a href="#">Q & A</a></li>
               <li><a href="#">menu 2.3</a></li>
             </ul>
           </div>
