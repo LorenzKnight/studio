@@ -3,7 +3,7 @@ $variable_Consulta = "0";
 if (isset($VARIABLE)) {
   $variable_Consulta = $VARIABLE;
 }
-$query_DatosPub = sprintf("SELECT * FROM publications ORDER BY id_publications ASC");
+$query_DatosPub = sprintf("SELECT * FROM publications ORDER BY id_publications DESC");
 $DatosPub = mysqli_query($con, $query_DatosPub) or die(mysqli_error($con));
 $row_DatosPub = mysqli_fetch_assoc($DatosPub);
 $totalRows_DatosPub = mysqli_num_rows($DatosPub);
@@ -20,12 +20,13 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequest")) {
   $year = date("Y");
 	$month = date("m");
 	$day = date("d");
-  $insertSQL = sprintf("INSERT INTO publications(date, year, month, day, time, foto, title, content, status, id_publications) 
+  $insertSQL = sprintf("INSERT INTO publications(date, year, month, day, time, foto, title, content, status, settings, id_publications) 
                         VALUES (NOW(), $year, $month, $day, NOW(), %s, %s, %s, %s, %s)",
                         GetSQLValueString($_POST["foto"], "text"),                      
                         GetSQLValueString($_POST["title"], "text"),
                         GetSQLValueString($_POST["content"], "text"),
                         GetSQLValueString($_POST["status"], "int"),
+                        GetSQLValueString($_POST["settings"], "int"),
                         GetSQLValueString($_POST["id_publications"], "int"));
 
   
@@ -114,36 +115,14 @@ const onClick = function (e) {
 }
 
 document.addEventListener('click', onClick)
-
 </script>
-<style>
-    .box_1 {
-        width: 80px;
-        overflow: auto;
-        /*background-color: blueviolet;*/
-        float: left;
-        margin: 0 3%;
-    }
-    .foto_box_1 {
-        width: 100%;
-        height: 500px;
-        background-color: blue;
-        margin: 0;
-        position: relative;
-        display: block;
-        overflow: hidden;
-        box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
-    }
-    .foto_box_1 img {
-        position: absolute;
-    }
-</style>
-<div class="user_div">
+
+<div class="pub_div">
     <?php if ($row_DatosPub > 0) { // Show if recordset not empty ?>
     <?php do { ?>
     <div class="pub_vy">
         <div class="pub_vy_foto">
-                    <img src="../img/news/<?php echo $row_DatosPub['foto']; ?>" style="width: 100%;">
+            <img src="../img/news/<?php echo $row_DatosPub['foto']; ?>">
         </div>
         <div class="pub_vy_text">
             <h3><?php echo $row_DatosPub['title']; ?></h3>
@@ -181,49 +160,53 @@ document.addEventListener('click', onClick)
           <tr height="200">
               <td colspan="2" valign="middle" align="center">
 
-          <script src="scriptupload.js"></script>
+                <script src="scriptupload.js"></script>
 
-            <?php 
-            //***********************BLOQUE INSERCION IMAGEN***********************//
-            //***********************PARÁMETROS DE IMAGEN**************************//
-            $nombrecampoimagen="foto";
-            $nombrecampoimagenmostrar="fotopic";
-            $nombrecarpetadestino="../img/news/"; //carpeta destino con barra al final
-            $nombrecampofichero="file1";
-            $nombrecampostatus="status1";
-            $nombrebarraprogreso="progressBar1";
-            $maximotamanofichero="0"; //en Bytes, "0" para ilimitado. 1000000 Bytes = 1000Kb = 1Mb
-            $tiposficheropermitidos="jpg,png"; //  Por ejemplo "jpg,doc,png", separados por comas y poner "0" para permitir todos los tipos
-            $limiteancho="0"; // En píxels, "0" significa cualquier tamaño permitido
-            $limitealto="0"; // En píxels, "0" significa cualquier tamaño permitido
-                                                
-            $cadenadeparametros="'".$nombrecampoimagen."','".$nombrecampoimagenmostrar."','".$nombrecarpetadestino."','".$nombrecampofichero."','".$nombrecampostatus."','".$nombrebarraprogreso."','".$maximotamanofichero."','".$tiposficheropermitidos."','".$limiteancho."','".$limitealto."'";
+                <?php 
+                //***********************BLOQUE INSERCION IMAGEN***********************//
+                //***********************PARÁMETROS DE IMAGEN**************************//
+                $nombrecampoimagen="foto";
+                $nombrecampoimagenmostrar="fotopic";
+                $nombrecarpetadestino="../img/news/"; //carpeta destino con barra al final
+                $nombrecampofichero="file1";
+                $nombrecampostatus="status1";
+                $nombrebarraprogreso="progressBar1";
+                $maximotamanofichero="0"; //en Bytes, "0" para ilimitado. 1000000 Bytes = 1000Kb = 1Mb
+                $tiposficheropermitidos="jpg,png"; //  Por ejemplo "jpg,doc,png", separados por comas y poner "0" para permitir todos los tipos
+                $limiteancho="0"; // En píxels, "0" significa cualquier tamaño permitido
+                $limitealto="0"; // En píxels, "0" significa cualquier tamaño permitido
+                                                    
+                $cadenadeparametros="'".$nombrecampoimagen."','".$nombrecampoimagenmostrar."','".$nombrecarpetadestino."','".$nombrecampofichero."','".$nombrecampostatus."','".$nombrebarraprogreso."','".$maximotamanofichero."','".$tiposficheropermitidos."','".$limiteancho."','".$limitealto."'";
 
-            //$cadenadeparametros="";                                 
-            ?>
-                    <input type="hidden" class="textf" size="40" name="<?php echo $nombrecampoimagen;?>" id="<?php echo $nombrecampoimagen;?>">
-                    <br>
-                    <br>
-                    <input type="file" name="<?php echo $nombrecampofichero;?>" id="<?php echo $nombrecampofichero;?>">
-                    
-                    <input class="form-control" type="button" value="Ladda up file" onclick="uploadFile(<?php echo $cadenadeparametros;?>)">
-                    <br>
-                    <progress id="<?php echo $nombrebarraprogreso;?>" value="0" max="80" style="width: 80%;"></progress>
-                    <h5 id="<?php echo $nombrecampostatus;?>"></h5>
-                    <img src="" alt="" id="<?php echo $nombrecampoimagenmostrar;?>" height="150">
-            <?php /*?>
-            //******************FIN BLOQUE INSERCION IMAGEN*************************
-            <?php */?>  
-                </td>
+                //$cadenadeparametros="";                                 
+                ?>
+                        <input type="hidden" size="40" name="settings" id="settings">
+                        <input type="hidden" class="textf" size="40" name="<?php echo $nombrecampoimagen;?>" id="<?php echo $nombrecampoimagen;?>">
+                        <br>
+                        <br>
+                        <input type="file" name="<?php echo $nombrecampofichero;?>" id="<?php echo $nombrecampofichero;?>">
+                        
+                        <input class="form-control" type="button" value="Ladda up file" onclick="uploadFile(<?php echo $cadenadeparametros;?>)">
+                        <br>
+                        <progress id="<?php echo $nombrebarraprogreso;?>" value="0" max="80" style="width: 80%;"></progress>
+                        <h5 id="<?php echo $nombrecampostatus;?>"></h5>
+                        <div class="foto_prev">
+                            <img src="" alt="" id="<?php echo $nombrecampoimagenmostrar;?>" height="150">
+
+                            <?php $ajuste = (270);?>
+
+                            <div class="new_index" style="left: <?php echo $ajuste; ?>px;">
+                            </div>
+                        </div>
+                <?php /*?>
+                //******************FIN BLOQUE INSERCION IMAGEN*************************
+                <?php */?>  
+              </td>
           </tr>
           <tr height="50">
               <td width="50%" valign="middle" align="right" style="color: #666; font-size: 14px; padding: 0 10px;">
-                  Site:
-                  <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="site" id="site" required>
-                  <option value="0">None</option>
-                  <option value="1">Man</option>
-                  <option value="2">Kvinna</option>
-                  </select>
+                  foto setting:
+                  <input class="textf" type="text" size="8" name="settings" id="settings">
               </td>
               <td width="50%" valign="middle" align="left" style="color: #666; font-size: 14px; padding: 0 10px;">
                   Status:
@@ -298,8 +281,14 @@ document.addEventListener('click', onClick)
                     <br>
                     <progress id="<?php echo $nombrebarraprogreso;?>" value="0" max="80" style="width: 80%;"></progress>
                     <h5 id="<?php echo $nombrecampostatus;?>"></h5>
-                    <img src="<?php echo $nombrecarpetadestino.$row_DatosEdit['foto']; ?>" alt="" id="<?php echo $nombrecampoimagenmostrar;?>" height="150">
-              
+                    <div class="foto_prev">
+                        <img src="<?php echo $nombrecarpetadestino.$row_DatosEdit['foto']; ?>" alt="" id="<?php echo $nombrecampoimagenmostrar;?>" height="150">
+
+                        <?php $ajuste = (270);?>
+
+                        <div class="new_index" style="left: <?php echo $ajuste; ?>px;">
+                        </div>
+                    </div>
             <?php /*?>
             
             //******************FIN BLOQUE INSERCION IMAGEN*************************
@@ -308,12 +297,8 @@ document.addEventListener('click', onClick)
           </tr>
           <tr height="50">
               <td width="50%" valign="middle" align="right" style="color: #666; font-size: 14px; padding: 0 10px;">
-                  Site:
-                  <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="site" id="site" required>
-                  <option value="0" <?php if ($row_DatosEdit["site"]=="0") echo "selected"; ?>>None</option>
-                  <option value="1" <?php if ($row_DatosEdit["site"]=="1") echo "selected"; ?>>Man</option>
-                  <option value="2" <?php if ($row_DatosEdit["site"]=="2") echo "selected"; ?>>Kvinna</option>
-                  </select>
+                  Foto setting:
+                  <input class="textf" type="text" value="<?php echo $row_DatosEdit['settings'];?>" size="8" name="settings" id="settings">
               </td>
               <td width="50%" valign="middle" align="left" style="color: #666; font-size: 14px; padding: 0 10px;">
                   Status:

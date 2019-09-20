@@ -38,7 +38,7 @@ window.onclick = function(event) {
         <li><a href="#about">Plugins</a>
           <div class="dropdown2-content">
             <ul>
-              <li><a href="#">Schedule</a></li>
+              <li><a href="schedule.php">Schedule</a></li>
               <li><a href="#">Q & A</a></li>
               <li><a href="#">menu 2.3</a></li>
             </ul>

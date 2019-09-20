@@ -27,6 +27,7 @@ h5 {
   box-shadow: 0px 0px 20px #333;
   display: flex;
   position: fixed;
+  z-index: 1;
 }
 .title {
   width: 90%;
@@ -264,7 +265,7 @@ h5 {
   height: 150px;
   background-color: #F7B500;
 }
-.user_div{
+.user_div {
   width: 90%;
   overflow: auto;
   background-color: #F7B500;
@@ -272,9 +273,37 @@ h5 {
   border-radius: 7px;
   box-shadow: 0 .15rem 2rem 0 rgba(58,59,69,.15)!important;
 }
+.pub_div{
+  width: 86%;
+  overflow: auto;
+  /*background-color: #F7B500;*/
+  background-image: linear-gradient(#F7B500, rgb(252, 201, 61), rgb(252, 210, 94), rgb(252, 201, 61), #F7B500);
+  margin: 0px auto 110px;
+  padding: 2% 2% 0;
+  border-radius: 5px;
+  box-shadow: 0 .15rem 2rem 0 rgba(58,59,69,.15)!important;
+}
+.schedule_div {
+  width: 90%;
+  overflow: auto;
+  /*background-color: #F7B500;*/
+  margin: 0px auto 110px;
+  border-radius: 4px;
+  box-shadow: 0 .15rem 2rem 0 rgba(58,59,69,.15)!important;
+}
 .formulario {
   width: 600px;
   margin: 150px 31%;
+  background-color: #FFF;
+  border: 1px solid #dddfeb;
+  border-radius: 7px;
+  box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
+  position: fixed;
+  top: 0;
+}
+.formulario_schedule {
+  width: 400px;
+  margin: 160px 34% 0;
   background-color: #FFF;
   border: 1px solid #dddfeb;
   border-radius: 7px;
@@ -391,32 +420,63 @@ h5 {
   }
   /*STOP MENU LISTA*/
   .pub_vy {
-    width: 21.6%;
+    width: 21%;
     height: 500px;
-    border-radius: 7px;
+    border-radius: 3px;
     background-color: #FFF;
-    margin: 10px 0.7%;
+    margin: 0 1% 30px;
     padding: 1%;
     float: left;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   }
   .pub_vy_foto {
-    width: 100%;
+    width: 95%;
     height: 230px;
-    background-color: #0F1E41;
-    border: 1px solid #CCC;
+    margin: 2.5%;
+    background-color: #666;
+    border: 1px solid #f1f1f1;
+    border-radius: 3px;
+    position: relative;
+    display: block;
     overflow: hidden;
   }
+  .pub_vy_foto img{
+    width: 180%;
+    position: absolute;
+    top: -15%;
+    left: -40%;
+}
   .pub_vy_text {
-    width: 94%;
-    height: 200px;
-    background-color: #F1F1F1;
-    border: 1px solid #CCC;
-    border-radius: 7px;
-    margin: 10px 0;
-    padding: 0 3%;
+    width: 85%;
+    height: 180px;
+    margin: 30px 3% 20px;
+    padding: 0 5%;
+    border-radius: 3px;
+    background-image: linear-gradient(#f1f1f1, #FFF);
     text-align: justify;
     overflow: auto;
     color: #666;
     font-size: 13px;
   }
+  .foto_prev {
+    height: 100%;
+    /*background-color: blue;*/
+    margin: 0;
+    position: relative;
+    display: block;
+  }
+  .new_index {
+    width: 10%;
+    height: 100%;
+    border: 2px solid red;
+    position: absolute;
+    top: -2px;
+    left: 45%;
+  }
+
+  .open_calendar {
+    width: 100%;
+    overflow: auto;
+    background-color: #CCC;
+    border-radius: 4px;
+}

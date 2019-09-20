@@ -9,7 +9,7 @@
 </head>
 <body>
     <?php include("inc/head.php")?>
-    <?php //include("inc/calendar.php")?>
+    <?php include("inc/calendar.php")?>
     <?php include("inc/foot.php")?>
 </body>
 </html>
