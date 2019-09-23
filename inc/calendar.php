@@ -89,20 +89,21 @@ $totalRows_ScheduleSun2 = mysqli_num_rows($ScheduleSun2);
 <style>
     .time {
         width: 100%;
-        padding: 20px 0;
+        height: 53.9px;
+        /*padding: 20px 0;*/
         background-color: #CCC;
         border-bottom: 1px solid #999;
-        font-size: 11px;
+        font-size: 10px;
     }
     .kurs {
         font-size: 13px;
         line-height: 26px;
-        position: relative;
+        position: absolute;
     }
     .text_kurs {
         width: 100%;
         top: 27%;
-        position: absolute;
+        font-size: 12px;
     }
 </style>
 <div class="space">
@@ -232,13 +233,13 @@ $totalRows_ScheduleSun2 = mysqli_num_rows($ScheduleSun2);
                         --
                     </div>
                 </td>
-                <td width="7%" nowrap="nowrap" align="center">
+                <td width="7%" nowrap="nowrap" align="center" style="position: relative;">
                     <?php if ($row_ScheduleMon1 > 0) { // Show if recordset not empty ?>
                     <?php do { ?>
-                        <div class="kurs" style="width: 100%; height: <?php echo $row_ScheduleMon1['duration']; ?>px; background-color: #CCC;">
+                        <div class="kurs" style="width: 98%; height: <?php echo $row_ScheduleMon1['duration']; ?>px; background: <?php echo NombreCursoColor($row_ScheduleMon1['level']); ?>; top: <?php echo $row_ScheduleMon1['hour']; ?>px;">
                             <div class="text_kurs">
                                 <?php echo $row_ScheduleMon1['name']; ?><br>
-                                <?php echo $row_ScheduleMon1['level']; ?><br>
+                                <?php echo NombreCurso($row_ScheduleMon1['level']); ?><br>
                                 <?php echo $row_ScheduleMon1['teacher']; ?>
                             </div>
                         </div>
@@ -248,13 +249,15 @@ $totalRows_ScheduleSun2 = mysqli_num_rows($ScheduleSun2);
                     { // Show if recordset is empty ?>
                     <?php } ?>
                 </td>
-                <td width="7%" nowrap="nowrap" align="center" style="border-right: 1px solid #CCC;">
+                <td width="7%" nowrap="nowrap" align="center" style="border-right: 1px solid #CCC; position: relative;">
                     <?php if ($row_ScheduleMon2 > 0) { // Show if recordset not empty ?>
                     <?php do { ?>
-                        <div class="kurs" style="width: 100%; height: <?php echo $row_ScheduleMon2['duration']; ?>px; background-color: #CCC;">
-                            <?php echo $row_ScheduleMon2['name']; ?><br>
-                            <?php echo $row_ScheduleMon2['level']; ?><br>
-                            <?php echo $row_ScheduleMon2['teacher']; ?>
+                        <div class="kurs" style="width: 98%; height: <?php echo $row_ScheduleMon2['duration']; ?>px; background: <?php echo NombreCursoColor($row_ScheduleMon2['level']); ?>; top: <?php echo $row_ScheduleMon2['hour']; ?>px;">
+                            <div class="text_kurs">
+                                <?php echo $row_ScheduleMon2['name']; ?><br>
+                                <?php echo NombreCurso($row_ScheduleMon2['level']); ?><br>
+                                <?php echo $row_ScheduleMon2['teacher']; ?>
+                            </div>
                         </div>
                     <?php } while ($row_ScheduleMon2 = mysqli_fetch_assoc($ScheduleMon2)); 
                     }
@@ -262,13 +265,15 @@ $totalRows_ScheduleSun2 = mysqli_num_rows($ScheduleSun2);
                     { // Show if recordset is empty ?>
                     <?php } ?>
                 </td>
-                <td width="7%" nowrap="nowrap" align="center">
+                <td width="7%" nowrap="nowrap" align="center" style="position: relative;">
                     <?php if ($row_ScheduleTue1 > 0) { // Show if recordset not empty ?>
                     <?php do { ?>
-                        <div class="kurs" style="width: 100%; height: <?php echo $row_ScheduleTue1['duration']; ?>px; background-color: #CCC;">
-                            <?php echo $row_ScheduleTue1['name']; ?><br>
-                            <?php echo $row_ScheduleTue1['level']; ?><br>
-                            <?php echo $row_ScheduleTue1['teacher']; ?>
+                        <div class="kurs" style="width: 98%; height: <?php echo $row_ScheduleTue1['duration']; ?>px; background: <?php echo NombreCursoColor($row_ScheduleTue1['level']); ?>; top: <?php echo $row_ScheduleTue1['hour']; ?>px;">
+                            <div class="text_kurs">
+                                <?php echo $row_ScheduleTue1['name']; ?><br>
+                                <?php echo NombreCurso($row_ScheduleTue1['level']); ?><br>
+                                <?php echo $row_ScheduleTue1['teacher']; ?>
+                            </div>
                         </div>
                     <?php } while ($row_ScheduleTue1 = mysqli_fetch_assoc($ScheduleTue1)); 
                     }
@@ -276,13 +281,15 @@ $totalRows_ScheduleSun2 = mysqli_num_rows($ScheduleSun2);
                     { // Show if recordset is empty ?>
                     <?php } ?>
                 </td>
-                <td width="7%" nowrap="nowrap" align="center" style="border-right: 1px solid #CCC;">
+                <td width="7%" nowrap="nowrap" align="center" style="border-right: 1px solid #CCC; position: relative;">
                     <?php if ($row_ScheduleTue2 > 0) { // Show if recordset not empty ?>
                     <?php do { ?>
-                        <div class="kurs" style="width: 100%; height: <?php echo $row_ScheduleTue2['duration']; ?>px; background-color: #CCC;">
-                            <?php echo $row_ScheduleTue2['name']; ?><br>
-                            <?php echo $row_ScheduleTue2['level']; ?><br>
-                            <?php echo $row_ScheduleTue2['teacher']; ?>
+                        <div class="kurs" style="width: 98%; height: <?php echo $row_ScheduleTue2['duration']; ?>px; background: <?php echo NombreCursoColor($row_ScheduleTue2['level']); ?>; top: <?php echo $row_ScheduleTue2['hour']; ?>px;">
+                            <div class="text_kurs">
+                                <?php echo $row_ScheduleTue2['name']; ?><br>
+                                <?php echo NombreCurso($row_ScheduleTue2['level']); ?><br>
+                                <?php echo $row_ScheduleTue2['teacher']; ?>
+                            </div>
                         </div>
                     <?php } while ($row_ScheduleTue2 = mysqli_fetch_assoc($ScheduleTue2)); 
                     }
@@ -290,13 +297,15 @@ $totalRows_ScheduleSun2 = mysqli_num_rows($ScheduleSun2);
                     { // Show if recordset is empty ?>
                     <?php } ?>
                 </td>
-                <td width="7%" nowrap="nowrap" align="center">
+                <td width="7%" nowrap="nowrap" align="center" style="position: relative;">
                     <?php if ($row_ScheduleWed1 > 0) { // Show if recordset not empty ?>
                     <?php do { ?>
-                        <div class="kurs" style="width: 100%; height: <?php echo $row_ScheduleWed1['duration']; ?>px; background-color: #CCC;">
-                            <?php echo $row_ScheduleWed1['name']; ?><br>
-                            <?php echo $row_ScheduleWed1['level']; ?><br>
-                            <?php echo $row_ScheduleWed1['teacher']; ?>
+                        <div class="kurs" style="width: 98%; height: <?php echo $row_ScheduleWed1['duration']; ?>px; background: <?php echo NombreCursoColor($row_ScheduleWed1['level']); ?>; top: <?php echo $row_ScheduleWed1['hour']; ?>px;">
+                            <div class="text_kurs">    
+                                <?php echo $row_ScheduleWed1['name']; ?><br>
+                                <?php echo NombreCurso($row_ScheduleWed1['level']); ?><br>
+                                <?php echo $row_ScheduleWed1['teacher']; ?>
+                            </div>
                         </div>
                     <?php } while ($row_ScheduleWed1 = mysqli_fetch_assoc($ScheduleWed1)); 
                     }
@@ -304,13 +313,15 @@ $totalRows_ScheduleSun2 = mysqli_num_rows($ScheduleSun2);
                     { // Show if recordset is empty ?>
                     <?php } ?>
                 </td>
-                <td width="7%" nowrap="nowrap" align="center" style="border-right: 1px solid #CCC;">
+                <td width="7%" nowrap="nowrap" align="center" style="border-right: 1px solid #CCC; position: relative;">
                     <?php if ($row_ScheduleWed2 > 0) { // Show if recordset not empty ?>
                     <?php do { ?>
-                        <div class="kurs" style="width: 100%; height: <?php echo $row_ScheduleWed2['duration']; ?>px; background-color: #CCC;">
-                            <?php echo $row_ScheduleWed2['name']; ?><br>
-                            <?php echo $row_ScheduleWed2['level']; ?><br>
-                            <?php echo $row_ScheduleWed2['teacher']; ?>
+                        <div class="kurs" style="width: 98%; height: <?php echo $row_ScheduleWed2['duration']; ?>px; background: <?php echo NombreCursoColor($row_ScheduleWed2['level']); ?>; top: <?php echo $row_ScheduleWed2['hour']; ?>px;">
+                            <div class="text_kurs">    
+                                <?php echo $row_ScheduleWed2['name']; ?><br>
+                                <?php echo NombreCurso($row_ScheduleWed2['level']); ?><br>
+                                <?php echo $row_ScheduleWed2['teacher']; ?>
+                            </div>
                         </div>
                     <?php } while ($row_ScheduleWed2 = mysqli_fetch_assoc($ScheduleWed2)); 
                     }
@@ -318,13 +329,15 @@ $totalRows_ScheduleSun2 = mysqli_num_rows($ScheduleSun2);
                     { // Show if recordset is empty ?>
                     <?php } ?>
                 </td>
-                <td width="7%" nowrap="nowrap" align="center">
+                <td width="7%" nowrap="nowrap" align="center" style="position: relative;">
                     <?php if ($row_ScheduleThu1 > 0) { // Show if recordset not empty ?>
                     <?php do { ?>
-                        <div class="kurs" style="width: 100%; height: <?php echo $row_ScheduleThu1['duration']; ?>px; background-color: #CCC;">
-                            <?php echo $row_ScheduleThu1['name']; ?><br>
-                            <?php echo $row_ScheduleThu1['level']; ?><br>
-                            <?php echo $row_ScheduleThu1['teacher']; ?>
+                        <div class="kurs" style="width: 98%; height: <?php echo $row_ScheduleThu1['duration']; ?>px; background: <?php echo NombreCursoColor($row_ScheduleThu1['level']); ?>; top: <?php echo $row_ScheduleThu1['hour']; ?>px;">
+                            <div class="text_kurs">    
+                                <?php echo $row_ScheduleThu1['name']; ?><br>
+                                <?php echo NombreCurso($row_ScheduleThu1['level']); ?><br>
+                                <?php echo $row_ScheduleThu1['teacher']; ?>
+                            </div>
                         </div>
                     <?php } while ($row_ScheduleThu1 = mysqli_fetch_assoc($ScheduleThu1)); 
                     }
@@ -332,13 +345,15 @@ $totalRows_ScheduleSun2 = mysqli_num_rows($ScheduleSun2);
                     { // Show if recordset is empty ?>
                     <?php } ?>
                 </td>
-                <td width="7%" nowrap="nowrap" align="center" style="border-right: 1px solid #CCC;">
+                <td width="7%" nowrap="nowrap" align="center" style="border-right: 1px solid #CCC; position: relative;">
                     <?php if ($row_ScheduleThu2 > 0) { // Show if recordset not empty ?>
                     <?php do { ?>
-                        <div class="kurs" style="width: 100%; height: <?php echo $row_ScheduleThu2['duration']; ?>px; background-color: #CCC;">
-                            <?php echo $row_ScheduleThu2['name']; ?><br>
-                            <?php echo $row_ScheduleThu2['level']; ?><br>
-                            <?php echo $row_ScheduleThu2['teacher']; ?>
+                        <div class="kurs" style="width: 98%; height: <?php echo $row_ScheduleThu2['duration']; ?>px; background: <?php echo NombreCursoColor($row_ScheduleThu2['level']); ?>; top: <?php echo $row_ScheduleThu2['hour']; ?>px;">
+                            <div class="text_kurs">
+                                <?php echo $row_ScheduleThu2['name']; ?><br>
+                                <?php echo NombreCurso($row_ScheduleThu2['level']); ?><br>
+                                <?php echo $row_ScheduleThu2['teacher']; ?>
+                            </div>
                         </div>
                     <?php } while ($row_ScheduleThu2 = mysqli_fetch_assoc($ScheduleThu2)); 
                     }
@@ -346,13 +361,15 @@ $totalRows_ScheduleSun2 = mysqli_num_rows($ScheduleSun2);
                     { // Show if recordset is empty ?>
                     <?php } ?>
                 </td>
-                <td width="7%" nowrap="nowrap" align="center">
+                <td width="7%" nowrap="nowrap" align="center" style="position: relative;">
                     <?php if ($row_ScheduleFri1 > 0) { // Show if recordset not empty ?>
                     <?php do { ?>
-                        <div class="kurs" style="width: 100%; height: <?php echo $row_ScheduleFri1['duration']; ?>px; background-color: #CCC;">
-                            <?php echo $row_ScheduleFri1['name']; ?><br>
-                            <?php echo $row_ScheduleFri1['level']; ?><br>
-                            <?php echo $row_ScheduleFri1['teacher']; ?>
+                        <div class="kurs" style="width: 98%; height: <?php echo $row_ScheduleFri1['duration']; ?>px; background: <?php echo NombreCursoColor($row_ScheduleFri1['level']); ?>; top: <?php echo $row_ScheduleFri1['hour']; ?>px;">
+                            <div class="text_kurs">    
+                                <?php echo $row_ScheduleFri1['name']; ?><br>
+                                <?php echo NombreCurso($row_ScheduleFri1['level']); ?><br>
+                                <?php echo $row_ScheduleFri1['teacher']; ?>
+                            </div>
                         </div>
                     <?php } while ($row_ScheduleFri1 = mysqli_fetch_assoc($ScheduleFri1)); 
                     }
@@ -360,13 +377,15 @@ $totalRows_ScheduleSun2 = mysqli_num_rows($ScheduleSun2);
                     { // Show if recordset is empty ?>
                     <?php } ?>
                 </td>
-                <td width="7%" nowrap="nowrap" align="center" style="border-right: 1px solid #CCC;">
+                <td width="7%" nowrap="nowrap" align="center" style="border-right: 1px solid #CCC; position: relative;">
                     <?php if ($row_ScheduleFri2 > 0) { // Show if recordset not empty ?>
                     <?php do { ?>
-                        <div class="kurs" style="width: 100%; height: <?php echo $row_ScheduleFri2['duration']; ?>px; background-color: #CCC;">
-                            <?php echo $row_ScheduleFri2['name']; ?><br>
-                            <?php echo $row_ScheduleFri2['level']; ?><br>
-                            <?php echo $row_ScheduleFri2['teacher']; ?>
+                        <div class="kurs" style="width: 98%; height: <?php echo $row_ScheduleFri2['duration']; ?>px; background: <?php echo NombreCursoColor($row_ScheduleFri2['level']); ?>; top: <?php echo $row_ScheduleFri2['hour']; ?>px;">
+                            <div class="text_kurs">    
+                                <?php echo $row_ScheduleFri2['name']; ?><br>
+                                <?php echo NombreCurso($row_ScheduleFri2['level']); ?><br>
+                                <?php echo $row_ScheduleFri2['teacher']; ?>
+                            </div>
                         </div>
                     <?php } while ($row_ScheduleFri2 = mysqli_fetch_assoc($ScheduleFri2)); 
                     }
@@ -374,13 +393,15 @@ $totalRows_ScheduleSun2 = mysqli_num_rows($ScheduleSun2);
                     { // Show if recordset is empty ?>
                     <?php } ?>
                 </td>
-                <td width="7%" nowrap="nowrap" align="center">
+                <td width="7%" nowrap="nowrap" align="center" style="position: relative;">
                     <?php if ($row_ScheduleSat1 > 0) { // Show if recordset not empty ?>
                     <?php do { ?>
-                        <div class="kurs" style="width: 100%; height: <?php echo $row_ScheduleSat1['duration']; ?>px; background-color: #CCC;">
-                            <?php echo $row_ScheduleSat1['name']; ?><br>
-                            <?php echo $row_ScheduleSat1['level']; ?><br>
-                            <?php echo $row_ScheduleSat1['teacher']; ?>
+                        <div class="kurs" style="width: 98%; height: <?php echo $row_ScheduleSat1['duration']; ?>px; background: <?php echo NombreCursoColor($row_ScheduleSat1['level']); ?>; top: <?php echo $row_ScheduleSat1['hour']; ?>px;">
+                            <div class="text_kurs">  
+                                <?php echo $row_ScheduleSat1['name']; ?><br>
+                                <?php echo NombreCurso($row_ScheduleSat1['level']); ?><br>
+                                <?php echo $row_ScheduleSat1['teacher']; ?>
+                            </div>
                         </div>
                     <?php } while ($row_ScheduleSat1 = mysqli_fetch_assoc($ScheduleSat1)); 
                     }
@@ -388,13 +409,15 @@ $totalRows_ScheduleSun2 = mysqli_num_rows($ScheduleSun2);
                     { // Show if recordset is empty ?>
                     <?php } ?>
                 </td>
-                <td width="7%" nowrap="nowrap" align="center" style="border-right: 1px solid #CCC;">
+                <td width="7%" nowrap="nowrap" align="center" style="border-right: 1px solid #CCC; position: relative;">
                     <?php if ($row_ScheduleSat2 > 0) { // Show if recordset not empty ?>
                     <?php do { ?>
-                        <div class="kurs" style="width: 100%; height: <?php echo $row_ScheduleSat2['duration']; ?>px; background-color: #CCC;">
-                            <?php echo $row_ScheduleSat2['name']; ?><br>
-                            <?php echo $row_ScheduleSat2['level']; ?><br>
-                            <?php echo $row_ScheduleSat2['teacher']; ?>
+                        <div class="kurs" style="width: 98%; height: <?php echo $row_ScheduleSat2['duration']; ?>px; background: <?php echo NombreCursoColor($row_ScheduleSat2['level']); ?>; top: <?php echo $row_ScheduleSat2['hour']; ?>px;">
+                            <div class="text_kurs">    
+                                <?php echo $row_ScheduleSat2['name']; ?><br>
+                                <?php echo NombreCurso($row_ScheduleSat2['level']); ?><br>
+                                <?php echo $row_ScheduleSat2['teacher']; ?>
+                            </div>
                         </div>
                     <?php } while ($row_ScheduleSat2 = mysqli_fetch_assoc($ScheduleSat2)); 
                     }
@@ -402,13 +425,15 @@ $totalRows_ScheduleSun2 = mysqli_num_rows($ScheduleSun2);
                     { // Show if recordset is empty ?>
                     <?php } ?>
                 </td>
-                <td width="7%" nowrap="nowrap" align="center">
+                <td width="7%" nowrap="nowrap" align="center" style="position: relative;">
                     <?php if ($row_ScheduleSun1 > 0) { // Show if recordset not empty ?>
                     <?php do { ?>
-                        <div class="kurs" style="width: 100%; height: <?php echo $row_ScheduleSun1['duration']; ?>px; background-color: #CCC;">
-                            <?php echo $row_ScheduleSun1['name']; ?><br>
-                            <?php echo $row_ScheduleSun1['level']; ?><br>
-                            <?php echo $row_ScheduleSun1['teacher']; ?>
+                        <div class="kurs" style="width: 98%; height: <?php echo $row_ScheduleSun1['duration']; ?>px; background: <?php echo NombreCursoColor($row_ScheduleSun1['level']); ?>; top: <?php echo $row_ScheduleSun1['hour']; ?>px;">
+                            <div class="text_kurs">   
+                                <?php echo $row_ScheduleSun1['name']; ?><br>
+                                <?php echo NombreCurso($row_ScheduleSun1['level']); ?><br>
+                                <?php echo $row_ScheduleSun1['teacher']; ?>
+                            </div>
                         </div>
                     <?php } while ($row_ScheduleSun1 = mysqli_fetch_assoc($ScheduleSun1)); 
                     }
@@ -416,13 +441,15 @@ $totalRows_ScheduleSun2 = mysqli_num_rows($ScheduleSun2);
                     { // Show if recordset is empty ?>
                     <?php } ?>
                 </td>
-                <td width="7%" nowrap="nowrap" align="center">
+                <td width="7%" nowrap="nowrap" align="center" style="position: relative;">
                     <?php if ($row_ScheduleSun2 > 0) { // Show if recordset not empty ?>
                     <?php do { ?>
-                        <div class="kurs" style="width: 100%; height: <?php echo $row_ScheduleSun2['duration']; ?>px; background-color: #CCC;">
-                            <?php echo $row_ScheduleSun2['name']; ?><br>
-                            <?php echo $row_ScheduleSun2['level']; ?><br>
-                            <?php echo $row_ScheduleSun2['teacher']; ?>
+                        <div class="kurs" style="width: 98%; height: <?php echo $row_ScheduleSun2['duration']; ?>px; background: <?php echo NombreCursoColor($row_ScheduleSun2['level']); ?>; top: <?php echo $row_ScheduleSun2['hour']; ?>px;">
+                            <div class="text_kurs">    
+                                <?php echo $row_ScheduleSun2['name']; ?><br>
+                                <?php echo NombreCurso($row_ScheduleSun2['level']); ?><br>
+                                <?php echo $row_ScheduleSun2['teacher']; ?>
+                            </div>
                         </div>
                     <?php } while ($row_ScheduleSun2 = mysqli_fetch_assoc($ScheduleSun2)); 
                     }

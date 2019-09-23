@@ -526,9 +526,13 @@ function Mesabreviado($varmesabrev)
 
 function NombreCurso($varcurso)
 {
-	if ($varcurso == 1) return "Beginning";
-	if ($varcurso == 2) return "Intermediate";
-	if ($varcurso == 3) return "Advance";
+	if ($varcurso == 1) return "Beginning 1";
+	if ($varcurso == 2) return "Beginning 2";
+	if ($varcurso == 3) return "Intermediate 1";
+	if ($varcurso == 4) return "Intermediate 2";
+	if ($varcurso == 5) return "Advance 1";
+	if ($varcurso == 6) return "Advance 2";
+	if ($varcurso == 7) return "Private class";
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -539,7 +543,11 @@ function NombreCurso($varcurso)
 function NombreCursoColor($varcursocolor)
 {
 	if ($varcursocolor == 1) return "#97d1f7";
-	if ($varcursocolor == 2) return "rgb(250, 211, 103)";
-	if ($varcursocolor == 3) return "rgb(245, 105, 80)";
+	if ($varcursocolor == 2) return "#2a86d1";
+	if ($varcursocolor == 3) return "rgb(250, 211, 103)";
+	if ($varcursocolor == 4) return "rgb(253, 173, 0)";
+	if ($varcursocolor == 5) return "rgb(240, 121, 100)";
+	if ($varcursocolor == 6) return "rgb(160, 72, 57)";
+	if ($varcursocolor == 7) return "linear-gradient(to right, #999, #CCC, #999)";
 }
 ?>

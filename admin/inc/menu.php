@@ -40,7 +40,6 @@ window.onclick = function(event) {
             <ul>
               <li><a href="schedule.php">Schedule</a></li>
               <li><a href="#">Q & A</a></li>
-              <li><a href="#">menu 2.3</a></li>
             </ul>
           </div>
         <li>
