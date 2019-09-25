@@ -124,12 +124,12 @@
     color: #FFF;
     text-shadow: 1px 1px 15px #999;
     font-size: 60px;
-    font-weight: 600;
+    font-weight: 200;
     font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    /*font-family: 'Montserrat', sans-serif;*/
     text-align: center;
     position: absolute;
     top: 200px;
-    /*background-color: blue;*/
   }
   .txt sup {
       font-size: 20px;
@@ -143,8 +143,8 @@
     <img class="photo_b" src="img/banners/pic1.png" alt="" height="" width="">
     <img class="photo" src="img/banners/nor.png" alt="Smiley face" height="" width="">
     <div class="txt">
-      <p>Din nya</p>
-      <p>Dance stället.</p>
+      <p>Ditt nya</p>
+      <p>dansställe.</p>
       <sup>- för allt och alla -</sup>
     </div>
   </div>

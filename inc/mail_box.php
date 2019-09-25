@@ -1,12 +1,12 @@
 <div class="space">
         <div class="text_div">
-        <h3 style="text-transform:uppercase;">Vad är Lorem Ipsum?</h3>
-        <p>Lorem Ipsum är en utfyllnadstext från tryck- och förlagsindustrin.
-        Lorem ipsum har varit standard ända sedan 1500-talet,
-        när en okänd boksättare tog att antal bokstäver och blandade dem för att göra ett provexemplar av en bok.
-        Lorem ipsum har inte bara överlevt fem århundraden, utan även övergången till elektronisk typografi utan större förändringar.
-        Det blev allmänt känt på 1960-talet i samband med lanseringen av Letraset-ark med avsnitt av Lorem Ipsum,
-        och senare med mjukvaror som Aldus PageMaker.</p>
+            <h3 style="text-transform:uppercase;">Vad är Lorem Ipsum?</h3>
+            <div class="text_cont">Lorem Ipsum är en utfyllnadstext från tryck- och förlagsindustrin.
+            Lorem ipsum har varit standard ända sedan 1500-talet,
+            när en okänd boksättare tog att antal bokstäver och blandade dem för att göra ett provexemplar av en bok.
+            Lorem ipsum har inte bara överlevt fem århundraden, utan även övergången till elektronisk typografi utan större förändringar.
+            Det blev allmänt känt på 1960-talet i samband med lanseringen av Letraset-ark med avsnitt av Lorem Ipsum,
+            och senare med mjukvaror som Aldus PageMaker.</div>
         </div>
         <div class="contact_content">
             <div class="separador">
@@ -34,21 +34,21 @@
             <div class="contact_info">
             
                 <h3 style="text-transform:uppercase;">Nå oss</h3>                       
-                <p>
+                <div class="text_cont">
                     Intresserad av att arbeta med mig
                         eller beställa mina tjänster? 
                         Hör av dig så pratar vi mer!.<br>
 
-                    Jag kommer svara så fort jag ser din mail.</p>
+                    Jag kommer svara så fort jag ser din mail.</div>
                     
 
                 <h3 style="text-transform:uppercase;">Kontaktinformation</h3>
-                <p>
+                <div class="text_cont">
                     <?php echo $row_DatosSite['name']; ?><br>
                     <?php echo $row_DatosSite['adress']; ?><br>
                     <?php echo $row_DatosSite['post']; ?><br>
                     <?php echo $row_DatosSite['email']; ?>
-                </p>
+                </div>
             
             </div>
         </div>

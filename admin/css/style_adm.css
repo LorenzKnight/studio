@@ -311,6 +311,16 @@ h5 {
   position: fixed;
   top: 0;
 }
+.formulario_user {
+  width: 400px;
+  margin: 160px 38% 0;
+  background-color: #FFF;
+  border: 1px solid #dddfeb;
+  border-radius: 7px;
+  box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
+  position: fixed;
+  top: 0;
+}
 .courses {
   width: 90%;
   height: 300px;

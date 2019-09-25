@@ -16,7 +16,7 @@
         <?php include("inc/head.php"); ?>
         <div class="container">
           <?php //echo $_SESSION['std_UserId']; ?>
-          <div class="title"><h2>Students</h2></div>
+          <div class="title"><h2>Terminer</h2></div>
           <?php include("inc/periods_list.php"); ?>
         </div>
     </div>

@@ -195,8 +195,11 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequeste")) {
                 <td colspan="6" valign="middle" align="center"><input class="textf" type="email" placeholder="Din mailadress..." name="email" id="email" size="70" required/></td>
             </tr>
             <tr height="60">
-                <td width="33.33%" valign="middle" align="center" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Personnummer" name="personal_number" id="personal_number" size="21" required/></td>
-                <td width="33.33%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
+                <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Personnummer" name="personal_number" id="personal_number" size="31" required/></td>
+                <td width="50%" valign="middle" align="left" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Telefonnummer" name="telephone" id="telephone" size="31" required/></td>
+            </tr>
+            <tr height="60">
+                <td colspan="6" valign="middle" align="center" style="width: 100px; font-size: 14px; color: #999;">
                     Kön:
                     <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="sex" id="sex" required>
                     <option value="None">None</option>
@@ -204,7 +207,6 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequeste")) {
                     <option value="Kvinna">Kvinna</option>
                     </select>
                 </td>
-                <td width="33.33%" valign="middle" align="center" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Telefonnummer" name="telephone" id="telephone" size="21" required/></td>
             </tr>
             <tr height="60">
                 <td colspan="6" valign="middle" align="center"><input class="textf" type="text" placeholder="Din adress..." name="adress" id="adress" size="70" required/></td>

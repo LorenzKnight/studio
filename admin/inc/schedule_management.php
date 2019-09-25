@@ -231,7 +231,7 @@ document.addEventListener('click', onClick)
         <table width="100%" cellspacing="0" border="0" class="" style="background-color: #FFF;">
             <tr height="50" style="color: #999;">
                 <td width="2,0000001%" nowrap="nowrap" align="center" style="padding: 0 10px; border-bottom: 1px solid #CCC; border-right: 1px solid #CCC;">
-                
+                    
                 </td>
                 <td width="14%" colspan="2" nowrap="nowrap" align="center" style="padding: 0 10px; border-bottom: 1px solid #CCC; border-right: 1px solid #CCC;">
                 Måndag
