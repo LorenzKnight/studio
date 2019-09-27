@@ -20,7 +20,7 @@ if (isset($_POST['mail'])) {
   //ATENCIÓN USAMOS MD5 para guardar la contraseña.
   $password=md5($_POST['password']);
   $MM_fldUserAuthorization = "rank";
-  $MM_redirectLoginSuccess = "users.php";
+  $MM_redirectLoginSuccess = "dashboard.php";
   $MM_redirectLoginFailed = "error.php?error=3";
   $MM_redirecttoReferrer = false;
   

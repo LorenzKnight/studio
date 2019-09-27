@@ -27,11 +27,9 @@ window.onclick = function(event) {
     <div id="myDropdown" class="dropdown-content">
         <ul>
         <h5>ADMIN</h5>
-        <li><a href="#home">Start</a></li>
+        <li><a href="dashboard.php">Start</a></li>
         <li><a href="students.php">Students</a></li>
         <li><a href="periods.php">Periods</a></li>
-        <li><a href="users.php">Users</a></li>
-        
         <hr>
         <h5>SITE</h5>
         <li><a href="publications.php">Publications</a></li>
@@ -43,7 +41,8 @@ window.onclick = function(event) {
             </ul>
           </div>
         <li>
-        <li><a href="#contact">Page info</a>
+        <li><a href="users.php">Users</a></li>
+        <li><a href="page_settings.php">Page setting</a>
         </ul>
     </div>
 </div>

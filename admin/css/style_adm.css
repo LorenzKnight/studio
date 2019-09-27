@@ -483,10 +483,69 @@ h5 {
     top: -2px;
     left: 45%;
   }
-
   .open_calendar {
     width: 100%;
     overflow: auto;
     background-color: #CCC;
     border-radius: 4px;
+}
+
+.space {
+  width: 96%;
+  overflow: auto;
+  background-color: #000;
+  margin: 2%;
+  display: flex;
+  box-shadow: 0 .15rem 2rem 0 rgba(58,59,69,.15)!important;
+}
+.settings_sb {
+  width: 15%;
+  overflow: auto;
+  float: left;
+  background-color: #FFF;
+  border-right: 1px solid #CCC;
+}
+.settings_cnt {
+  flex: 1;
+  height: 500px;
+  float: right;
+  background-color: #FFF;
+}
+
+.under_sites {
+  text-align: left;
+  font-size: 14px;
+}
+.under_sites ul{
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.under_sites ul li{
+  background-color: #FFF;
+  padding: 20px;
+  color: #666;
+  border-bottom: 1px solid #CCC;
+}
+.under_sites ul li:hover{
+  background-color: #0F1E41;
+  color: #FFF;
+}
+
+.add_under_button {
+  text-align: center;
+  font-size: 14px;
+}
+.add_under_button ul{
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.add_under_button ul li{
+  background-color: #82C040;
+  padding: 20px 0;
+  color: #FFF;
+}
+.add_under_button ul li:hover{
+  background-color: #E34747;
 }
