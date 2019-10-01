@@ -507,7 +507,8 @@ h5 {
 }
 .settings_cnt {
   flex: 1;
-  height: 500px;
+  overflow: auto;
+  min-height: 800px;
   float: right;
   background-color: #FFF;
 }
@@ -550,9 +551,10 @@ h5 {
   background-color: #E34747;
 }
 .pageinf {
-  width: 900px;
+  width: 400px;
   height: 400px;
-  background-color: #f0f0f0;
-  border: 1px solid #666;
-  margin: 50px auto;
+  border-radius: 7px;
+  background-color: #FFF;
+  margin: 100px auto;
+  box-shadow: 0 .15rem 2rem 0 rgba(58,59,69,.15)!important;
 }

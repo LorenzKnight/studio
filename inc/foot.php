@@ -27,7 +27,7 @@ $totalRows_DatosSite = mysqli_num_rows($DatosSite);
             <p><?php echo $row_DatosSite['name']; ?><br>
             <br>
             <?php echo $row_DatosSite['adress']; ?>,<br>
-            <?php echo $row_DatosSite['post']; ?><br>
+            <?php echo $row_DatosSite['post']; ?> <?php echo $row_DatosSite['city']; ?><br>
             <br>
             <?php echo $row_DatosSite['email']; ?></p>
             </div>
