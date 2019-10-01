@@ -414,7 +414,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
                           }
                           ?>
                       </div>
-                      <div class="class1" style="border-left: 2px solid #CCC; display: <?php echo packet2($row_DatosInsc["package"], 2);?>;" id="courses1">
+                      <div class="class1" style="border-left: 2px solid #CCC; display: <?php echo packet2($row_DatosInsc["package"], 2);?>;" id="courses2">
                           <p>Klass 2</p>
                           <hr>
                           <?php
@@ -430,7 +430,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
                           }
                           ?>
                       </div>
-                      <div class="class1" style="border-left: 2px solid #CCC; display: <?php echo packet2($row_DatosInsc["package"], 3);?>;" id="courses2">
+                      <div class="class1" style="border-left: 2px solid #CCC; display: <?php echo packet2($row_DatosInsc["package"], 3);?>;" id="courses3">
                           <p>Klass 3</p>
                           <hr>
                           <?php
@@ -446,7 +446,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
                           }
                           ?>
                       </div>
-                      <div class="class1" style="border-left: 2px solid #CCC; display: <?php echo packet2($row_DatosInsc["package"], 4);?>;" id="courses3">
+                      <div class="class1" style="border-left: 2px solid #CCC; display: <?php echo packet2($row_DatosInsc["package"], 4);?>;" id="courses4">
                           <p>Klass 4</p>
                           <hr>
                           <?php
@@ -491,21 +491,21 @@ if (isset($_SERVER['QUERY_STRING'])) {
 <script>
     function showDiv(select){
         if(select.value>=2){
-            document.getElementById('courses1').style.display = "block";
-        } else{
-            document.getElementById('courses1').style.display = "none";
-        }
-
-        if(select.value>=3){
             document.getElementById('courses2').style.display = "block";
         } else{
             document.getElementById('courses2').style.display = "none";
         }
 
-        if(select.value>=4){
+        if(select.value>=3){
             document.getElementById('courses3').style.display = "block";
         } else{
             document.getElementById('courses3').style.display = "none";
+        }
+
+        if(select.value>=4){
+            document.getElementById('courses4').style.display = "block";
+        } else{
+            document.getElementById('courses4').style.display = "none";
         }
     } 
 </script>
@@ -678,7 +678,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
                           }
                           ?>
                       </div>
-                      <div class="class1" style="border-left: 2px solid #CCC; display: none;" id="courses1">
+                      <div class="class1" style="border-left: 2px solid #CCC; display: none;" id="courses2">
                           <p>Klass 2</p>
                           <hr>
                           <?php
@@ -694,7 +694,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
                           }
                           ?>
                       </div>
-                      <div class="class1" style="border-left: 2px solid #CCC; display: none;" id="courses2">
+                      <div class="class1" style="border-left: 2px solid #CCC; display: none;" id="courses3">
                           <p>Klass 3</p>
                           <hr>
                           <?php
@@ -710,7 +710,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
                           }
                           ?>
                       </div>
-                      <div class="class1" style="border-left: 2px solid #CCC; display: none;" id="courses3">
+                      <div class="class1" style="border-left: 2px solid #CCC; display: none;" id="courses4">
                           <p>Klass 4</p>
                           <hr>
                           <?php

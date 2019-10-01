@@ -141,7 +141,7 @@
 <div class="banner">
   <div class="tile">
     <img class="photo_b" src="img/banners/pic1.png" alt="" height="" width="">
-    <img class="photo" src="img/banners/nor.png" alt="Smiley face" height="" width="">
+    <img class="photo" src="img/banners/nor.png" alt="" height="" width="">
     <div class="txt">
       <p>Ditt nya</p>
       <p>dansställe.</p>

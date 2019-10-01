@@ -549,3 +549,10 @@ h5 {
 .add_under_button ul li:hover{
   background-color: #E34747;
 }
+.pageinf {
+  width: 900px;
+  height: 400px;
+  background-color: #f0f0f0;
+  border: 1px solid #666;
+  margin: 50px auto;
+}
