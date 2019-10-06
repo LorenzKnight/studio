@@ -356,9 +356,42 @@ h5 {
   bottom: 50px;
   cursor: pointer;
 }
-.flying_button a:hover {
+.flying_button:hover {
   background-color: rgb(84, 124, 42);
   color: #000;
+}
+.flying_button2 {
+  width: 20px;
+  height: 40px;
+  padding: 5px 15px;
+  border-radius: 25px;
+  background-color: #82C040;
+  color: #FFF;
+  box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
+  font-size: 30px;
+  position: absolute;
+  margin: 0px 20px;
+  bottom: 50px;
+  cursor: pointer;
+}
+.flying_button2:hover {
+  background-color: rgb(84, 124, 42);
+}
+.flying_button3 {
+  width: 20px;
+  height: 40px;
+  padding: 5px 15px;
+  border-radius: 25px;
+  background-color: rgb(230, 227, 227);
+  color: #FFF;
+  box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
+  font-size: 30px;
+  float: right;
+  bottom: 50px;
+  cursor: pointer;
+}
+.flying_button3:hover {
+  background-color: rgb(84, 124, 42);
 }
 .button {
   margin: 10px 0;
@@ -411,7 +444,8 @@ h5 {
 /*MENU LISTA*/
   .arternative-content a {
       text-align: left;
-      color: black;
+      color: #666;
+      font-size: 14px;
       padding: 20px 16px;
       text-decoration: none;
       display: block;
@@ -508,10 +542,12 @@ h5 {
 .settings_cnt {
   flex: 1;
   overflow: auto;
-  min-height: 800px;
+  min-height: 650px;
+  max-height: 700px;
   float: right;
   background-color: #FFF;
 }
+
 
 .under_sites {
   text-align: left;
@@ -526,12 +562,60 @@ h5 {
   background-color: #FFF;
   padding: 20px;
   color: #666;
-  border-bottom: 1px solid #CCC;
 }
 .under_sites ul li:hover{
   background-color: #0F1E41;
   color: #FFF;
 }
+
+
+
+/*********************MENU PROV**********************/
+.sbbtn {
+  width: 100%;
+  text-align: left;
+  background-color: #FFF;
+  color: #666;
+  font-size: 14px;
+  padding: 20px;
+  border: none;
+  cursor: pointer;
+  }
+  .contentprov {
+    width: 100%;
+    /*position: relative;*/
+    display: inline-block;
+  }
+  .contentprov-content {
+  display: none;
+  position: absolute;
+  margin:-56px 0 0 218px; 
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  }
+  .contentprov-content a {
+      text-align: left;
+      color: #666;
+      font-size: 14px;
+      padding: 20px 16px;
+      text-decoration: none;
+      display: block;
+  }
+  .contentprov-content a:hover {
+      background-color: #f1f1f1
+  }
+  .contentprov:hover .contentprov-content {
+      display: block;
+  }
+  .contentprov:hover .sbbtn {
+      background-color: #0F1E41;
+      color: #FFF;
+  }
+  /*******************END MENU PROV*********************/
+
+
 
 .add_under_button {
   text-align: center;
@@ -548,7 +632,7 @@ h5 {
   color: #FFF;
 }
 .add_under_button ul li:hover{
-  background-color: #E34747;
+  background-color: rgb(84, 124, 42);
 }
 .pageinf {
   width: 400px;

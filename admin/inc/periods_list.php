@@ -209,139 +209,118 @@ document.addEventListener('click', onClick)
 </table>
 </div>
 
+<div onclick="location='periods.php?new=1'" class="flying_button">+</div>
+
 <?php if($_GET["new"]):?>
-<form action="students.php" method="post" name="formrequest" id="formrequest">
-      <table class="formulario" border="0" cellspacing="0" cellpadding="0">
-          <tr height="80">
-              <td colspan="2" valign="middle" align="center" style="color: #333; padding: 30px 0 0 0;">
-                Packet:
-                <select class="textf" style="font-size: 14px; color: #999;" name="package" id="package" onchange="showDiv(this)" required>
-                <?php
-                if ($totalRows_DatosPackage > 0) {
-                do { ?>
-                <option value="<?php echo $row_DatosPackage["id_package"]; ?>"><?php echo $row_DatosPackage["package_name"]; ?></option>
-                <?php } while ($row_DatosPackage = mysqli_fetch_assoc($DatosPackage));
-                }
-                ?>
-                </select>
-              </td>
-          </tr>
-          <tr height="60">
-              <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Namn" name="name" id="name" size="31" required/></td>
-              <td width="50%" valign="middle" align="left" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Efternamn" name="surname" id="surname" size="31" required/></td>
-          </tr>
-          <tr height="60">
-              <td colspan="2" valign="middle" align="center"><input class="textf" type="email" placeholder="Din mailadress..." name="email" id="email" size="68" required/></td>
-          </tr>
-          <tr height="60">
-              <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Personnummer" name="personal_number" id="personal_number" size="31" required/></td>
-              <td width="50%" valign="middle" align="left" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Telefonnummer" name="telephone" id="telephone" size="31" required/></td>
-          </tr>
-          <tr height="60">
-              <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
-                  Kön:
-                  <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="sex" id="sex" required>
-                  <option value="0" >None</option>
-                  <option value="1">Man</option>
-                  <option value="2">Kvinna</option>
-                  </select>
-              </td>
-          </tr>
-              <style>
-                  .class1_content{
-                      font-size: 14px;
-                  }
-              </style>
-          <tr>
-              <td colspan="2" valign="middle" align="center">
-                  <div class="courses">
-                      <div class="class1" style="flex: 1;">
-                          <p>Klass 1</p>
-                          <hr>
-                          <?php
-                          if ($totalRows_DatosCourse > 0) {
-                          do { ?>
-                          <table width="100%" border="0" cellspacing="0" cellpadding="0" >
-                              <tr height="40">
-                                  <td width="20%" align="center" ><input class="class1_content" type="radio" name="course_1" value="<?php echo $row_DatosCourse['id_course'];?>"></td>
-                                  <td width="80%" align="left" style ="font-size: 14px;"><?php echo $row_DatosCourse['name'];?></td>
-                              <tr>
-                          </table>
-                          <?php } while ($row_DatosCourse = mysqli_fetch_assoc($DatosCourse));
-                          }
-                          ?>
-                      </div>
-                      <div class="class1" style="border-left: 2px solid #CCC; display: none;" id="courses1">
-                          <p>Klass 2</p>
-                          <hr>
-                          <?php
-                          if ($totalRows_DatosCourse2 > 0) {
-                          do { ?>
-                          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                              <tr height="40">
-                                  <td width="20%" align="center" ><input class="class1_content" type="radio" name="course_2" value="<?php echo $row_DatosCourse2['id_course'];?>"></td>
-                                  <td width="80%" align="left" style ="font-size: 14px;"><?php echo $row_DatosCourse2['name'];?></td>
-                              <tr>
-                          </table>
-                          <?php } while ($row_DatosCourse2 = mysqli_fetch_assoc($DatosCourse2));
-                          }
-                          ?>
-                      </div>
-                      <div class="class1" style="border-left: 2px solid #CCC; display: none;" id="courses2">
-                          <p>Klass 3</p>
-                          <hr>
-                          <?php
-                          if ($totalRows_DatosCourse3 > 0) {
-                          do { ?>
-                          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                              <tr height="40">
-                                  <td width="20%" align="center" ><input class="class1_content" type="radio" name="course_3" value="<?php echo $row_DatosCourse3['id_course'];?>"></td>
-                                  <td width="80%" align="left" style ="font-size: 14px;"><?php echo $row_DatosCourse3['name'];?></td>
-                              <tr>
-                          </table>
-                          <?php } while ($row_DatosCourse3 = mysqli_fetch_assoc($DatosCourse3));
-                          }
-                          ?>
-                      </div>
-                      <div class="class1" style="border-left: 2px solid #CCC; display: none;" id="courses3">
-                          <p>Klass 4</p>
-                          <hr>
-                          <?php
-                          if ($totalRows_DatosCourse4 > 0) {
-                          do { ?>
-                          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                              <tr height="40">
-                                  <td width="20%" align="center" ><input class="class1_content" type="radio" name="course_4" value="<?php echo $row_DatosCourse4['id_course'];?>"></td>
-                                  <td width="80%" align="left" style ="font-size: 14px;"><?php echo $row_DatosCourse4['name'];?></td>
-                              <tr>
-                          </table>
-                          <?php } while ($row_DatosCourse4 = mysqli_fetch_assoc($DatosCourse4));
-                          }
-                          ?>
-                      </div>
-                  </div>
-              </td>
-          </tr>
-          <tr height="80">
-              <td colspan="2" valign="middle" align="center" style="color: #666; font-size: 14px;">
-                      <a href="students.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Anmäla mig" />
-              </td>
-          </tr>
-          <tr height="30">
-              <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
-                  
-              </td>
-          </tr>
-          <input type="hidden" name="payment" id="payment" value="1"/>
-          <input type="hidden" name="status" id="status" value="1"/>
-          <input type="hidden" name="MM_insert" id="MM_insert" value="formrequest" />
-      </table>
-  </form>
-
+    <form action="periods.php" method="post" name="formrequest" id="formrequest">
+        <table class="formulario_user" border="0" cellspacing="0" cellpadding="0">
+            <tr height="60">
+                <td colspan="2" valign="middle" align="center" style="color: #333; padding: 30px 0 0 0;">
+                    <h2>Ny Termin</h2>
+                </td>
+            </tr>
+            <tr height="60">
+                <td colspan="2" valign="middle" align="center"><input class="textf" type="text" placeholder="Termin Namn..." name="term_name" id="term_name" size="52" required/></td>
+            </tr>
+            <tr height="60">
+                <td colspan="2" valign="middle" align="center"><input class="textf" type="text" placeholder="Instruktor..." name="teacher" id="teacher" size="52" required/></td>
+            </tr>
+            <tr height="60">
+                <td width="50%" valign="middle" align="right" style="padding: 0 10px; color: #999; font-size: 14px;">
+                    Nivå: 
+                    <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="level" id="level" required>
+                    <option value="1">Beginning 1</option>
+                    <option value="2">Beginning 2</option>
+                    <option value="3">Intermediate 1</option>
+                    <option value="4">Intermediate 2</option>
+                    <option value="5">Advance 1</option>
+                    <option value="6">Advance 2</option>
+                    <option value="7">Private class</option>
+                    </select>
+                </td>
+                <td width="50%" valign="middle" align="left" style="padding: 0 10px; color: #999; font-size: 14px;">
+                    Bokninsbar: 
+                    
+                </td>
+            </tr>
+            <tr height="60">
+                <td width="50%" valign="middle" align="right" style="padding: 0 10px; color: #999; font-size: 14px;">
+                    Dag: 
+                    <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="day" id="day" required>
+                    <option value="1">Måndag</option>
+                    <option value="2">Tisdag</option>
+                    <option value="3">Onsdag</option>
+                    <option value="4">Tursdag</option>
+                    <option value="5">Fredag</option>
+                    <option value="6">Lördag</option>
+                    <option value="7">Söndag</option>
+                    </select>
+                </td>
+                <td width="50%" valign="middle" align="left" style="padding: 0 10px; color: #999; font-size: 14px;">
+                    Sal: 
+                    <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="sal" id="sal" required>
+                    <option value="1">Sal 1</option>
+                    <option value="2">Sal 2</option>
+                    </select>
+                </td>
+            </tr>
+            <tr height="60">
+                <td width="50%" valign="middle" align="right" style="padding: 0 10px; color: #999; font-size: 14px;">
+                    Kl: 
+                    <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="hour" id="hour" required>
+                    <option value="0">17:00</option>
+                    <option value="54">17:30</option>
+                    <option value="110">18:00</option>
+                    <option value="165">18:30</option>
+                    <option value="220">19:00</option>
+                    <option value="275">19:30</option>
+                    <option value="330">20:00</option>
+                    <option value="385">20:30</option>
+                    <option value="440">21:00</option>
+                    <option value="495">21:30</option>
+                    <option value="550">22:00</option>
+                    <option value="605">22:30</option>
+                    <option value="660">23:00</option>
+                    <option value="715">23:30</option>
+                    <option value="770">00:00</option>
+                    </select>
+                </td>
+                <td width="50%" valign="middle" align="left" style="padding: 0 10px; color: #999; font-size: 14px;">
+                    Tid: 
+                    <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="duration" id="duration" required>
+                    <option value="54">0.5 timma</option>
+                    <option value="110" selected>1 timma</option>
+                    <option value="165">1.5 timma</option>
+                    <option value="220">2 timma</option>
+                    <option value="275">2.5 timmar</option>
+                    <option value="330">3 timmar</option>
+                    <option value="385">3.5 timmar</option>
+                    <option value="440">4 timmar</option>
+                    <option value="495">4.5 timmar</option>
+                    <option value="550">5 timmar</option>
+                    <option value="605">5.5 timmar</option>
+                    <option value="660">6 timmar</option>
+                    <option value="715">6.5 timmar</option>
+                    <option value="770">7 timmar</option>
+                    </select>
+                </td>
+            </tr>
+            <tr height="80">
+                <td colspan="2" valign="middle" align="center" style="color: #666; font-size: 14px;">
+                        <a href="periods.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Lägg till" />
+                </td>
+            </tr>
+            <tr height="30">
+                <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
+                    
+                </td>
+            </tr>
+            <input type="hidden" name="via" id="via" value="<?php echo $_SESSION['std_UserId']; ?>"/>
+            <input type="hidden" name="status" id="status" value="1"/>
+            <input type="hidden" name="MM_insert" id="MM_insert" value="formrequest" />
+        </table>
+    </form>
 <?php endif ?>
-
-    <div onclick="location='students.php?new=1'" class="flying_button">+</div>
-
 <script>
     function showDiv(select){
         if(select.value>=2){
@@ -364,151 +343,7 @@ document.addEventListener('click', onClick)
     } 
 </script>
 
-    <?php if($_GET["id"]):?>
-<form action="students.php" method="post" name="formredit" id="formedit">
-      <table class="formulario" border="0" cellspacing="0" cellpadding="0">
-          <tr height="60">
-              <td colspan="2" valign="middle" align="center" style="color: #333; padding: 30px 0 0 0;">
-                Packet:
-                <select class="textf" style="font-size: 14px; color: #999;" name="package" id="package" onchange="showDiv(this)" required>
-                <?php
-                if ($totalRows_DatosPackage2 > 0) {
-                do { ?>
-                <option value="<?php echo $row_DatosPackage2["id_package"]; ?>" <?php if ($row_DatosEdit['package'] == $row_DatosPackage2['id_package']) echo "selected"; ?>><?php echo $row_DatosPackage2["package_name"]; ?></option>
-                <?php } while ($row_DatosPackage2 = mysqli_fetch_assoc($DatosPackage2));
-                }
-                ?>
-                </select>
-              </td>
-          </tr>
-          <tr height="60">
-              <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" value="<?php echo $row_DatosEdit['name'];?>" placeholder="Ditt Namn" name="name" id="name" size="31" required/></td>
-              <td width="50%" valign="middle" align="left" style="padding: 0 10px;"><input class="textf" type="text" value="<?php echo $row_DatosEdit['surname'];?>" placeholder="Ditt Efternamn" name="surname" id="surname" size="31" required/></td>
-          </tr>
-          <tr height="60">
-              <td colspan="2" valign="middle" align="center"><input class="textf" type="email" value="<?php echo $row_DatosEdit['email'];?>" placeholder="Din mailadress..." name="email" id="email" size="68" required/></td>
-          </tr>
-          <tr height="60">
-              <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" value="<?php echo $row_DatosEdit['personal_number'];?>" placeholder="Ditt Personnummer" name="personal_number" id="personal_number" size="31" required/></td>
-              <td width="50%" valign="middle" align="left" style="padding: 0 10px;"><input class="textf" type="text" value="<?php echo $row_DatosEdit['telephone'];?>" placeholder="Ditt Telefonnummer" name="telephone" id="telephone" size="31" required/></td>
-          </tr>
-          <tr height="60">
-              <td width="50%" valign="middle" align="right" style="color: #666; font-size: 14px; padding: 0 10px;">
-                  Kön:
-                  <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="sex" id="sex" required>
-                  <option value="0" <?php if ($row_DatosEdit["sex"]=="0") echo "selected"; ?>>None</option>
-                  <option value="1" <?php if ($row_DatosEdit["sex"]=="1") echo "selected"; ?>>Man</option>
-                  <option value="2" <?php if ($row_DatosEdit["sex"]=="2") echo "selected"; ?>>Kvinna</option>
-                  </select>
-              </td>
-              <td width="50%" valign="middle" align="left" style="color: #666; font-size: 14px; padding: 0 10px;">
-                  Status:
-                  <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="status" id="status" required>
-                  <option value="1" <?php if ($row_DatosEdit["status"]=="1") echo "selected"; ?>>Aktiv</option>
-                  <option value="0" <?php if ($row_DatosEdit["status"]=="0") echo "selected"; ?>>Inaktiv</option>
-                  </select>
-              </td>
-          </tr>
-          <tr>
-              <td colspan="2" valign="middle" align="center">
-                  <div class="courses">
-                      <div class="class1" style="flex: 1;">
-                          <p>Klass 1</p>
-                          <hr>
-                          <?php
-                          if ($totalRows_DatosCourse_edit > 0) {
-                          do { ?>
-                          <table width="100%" border="0" cellspacing="0" cellpadding="0" >
-                              <tr height="40">
-                                  <td width="20%" align="center" ><input class="class1_content" type="radio" name="course_1" value="<?php echo $row_DatosCourse_edit['id_course'];?>" <?php if ($row_DatosEdit['course_1'] == $row_DatosCourse_edit['id_course']) echo "checked"; ?>></td>
-                                  <td width="80%" align="left" style ="font-size: 14px;"><?php echo $row_DatosCourse_edit['name'];?></td>
-                              <tr>
-                          </table>
-                          <?php } while ($row_DatosCourse_edit = mysqli_fetch_assoc($DatosCourse_edit));
-                          }
-                          ?>
-                      </div>
-                      <div class="class1" style="border-left: 2px solid #CCC; display: none;" id="courses1">
-                          <p>Klass 2</p>
-                          <hr>
-                          <?php
-                          if ($totalRows_DatosCourse2_edit > 0) {
-                          do { ?>
-                          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                              <tr height="40">
-                                  <td width="20%" align="center" ><input class="class1_content" type="radio" name="course_2" value="<?php echo $row_DatosCourse2_edit['id_course'];?>" <?php if ($row_DatosEdit['course_2'] == $row_DatosCourse2_edit['id_course']) echo "checked"; ?>></td>
-                                  <td width="80%" align="left" style ="font-size: 14px;"><?php echo $row_DatosCourse2_edit['name'];?></td>
-                              <tr>
-                          </table>
-                          <?php } while ($row_DatosCourse2_edit = mysqli_fetch_assoc($DatosCourse2_edit));
-                          }
-                          ?>
-                      </div>
-                      <div class="class1" style="border-left: 2px solid #CCC; display: none;" id="courses2">
-                          <p>Klass 3</p>
-                          <hr>
-                          <?php
-                          if ($totalRows_DatosCourse3_edit > 0) {
-                          do { ?>
-                          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                              <tr height="40">
-                                  <td width="20%" align="center" ><input class="class1_content" type="radio" name="course_3" value="<?php echo $row_DatosCourse3_edit['id_course'];?>" <?php if ($row_DatosEdit['course_3'] == $row_DatosCourse3_edit['id_course']) echo "checked"; ?>></td>
-                                  <td width="80%" align="left" style ="font-size: 14px;"><?php echo $row_DatosCourse3_edit['name'];?></td>
-                              <tr>
-                          </table>
-                          <?php } while ($row_DatosCourse3_edit = mysqli_fetch_assoc($DatosCourse3_edit));
-                          }
-                          ?>
-                      </div>
-                      <div class="class1" style="border-left: 2px solid #CCC; display: none;" id="courses3">
-                          <p>Klass 4</p>
-                          <hr>
-                          <?php
-                          if ($totalRows_DatosCourse4_edit > 0) {
-                          do { ?>
-                          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                              <tr height="40">
-                                  <td width="20%" align="center" ><input class="class1_content" type="radio" name="course_4" value="<?php echo $row_DatosCourse4_edit['id_course'];?>" <?php if ($row_DatosEdit['course_4'] == $row_DatosCourse4_edit['id_course']) echo "checked"; ?>></td>
-                                  <td width="80%" align="left" style ="font-size: 14px;"><?php echo $row_DatosCourse4_edit['name'];?></td>
-                              <tr>
-                          </table>
-                          <?php } while ($row_DatosCourse4_edit = mysqli_fetch_assoc($DatosCourse4_edit));
-                          }
-                          ?>
-                      </div>
-                  </div>
-              </td>
-          </tr>
-          <tr height="80">
-              <td colspan="2" valign="middle" align="center" style="color: #666; font-size: 14px;">
-                      <a href="students.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Redigera !" />
-              </td>
-          </tr>
-        <style>
-            .delete_link a{
-                color: red;
-            }
-            .delete_link a:hover{
-                color: #F7B500;
-            }
-        </style>
-          <tr height="10">
-              <td colspan="2" valign="middle" align="center" style="color: #333; padding: 10px 0 0 0;">
-              <div class="delete_link"><a href="students.php?DeleteID=<?php echo $_GET["id"];?>">Radera denna register</a></div>
-              </td>
-          </tr>
-          <tr height="30">
-              <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
-                  
-              </td>
-          </tr>
-          <input type="hidden" name="payment" id="payment" value="1"/>
-          <input type="hidden" name="MM_insert" id="MM_insert" value="formedit" />
-          <input type="hidden" name="id_student" id="id_student" value="<?php echo $_GET["id"];?>"/>
-      </table>
-  </form>
 
-<?php endif ?>
 
 <style>
 .paquetes {

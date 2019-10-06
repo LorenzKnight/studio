@@ -30,7 +30,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formpage")) {
   $Result1 = mysqli_query($con,  $insertSQL) or die(mysqli_error($con));
   
   
-  $insertGoTo = "page_settings.php";
+  $insertGoTo = $_SERVER['HTTP_REFERER'];
   if (isset($_SERVER['QUERY_STRING'])) {
     $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
     $insertGoTo .= $_SERVER['QUERY_STRING'];
@@ -70,32 +70,69 @@ if (isset($_SERVER['QUERY_STRING'])) {
   header(sprintf("Location: %s", $updateGoTo));
 }
 ?>
+<?php
+ $query_DatosPage = sprintf("SELECT * FROM pages WHERE padre=%s", GetSQLValueString($_GET["pageid"], "int"));
+ $DatosPage = mysqli_query($con, $query_DatosPage) or die(mysqli_error($con));
+ $row_DatosPage = mysqli_fetch_assoc($DatosPage);
+ $totalRows_DatosPage = mysqli_num_rows($DatosPage);
+?>
+<script>
+    function Mostrar() {
+    event.stopPropagation()
+    document.getElementById("myForm").style.display="block";
+    }
+    function ocurtar() {
+    event.stopPropagation()
+    document.getElementById("myForm").style.display="none";
+    }
+
+    function Mostrar2() {
+    event.stopPropagation()
+    document.getElementById("myForm2").style.display="block";
+    }
+    function ocurtar2() {
+    event.stopPropagation()
+    document.getElementById("myForm2").style.display="none";
+    }
+</script>
 <div class="user_div">
     <div class="space">
         <div class="settings_sb">
             <div class="under_sites">
                 <ul>
-                    <a href="page_settings.php?pageinfo=1"><li>Page info</li></a>
+                    <a href="page_settings.php?pageinfo=1"><li style="border-bottom: 1px solid #CCC;">Page info</li></a>
                 </ul>
             </div>
             <?php
             if ($totalRows_DatosConsulta > 0) {
             do { ?>
-            <div class="under_sites">
-                <ul>
-                    <a href="page_settings.php?pageid=<?php echo $row_DatosConsulta["id_page"]; ?>"><li><?php echo $row_DatosConsulta["name"]; ?></li></a>
-                </ul>
+            <div class="contentprov">
+                <a href="page_settings.php?pageid=<?php echo $row_DatosConsulta["id_page"]; ?>"><button class="sbbtn"><?php echo $row_DatosConsulta["name"]; ?></button></a>
+                <div class="contentprov-content">
+                    <a href="students.php?editi=<?php echo $row_DatosConsulta['id_student']; ?>" class="alt_button">Edit info</a>
+                    <a href="student_delete.php?id=<?php echo $row_DatosConsulta['id_student']; ?>" class="alt_button">Delete</a>
+                </div>
             </div>
             <?php } while ($row_DatosConsulta = mysqli_fetch_assoc($DatosConsulta));
             }
             ?>
+            
+<!--///////////////////////////////////////////////////////////////-->
+            
+                    
+                    
+<!--///////////////////////////////////////////////////////////////-->
+
             <div class="add_under_button">
                 <ul>
-                    <a href="page_settings.php?newpage=1"><li>+ Add page</li></a>
+                    <div onclick="Mostrar()"><li>+ Add page</li></div>
                 </ul>
             </div>
         </div>
         <div class="settings_cnt">
+            <?php if($_GET["pageinfo"] != 1):?>
+                <div onclick="Mostrar2()" class="flying_button2">+</div>
+            <?php endif ?>
             <?php if($_GET["pageinfo"]):?>
                 <form action="page_settings.php?pageinfo=1" method="post" name="formpageinf" id="formpageinf">
                     <table class="pageinf" border="0" cellspacing="0" cellpadding="0">
@@ -127,9 +164,36 @@ if (isset($_SERVER['QUERY_STRING'])) {
                     </table>
                 </form>
             <?php endif ?>
+
+            <?php if($_GET["pageid"] = $row_DatosPage['padre']):?>
+                <table style="width: 100%;" class="" border="0" cellspacing="0" cellpadding="0">
+                    <tr height="80">
+                        <td colspan="2" valign="middle" align="center" style="color: #333; padding: 30px 0 0 0; text-align: center;">
+                            <a href="">Delete </a>
+                        </td>
+                    </tr>
+                </table>
+                <?php
+                if ($totalRows_DatosPage > 0) {
+                do { ?>
+                <div style="width:96%; height: 500px; margin: 10px 2%; background-color: #FFF; box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;">
+                    <div class="arternative" style="margin:10px;">
+                        <button class="artbtn">o o o</button>
+                        <div class="arternative-content">
+                            <a href="students.php?see=<?php echo $row_DatosConsulta['id_student']; ?>" class="alt_button">Add div</a>
+                            <a href="students.php?editi=<?php echo $row_DatosConsulta['id_student']; ?>" class="alt_button">Edit</a>
+                            <a href="student_delete.php?id=<?php echo $row_DatosConsulta['id_student']; ?>" class="alt_button">Delete</a>
+                        </div>
+                    </div>
+                </div>
+                <?php } while ($row_DatosPage = mysqli_fetch_assoc($DatosPage));
+                }
+                ?>
+            <?php endif ?>
         </div>
     </div>
-    <?php if($_GET["newpage"]):?>
+    
+    <div id="myForm" class="subform_cont">
         <form action="page_settings.php" method="post" name="formpage" id="formpage">
             <table class="formulario_schedule" style="margin-top: 300px;" border="0" cellspacing="0" cellpadding="0">
                 <tr height="80">
@@ -145,12 +209,53 @@ if (isset($_SERVER['QUERY_STRING'])) {
                 </tr>
                 <tr height="120">
                     <td colspan="2" valign="middle" align="center" style="color: #666; font-size: 14px;">
-                            <a href="page_settings.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Lägg till" />
+                            <input onclick="ocurtar()" class="button_a" style="width: 170px; text-align: center;" value="avbryt" /> <input type="submit" class="button" value="Lägg till" />
                     </td>
                 </tr>
                 <input type="hidden" name="padre" id="padre" value="0"/>
                 <input type="hidden" name="MM_insert" id="MM_insert" value="formpage" />
             </table>
         </form>
-    <?php endif ?>
+    </div>
 </div>
+<div id="myForm2" class="subform_cont">
+    <form action="page_settings.php" method="post" name="formpageinf" id="formpageinf">
+        <table class="subform" style="" border="0" cellspacing="0" cellpadding="0">
+            <tr height="80">
+                <td colspan="2" valign="middle" align="center" style="color: #333; padding: 30px 0 0 0;">
+                    New Div
+                </td>
+            </tr>
+            <tr height="60">
+                <td colspan="2" valign="middle" align="center"><input class="textf" type="text" placeholder="Div Namn..." name="name" id="name" size="52" required/></td>
+            </tr>
+            <tr height="60">
+                <td colspan="2" valign="middle" align="center"><input class="textf" type="text" placeholder="Description..." name="description" id="description" size="52" required/></td>
+            </tr>
+            <tr height="120">
+                <td colspan="2" valign="middle" align="center" style="color: #666; font-size: 14px;">
+                        <input onclick="ocurtar2()" class="button_a" style="width: 170px; text-align: center;" value="avbryt" /> <input type="submit" class="button" value="Lägg till" />
+                </td>
+            </tr>
+            <input type="hidden" name="padre" id="padre" value="<?php echo $_GET['pageid']?>"/>
+            <input type="hidden" name="MM_insert" id="MM_insert" value="formpage" />
+        </table>
+    </form>
+</div>
+<style>
+    .subform_cont {
+        width:100%;
+        overflow: auto;
+        position: fixed;
+        top: 150px;
+        display: none;
+    }
+    .subform {
+        width:400px;
+        height:500px;
+        border-radius: 7px;
+        background-color: #FFF;
+        margin: 30px auto;
+        box-shadow: 0 .15rem 2rem 0 rgba(58,59,69,.15)!important;
+    }
+</style>
