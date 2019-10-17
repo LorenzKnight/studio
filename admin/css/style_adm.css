@@ -1,6 +1,6 @@
 body {
-  margin: 0;
-  padding: 0;
+  margin:0 auto;
+  padding:0;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   background-color: #0F1E41;
 }
@@ -370,8 +370,7 @@ h5 {
   box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
   font-size: 30px;
   position: absolute;
-  margin: 0px 20px;
-  bottom: 50px;
+  margin: 20px;
   cursor: pointer;
 }
 .flying_button2:hover {
@@ -431,6 +430,7 @@ h5 {
   .arternative {
   /*position: relative;*/
   display: inline-block;
+  position: absolute;
   }
 
   .arternative-content {
@@ -542,8 +542,6 @@ h5 {
 .settings_cnt {
   flex: 1;
   overflow: auto;
-  min-height: 650px;
-  max-height: 700px;
   float: right;
   background-color: #FFF;
 }

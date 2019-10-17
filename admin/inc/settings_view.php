@@ -116,13 +116,6 @@ if (isset($_SERVER['QUERY_STRING'])) {
             <?php } while ($row_DatosConsulta = mysqli_fetch_assoc($DatosConsulta));
             }
             ?>
-            
-<!--///////////////////////////////////////////////////////////////-->
-            
-                    
-                    
-<!--///////////////////////////////////////////////////////////////-->
-
             <div class="add_under_button">
                 <ul>
                     <div onclick="Mostrar()"><li>+ Add page</li></div>
@@ -176,7 +169,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
                 <?php
                 if ($totalRows_DatosPage > 0) {
                 do { ?>
-                <div style="width:96%; height: 500px; margin: 10px 2%; background-color: #FFF; box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;">
+                <div style="width:96%; height:500px; margin:10px 2%; padding:0; background-color:#FFF; position:relative; box-shadow:0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;">
                     <div class="arternative" style="margin:10px;">
                         <button class="artbtn">o o o</button>
                         <div class="arternative-content">
@@ -184,6 +177,8 @@ if (isset($_SERVER['QUERY_STRING'])) {
                             <a href="students.php?editi=<?php echo $row_DatosConsulta['id_student']; ?>" class="alt_button">Edit</a>
                             <a href="student_delete.php?id=<?php echo $row_DatosConsulta['id_student']; ?>" class="alt_button">Delete</a>
                         </div>
+                    </div>
+                    <div style="width:24%; height:98%; margin:0.5% 0.5%; background-color:#CCC; float:left;">
                     </div>
                 </div>
                 <?php } while ($row_DatosPage = mysqli_fetch_assoc($DatosPage));
