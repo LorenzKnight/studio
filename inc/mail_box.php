@@ -1,12 +1,15 @@
 <div class="space">
         <div class="text_div">
-            <h3 style="text-transform:uppercase;">Vad är Lorem Ipsum?</h3>
-            <div class="text_cont">Lorem Ipsum är en utfyllnadstext från tryck- och förlagsindustrin.
-            Lorem ipsum har varit standard ända sedan 1500-talet,
-            när en okänd boksättare tog att antal bokstäver och blandade dem för att göra ett provexemplar av en bok.
-            Lorem ipsum har inte bara överlevt fem århundraden, utan även övergången till elektronisk typografi utan större förändringar.
-            Det blev allmänt känt på 1960-talet i samband med lanseringen av Letraset-ark med avsnitt av Lorem Ipsum,
-            och senare med mjukvaror som Aldus PageMaker.</div>
+            <h3 style="text-transform:uppercase;">Vill du få kontakt med oss?</h3>
+            <div class="text_cont">
+
+            Har du kanske frågor om  kommande evenamang, vill boka privatlektion eller vill ha tips och råd kring vilken nivå du ska anmäla dig till?<br> 
+            Hör av dig så hjälper vi dig och svarar på dina frågor så snart vi kan!<br>
+            Skicka ett meddelande genom att fylla i formuläret här nedan eller skicka ett mejl till <?php echo $row_DatosSite['email']; ?>.<br> 
+            <br>
+            Vi hörs snart!<br>
+            /Sofia, Lorenz, Marie & Lessly
+            </div>
         </div>
         <div class="contact_content">
             <div class="separador">
@@ -17,8 +20,8 @@
                     <form name="contactform" method="post" action="send_form_email.php">
                         <table width="100%" border="0" cellspacing="0">
                             <tr height="60">
-                                <td nowrap="nowrap" align="center" width="50%"><input class="textf" type="text" name="first_name" placeholder="Ditt namn..." maxlength="50" size="37"></td>
-                                <td nowrap="nowrap" align="center" width="50%"><input class="textf" type="text" name="email" placeholder="Din mail..." maxlength="80" size="37"></td>
+                                <td nowrap="nowrap" align="center" width="50%"><input class="textf" type="text" name="first_name" placeholder="Ditt namn..." maxlength="50" size="49"></td>
+                                <td nowrap="nowrap" align="center" width="50%"><input class="textf" type="text" name="email" placeholder="Din mail..." maxlength="80" size="49"></td>
                             </tr>
                             <tr height="60">
                                 <td nowrap="nowrap" align="center" colspan="2"><textarea class="textf" name="comments" placeholder="Meddelande..." maxlength="2000" cols="100" rows="2" style="margin: 0px; height: 188px; width: 570px;"></textarea></td>
@@ -33,20 +36,11 @@
             </div>
             <div class="contact_info">
             
-                <h3 style="text-transform:uppercase;">Nå oss</h3>                       
-                <div class="text_cont">
-                    Intresserad av att arbeta med mig
-                        eller beställa mina tjänster? 
-                        Hör av dig så pratar vi mer!.<br>
-
-                    Jag kommer svara så fort jag ser din mail.</div>
-                    
-
-                <h3 style="text-transform:uppercase;">Kontaktinformation</h3>
+                <h4 style="text-transform:uppercase;">Yandali Dance Studio</h4>
                 <div class="text_cont">
                     <?php echo $row_DatosSite['name']; ?><br>
                     <?php echo $row_DatosSite['adress']; ?><br>
-                    <?php echo $row_DatosSite['post']; ?><br>
+                    <?php echo $row_DatosSite['post']; ?> <?php echo $row_DatosSite['city']; ?><br>
                     <?php echo $row_DatosSite['email']; ?>
                 </div>
             

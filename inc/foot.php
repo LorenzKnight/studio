@@ -13,14 +13,14 @@ $totalRows_DatosSite = mysqli_num_rows($DatosSite);
     <div class="foot_case">
         <div class="social">
             <div class="icon">
-                <a href="#" target="_blank"><img src="/img/icon/fb.svg" class="social_icon"></a>
+                <a href="https://www.facebook.com/YandaliDanceStudio/" target="_blank"><img src="/img/icon/fb.svg" class="social_icon"></a>
             </div>
             <div class="icon">
-                <a href="#" target="_blank"><img src="/img/icon/ig.svg" class="social_icon"></a>
+                <a href="https://www.instagram.com/yandalistudio/" target="_blank"><img src="/img/icon/ig.svg" class="social_icon"></a>
             </div>
-            <div class="icon">
+            <!-- <div class="icon">
                 <a href="#" target="_blank"><img src="/img/icon/yt.svg" class="social_icon"></a>
-            </div>
+            </div> -->
         </div>
         <div class="adress">
             <div class="adress_text">

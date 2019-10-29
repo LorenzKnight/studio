@@ -145,6 +145,20 @@
         color: #666;
         cursor: pointer;
     }
+    .big_button {
+        width:60%;
+        padding:30px;
+        border-radius: 7px;
+        background-color:green;
+        margin:0 auto 50px;
+        color:#FFF;
+        font-size:22px;
+        text-align:center;
+    }
+    .big_button:hover {
+        background-color:rgb(1, 77, 1);
+    }
+
     .signup_graf {
         width: 50%;
         height: 700px;
@@ -218,7 +232,7 @@
     }
     .site_bottom {
         width: 100%;
-        height: 80px;
+        overflow: auto;
         text-align: center;
         font-size: 12px;
         padding: 10px 0;
@@ -235,11 +249,19 @@
         font-size: 16px;
         line-height:25px;
     }
+    .checkin_frame {
+        width: 100%;
+        /* background-color: #333; */
+        position: fixed;
+        top: 150px;
+    }
     .checkin {
         width: 80%;
+        background-color: #FFF;
+        border-radius: 7px;
         overflow: auto;
         margin: 10px auto;
-        position: relative;
+        box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
     }
     .to_register {
         width: 100%;
@@ -280,8 +302,9 @@
         box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
         cursor: pointer;
     }
-    .paquetes a{
-        text-decoration: none;
+    .paquetes:hover{
+        background-color: green;
+        color: #FFF;
     }
     .textf {
         padding: 10px;
@@ -485,6 +508,19 @@
         color: #666;
         cursor: pointer;
     }
+    .big_button {
+        width:60%;
+        padding:30px;
+        border-radius: 7px;
+        background-color:green;
+        margin:0 auto 50px;
+        color:#FFF;
+        font-size:22px;
+        text-align:center;
+    }
+    .big_button:hover {
+        background-color:rgb(1, 77, 1);
+    }
     .signup_graf {
         width: 50%;
         height: 700px;
@@ -575,11 +611,19 @@
         font-size: 16px;
         line-height:25px;
     }
+    .checkin_frame {
+        width: 100%;
+        /* background-color: #333; */
+        position: fixed;
+        top: 100px;
+    }
     .checkin {
         width: 80%;
+        background-color: #FFF;
+        border-radius: 7px;
         overflow: auto;
         margin: 10px auto;
-        position: relative;
+        box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
     }
     .to_register {
         width: 100%;
@@ -611,8 +655,9 @@
         box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
         cursor: pointer;
     }
-    .paquetes a{
-        text-decoration: none;
+    .paquetes:hover{
+        background-color: green;
+        color: #FFF;
     }
     .textf {
         padding: 10px;
@@ -818,6 +863,19 @@
         color: #666;
         cursor: pointer;
     }
+    .big_button {
+        width:60%;
+        padding:30px;
+        border-radius: 7px;
+        background-color:green;
+        margin:0 auto 50px;
+        color:#FFF;
+        font-size:22px;
+        text-align:center;
+    }
+    .big_button:hover {
+        background-color:rgb(1, 77, 1);
+    }
     .signup_graf {
         width: 50%;
         height: 700px;
@@ -908,11 +966,19 @@
         font-size: 16px;
         line-height:25px;
     }
+    .checkin_frame {
+        width: 100%;
+        /* background-color: #333; */
+        position: fixed;
+        top: 100px;
+    }
     .checkin {
         width: 80%;
+        background-color: #FFF;
+        border-radius: 7px;
         overflow: auto;
         margin: 10px auto;
-        position: relative;
+        box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
     }
     .to_register {
         width: 100%;
@@ -946,8 +1012,9 @@
         box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
         cursor: pointer;
     }
-    .paquetes a{
-        text-decoration: none;
+    .paquetes:hover{
+        background-color: green;
+        color: #FFF;
     }
     .textf {
         padding: 10px;
@@ -1152,6 +1219,19 @@
         border: 1px solid #666;
         cursor: pointer;
     }
+    .big_button {
+        width:60%;
+        padding:30px;
+        border-radius: 7px;
+        background-color:green;
+        margin:0 auto 50px;
+        color:#FFF;
+        font-size:22px;
+        text-align:center;
+    }
+    .big_button:hover {
+        background-color:rgb(1, 77, 1);
+    }
     .signup_graf {
         width: 50%;
         height: 700px;
@@ -1250,11 +1330,19 @@
         font-size: 16px;
         line-height:25px;
     }
+    .checkin_frame {
+        width: 100%;
+        /* background-color: #333; */
+        position: fixed;
+        top: 200px;
+    }
     .checkin {
         width: 80%;
+        background-color: #FFF;
+        border-radius: 7px;
         overflow: auto;
         margin: 10px auto;
-        position: relative;
+        box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
     }
     .to_register {
         width: 50%;
@@ -1288,8 +1376,9 @@
         box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
         cursor: pointer;
     }
-    .paquetes a{
-        text-decoration: none;
+    .paquetes:hover{
+        background-color: green;
+        color: #FFF;
     }
     .textf {
         padding: 10px;

@@ -36,7 +36,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequest")) {
   $year = date("Y");
 	$month = date("m");
 	$day = date("d");
-  $insertSQL = sprintf("INSERT INTO students(date, year, month, day, time, name, surname, email, password, personal_number, telephone, adress, post, city, sex, agree, package, status) 
+  $insertSQL = sprintf("INSERT INTO students(date, year, month, day, time, name, surname, email, password, personal_number, telephone, adress, post, city, sex, agree, status, package) 
                         VALUES (NOW(), $year, $month, $day, NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
                         GetSQLValueString($_POST["name"], "text"),                      
                         GetSQLValueString($_POST["surname"], "text"),
@@ -49,8 +49,8 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequest")) {
                         GetSQLValueString($_POST["city"], "text"),
                         GetSQLValueString($_POST["sex"], "text"),
                         GetSQLValueString($_POST["agree"], "text"),
-                        GetSQLValueString($_POST["package"], "int"),
-                        GetSQLValueString($_POST["status"], "text"));
+                        GetSQLValueString($_POST["status"], "text"),
+                        GetSQLValueString($_POST["package"], "int"));
 
   
   $Result1 = mysqli_query($con,  $insertSQL) or die(mysqli_error($con));
@@ -96,7 +96,7 @@ if (isset($_POST['email'])) {
   $MM_redirecttoReferrer = false;
   
   	
-  $LoginRS__query=sprintf("SELECT id_student, email, password, rank FROM students WHERE email=%s AND password=%s AND status=1",
+  $LoginRS__query=sprintf("SELECT id_student, email, password, rank FROM students WHERE email=%s AND password=%s",
   GetSQLValueString($loginUsername, "text"),
   GetSQLValueString($password, "text")); 
    
@@ -131,7 +131,7 @@ if (isset($_POST['email'])) {
 }
 ?>
 <?php
-$query_DatosTerm = sprintf("SELECT * FROM term ORDER BY id_term DESC");
+$query_DatosTerm = sprintf("SELECT * FROM term ORDER BY id_term ASC");
 $DatosTerm = mysqli_query($con, $query_DatosTerm) or die(mysqli_error($con));
 $row_DatosTerm = mysqli_fetch_assoc($DatosTerm);
 $totalRows_DatosTerm = mysqli_num_rows($DatosTerm);
@@ -241,7 +241,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequeste")) {
 
     <div class="formulario_solid" style="padding: 20px; text-align: center;">
     Yandali kommer att skicka via mail kvitto på din anmällning!<br>
-    bekäfta du att <?php echo $row_DatosReg['email'];?> är ditt mail?<br><br>
+    bekräfta du att <?php echo $row_DatosReg['email'];?> är ditt mail?<br><br>
     <form action="registration.php" method="post" name="forminsert" id="forminsert">
         <!-- <input class="textin" type="email" name="email" id="email" size="43" placeholder="Enter your E-Mail..." title="Enter a valid email" required/><br>
         <input class="textin" type="password" name="password" id="password" size="43" placeholder="Enter your Password..." required/><br> -->

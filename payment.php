@@ -36,8 +36,8 @@ $totalRows_DatosReg = mysqli_num_rows($DatosReg);
             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" id="paypal_form">
                 <input type="hidden" name="upload" value="1" />
                 <input type="hidden" name="amount" value="<?php echo ObtenerPrecioPacket($row_DatosReg["package"]); ?>" />
-                <input type="hidden" name="business" value="cuentabusiness@yandali.se" />
-                <input type="hidden" name="receiver_email" value="cuentabusiness@yandali.se" />
+                <input type="hidden" name="business" value="ekonomi@yandali.se" />
+                <input type="hidden" name="receiver_email" value="ekonomi@yandali.se" />
                 <input type="hidden" name="cmd" value="_xclick" />
                 <input type="hidden" name="charset" value="utf-8" />
                 <input type="hidden" name="currency_code" value="SEK" />

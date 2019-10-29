@@ -122,7 +122,7 @@
     width: 40%;
     padding: 5%;
     color: #FFF;
-    text-shadow: 1px 1px 15px #999;
+    text-shadow: 1px 1px 15px #666;
     font-size: 60px;
     font-weight: 200;
     font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -134,7 +134,8 @@
   .txt sup {
       font-size: 20px;
       font-weight: 200;
-      color: rgba(201,172,140,1);
+      color: #FFF;
+      text-shadow: 1px 1px 15px #333;
   }
 }
 </style>
@@ -143,9 +144,9 @@
     <img class="photo_b" src="img/banners/pic1.png" alt="" height="" width="">
     <img class="photo" src="img/banners/nor.png" alt="" height="" width="">
     <div class="txt">
-      <p>Ditt nya</p>
-      <p>dansställe.</p>
-      <sup>- för allt och alla -</sup>
+      <p>Göteborgs</p>
+      <p>nya dansstudio.</p>
+      <sup>- av dansare, för dansare -</sup>
     </div>
   </div>
 </div>

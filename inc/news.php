@@ -5,7 +5,7 @@ $row_DatosPublications = mysqli_fetch_assoc($DatosPublications);
 $totalRows_DatosPublications = mysqli_num_rows($DatosPublications);
 ?>
 <div class="space">
-    <div style="background-color: red; width: 66%;">
+    <div style="background-color: red; width: 1080px;">
         <?php if ($row_DatosPublications > 0) { 
                 do { ?>
         <div class="box_1">
@@ -18,14 +18,14 @@ $totalRows_DatosPublications = mysqli_num_rows($DatosPublications);
                     <?php 
                     $texto= $row_DatosPublications['content'];
                     if (strlen($texto) > 0) {
-                    $texto = substr($texto,0,200).'...';
+                    $texto = substr($texto,0,300).'...';
                     print '<div class="text_cont">'.$texto.'</div>';
                     ?>
                     <?php
                     }
                     ?>
                 <br>
-                <a href="">see more</a>
+                <!-- <a href="">see more</a> -->
             </div>
         </div>
         <?php } while ($row_DatosPublications = mysqli_fetch_assoc($DatosPublications));

@@ -1,3 +1,4 @@
+<?php $divid = $_GET['pageid'];?>
 <?php
  $query_DatosConsulta = sprintf("SELECT * FROM pages WHERE padre = 0 ORDER BY id_page"); 
  $DatosConsulta = mysqli_query($con, $query_DatosConsulta) or die(mysqli_error($con));
@@ -20,10 +21,20 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formpage")) {
   $year = date("Y");
 	$month = date("m");
 	$day = date("d");
-  $insertSQL = sprintf("INSERT INTO pages(name, description, padre) 
-                        VALUES (%s, %s, %s)",
+  $insertSQL = sprintf("INSERT INTO pages(name, level, foto, background, height, border, borderpx, border_color, mtop, mright, mbottom, mleft, padre) 
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
                         GetSQLValueString($_POST["name"], "text"),                      
-                        GetSQLValueString($_POST["description"], "text"),
+                        GetSQLValueString($_POST["level"], "text"),
+                        GetSQLValueString($_POST["foto"], "text"),
+                        GetSQLValueString($_POST["background"], "text"),
+                        GetSQLValueString($_POST["height"], "int"),
+                        GetSQLValueString($_POST["border"], "text"),
+                        GetSQLValueString($_POST["borderpx"], "int"),
+                        GetSQLValueString($_POST["border_color"], "text"),
+                        GetSQLValueString($_POST["mtop"], "int"),
+                        GetSQLValueString($_POST["mright"], "int"),
+                        GetSQLValueString($_POST["mbottom"], "int"),
+                        GetSQLValueString($_POST["mleft"], "int"),
                         GetSQLValueString($_POST["padre"], "int"));
 
   
@@ -71,10 +82,22 @@ if (isset($_SERVER['QUERY_STRING'])) {
 }
 ?>
 <?php
- $query_DatosPage = sprintf("SELECT * FROM pages WHERE padre=%s", GetSQLValueString($_GET["pageid"], "int"));
+ $query_DatosPage = sprintf("SELECT * FROM pages WHERE level=0 AND padre=%s", GetSQLValueString($_GET["pageid"], "int"));
  $DatosPage = mysqli_query($con, $query_DatosPage) or die(mysqli_error($con));
  $row_DatosPage = mysqli_fetch_assoc($DatosPage);
  $totalRows_DatosPage = mysqli_num_rows($DatosPage);
+?>
+<?php
+ $query_PageList = sprintf("SELECT * FROM pages WHERE padre=0");
+ $PageList = mysqli_query($con, $query_PageList) or die(mysqli_error($con));
+ $row_PageList = mysqli_fetch_assoc($PageList);
+ $totalRows_PageList = mysqli_num_rows($PageList);
+?>
+<?php
+ $query_DatosPage2 = sprintf("SELECT * FROM pages WHERE level=0 AND padre2=%s", GetSQLValueString($_GET["pageid"], "int"));
+ $DatosPage2 = mysqli_query($con, $query_DatosPage2) or die(mysqli_error($con));
+ $row_DatosPage2 = mysqli_fetch_assoc($DatosPage2);
+ $totalRows_DatosPage2 = mysqli_num_rows($DatosPage2);
 ?>
 <script>
     function Mostrar() {
@@ -94,6 +117,15 @@ if (isset($_SERVER['QUERY_STRING'])) {
     event.stopPropagation()
     document.getElementById("myForm2").style.display="none";
     }
+
+    function Mostrar3() {
+    event.stopPropagation()
+    document.getElementById("myForm3").style.display="block";
+    }
+    function ocurtar3() {
+    event.stopPropagation()
+    document.getElementById("myForm3").style.display="none";
+    }
 </script>
 <div class="user_div">
     <div class="space">
@@ -109,10 +141,11 @@ if (isset($_SERVER['QUERY_STRING'])) {
             <div class="contentprov">
                 <a href="page_settings.php?pageid=<?php echo $row_DatosConsulta["id_page"]; ?>"><button class="sbbtn"><?php echo $row_DatosConsulta["name"]; ?></button></a>
                 <div class="contentprov-content">
-                    <a href="students.php?editi=<?php echo $row_DatosConsulta['id_student']; ?>" class="alt_button">Edit info</a>
-                    <a href="student_delete.php?id=<?php echo $row_DatosConsulta['id_student']; ?>" class="alt_button">Delete</a>
+                    <a href="page_settings.php?id=<?php echo $row_DatosConsulta['id_page']; ?>" class="alt_button">Edit info</a>
+                    <a href="page_delete.php?DeleteID=<?php echo $row_DatosConsulta['id_page']; ?>" class="alt_button">Delete</a>
                 </div>
             </div>
+                <?php categorianivel($row_DatosConsulta["id_page"]); ?>
             <?php } while ($row_DatosConsulta = mysqli_fetch_assoc($DatosConsulta));
             }
             ?>
@@ -162,24 +195,23 @@ if (isset($_SERVER['QUERY_STRING'])) {
                 <table style="width: 100%;" class="" border="0" cellspacing="0" cellpadding="0">
                     <tr height="80">
                         <td colspan="2" valign="middle" align="center" style="color: #333; padding: 30px 0 0 0; text-align: center;">
-                            <a href="">Delete </a>
+                            
                         </td>
                     </tr>
                 </table>
                 <?php
                 if ($totalRows_DatosPage > 0) {
                 do { ?>
-                <div style="width:96%; height:500px; margin:10px 2%; padding:0; background-color:#FFF; position:relative; box-shadow:0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;">
-                    <div class="arternative" style="margin:10px;">
+                <div style="width:96%; min-height:<?php echo $row_DatosPage['height'];?>px; overflow:auto; margin:10 2%; <?php echo $row_DatosPage['border'];?>:<?php echo $row_DatosPage['borderpx'];?>px solid <?php echo $row_DatosPage['border_color'];?>; background-color:<?php echo $row_DatosPage['background'];?>; position:relative; box-shadow:0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;">
+                    <div class="arternative" style="margin:10px; position:absolute;">
                         <button class="artbtn">o o o</button>
                         <div class="arternative-content">
-                            <a href="students.php?see=<?php echo $row_DatosConsulta['id_student']; ?>" class="alt_button">Add div</a>
-                            <a href="students.php?editi=<?php echo $row_DatosConsulta['id_student']; ?>" class="alt_button">Edit</a>
-                            <a href="student_delete.php?id=<?php echo $row_DatosConsulta['id_student']; ?>" class="alt_button">Delete</a>
+                            <a href="element_add.php?eleid=<?php echo $row_DatosPage['id_page']; ?>" class="alt_button">Add Element</a>
+                            <a href="page_edit.php?bdivid=<?php echo $row_DatosPage['id_page']; ?>" class="alt_button">Edit Div</a>
+                            <a href="page_delete.php?DeleteBDivID=<?php echo $row_DatosPage['id_page']; ?>" class="alt_button">Delete</a>
                         </div>
                     </div>
-                    <div style="width:24%; height:98%; margin:0.5% 0.5%; background-color:#CCC; float:left;">
-                    </div>
+                    <?php divelement($row_DatosPage["id_page"]); ?>
                 </div>
                 <?php } while ($row_DatosPage = mysqli_fetch_assoc($DatosPage));
                 }
@@ -190,67 +222,78 @@ if (isset($_SERVER['QUERY_STRING'])) {
     
     <div id="myForm" class="subform_cont">
         <form action="page_settings.php" method="post" name="formpage" id="formpage">
-            <table class="formulario_schedule" style="margin-top: 300px;" border="0" cellspacing="0" cellpadding="0">
+            <table class="formulario_schedule" style="margin-top: 100px;" border="0" cellspacing="0" cellpadding="0">
                 <tr height="80">
                     <td colspan="2" valign="middle" align="center" style="color: #333; padding: 30px 0 0 0;">
                         Page
                     </td>
                 </tr>
-                <tr height="60">
+                <tr height="50">
                     <td colspan="2" valign="middle" align="center"><input class="textf" type="text" placeholder="Page Namn..." name="name" id="name" size="52" required/></td>
                 </tr>
-                <tr height="60">
-                    <td colspan="2" valign="middle" align="center"><input class="textf" type="text" placeholder="Description..." name="description" id="description" size="52" required/></td>
+                <tr height="50">
+                    <td colspan="2" valign="middle" align="center" style="font-size: 12px; color: #666;">
+                        <label>Select list</label>
+                            <select class="textf" name="padre" id="padre">
+                                <option value = "0">Father</option>
+                            <?php
+                            if ($totalRows_PageList > 0) {
+                            do { ?>
+                                <option value = "<?php echo $row_PageList['id_page']; ?>"><?php echo $row_PageList['name']; ?></option>
+                            <?php } while ($row_PageList = mysqli_fetch_assoc($PageList));
+                            }
+                            ?>
+                            </select>
+                    </td>
                 </tr>
-                <tr height="120">
+                <tr height="60">
+                    <td colspan="2" valign="middle" align="center">
+                        <script src="scriptupload.js"></script>
+                        <?php 
+                        //***********************BLOQUE INSERCION IMAGEN***********************//
+                        //***********************PARÁMETROS DE IMAGEN**************************//
+                        $nombrecampoimagen="foto";
+                        $nombrecampoimagenmostrar="fotopic";
+                        $nombrecarpetadestino="../img/news/"; //carpeta destino con barra al final
+                        $nombrecampofichero="file1";
+                        $nombrecampostatus="status1";
+                        $nombrebarraprogreso="progressBar1";
+                        $maximotamanofichero="0"; //en Bytes, "0" para ilimitado. 1000000 Bytes = 1000Kb = 1Mb
+                        $tiposficheropermitidos="jpg,png"; //  Por ejemplo "jpg,doc,png", separados por comas y poner "0" para permitir todos los tipos
+                        $limiteancho="0"; // En píxels, "0" significa cualquier tamaño permitido
+                        $limitealto="0"; // En píxels, "0" significa cualquier tamaño permitido
+                                                            
+                        $cadenadeparametros="'".$nombrecampoimagen."','".$nombrecampoimagenmostrar."','".$nombrecarpetadestino."','".$nombrecampofichero."','".$nombrecampostatus."','".$nombrebarraprogreso."','".$maximotamanofichero."','".$tiposficheropermitidos."','".$limiteancho."','".$limitealto."'";
+
+                        //$cadenadeparametros="";                                 
+                        ?>
+                                <input type="hidden" size="40" name="settings" id="settings">
+                                <input type="hidden" class="textf" size="40" name="<?php echo $nombrecampoimagen;?>" id="<?php echo $nombrecampoimagen;?>">
+                                <br>
+                                <br>
+                                <input type="file" name="<?php echo $nombrecampofichero;?>" id="<?php echo $nombrecampofichero;?>">
+                                
+                                <input class="form-control" type="button" value="Ladda up file" onclick="uploadFile(<?php echo $cadenadeparametros;?>)">
+                                <br>
+                                <progress id="<?php echo $nombrebarraprogreso;?>" value="0" max="80" style="width: 80%;"></progress>
+                                <h5 id="<?php echo $nombrecampostatus;?>"></h5>
+                                <div class="foto_prev">
+                                    <img src="" alt="" id="<?php echo $nombrecampoimagenmostrar;?>" height="100">
+                                </div>
+                        <?php /*?>
+                        //******************FIN BLOQUE INSERCION IMAGEN*************************
+                        <?php */?> 
+                    </td>
+                </tr>
+                <tr height="100">
                     <td colspan="2" valign="middle" align="center" style="color: #666; font-size: 14px;">
                             <input onclick="ocurtar()" class="button_a" style="width: 170px; text-align: center;" value="avbryt" /> <input type="submit" class="button" value="Lägg till" />
                     </td>
                 </tr>
+                <input type="hidden" name="level" id="level" value="2"/>
                 <input type="hidden" name="padre" id="padre" value="0"/>
                 <input type="hidden" name="MM_insert" id="MM_insert" value="formpage" />
             </table>
         </form>
     </div>
 </div>
-<div id="myForm2" class="subform_cont">
-    <form action="page_settings.php" method="post" name="formpageinf" id="formpageinf">
-        <table class="subform" style="" border="0" cellspacing="0" cellpadding="0">
-            <tr height="80">
-                <td colspan="2" valign="middle" align="center" style="color: #333; padding: 30px 0 0 0;">
-                    New Div
-                </td>
-            </tr>
-            <tr height="60">
-                <td colspan="2" valign="middle" align="center"><input class="textf" type="text" placeholder="Div Namn..." name="name" id="name" size="52" required/></td>
-            </tr>
-            <tr height="60">
-                <td colspan="2" valign="middle" align="center"><input class="textf" type="text" placeholder="Description..." name="description" id="description" size="52" required/></td>
-            </tr>
-            <tr height="120">
-                <td colspan="2" valign="middle" align="center" style="color: #666; font-size: 14px;">
-                        <input onclick="ocurtar2()" class="button_a" style="width: 170px; text-align: center;" value="avbryt" /> <input type="submit" class="button" value="Lägg till" />
-                </td>
-            </tr>
-            <input type="hidden" name="padre" id="padre" value="<?php echo $_GET['pageid']?>"/>
-            <input type="hidden" name="MM_insert" id="MM_insert" value="formpage" />
-        </table>
-    </form>
-</div>
-<style>
-    .subform_cont {
-        width:100%;
-        overflow: auto;
-        position: fixed;
-        top: 150px;
-        display: none;
-    }
-    .subform {
-        width:400px;
-        height:500px;
-        border-radius: 7px;
-        background-color: #FFF;
-        margin: 30px auto;
-        box-shadow: 0 .15rem 2rem 0 rgba(58,59,69,.15)!important;
-    }
-</style>

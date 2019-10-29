@@ -1,3 +1,18 @@
+<?php
+ $query_DatosPackage3 = sprintf("SELECT * FROM package WHERE id_package=%s", GetSQLValueString($_GET["idCompl"], "int")); 
+ $DatosPackage3 = mysqli_query($con, $query_DatosPackage3) or die(mysqli_error($con));
+$row_DatosPackage3 = mysqli_fetch_assoc($DatosPackage3);
+$totalRows_DatosPackage3 = mysqli_num_rows($DatosPackage3);
+?>
+
+<?php
+$query_DatosReg = sprintf("SELECT * FROM students WHERE id_student=%s",
+GetSQLValueString($_SESSION['ydl_UserId'], "text"));
+$DatosReg = mysqli_query($con, $query_DatosReg) or die(mysqli_error($con));
+$row_DatosReg = mysqli_fetch_assoc($DatosReg);
+$totalRows_DatosReg = mysqli_num_rows($DatosReg);
+?>
+
 <div class="space">
     <div class="text_div">
         <h3 style="text-transform:uppercase;">Intresserad av att anmäla dig till en danskurs på Yandali?</h3>
@@ -10,7 +25,9 @@
         <br>
         <h3 style="text-align: center;">Vårens kurser börjar vecka 4. Öppet hus v 3</h3>
     </div>
-    <?php include("inc/form.php")?>
+
+    <a href="price_registration.php?tickets=1"><div class="big_button">Tickets</div></a>
+
     <div class="text_div">
     <h3 style="text-transform:uppercase;">DROP-IN</h3>
     <p>Enskilda klasser utan föranmälan, betalas i entrén.

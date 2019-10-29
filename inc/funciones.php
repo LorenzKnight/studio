@@ -550,4 +550,94 @@ function NombreCursoColor($varcursocolor)
 	if ($varcursocolor == 6) return "rgb(160, 72, 57)";
 	if ($varcursocolor == 7) return "linear-gradient(to right, #999, #CCC, #999)";
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function categorianivel($padre)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM pages WHERE name!='' AND padre = %s",
+	GetSQLValueString($padre, "int"));
+	
+	$ConsultaFuncion = mysqli_query($con, $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+
+	if ($totalRows_ConsultaFuncion > 0) {
+		do {
+			?> 
+		<div class="sub_cat">
+			<ul>
+				<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row_ConsultaFuncion['name']?></li>
+			</ul>
+		</div>
+	<?php
+		} while ($row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion));
+	}
+		 
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function divelement($padre2)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM pages WHERE padre2 = %s",
+	GetSQLValueString($padre2, "int"));
+	
+	$ConsultaFuncion = mysqli_query($con, $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+
+	if ($totalRows_ConsultaFuncion > 0) {
+		do {
+			?> 
+		<div style="width:<?php echo $row_ConsultaFuncion['width']; ?>%; height:<?php echo $row_ConsultaFuncion['height']; ?>px; margin:0.5% 0.5%; background:<?php echo $row_ConsultaFuncion['background']; ?>; float:left;">
+			aqui! aqui! aqui! aqui!
+		</div>
+	<?php
+		} while ($row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion));
+	}
+		 
+	mysqli_free_result($ConsultaFuncion);
+}
 ?>
+<style>
+	/* .sub_cat{
+		width: 100%;
+		padding: 10px;
+		background-color: #CCC;
+		color: #666;
+		font-size: 12px;
+		display:;
+	} */
+	
+
+	.sub_cat {
+		text-align: left;
+		font-size: 14px;
+	}
+	.sub_cat ul {
+		width: 100%;
+		margin: 0;
+		padding: 0;
+	}
+	.sub_cat ul li {
+		background-color: #CCC;
+		padding: 20px;
+		color: #666;
+	}
+	.sub_cat ul li:hover {
+		background-color: #0F1E41;
+		color: #FFF;
+	}
+</style>
