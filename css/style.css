@@ -90,7 +90,7 @@
         width: 44%;
         overflow: auto;
         /*background-color: blueviolet;*/
-        float: right;
+        float: left;
         margin: 0 3% 20px;
     }
     .foto_box_1 {
@@ -515,13 +515,13 @@
     .box_position {
         /* background-color: red; */
         float:left;
-        width: 955px;
+        width: 100%;
     }
     .box_1 {
         width: 44%;
         overflow: auto;
         /*background-color: blueviolet;*/
-        float: right;
+        float: left;
         margin: 0 3% 20px;
     }
     .foto_box_1 {
@@ -937,13 +937,13 @@
     .box_position {
         /* background-color: red; */
         float:left;
-        width: 955px;
+        width: 100%;
     }
     .box_1 {
         width: 44%;
         overflow: auto;
         /*background-color: blueviolet;*/
-        float: right;
+        float: left;
         margin: 0 3% 20px;
     }
     .foto_box_1 {
@@ -1364,13 +1364,13 @@
     .box_position {
         /* background-color: red; */
         float:left;
-        width: 80%;
+        width: 100%;
     }
     .box_1 {
         width: 200px;
         overflow: auto;
         /*background-color: blueviolet;*/
-        float: right;
+        float: left;
         margin: 0 3%;
     }
     .foto_box_1 {
