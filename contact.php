@@ -13,7 +13,6 @@ $totalRows_DatosSite = mysqli_num_rows($DatosSite);
 <html>
 <head>
 <meta charset="iso-8859-1">
-<meta name="robots" content="noindex">
 <title>Yandali Studio</title>
 <link rel="shortcut icon" href="favicon-32x32.png">
 <link href="css/style.css" rel="stylesheet" type="text/css"  media="all" />

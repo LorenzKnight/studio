@@ -415,7 +415,28 @@ h5 {
   border: 1px solid #666;
   cursor: pointer;
 }
-
+.ele2btn {
+  background-color: #E34747;
+  color: white;
+  padding: 1px 20px 1px;
+  border-radius: 0 0 7px 7px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  font-size: 10px;
+  z-index: 1;
+}
+.elebtn {
+  background-color: #E34747;
+  color: white;
+  padding: 8px 20px 8px;
+  border-radius: 7px 7px 0 0;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  font-size: 10px;
+  z-index: 1;
+}
 .artbtn {
   background-color: #E34747;
   color: white;

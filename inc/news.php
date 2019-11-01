@@ -5,7 +5,7 @@ $row_DatosPublications = mysqli_fetch_assoc($DatosPublications);
 $totalRows_DatosPublications = mysqli_num_rows($DatosPublications);
 ?>
 <div class="space">
-    <div style="background-color: red; width: 1080px;">
+    <div class="box_position">
         <?php if ($row_DatosPublications > 0) { 
                 do { ?>
         <div class="box_1">

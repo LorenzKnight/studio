@@ -30,7 +30,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequest")) {
                         GetSQLValueString($_POST["id_publications"], "int"));
 
   
-  $Result1 = mysqli_query($con,  $insertSQL) or die(mysqli_error($con));
+  $Result1 = mysqli_query($con, $insertSQL) or die(mysqli_error($con));
   
   
   $insertGoTo = "publications.php";

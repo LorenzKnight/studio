@@ -19,22 +19,3 @@ $totalRows_DatosPublications = mysqli_num_rows($DatosPublications);
         </div>
     </div>
 </div>
-<style>
-    .about_pic{
-        width: 96%;
-        height: 700px;
-        background-color: black;
-        margin: 0 auto;
-        overflow: hidden;
-        position: relative;
-    }
-    .about_text{
-        margin: 0 auto;
-        padding: 0 150px 50px;
-        position:absolute;
-        bottom: 0px;
-        color: #FFF;
-        text-shadow: 1px 1px 15px #333;
-        text-align: justify;
-    }
-</style>

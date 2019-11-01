@@ -598,13 +598,29 @@ function divelement($padre2)
 	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
 	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
 
-	if ($totalRows_ConsultaFuncion > 0) {
+	$rwidth = $row_ConsultaFuncion['width']-$row_ConsultaFuncion['mleft']-$row_ConsultaFuncion['mright'];
+	
+		if ($totalRows_ConsultaFuncion > 0) {
 		do {
-			?> 
-		<div style="width:<?php echo $row_ConsultaFuncion['width']; ?>%; height:<?php echo $row_ConsultaFuncion['height']; ?>px; margin:0.5% 0.5%; background:<?php echo $row_ConsultaFuncion['background']; ?>; float:left;">
-			aqui! aqui! aqui! aqui!
+		?>
+		<?php
+		$rwidth = $row_ConsultaFuncion['width']-$row_ConsultaFuncion['mleft']-$row_ConsultaFuncion['mright'];
+		$rheight = $row_ConsultaFuncion['height']-$row_ConsultaFuncion['mtop']-$row_ConsultaFuncion['mbottom'];
+		?>
+		<div style="width:<?php echo $rwidth; ?>%; height:<?php echo $rheight; ?>px; box-shadow:<?php echo $row_ConsultaFuncion['shadow']; ?>; background:<?php echo $row_ConsultaFuncion['background']; ?>; <?php echo $row_ConsultaFuncion['border']; ?>:<?php echo $row_ConsultaFuncion['borderpx']; ?>px solid <?php echo $row_ConsultaFuncion['border_color']; ?>; border-radius:<?php echo $row_ConsultaFuncion['radius']; ?>px; margin:0.5% 0; margin-top:<?php echo $row_ConsultaFuncion['mtop']; ?>px; margin-right:<?php echo $row_ConsultaFuncion['mright']; ?>%; margin-bottom:<?php echo $row_ConsultaFuncion['mbottom']; ?>px; margin-left:<?php echo $row_ConsultaFuncion['mleft']; ?>%; float:left; overflow:hidden;">
+			<div class="arternative" style="margin:0 5px 1px;">
+				<button class="ele2btn">o o o</button>
+				<div class="arternative-content">
+					<a href="element_add.php?ele2id=<?php echo $row_ConsultaFuncion['id_page']; ?>" class="alt_button">Add Element</a>
+					<a href="page_edit.php?bdivid=<?php echo $row_DatosPage['id_page']; ?>" class="alt_button">Edit Div</a>
+					<a href="page_delete.php?DeleteEDivID=<?php echo $row_DatosPage['id_page']; ?>" class="alt_button">Delete</a>
+				</div>
+			</div>
+			<div style="width:99%; height:100px; background-color:green; margin:0 auto; 1.5px">
+			</div>
+			<?php echo $rwidth; ?>
 		</div>
-	<?php
+		<?php
 		} while ($row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion));
 	}
 		 
@@ -612,16 +628,6 @@ function divelement($padre2)
 }
 ?>
 <style>
-	/* .sub_cat{
-		width: 100%;
-		padding: 10px;
-		background-color: #CCC;
-		color: #666;
-		font-size: 12px;
-		display:;
-	} */
-	
-
 	.sub_cat {
 		text-align: left;
 		font-size: 14px;

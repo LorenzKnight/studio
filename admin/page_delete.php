@@ -5,7 +5,7 @@ $query_Delete = sprintf("DELETE FROM pages WHERE id_page=%s", GetSQLValueString(
 echo $query_Delete;
 $Result1 = mysqli_query($con, $query_Delete) or die(mysqli_error());
 
-  $insertGoTo = "page_settings.php";
+  $insertGoTo = $_SERVER['HTTP_REFERER'];
   header(sprintf("Location: %s", $insertGoTo));
   mysqli_free_result($Result1);
 ?>
@@ -14,7 +14,7 @@ $query_Delete = sprintf("DELETE FROM pages WHERE id_page=%s", GetSQLValueString(
 echo $query_Delete;
 $Result1 = mysqli_query($con, $query_Delete) or die(mysqli_error());
 
-  $insertGoTo = "page_settings.php";
+  $insertGoTo = $_SERVER['HTTP_REFERER'];
   header(sprintf("Location: %s", $insertGoTo));
   mysqli_free_result($Result1);
 ?>

@@ -21,13 +21,17 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formpage")) {
   $year = date("Y");
 	$month = date("m");
 	$day = date("d");
-  $insertSQL = sprintf("INSERT INTO pages(name, level, foto, background, height, border, borderpx, border_color, mtop, mright, mbottom, mleft, padre) 
-                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+  $insertSQL = sprintf("INSERT INTO pages(name, level, foto, width, height, background, radius, shadow, divfloat, border, borderpx, border_color, mtop, mright, mbottom, mleft, padre, padre2) 
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
                         GetSQLValueString($_POST["name"], "text"),                      
                         GetSQLValueString($_POST["level"], "text"),
                         GetSQLValueString($_POST["foto"], "text"),
-                        GetSQLValueString($_POST["background"], "text"),
+                        GetSQLValueString($_POST["width"], "int"),
                         GetSQLValueString($_POST["height"], "int"),
+                        GetSQLValueString($_POST["background"], "text"),
+                        GetSQLValueString($_POST["radius"], "int"),
+                        GetSQLValueString($_POST["shadow"], "text"),
+                        GetSQLValueString($_POST["divfloat"], "text"),
                         GetSQLValueString($_POST["border"], "text"),
                         GetSQLValueString($_POST["borderpx"], "int"),
                         GetSQLValueString($_POST["border_color"], "text"),
@@ -35,7 +39,8 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formpage")) {
                         GetSQLValueString($_POST["mright"], "int"),
                         GetSQLValueString($_POST["mbottom"], "int"),
                         GetSQLValueString($_POST["mleft"], "int"),
-                        GetSQLValueString($_POST["padre"], "int"));
+                        GetSQLValueString($_POST["padre"], "int"),
+                        GetSQLValueString($_POST["padre2"], "int"));
 
   
   $Result1 = mysqli_query($con,  $insertSQL) or die(mysqli_error($con));
@@ -202,15 +207,15 @@ if (isset($_SERVER['QUERY_STRING'])) {
                 <?php
                 if ($totalRows_DatosPage > 0) {
                 do { ?>
-                <div style="width:96%; min-height:<?php echo $row_DatosPage['height'];?>px; overflow:auto; margin:10 2%; <?php echo $row_DatosPage['border'];?>:<?php echo $row_DatosPage['borderpx'];?>px solid <?php echo $row_DatosPage['border_color'];?>; background-color:<?php echo $row_DatosPage['background'];?>; position:relative; box-shadow:0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;">
-                    <div class="arternative" style="margin:10px; position:absolute;">
-                        <button class="artbtn">o o o</button>
-                        <div class="arternative-content">
-                            <a href="element_add.php?eleid=<?php echo $row_DatosPage['id_page']; ?>" class="alt_button">Add Element</a>
-                            <a href="page_edit.php?bdivid=<?php echo $row_DatosPage['id_page']; ?>" class="alt_button">Edit Div</a>
-                            <a href="page_delete.php?DeleteBDivID=<?php echo $row_DatosPage['id_page']; ?>" class="alt_button">Delete</a>
-                        </div>
+                <div class="arternative" style="margin:0 2%;">
+                    <button class="elebtn">o o o</button>
+                    <div class="arternative-content">
+                        <a href="element_add.php?eleid=<?php echo $row_DatosPage['id_page']; ?>" class="alt_button">Add Element</a>
+                        <a href="page_edit.php?bdivid=<?php echo $row_DatosPage['id_page']; ?>" class="alt_button">Edit Div</a>
+                        <a href="page_delete.php?DeleteBDivID=<?php echo $row_DatosPage['id_page']; ?>" class="alt_button">Delete</a>
                     </div>
+                </div>
+                <div style="width:96%; min-height:<?php echo $row_DatosPage['height'];?>px; overflow:auto; margin:0 2% 20px; <?php echo $row_DatosPage['border'];?>:<?php echo $row_DatosPage['borderpx'];?>px solid <?php echo $row_DatosPage['border_color'];?>; background:<?php echo $row_DatosPage['background'];?>; position:relative; box-shadow:0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;">
                     <?php divelement($row_DatosPage["id_page"]); ?>
                 </div>
                 <?php } while ($row_DatosPage = mysqli_fetch_assoc($DatosPage));

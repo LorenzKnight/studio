@@ -1223,11 +1223,11 @@
     <!--Element insert-->
     <?php if($_GET["eleid"]):?>
     <div id="myForm3" class="subform_cont2">
-        <form action="page_settings.php" method="post" name="formpage" id="formpage">
+        <form action="element_add.php" method="post" name="formpage" id="formpage">
         <table class="subform" style="padding:0 5px;" border="0" cellspacing="0" cellpadding="0">
             <tr height="50">
                 <td colspan="2" valign="middle" align="center" style="color: #333;">
-                    New Element <?php //echo $divid ?>
+                    New Element (<?php echo $_GET["eleid"]; ?>)
                 </td>
             </tr>
             <tr>
@@ -1236,7 +1236,7 @@
                         <tr height="40">
                             <td width="50%" valign="middle" align="center" style="font-size:14px; color:#666;">
                                 Width:
-                                <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="border" id="border">
+                                <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="width" id="width">
                                     <option value="16.66">1/6</option>
                                     <option value="20">1/5</option>
                                     <option value="25">1/4</option>
@@ -1246,7 +1246,7 @@
                                 </select>
                             </td>
                             <td width="50%" valign="middle" align="center" style="font-size:14px; color:#666;">
-                                Height <input class="textf" type="text" placeholder="100" name="borderpx" id="borderpx" size="5"/> px
+                                Height <input class="textf" type="text" placeholder="400" name="height" id="height" size="5" value="400"/> px
                             </td>
                         </tr>
                         <tr height="60">
@@ -1254,7 +1254,7 @@
                                 <table border="0" cellspacing="0" cellpadding="0" style="margin:10px 0;">
                                     <tr height="30">
                                         <td align="center" style="width:30px; background-color:#FFF;">
-                                            <input type="radio" name="background" id="background" value="#FFF">
+                                            <input type="radio" name="background" id="background" value="#FFF" checked>
                                         </td>
                                         <td align="center" style="width:30px; background-color:#FEF9E7;">
                                             <input type="radio" name="background" id="background" value="#FEF9E7">
@@ -1523,27 +1523,20 @@
                         </tr>
                         <tr height="40">
                             <td width="50%" valign="middle" align="left" style="font-size:14px; color:#666; border-bottom:1px solid #CCC;">
-                                border-radiun: <input class="textf" type="text" placeholder="2" name="borderpx" id="borderpx" size="5"/> px
+                                border-radius: <input class="textf" type="text" placeholder="2" name="radius" id="radius" size="5"/> px
                             </td>
-                            <td width="50%" valign="middle" align="right" style="font-size:14px; color:#666; border-bottom:1px solid #CCC;">
+                            <td width="50%" valign="middle" align="center" style="font-size:14px; color:#666; border-bottom:1px solid #CCC;">
                                 Shadow:
-                                <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="border" id="border">
-                                    <option value="16.66">1/6</option>
-                                    <option value="20">1/5</option>
-                                    <option value="25">1/4</option>
-                                    <option value="33.33">1/3</option>
-                                    <option value="50">1/2</option>
-                                    <option value="100">1</option>
-                                </select>
+                                <input type="checkbox" name="shadow" value="0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important">
                             </td>
                         </tr>
                         <tr height="40">
                             <td colspan="2" valign="middle" align="center" style="font-size:14px; color:#666;">
                                 float:
-                                <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="border" id="border">
-                                    <option value="">none</option>
-                                    <option value="border-top">top</option>
-                                    <option value="border-bottom">bottom</option>
+                                <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="divfloat" id="divfloat">
+                                    <option value="float:left;">Left</option>
+                                    <option value="margin:0 auto;">center</option>
+                                    <option value="float:right;">right</option>
                                 </select>
                             </td>
                         </tr>
@@ -1560,8 +1553,11 @@
                                 border
                                 <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="border" id="border">
                                     <option value="">none</option>
-                                    <option value="border-top">top</option>
-                                    <option value="border-bottom">bottom</option>
+                                    <option value="border-top">Top</option>
+                                    <option value="border-right">Right</option>
+                                    <option value="border-bottom">Bottom</option>
+                                    <option value="border-left">Left</option>
+                                    
                                 </select>
                             </td>
                             <td width="50%" valign="middle" align="center" style="font-size:14px; color:#666;">
@@ -1845,17 +1841,17 @@
                                 <table border="0" cellspacing="0" cellpadding="0" style="border:1px solid #CCC; border-radius:3px; margin:5px;">
                                     <tr height="40">
                                         <td valign="middle" align="center" style="width:50px;"></td>
-                                        <td valign="middle" align="center" style="width:50px;"><input class="textf" type="text" placeholder="top" name="mtop" id="mtop" size="5"/></td>
+                                        <td valign="middle" align="center" style="width:50px;"><input class="textf" type="text" placeholder="px" name="mtop" id="mtop" size="5"/></td>
                                         <td valign="middle" align="center" style="width:50px;"></td>
                                     </tr>
                                     <tr height="40">
-                                        <td valign="middle" align="center" style="width:50px;"><input class="textf" type="text" placeholder="left" name="mleft" id="mleft" size="5"/></td>
+                                        <td valign="middle" align="center" style="width:50px;"><input class="textf" type="text" placeholder="%" name="mleft" id="mleft" size="5"/></td>
                                         <td valign="middle" align="center" style="width:50px; font-size:11px; color:#666;">Margin</td>
-                                        <td valign="middle" align="center" style="width:50px;"><input class="textf" type="text" placeholder="right" name="mright" id="mright" size="5"/></td>
+                                        <td valign="middle" align="center" style="width:50px;"><input class="textf" type="text" placeholder="%" name="mright" id="mright" size="5"/></td>
                                     </tr>
                                     <tr height="40">
                                         <td valign="middle" align="center" style="width:50px;"></td>
-                                        <td valign="middle" align="center" style="width:50px;"><input class="textf" type="text" placeholder="bottom" name="mbottom" id="mbottom" size="5"/></td>
+                                        <td valign="middle" align="center" style="width:50px;"><input class="textf" type="text" placeholder="px" name="mbottom" id="mbottom" size="5"/></td>
                                         <td valign="middle" align="center" style="width:50px;"></td>
                                     </tr>
                                 </table>
@@ -1870,7 +1866,7 @@
                 </td>
             </tr>
             <input type="hidden" name="level" id="level" value="0"/>
-            <input type="hidden" name="padre" id="padre" value="<?php echo $divid ?>"/>
+            <input type="hidden" name="padre2" id="padre2" value="<?php echo $_GET["eleid"]; ?>"/>
             <input type="hidden" name="MM_insert" id="MM_insert" value="formpage" />
         </table>
         </form>
