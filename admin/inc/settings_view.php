@@ -200,7 +200,6 @@ if (isset($_SERVER['QUERY_STRING'])) {
                 <table style="width: 100%;" class="" border="0" cellspacing="0" cellpadding="0">
                     <tr height="80">
                         <td colspan="2" valign="middle" align="center" style="color: #333; padding: 30px 0 0 0; text-align: center;">
-                            
                         </td>
                     </tr>
                 </table>
@@ -208,7 +207,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
                 if ($totalRows_DatosPage > 0) {
                 do { ?>
                 <div class="arternative" style="margin:0 2%;">
-                    <button class="elebtn">o o o</button>
+                    <button class="elebtn">o o 1</button>
                     <div class="arternative-content">
                         <a href="element_add.php?eleid=<?php echo $row_DatosPage['id_page']; ?>" class="alt_button">Add Element</a>
                         <a href="page_edit.php?bdivid=<?php echo $row_DatosPage['id_page']; ?>" class="alt_button">Edit Div</a>
@@ -216,6 +215,9 @@ if (isset($_SERVER['QUERY_STRING'])) {
                     </div>
                 </div>
                 <div style="width:96%; min-height:<?php echo $row_DatosPage['height'];?>px; overflow:auto; margin:0 2% 20px; <?php echo $row_DatosPage['border'];?>:<?php echo $row_DatosPage['borderpx'];?>px solid <?php echo $row_DatosPage['border_color'];?>; background:<?php echo $row_DatosPage['background'];?>; position:relative; box-shadow:0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;">
+                    <div class="flybutton_div">
+                        <a href="element_add.php?eleid=<?php echo $row_DatosPage['id_page']; ?>" class="alt_button"><div class="flying_button4">+</div></a>
+                    </div>
                     <?php divelement($row_DatosPage["id_page"]); ?>
                 </div>
                 <?php } while ($row_DatosPage = mysqli_fetch_assoc($DatosPage));
@@ -224,7 +226,6 @@ if (isset($_SERVER['QUERY_STRING'])) {
             <?php endif ?>
         </div>
     </div>
-    
     <div id="myForm" class="subform_cont">
         <form action="page_settings.php" method="post" name="formpage" id="formpage">
             <table class="formulario_schedule" style="margin-top: 100px;" border="0" cellspacing="0" cellpadding="0">

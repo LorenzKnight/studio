@@ -120,14 +120,17 @@ document.addEventListener('click', onClick)
 
 <div class="checkin">
     <div class="register_info">
-        <h3 style="text-transform:uppercase;">Vad är Lorem Ipsum?</h3>
-        <?php echo $_SESSION['ydl_UserId'];?><br>
-        <p>Lorem Ipsum är en utfyllnadstext från tryck- och förlagsindustrin.
-        Lorem ipsum har varit standard ända sedan 1500-talet,
-        när en okänd boksättare tog att antal bokstäver och blandade dem för att göra ett provexemplar av en bok.
-        Lorem ipsum har inte bara överlevt fem århundraden, utan även övergången till elektronisk typografi utan större förändringar.
-        Det blev allmänt känt på 1960-talet i samband med lanseringen av Letraset-ark med avsnitt av Lorem Ipsum,
-        och senare med mjukvaror som Aldus PageMaker.</p>
+        <h3 style="text-transform:uppercase;">KURSER OCH SOCIALDANS</h3>
+        <?php echo $_SESSION['ydl_UserId'];?>
+        <h3>Kurser & paket</h3>
+        <p>Varje termin är uppdelad i två kurs-omgångar och varje kurs pågår i 9 veckor.</p>
+        <br>
+        <p>Innan kursstart anmäler du dig till de kurser du vill gå. 
+        I de olika paketen ingår även så kallade practica, tillfällen då du kan öva och repetera steg tillsammans med andra kursdeltagare. 
+        I vårt brons-paket ingår den practica som äger rum samma dag som de kurs du anmält dig till. I de övriga paketen ingår samtliga practicas.</p>
+        
+        <h3>OBS!</h3>
+        <p>Din anmälan gäller bara den specifika kurs du anmält dig till, man kan ej byta till annan kurs efter köp.</p>
     </div>
     
     <div class="to_register">
@@ -136,7 +139,7 @@ document.addEventListener('click', onClick)
             do { ?> 
         <div class="paquetes" onclick="location='price_registration.php?id=<?php echo $row_DatosPackage['id_package']; ?>'">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                    <tr height="80">
+                    <tr height="70">
                         <td width="50%" valign="middle" align="center" style="padding: 0 10px;"><?php echo $row_DatosPackage['package_name'];?></td>
                         <td width="50%" valign="middle" align="left" style="padding: 0 10px;"><?php echo $row_DatosPackage['description'];?></td>
                     </tr>
@@ -145,8 +148,6 @@ document.addEventListener('click', onClick)
             <?php } while ($row_DatosPackage = mysqli_fetch_assoc($DatosPackage));
             }
             ?>
-
-            <a href="reg_done.php?control=<?php echo $row_DatosReg["id_student"]; ?>">Click test</a>
     </div>
 
 

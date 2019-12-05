@@ -270,12 +270,9 @@
         top: 150px;
     }
     .checkin {
-        width: 80%;
-        background-color: #FFF;
-        border-radius: 7px;
+        width: 90%;
         overflow: auto;
         margin: 10px auto;
-        box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
     }
     .to_register {
         width: 100%;
@@ -283,10 +280,13 @@
     }
     .register_info {
         width: 92%;
-        margin-top: 30px;
+        border-radius: 7px;
+        margin: 10px 0 30px;
         padding: 4%;
         overflow: auto;
+        float: left;
         background-color: #FFF;
+        box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
     }
     .formulario {
         width: 600px;
@@ -308,17 +308,31 @@
         text-align: 
     }
     .paquetes {
-        width: 90%;
-        margin: 30px auto;
-        background-color: #FFF;
-        border: 1px solid #dddfeb;
-        border-radius: 7px;
-        box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
+        width: 95%;
+        margin: 10px auto;
+        border-bottom: 1px solid rgba(201,172,140,1);
         cursor: pointer;
     }
     .paquetes:hover{
-        background-color: green;
+        background-image: linear-gradient(to right, rgb(96, 42, 245), rgb(150, 115, 247), rgb(183, 195, 250), #f0f0f0, #f0f0f0, #f0f0f0);
         color: #FFF;
+    }
+    .heading {
+        text-align: center;
+        margin: 0 0 30px;
+    }
+    .beginfo {
+        width: 17%;
+        height: 300px;
+        margin: 0 0.4%;
+        padding: 0 1%;
+        overflow: auto;
+        background-color: #FFF;
+        border: 1px solid #dddfeb;
+        /* box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important; */
+        border-radius: 4px;
+        float: left;
+        font-size: 14px;
     }
     .textf {
         padding: 10px;
@@ -700,11 +714,8 @@
     }
     .checkin {
         width: 80%;
-        background-color: #FFF;
-        border-radius: 7px;
         overflow: auto;
         margin: 10px auto;
-        box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
     }
     .to_register {
         width: 100%;
@@ -712,10 +723,13 @@
     }
     .register_info {
         width: 92%;
-        margin-top: 30px;
+        border-radius: 7px;
+        margin: 10px 0 30px;
         padding: 4%;
         overflow: auto;
+        float: left;
         background-color: #FFF;
+        box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
     }
     .formulario {
         width: 600px;
@@ -728,17 +742,31 @@
         top: 0;
     }
     .paquetes {
-        width: 90%;
-        margin: 30px auto;
-        background-color: #FFF;
-        border: 1px solid #dddfeb;
-        border-radius: 7px;
-        box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
+        width: 95%;
+        margin: 10px auto;
+        border-bottom: 1px solid rgba(201,172,140,1);
         cursor: pointer;
     }
     .paquetes:hover{
-        background-color: green;
+        background-image: linear-gradient(to right, rgb(96, 42, 245), rgb(150, 115, 247), rgb(183, 195, 250), #f0f0f0, #f0f0f0, #f0f0f0);
         color: #FFF;
+    }
+    .heading {
+        text-align: center;
+        margin: 0 0 30px;
+    }
+    .beginfo {
+        width: 17%;
+        height: 300px;
+        margin: 0 0.4%;
+        padding: 0 1%;
+        overflow: auto;
+        background-color: #FFF;
+        border: 1px solid #dddfeb;
+        /* box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important; */
+        border-radius: 4px;
+        float: left;
+        font-size: 14px;
     }
     .textf {
         padding: 10px;
@@ -853,6 +881,11 @@
         color: #FFF;
         text-shadow: 1px 1px 15px #333;
         text-align: justify;
+    }
+    .date_div {
+        width: 150px;
+        height: 100px;
+        background-color: #E34747;
     }
 }
 @media (min-width: 425px) {
@@ -1122,12 +1155,9 @@
         top: 100px;
     }
     .checkin {
-        width: 80%;
-        background-color: #FFF;
-        border-radius: 7px;
+        width: 90%;
         overflow: auto;
         margin: 10px auto;
-        box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
     }
     .to_register {
         width: 100%;
@@ -1136,11 +1166,13 @@
     }
     .register_info {
         width: 92%;
-        margin-top: 30px;
+        border-radius: 7px;
+        margin: 10px 0 30px;
         padding: 4%;
         overflow: auto;
         float: left;
         background-color: #FFF;
+        box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
     }
     .formulario {
         width: 600px;
@@ -1153,17 +1185,31 @@
         top: 0;
     }
     .paquetes {
-        width: 90%;
-        margin: 30px auto;
-        background-color: #FFF;
-        border: 1px solid #dddfeb;
-        border-radius: 7px;
-        box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
+        width: 95%;
+        margin: 10px auto;
+        border-bottom: 1px solid rgba(201,172,140,1);
         cursor: pointer;
     }
     .paquetes:hover{
-        background-color: green;
+        background-image: linear-gradient(to right, rgb(96, 42, 245), rgb(150, 115, 247), rgb(183, 195, 250), #f0f0f0, #f0f0f0, #f0f0f0);
         color: #FFF;
+    }
+    .heading {
+        text-align: center;
+        margin: 0 0 30px;
+    }
+    .beginfo {
+        width: 17%;
+        height: 300px;
+        margin: 0 0.4%;
+        padding: 0 1%;
+        overflow: auto;
+        background-color: #FFF;
+        border: 1px solid #dddfeb;
+        /* box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important; */
+        border-radius: 4px;
+        float: left;
+        font-size: 14px;
     }
     .textf {
         padding: 10px;
@@ -1278,6 +1324,11 @@
         color: #FFF;
         text-shadow: 1px 1px 15px #333;
         text-align: justify;
+    }
+    .date_div {
+        width: 150px;
+        height: 100px;
+        background-color: #E34747;
     }
 }
 @media (min-width: 1024px) {
@@ -1537,7 +1588,7 @@
     }
 
     .text_div { 
-        width: 76%;
+        width: 86%;
         color: #333;
         overflow: auto;
         margin: 0 auto;
@@ -1553,12 +1604,9 @@
         top: 200px;
     }
     .checkin {
-        width: 80%;
-        background-color: #FFF;
-        border-radius: 7px;
+        width: 90%;
         overflow: auto;
         margin: 10px auto;
-        box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
     }
     .to_register {
         width: 50%;
@@ -1567,11 +1615,13 @@
     }
     .register_info {
         width: 46%;
-        margin-top: 30px;
+        border-radius: 7px;
+        margin: 10px 0 30px;
         padding: 2%;
         overflow: auto;
         float: left;
         background-color: #FFF;
+        box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
     }
     .formulario {
         width: 600px;
@@ -1584,17 +1634,31 @@
         top: 0;
     }
     .paquetes {
-        width: 90%;
-        margin: 30px auto;
-        background-color: #FFF;
-        border: 1px solid #dddfeb;
-        border-radius: 7px;
-        box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
+        width: 95%;
+        margin: 10px auto;
+        border-bottom: 1px solid rgba(201,172,140,1);
         cursor: pointer;
     }
     .paquetes:hover{
-        background-color: green;
+        background-image: linear-gradient(to right, rgb(96, 42, 245), rgb(150, 115, 247), rgb(183, 195, 250), #f0f0f0, #f0f0f0, #f0f0f0);
         color: #FFF;
+    }
+    .heading {
+        text-align: center;
+        margin: 0 0 30px;
+    }
+    .beginfo {
+        width: 17%;
+        height: 300px;
+        margin: 0 0.4%;
+        padding: 0 1%;
+        overflow: auto;
+        background-color: #FFF;
+        border: 1px solid #dddfeb;
+        /* box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important; */
+        border-radius: 4px;
+        float: left;
+        font-size: 14px;
     }
     .textf {
         padding: 10px;
@@ -1709,5 +1773,11 @@
         color: #FFF;
         text-shadow: 1px 1px 15px #333;
         text-align: justify;
+    }
+    .date_div {
+        width: 100px;
+        padding: 15px 0 0;
+        background-color: #E34747;
+        color: #FFF;
     }
 }

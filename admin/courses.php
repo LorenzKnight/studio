@@ -15,8 +15,9 @@
     <div class="wrapp">
         <?php include("inc/head.php"); ?>
         <div class="container">
-          <div class="title"><h2>Publications/News/Vlog</h2></div>
-          <?php include("inc/publications_list.php"); ?>
+          <?php //echo $_SESSION['std_UserId']; ?>
+          <div class="title"><h2>Courses Packages</h2></div>
+          <?php include("inc/courses_list.php"); ?>
         </div>
     </div>
 </body>

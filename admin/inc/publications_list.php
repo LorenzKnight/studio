@@ -252,7 +252,7 @@ document.addEventListener('click', onClick)
           <tr height="200">
               <td colspan="2" valign="middle" align="center">
 
-          <script src="scriptupload.js"></script>
+          <script src="js/scriptupload.js"></script>
 
             <?php 
             //***********************BLOQUE INSERCION IMAGEN***********************//

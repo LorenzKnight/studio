@@ -345,7 +345,7 @@ h5 {
 .flying_button {
   width: 20px;
   height: 40px;
-  padding: 5px 15px;
+  padding: 5px 17px 5px 14px;
   border-radius: 25px;
   background-color: #82C040;
   color: #FFF;
@@ -390,6 +390,29 @@ h5 {
   cursor: pointer;
 }
 .flying_button3:hover {
+  background-color: #82C040;
+}
+.flybutton_div {
+  width: 100%;
+  position: absolute;
+  bottom: 3px;
+}
+.flying_button4 {
+  width: 15px;
+  height: 35px;
+  margin: 0 auto;
+  padding: 2px 20px 8px 11px;
+  border:1px solid #FFF;
+  border-radius: 25px;
+  background-color: #CCC;
+  opacity: 0.8;
+  color: #FFF;
+  box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
+  text-shadow: 1px 1px 15px #333;
+  font-size: 30px;
+  cursor: pointer;
+}
+.flying_button4:hover {
   background-color: rgb(84, 124, 42);
 }
 .button {
@@ -668,6 +691,14 @@ h5 {
   overflow: auto;
   position: fixed;
   display: none;
+  z-index: 1;
+}
+.subform_cont1 {
+  width:100%;
+  height:100%;
+  background-image: url("../../img/sys/opacity_bg.png");
+  overflow: auto;
+  position: fixed;
   z-index: 1;
 }
 .subform {

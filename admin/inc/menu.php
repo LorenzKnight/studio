@@ -30,9 +30,18 @@ window.onclick = function(event) {
         <li><a href="dashboard.php">Start</a></li>
         <li><a href="students.php">Students</a></li>
         <li><a href="periods.php">Periods</a></li>
+        <li><a href="#">Tickets</a>
+          <div class="dropdown2-content">
+            <ul>
+              <li><a href="courses.php">Courses</a></li>
+              <li><a href="#">Events</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="events.php">Events</a></li>
         <hr>
         <h5>SITE</h5>
-        <li><a href="publications.php">Publications</a></li>
+        <li><a href="publications.php">Publications/News/Vlog</a></li>
         <li><a href="#about">Plugins</a>
           <div class="dropdown2-content">
             <ul>

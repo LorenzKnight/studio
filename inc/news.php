@@ -1,5 +1,5 @@
 <?php
-$query_DatosPublications = sprintf("SELECT * FROM publications WHERE status= 1 ORDER BY id_publications DESC LIMIT 4");
+$query_DatosPublications = sprintf("SELECT * FROM publications WHERE site= 1 AND status= 1 ORDER BY id_publications DESC LIMIT 4");
 $DatosPublications = mysqli_query($con, $query_DatosPublications) or die(mysqli_error($con));
 $row_DatosPublications = mysqli_fetch_assoc($DatosPublications);
 $totalRows_DatosPublications = mysqli_num_rows($DatosPublications);
