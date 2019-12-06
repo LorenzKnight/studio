@@ -152,128 +152,122 @@ document.addEventListener('click', onClick)
 
 
     <?php if($_GET["id"]):?>
-
-    <form action="price_registration.php" method="post" name="formrequest" id="formrequest">
-        <table class="formulario" border="0" cellspacing="0" cellpadding="0">
-            <tr height="80">
-                <td colspan="2" valign="middle" align="center" style="font-size: 30px; padding: 30px 0 0 0;">Du val <?php echo $row_DatosPackage2["package_name"]; ?>!</td>
-            </tr>
-            <tr height="60">
-                <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Namn" name="name" id="name" size="31" required/></td>
-                <td width="50%" valign="middle" align="left" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Efternamn" name="surname" id="surname" size="31" required/></td>
-            </tr>
-            <tr height="60">
-                <td colspan="2" valign="middle" align="center"><input class="textf" type="email" placeholder="Din mailadress..." name="email" id="email" size="70" required/></td>
-            </tr>
-            <tr height="60">
-                <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Personnummer" name="personal_number" id="personal_number" size="31" required/></td>
-                <td width="50%" valign="middle" align="left" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Telefonnummer" name="telephone" id="telephone" size="31" required/></td>
-            </tr>
-            <tr height="60">
-                <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
-                    Kön:
-                    <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="sex" id="sex" required>
-                    <option value="0">None</option>
-                    <option value="1">Man</option>
-                    <option value="2">Kvinna</option>
-                    </select>
-                </td>
-            </tr>
-                <style>
-                    .class1_content{
-                        font-size: 14px;
-                    }
-                </style>
-            <tr>
-                <td colspan="2" valign="middle" align="center">
-                    <div class="courses">
-                        <div class="class1" style="flex: 1;">
-                            <p>Klass 1</p>
-                            <hr>
-                            <?php
-                            if ($totalRows_DatosCourse > 0) {
-                            do { ?>
-                            <table width="100%" border="0" cellspacing="0" cellpadding="0" >
-                                <tr height="40">
-                                    <td width="20%" align="center" ><input class="class1_content" type="radio" name="course_1" value="<?php echo $row_DatosCourse['id_course'];?>"></td>
-                                    <td width="80%" align="left" style ="font-size: 14px;"><?php echo $row_DatosCourse['name'];?></td>
-                                <tr>
-                            </table>
-                            <?php } while ($row_DatosCourse = mysqli_fetch_assoc($DatosCourse));
-                            }
-                            ?>
+        <form action="price_registration.php" method="post" name="formrequest" id="formrequest">
+            <table class="formulario" border="0" cellspacing="0" cellpadding="0">
+                <tr height="80">
+                    <td colspan="2" valign="middle" align="center" style="font-size: 30px; padding: 30px 0 0 0;">Du val <?php echo $row_DatosPackage2["package_name"]; ?>!</td>
+                </tr>
+                <tr height="60">
+                    <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Namn" name="name" id="name" size="31" required/></td>
+                    <td width="50%" valign="middle" align="left" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Efternamn" name="surname" id="surname" size="31" required/></td>
+                </tr>
+                <tr height="60">
+                    <td colspan="2" valign="middle" align="center"><input class="textf" type="email" placeholder="Din mailadress..." name="email" id="email" size="70" required/></td>
+                </tr>
+                <tr height="60">
+                    <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Personnummer" name="personal_number" id="personal_number" size="31" required/></td>
+                    <td width="50%" valign="middle" align="left" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Telefonnummer" name="telephone" id="telephone" size="31" required/></td>
+                </tr>
+                <tr height="60">
+                    <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
+                        Kön:
+                        <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="sex" id="sex" required>
+                        <option value="0">None</option>
+                        <option value="1">Man</option>
+                        <option value="2">Kvinna</option>
+                        </select>
+                    </td>
+                </tr>
+                    <style>
+                        .class1_content{
+                            font-size: 14px;
+                        }
+                    </style>
+                <tr>
+                    <td colspan="2" valign="middle" align="center">
+                        <?php if($_GET["id"] < 5):?>
+                        <div class="courses">
+                            <div class="class1" style="flex: 1;">
+                                <p>Klass 1</p>
+                                <hr>
+                                <?php
+                                if ($totalRows_DatosCourse > 0) {
+                                do { ?>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+                                    <tr height="40">
+                                        <td width="20%" align="center" ><input class="class1_content" type="radio" name="course_1" value="<?php echo $row_DatosCourse['id_course'];?>"></td>
+                                        <td width="80%" align="left" style ="font-size: 14px;"><?php echo $row_DatosCourse['name'];?></td>
+                                    <tr>
+                                </table>
+                                <?php } while ($row_DatosCourse = mysqli_fetch_assoc($DatosCourse));
+                                }
+                                ?>
+                            </div>
+                            <div class="class1" style="border-left: 2px solid #CCC; display: <?php echo packet2($row_DatosPackage2["id_package"], 2);?>;">
+                                <p>Klass 2</p>
+                                <hr>
+                                <?php
+                                if ($totalRows_DatosCourse2 > 0) {
+                                do { ?>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr height="40">
+                                        <td width="20%" align="center" ><input class="class1_content" type="radio" name="course_2" value="<?php echo $row_DatosCourse2['id_course'];?>"></td>
+                                        <td width="80%" align="left" style ="font-size: 14px;"><?php echo $row_DatosCourse2['name'];?></td>
+                                    <tr>
+                                </table>
+                                <?php } while ($row_DatosCourse2 = mysqli_fetch_assoc($DatosCourse2));
+                                }
+                                ?>
+                            </div>
+                            <div class="class1" style="border-left: 2px solid #CCC; display: <?php echo packet2($row_DatosPackage2["id_package"], 3);?>;">
+                                <p>Klass 3</p>
+                                <hr>
+                                <?php
+                                if ($totalRows_DatosCourse3 > 0) {
+                                do { ?>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr height="40">
+                                        <td width="20%" align="center" ><input class="class1_content" type="radio" name="course_3" value="<?php echo $row_DatosCourse3['id_course'];?>"></td>
+                                        <td width="80%" align="left" style ="font-size: 14px;"><?php echo $row_DatosCourse3['name'];?></td>
+                                    <tr>
+                                </table>
+                                <?php } while ($row_DatosCourse3 = mysqli_fetch_assoc($DatosCourse3));
+                                }
+                                ?>
+                            </div>
+                            <div class="class1" style="border-left: 2px solid #CCC; display: <?php echo packet2($row_DatosPackage2["id_package"], 4);?>;">
+                                <p>Klass 4</p>
+                                <hr>
+                                <?php
+                                if ($totalRows_DatosCourse4 > 0) {
+                                do { ?>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr height="40">
+                                        <td width="20%" align="center" ><input class="class1_content" type="radio" name="course_4" value="<?php echo $row_DatosCourse4['id_course'];?>"></td>
+                                        <td width="80%" align="left" style ="font-size: 14px;"><?php echo $row_DatosCourse4['name'];?></td>
+                                    <tr>
+                                </table>
+                                <?php } while ($row_DatosCourse4 = mysqli_fetch_assoc($DatosCourse4));
+                                }
+                                ?>
+                            </div>
                         </div>
-                        <div class="class1" style="border-left: 2px solid #CCC; display: <?php echo packet2($row_DatosPackage2["id_package"], 2);?>;">
-                            <p>Klass 2</p>
-                            <hr>
-                            <?php
-                            if ($totalRows_DatosCourse2 > 0) {
-                            do { ?>
-                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                <tr height="40">
-                                    <td width="20%" align="center" ><input class="class1_content" type="radio" name="course_2" value="<?php echo $row_DatosCourse2['id_course'];?>"></td>
-                                    <td width="80%" align="left" style ="font-size: 14px;"><?php echo $row_DatosCourse2['name'];?></td>
-                                <tr>
-                            </table>
-                            <?php } while ($row_DatosCourse2 = mysqli_fetch_assoc($DatosCourse2));
-                            }
-                            ?>
-                        </div>
-                        <div class="class1" style="border-left: 2px solid #CCC; display: <?php echo packet2($row_DatosPackage2["id_package"], 3);?>;">
-                            <p>Klass 3</p>
-                            <hr>
-                            <?php
-                            if ($totalRows_DatosCourse3 > 0) {
-                            do { ?>
-                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                <tr height="40">
-                                    <td width="20%" align="center" ><input class="class1_content" type="radio" name="course_3" value="<?php echo $row_DatosCourse3['id_course'];?>"></td>
-                                    <td width="80%" align="left" style ="font-size: 14px;"><?php echo $row_DatosCourse3['name'];?></td>
-                                <tr>
-                            </table>
-                            <?php } while ($row_DatosCourse3 = mysqli_fetch_assoc($DatosCourse3));
-                            }
-                            ?>
-                        </div>
-                        <div class="class1" style="border-left: 2px solid #CCC; display: <?php echo packet2($row_DatosPackage2["id_package"], 4);?>;">
-                            <p>Klass 4</p>
-                            <hr>
-                            <?php
-                            if ($totalRows_DatosCourse4 > 0) {
-                            do { ?>
-                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                <tr height="40">
-                                    <td width="20%" align="center" ><input class="class1_content" type="radio" name="course_4" value="<?php echo $row_DatosCourse4['id_course'];?>"></td>
-                                    <td width="80%" align="left" style ="font-size: 14px;"><?php echo $row_DatosCourse4['name'];?></td>
-                                <tr>
-                            </table>
-                            <?php } while ($row_DatosCourse4 = mysqli_fetch_assoc($DatosCourse4));
-                            }
-                            ?>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr height="60">
-                <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
-                   Pay method:<br>
-                   Paypal
-                </td>
-            </tr>
-            <tr height="80">
-                <td colspan="2" valign="middle" align="center" style="color: #666; font-size: 14px;">
-                        <a href="price_registration.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Anmäla mig" />
-                </td>
-            </tr>
-            <tr height="20">
-            </tr>
-            <input type="hidden" name="package" id="package" value="<?php echo $_GET['id']; ?>"/>
-            <input type="hidden" name="payment" id="payment" value="1"/>
-            <input type="hidden" name="status" id="status" value="1"/>
-            <input type="hidden" name="MM_insert" id="MM_insert" value="formrequest" />
-        </table>
-    </form>
-
+                        <?php endif ?>
+                    </td>
+                </tr>
+                <tr height="80">
+                    <td colspan="2" valign="middle" align="center" style="color: #666; font-size: 14px;">
+                            <a href="price_registration.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Anmäla mig" />
+                    </td>
+                </tr>
+                <tr height="20">
+                </tr>
+                <input type="hidden" name="package" id="package" value="<?php echo $_GET['id']; ?>"/>
+                <input type="hidden" name="payment" id="payment" value="1"/>
+                <input type="hidden" name="status" id="status" value="1"/>
+                <input type="hidden" name="MM_insert" id="MM_insert" value="formrequest" />
+            </table>
+        </form>
     <?php endif ?>
 
 

@@ -279,24 +279,34 @@
         overflow: auto;
     }
     .register_info {
-        width: 92%;
+        width: 91%;
         border-radius: 7px;
         margin: 10px 0 30px;
         padding: 4%;
         overflow: auto;
         float: left;
         background-color: #FFF;
-        box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
+        border: 1px solid #dddfeb;
     }
+    .form_frame {
+        height: 100%;
+        overflow: auto;
+        /* background-image: url("../img/sys/opacity_bg.png"); */
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1;
+      }
     .formulario {
         width: 600px;
-        margin: 120px 21%;
         background-color: #FFF;
         border: 1px solid #dddfeb;
         border-radius: 7px;
         box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
         position: fixed;
-        top: 0;
+        top: 10px;
+        left: 50%;
+        transform: translate(-50%, 0%);
     }
     .formulario_solid{
         width: 600px;
@@ -383,13 +393,13 @@
     }
     .courses {
         width: 95%;
-        height: 300px;
+        height: 250px;
         border: 1px solid #CCC;
         border-radius: 7px;
         display: flex;
     }
     .class1 {
-        height: 300px;
+        height: 250px;
         overflow: auto;
         float: left;
         flex: 1;
@@ -722,24 +732,34 @@
         overflow: auto;
     }
     .register_info {
-        width: 92%;
+        width: 91%;
         border-radius: 7px;
         margin: 10px 0 30px;
         padding: 4%;
         overflow: auto;
         float: left;
         background-color: #FFF;
-        box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
+        border: 1px solid #dddfeb;
     }
+    .form_frame {
+        height: 100%;
+        overflow: auto;
+        /* background-image: url("../img/sys/opacity_bg.png"); */
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1;
+      }
     .formulario {
         width: 600px;
-        margin: 120px auto;
         background-color: #FFF;
         border: 1px solid #dddfeb;
         border-radius: 7px;
         box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
         position: fixed;
-        top: 0;
+        top: 10px;
+        left: 50%;
+        transform: translate(-50%, 0%);
     }
     .paquetes {
         width: 95%;
@@ -817,13 +837,13 @@
     }
     .courses {
         width: 95%;
-        height: 300px;
+        height: 250px;
         border: 1px solid #CCC;
         border-radius: 7px;
         display: flex;
     }
     .class1 {
-        height: 300px;
+        height: 250px;
         overflow: auto;
         float: left;
         flex: 1;
@@ -1165,24 +1185,34 @@
         float: right;
     }
     .register_info {
-        width: 92%;
+        width: 91%;
         border-radius: 7px;
         margin: 10px 0 30px;
         padding: 4%;
         overflow: auto;
         float: left;
         background-color: #FFF;
-        box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
+        border: 1px solid #dddfeb;
     }
+    .form_frame {
+        height: 100%;
+        overflow: auto;
+        /* background-image: url("../img/sys/opacity_bg.png"); */
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1;
+      }
     .formulario {
         width: 600px;
-        margin: 120px 8%;
         background-color: #FFF;
         border: 1px solid #dddfeb;
         border-radius: 7px;
         box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
         position: fixed;
-        top: 0;
+        top: 10px;
+        left: 50%;
+        transform: translate(-50%, 0%);
     }
     .paquetes {
         width: 95%;
@@ -1260,13 +1290,13 @@
     }
     .courses {
         width: 95%;
-        height: 300px;
+        height: 350px;
         border: 1px solid #CCC;
         border-radius: 7px;
         display: flex;
     }
     .class1 {
-        height: 300px;
+        height: 250px;
         overflow: auto;
         float: left;
         flex: 1;
@@ -1355,7 +1385,6 @@
     .head {
         width: 100%;
         height: 180px;
-        /*background-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet, white);*/
         background-image: linear-gradient(to right, rgb(96, 42, 245), rgb(150, 115, 247), rgb(183, 195, 250), white, white, white);
         /*background-color: #FFF;*/
         border-bottom: 1px solid #CCC;
@@ -1614,24 +1643,34 @@
         float: right;
     }
     .register_info {
-        width: 46%;
+        width: 45%;
         border-radius: 7px;
         margin: 10px 0 30px;
         padding: 2%;
         overflow: auto;
         float: left;
         background-color: #FFF;
-        box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
+        border: 1px solid #dddfeb;
     }
+    .form_frame {
+        height: 100%;
+        overflow: auto;
+        /* background-image: url("../img/sys/opacity_bg.png"); */
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1;
+      }
     .formulario {
         width: 600px;
-        margin: 120px 21%;
         background-color: #FFF;
         border: 1px solid #dddfeb;
         border-radius: 7px;
         box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
         position: fixed;
-        top: 0;
+        top: 10px;
+        left: 50%;
+        transform: translate(-50%, 0%);
     }
     .paquetes {
         width: 95%;
@@ -1709,13 +1748,13 @@
     }
     .courses {
         width: 95%;
-        height: 300px;
+        height: 250px;
         border: 1px solid #CCC;
         border-radius: 7px;
         display: flex;
     }
     .class1 {
-        height: 300px;
+        height: 250px;
         overflow: auto;
         float: left;
         flex: 1;
