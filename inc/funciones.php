@@ -214,21 +214,28 @@ function SendMailHtml($destinatario, $contenido, $asunto)
 </head>
 
 <body>
-<table width="100%" border="0" cellspacing="3" cellpadding="3">
+<table width="100%" border="0" cellspacing="3" cellpadding="3" style="">
   <tr>
-    <td><img src="img/yandali.png" width="" height="65" /></td>
-  </tr>
-  <tr>
-    <td><p>Estimado Cliente: <br><br></p>
-    <p>'; 
-	$mensaje.= $contenido;
-	$mensaje.='</p><br><br></td>
+    <td><img src="http://yandali.se/img/yandali.png" width="" height="65" /></td>
   </tr>
   <tr>
 	<td>
-		Tack för att vara en del av denna termin!<br><br>
-		har du nån fråga? maila oss på:<br>
-		<a href="mailto:info@yandali.se">info@yandali.se</a>
+		<br/>
+		<p>Kära Elev:</p>
+		<br/>
+		<br/>
+		<p>'; 
+		$mensaje.= $contenido;
+		$mensaje.='</p>
+		<br/><br/>
+	</td>
+  </tr>
+  <tr>
+	<td>
+	<p style="color:#666;">FRISKVÅRDSBIDRAG?</p>
+	<br/>
+	<p style="font-size:15px; color:#666;">Detta mejl gäller som kvitto och går hos de flesta arbetsgivare att använda för friskvårdsbidrag. 
+	Om du vill ha ett mer utfärligt intyg så kan du kontakta oss på <a style="font-size:14px;" href="mailto:ekonomi@yandali.se">ekonomi@yandali.se</a> </p>
 	</td>
   </tr>
 </table>

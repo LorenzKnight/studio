@@ -13,6 +13,6 @@
     session_start();
     session_destroy();
 
-    header("Location: comp_reg.php");
+    header("Location: ../price_registration.php");
     exit;
 ?>

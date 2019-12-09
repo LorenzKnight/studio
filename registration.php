@@ -233,7 +233,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequeste")) {
             <input type="hidden" name="status" id="status" value="Activ"/>
             <input type="hidden" name="MM_insert" id="MM_insert" value="formrequest" />
         </table>
-    </form>
+    </form> 
 
     <?php endif ?>
 
