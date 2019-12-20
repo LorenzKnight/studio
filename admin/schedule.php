@@ -21,6 +21,3 @@
     </div>
 </body>
 </html>
-<?php
-mysqli_free_result($DatosConsulta);
-?>

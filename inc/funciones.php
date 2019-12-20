@@ -495,16 +495,6 @@ function statusS($statusS)
 	mysqli_free_result($ConsultaFuncion);
 }
 
-
-
-
-
-
-
-
-
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -533,12 +523,12 @@ function Mesabreviado($varmesabrev)
 
 function NombreCurso($varcurso)
 {
-	if ($varcurso == 1) return "Beginning 1";
-	if ($varcurso == 2) return "Beginning 2";
-	if ($varcurso == 3) return "Intermediate 1";
-	if ($varcurso == 4) return "Intermediate 2";
-	if ($varcurso == 5) return "Advance 1";
-	if ($varcurso == 6) return "Advance 2";
+	if ($varcurso == 1) return "Steg 1";
+	if ($varcurso == 2) return "Steg 2";
+	if ($varcurso == 3) return "Steg 3";
+	if ($varcurso == 4) return "Steg 4";
+	if ($varcurso == 5) return "Open level";
+	if ($varcurso == 6) return "none";
 	if ($varcurso == 7) return "Private class";
 }
 
@@ -557,6 +547,22 @@ function NombreCursoColor($varcursocolor)
 	if ($varcursocolor == 6) return "rgb(160, 72, 57)";
 	if ($varcursocolor == 7) return "linear-gradient(to right, #999, #CCC, #999)";
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function ConfirmacionPago($Paid, $now)
+{
+	global $con;
+		$updateSQL = sprintf("UPDATE inscriptions SET done=%s WHERE id_student=%s AND date=%s",
+			$Paid,
+			$_SESSION["ydl_UserId"],
+			$now);
+  
+  $Result1 = mysqli_query($con, $updateSQL) or die(mysqli_error($con));
+	}
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////

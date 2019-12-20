@@ -1,4 +1,6 @@
 <?php require_once('connections/conexion.php');?>
+<!-- Esta linea en conjunto con la funcion "ConfirmacionPago" hace que la celda done cambie su valor-->
+<?php ConfirmacionPago(1, date('Ymd')); ?>
 <?php
 $query_DatosReg = sprintf("SELECT * FROM students WHERE id_student=%s ORDER BY id_student ASC",
 GetSQLValueString($_SESSION['ydl_UserId'], "int"));
@@ -73,7 +75,6 @@ $totalRows_DatosRegDone = mysqli_num_rows($DatosRegDone);
             <br/>
             <br/>';
             $asunto ='Bekräftelse-Anmälan till kurs';
-            $precio = $row_DatosReg['package'];
             SendMailHtml($row_DatosReg['email'], $contenido, $asunto);
             ?>
         </div>

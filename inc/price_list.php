@@ -73,8 +73,8 @@ $totalRows_DatosReg = mysqli_num_rows($DatosReg);
             <h3 style="text-transform:uppercase;">Intresserad av att anmäla dig till en danskurs på Yandali?</h3>
 
             <p >Hos oss hittar du kurser i flera olika dansstilar och på olika nivåer som passar allt från nybörjare till erfarna dansare.</p>
-           <p> Hit kan du anmäla dig själv eller tillsammans med vänner och/eller en danspartner.</p>
-           <p>Våra klasser är välkomnade och sociala och du kommer lära känna andra dansare under kursens gång.</p>
+            <p> Hit kan du anmäla dig själv eller tillsammans med vänner och/eller en danspartner.</p>
+            <p>Våra klasser är välkomnade och sociala och du kommer lära känna andra dansare under kursens gång.</p>
             <br>
             <h3 style="text-align: center;">Vårens kurser börjar vecka 3.</h3>
         </div>

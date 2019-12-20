@@ -18,125 +18,6 @@
             </a></li>
         </ul>
     </div>
-<!---------------------------------------------------EVENTS------------------------------------------->
-    <script>
-    // const isElementOrDescendant = function (parent, child) {
-    //     if (parent === child) return true
-
-    //     var node = child.parentNode;
-    //     while (node != null) {
-    //     if (node == parent) {
-    //         return true;
-    //     }
-    //     node = node.parentNode;
-    //     }
-    //     return false;
-    // }
-
-    // const onClick = function (e) {
-    //     const el = document.getElementById('big_b')
-    //     const clickableAreas = Array.from(document.getElementsByClassName('paquetes'))
-    //     clickableAreas.push(el)
-
-    //     let isClickOutside = true
-
-    //     for (let i = 0; i < clickableAreas.length; i++) {
-    //         if (isElementOrDescendant(clickableAreas[i], e.target)) {
-    //             isClickOutside = false
-    //         }
-    //     }
-
-    //     if (isClickOutside) {
-    //         location = 'events.php'
-    //     }
-    // }
-
-    // document.addEventListener('click', onClick)
-    </script>
-
-    <script>
-    function Mostrar2() {
-    event.stopPropagation()
-    document.getElementById("myForm2").style.display="block";
-    }
-    function ocurtar2() {
-    event.stopPropagation()
-    document.getElementById("myForm2").style.display="none";
-    }
-    </script>
-    <?php if ($_GET["newevent"]): ?>
-        <div class="subform_cont1">
-        <form action="events.php" method="post" name="formnewevent" id="formnewevent">
-            <table class="subform" id="big_b" style="width:400px;" border="0" cellspacing="0" cellpadding="0">
-                <tr height="50">
-                    <td colspan="6" valign="middle" align="center" style="color: #333;">
-                        New Event
-                    </td>
-                </tr>
-                <tr height="60">
-                    <td colspan="6" width="50%" valign="middle" align="center" style="font-size:14px; color:#666; border-top:1px solid #CCC;">
-                        <input class="textf" type="text" placeholder="Events name" name="name" id="name" size="50"/>
-                    </td>
-                </tr>
-                <tr height="60">
-                    <td colspan="6" valign="middle" align="center" style="border-top:1px solid #CCC; padding-bottom: 10px;">
-                        <script src="../js/scriptupload.js"></script>
-
-                        <?php 
-                        //***********************BLOQUE INSERCION IMAGEN***********************//
-                        //***********************PARÁMETROS DE IMAGEN**************************//
-                        $nombrecampoimagen="foto";
-                        $nombrecampoimagenmostrar="fotopic";
-                        $nombrecarpetadestino="../img/news/"; //carpeta destino con barra al final
-                        $nombrecampofichero="file1";
-                        $nombrecampostatus="status1";
-                        $nombrebarraprogreso="progressBar1";
-                        $maximotamanofichero="0"; //en Bytes, "0" para ilimitado. 1000000 Bytes = 1000Kb = 1Mb
-                        $tiposficheropermitidos="jpg,png"; //  Por ejemplo "jpg,doc,png", separados por comas y poner "0" para permitir todos los tipos
-                        $limiteancho="0"; // En píxels, "0" significa cualquier tamaño permitido
-                        $limitealto="0"; // En píxels, "0" significa cualquier tamaño permitido
-                                                            
-                        $cadenadeparametros="'".$nombrecampoimagen."','".$nombrecampoimagenmostrar."','".$nombrecarpetadestino."','".$nombrecampofichero."','".$nombrecampostatus."','".$nombrebarraprogreso."','".$maximotamanofichero."','".$tiposficheropermitidos."','".$limiteancho."','".$limitealto."'";
-
-                        //$cadenadeparametros="";                                 
-                        ?>
-                                <input type="hidden" class="textf" size="40" name="<?php echo $nombrecampoimagen;?>" id="<?php echo $nombrecampoimagen;?>">
-                                <br>
-                                <br>
-                                <input type="file" name="<?php echo $nombrecampofichero;?>" id="<?php echo $nombrecampofichero;?>">
-                                
-                                <input class="form-control" type="button" value="Ladda up file" onclick="uploadFile(<?php echo $cadenadeparametros;?>)">
-                                <br>
-                                <progress id="<?php echo $nombrebarraprogreso;?>" value="0" max="80" style="width: 80%;"></progress>
-                                <h5 id="<?php echo $nombrecampostatus;?>"></h5>
-                                <div class="foto_prev">
-                                    <img src="" alt="" id="<?php echo $nombrecampoimagenmostrar;?>" height="150">
-
-                                    <?php $ajuste = (270);?>
-                                </div>
-                        <?php /*?>
-                        //******************FIN BLOQUE INSERCION IMAGEN*************************
-                        <?php */?>
-                    </td>
-                </tr>
-                <tr height="60">
-                    <td colspan="6" valign="middle" align="center" style="font-size:14px; color:#666; border-top:1px solid #CCC;">
-                        <input  class="tcal" type="text" id="event_date" name="event_date" autocomplete="off" value="" />
-                    </td>
-                </tr>
-                <tr height="80">
-                    <td colspan="6" valign="middle" align="center" style="color: #666; font-size: 14px; border-top:1px solid #CCC;">
-                            <a href="events.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Lägg till" />
-                    </td>
-                </tr>
-                <input type="hidden" name="status" id="status" value="1"/>
-                <input type="hidden" name="MM_insert" id="MM_insert" value="formnewevent" />
-            </table>
-        </form>
-    </div>
-    <?php endif ?>
-<!---------------------------------------------------END EVENTS------------------------------------------->
-
 <!---------------------------------------------------PAGE SETTING------------------------------------------->
 <!---------------------------------------------------Div insert------------------------------------------->
     <div id="myForm2" class="subform_cont">
@@ -732,7 +613,7 @@
     $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
     }
 
-    if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formedit")) {
+    if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formeditd")) {
     $updateSQL = sprintf("UPDATE pages SET background=%s, border=%s, borderpx=%s, border_color=%s WHERE id_page=%s",
                         GetSQLValueString($_POST["background"], "text"),
                         GetSQLValueString($_POST["border"], "text"),
@@ -763,7 +644,7 @@
 </script>
     <?php if($_GET["bdivid"]):?>
     <div class="subform_cont2">
-        <form action="page_settings.php" method="post" name="formedit" id="formedit">
+        <form action="page_settings.php" method="post" name="formeditd" id="formeditd">
             <table class="subform" style="width:400px;" border="0" cellspacing="0" cellpadding="0">
                 <tr height="50">
                     <td colspan="2" valign="middle" align="center" style="color: #333;">
@@ -1333,7 +1214,7 @@
                     </td>
                 </tr>
                 <input type="hidden" name="id_page" id="id_page" value="<?php echo $_GET["bdivid"]; ?>"/>
-                <input type="hidden" name="MM_insert" id="MM_insert" value="formedit" />
+                <input type="hidden" name="MM_insert" id="MM_insert" value="formeditd" />
             </table>
         </form>
     </div>

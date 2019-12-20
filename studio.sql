@@ -1,40 +1,43 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
--- https://www.phpmyadmin.net/
+-- version 3.4.10.1deb1
+-- http://www.phpmyadmin.net
 --
--- Host: localhost:8889
--- Generation Time: Oct 25, 2019 at 08:16 AM
--- Server version: 5.7.26
--- PHP Version: 7.3.8
+-- Värd: 10.209.2.58
+-- Skapad: 20 dec 2019 kl 16:01
+-- Serverversion: 5.5.52
+-- PHP-version: 5.3.10-1ubuntu3.11
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
--- Database: `studio`
+-- Databas: `158575-studio`
 --
+CREATE DATABASE `158575-studio` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `158575-studio`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `banners`
+-- Tabellstruktur `banners`
 --
 
-CREATE TABLE `banners` (
-  `id_banner` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `banners` (
+  `id_banner` int(11) NOT NULL AUTO_INCREMENT,
   `foto` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
-  `position` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `position` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_banner`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- Dumping data for table `banners`
+-- Dumpning av Data i tabell `banners`
 --
 
 INSERT INTO `banners` (`id_banner`, `foto`, `title`, `position`) VALUES
@@ -45,36 +48,70 @@ INSERT INTO `banners` (`id_banner`, `foto`, `title`, `position`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `courses`
+-- Tabellstruktur `courses`
 --
 
-CREATE TABLE `courses` (
-  `id_course` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `courses` (
+  `id_course` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `description` text,
   `teacher` varchar(255) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `status` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_course`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
--- Dumping data for table `courses`
+-- Dumpning av Data i tabell `courses`
 --
 
 INSERT INTO `courses` (`id_course`, `name`, `description`, `teacher`, `status`) VALUES
-(1, 'Urban_kiz', 'safkklsdfj lkjasdfkl jsdlifj alösdjf öasldkjhf ölasjfajsdflasjdfljasfasfölgasflögkaslfgölasfgölafgsölkafsg', 'Lessly & Marie', 1),
-(2, 'Dominican Bachata', 'asdfsda asdf asdf asfsdfsa asdf asdfasdfsfasdfsdf sadf sfasdf asdf asdfasdfasdfsdfsad sdfsadf', 'Lorenz & Sofia', 1),
-(3, 'traditional Kizomba', 'adfa sdfasdf sadf asdfsadfsadfsadf asdf sdaf asdf asdfasdf asdf asdfasdf sdf asdfas', 'Lorenz & Sanna', 1),
-(4, 'Lady styling ', 'asdf asdf asdf asdf asdfasdfasdf asdf asdf fasdfsadfasdf asdf dsf asdf asdfasdf', 'Sussana Lindden', 1),
-(5, 'Bachata Sensual', 'asdfakjsdf khdsf aslkdfl jskdjf asdöf jasödfj asdfjk f kajsdf ljasldjfakl sdfkjsdf kljsdf öjasdjflkj sklfjsdf sdlfj laskdjf lkjasdf', 'Peter & Elin', 1);
+(1, 'Urban kiz steg 1 (ons 18.30-19.30)', 'safkklsdfj lkjasdfkl jsdlifj alösdjf öasldkjhf ölasjfajsdflasjdfljasfasfölgasflögkaslfgölasfgölafgsölkafsg', 'Lessly & Marie', 1),
+(2, 'Urban kiz steg 2 (ons 19.30-20.30)', 'asdfsda asdf asdf asfsdfsa asdf asdfasdfsfasdfsdf sadf sfasdf asdf asdfasdfasdfsdfsad sdfsadf', 'Lessly & Marie', 1),
+(3, 'Urban kiz steg 3 (ons 20.30-21.30)', 'adfa sdfasdf sadf asdfsadfsadfsadf asdf sdaf asdf asdfasdf asdf asdfasdf sdf asdfas', 'Lessly & Marie', 1),
+(4, 'Urban kiz steg 4 (mån 20.30-21.30)', 'asdf asdf asdf asdf asdfasdfasdf asdf asdf fasdfsadfasdf asdf dsf asdf asdfasdf', 'Lorenz & Sofia', 1),
+(5, 'Balett steg 1 (mån 18.00-19.30)', 'asdfakjsdf khdsf aslkdfl jskdjf asdöf jasödfj asdfjk f kajsdf ljasldjfakl sdfkjsdf kljsdf öjasdjflkj sklfjsdf sdlfj laskdjf lkjasdf', 'Aurica Muntoiu', 1),
+(6, 'Dominikansk bachata steg 1 (mån 19.30-20.30)', NULL, 'Lorenz & Sofia', 1),
+(7, 'Kubansk salsa steg 1 (ons 18.30-19.30)', NULL, 'Ali', 1),
+(8, 'Kubansk salsa steg 2 (ons 19.30-20.30)', NULL, 'Ali', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `inscriptions`
+-- Tabellstruktur `events`
 --
 
-CREATE TABLE `inscriptions` (
-  `id_insc` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `events` (
+  `id_event` int(11) NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `time` time DEFAULT NULL,
+  `foto` varchar(255) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text,
+  `event_date` date DEFAULT NULL,
+  `link` text,
+  `status` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_event`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+
+--
+-- Dumpning av Data i tabell `events`
+--
+
+INSERT INTO `events` (`id_event`, `date`, `time`, `foto`, `name`, `description`, `event_date`, `link`, `status`) VALUES
+(1, '2019-11-14', NULL, 'yandali premiere.jpg', 'Yandali The Premiere', NULL, '2019-11-28', 'https://www.facebook.com/watch/?v=688526378320554', 1),
+(2, '2019-11-16', NULL, 'The night.jpg', 'The Night', NULL, '2019-11-16', NULL, 1),
+(3, '2019-11-21', NULL, 'Yandali Thursday spaicy.jpg', 'Spice Thursdays', NULL, '2019-11-21', NULL, 1),
+(4, '2019-11-23', NULL, 'The night.jpg\r\n', 'The Night', NULL, '2019-11-23', NULL, 1),
+(5, '2019-11-28', NULL, 'Yandali Thursday spaicy.jpg', 'Spice Thursdays', NULL, '2019-11-28', NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Tabellstruktur `inscriptions`
+--
+
+CREATE TABLE IF NOT EXISTS `inscriptions` (
+  `id_insc` int(11) NOT NULL AUTO_INCREMENT,
   `date` date DEFAULT NULL,
   `year` varchar(255) DEFAULT NULL,
   `month` varchar(255) DEFAULT NULL,
@@ -88,48 +125,52 @@ CREATE TABLE `inscriptions` (
   `course_3` int(11) DEFAULT NULL,
   `course_4` int(11) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
-  `payment` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `payment` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_insc`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
 
 --
--- Dumping data for table `inscriptions`
+-- Dumpning av Data i tabell `inscriptions`
 --
 
 INSERT INTO `inscriptions` (`id_insc`, `date`, `year`, `month`, `day`, `time`, `id_student`, `term`, `package`, `course_1`, `course_2`, `course_3`, `course_4`, `status`, `payment`) VALUES
-(10, '2019-10-22', '2019', '10', '22', '22:03:19', 27, 1, 1, 1, NULL, NULL, NULL, 'Activ', 1);
+(15, '2019-12-12', '2019', '12', '12', '13:55:47', 40, 1, 1, 1, NULL, NULL, NULL, NULL, 1),
+(16, '2019-12-13', '2019', '12', '13', '17:45:07', 41, 1, 5, NULL, NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `package`
+-- Tabellstruktur `package`
 --
 
-CREATE TABLE `package` (
-  `id_package` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `package` (
+  `id_package` int(11) NOT NULL AUTO_INCREMENT,
   `package_name` varchar(255) DEFAULT NULL,
   `description` text,
   `price` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `status` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_package`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
--- Dumping data for table `package`
+-- Dumpning av Data i tabell `package`
 --
 
 INSERT INTO `package` (`id_package`, `package_name`, `description`, `price`, `status`) VALUES
-(1, 'Packet 1 (Brons)', '1 kurs + 1 practica', 10, 1),
-(2, 'Packet 2 (Silver)', '2 kurser + 2 practica', 1600, 1),
-(3, 'Packet 3 (Guld)', '3 kurser + 2 practica + torsdag social', 2100, 1),
-(4, 'Packet 4 (VIP)', 'Upp till 6 kurser. ', 2900, 1);
+(1, 'Paket 1 (Brons)', '1 kurs + 1 praktika', 980, 1),
+(2, 'Paket 2 (Silver)', '2 kurser + 2 praktika', 1750, 1),
+(3, 'Paket 3 (Guld)', '3 kurser + 2 praktika', 2350, 1),
+(4, 'Paket 4 (VIP)', 'Upp till 6 kurser + social(Spicy Thursdays)', 3500, 1),
+(5, 'Balett', '(Denna kurs bokas separat pga 90 min klass)', 1290, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pages`
+-- Tabellstruktur `pages`
 --
 
-CREATE TABLE `pages` (
-  `id_page` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pages` (
+  `id_page` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `level` int(11) DEFAULT NULL,
   `foto` varchar(255) DEFAULT NULL,
@@ -140,11 +181,12 @@ CREATE TABLE `pages` (
   `pbottom` int(11) DEFAULT NULL,
   `pleft` int(11) DEFAULT NULL,
   `padre` int(11) DEFAULT NULL,
-  `padre 2` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `padre 2` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_page`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
 
 --
--- Dumping data for table `pages`
+-- Dumpning av Data i tabell `pages`
 --
 
 INSERT INTO `pages` (`id_page`, `name`, `level`, `foto`, `background`, `color`, `ptop`, `pright`, `pbottom`, `pleft`, `padre`, `padre 2`) VALUES
@@ -168,11 +210,11 @@ INSERT INTO `pages` (`id_page`, `name`, `level`, `foto`, `background`, `color`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `publications`
+-- Tabellstruktur `publications`
 --
 
-CREATE TABLE `publications` (
-  `id_publications` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `publications` (
+  `id_publications` int(11) NOT NULL AUTO_INCREMENT,
   `date` date DEFAULT NULL,
   `year` varchar(255) DEFAULT NULL,
   `month` varchar(255) DEFAULT NULL,
@@ -184,29 +226,28 @@ CREATE TABLE `publications` (
   `settings` int(11) DEFAULT NULL,
   `site` varchar(255) DEFAULT NULL,
   `position` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `status` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_publications`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
--- Dumping data for table `publications`
+-- Dumpning av Data i tabell `publications`
 --
 
 INSERT INTO `publications` (`id_publications`, `date`, `year`, `month`, `day`, `time`, `title`, `content`, `foto`, `settings`, `site`, `position`, `status`) VALUES
-(1, NULL, NULL, NULL, NULL, NULL, 'Kiz Addicts The Weekend', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.', 'Line up Kiz Addicts the weekend.jpg', 360, '1', 1, 1),
-(2, NULL, NULL, NULL, NULL, NULL, 'YANDALI Thursday\'s Social', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s. ok ok ok', 'yadali promo flayer v36.jpg', 420, '1', 2, 1),
-(3, NULL, NULL, NULL, NULL, NULL, 'YANDALI Sunday\'s Practica', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.', 'yadali promo flayer v36.jpg', 420, '1', 3, 1),
-(4, NULL, NULL, NULL, NULL, NULL, 'YANDALI is the new place for DAKALI', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.', 'Dakali Henriksberg Lorenz.jpg', 60, '1', 4, 1),
-(6, '2019-09-13', '2019', '9', '13', '13:27:31', 'Prueva', 'Hos oss hittar du kurser i flera olika dansstilar och på olika nivåer som passar allt från nybörjare till erfarna dansare.\r\n\r\nHit kan du anmäla dig själv eller tillsammans med vänner och/eller en danspartner. \r\nVåra klasser är välkomnade och sociala och du kommer lära känna andra dansare under kursens gång.\r\n        \r\nVarje termin är uppdelad i två kurs-omgångar och varje kurs pågår i 9 veckor.\r\n        \r\nVårens kurser börjar vecka 4. Öppet hus v 3', 'senal-neon-geometrica_23-2147570378.jpg', 60, NULL, NULL, 1),
-(7, '2019-09-16', '2019', '9', '16', '15:00:23', 'Prueva 2', 'Hos oss hittar du kurser i flera olika dansstilar och på olika nivåer som passar allt från nybörjare till erfarna dansare. Hit kan du anmäla dig själv eller tillsammans med vänner och/eller en danspartner. Våra klasser är välkomnade och sociala och du kommer lära känna andra dansare under kursens gång. Varje termin är uppdelad i två kurs-omgångar och varje kurs pågår i 9 veckor. Vårens kurser börjar vecka 4. Öppet hus v ', '1500881754.jpg', 420, NULL, NULL, 1);
+(1, NULL, NULL, NULL, NULL, NULL, 'Kurser & Workshops', 'Varje termin kan du anmäla dig till kurser och workshops i flera olika dansstilar.   Hos oss hittar du allt från härliga nybörjarkurser till intensiva kurser för mer erfarna dansare.  \r\nAlla är välkomna och hos oss är både kvalité, glädje och gemenskap viktigt!', 'IMG_6231.jpg', 75, '1', 1, 1),
+(2, NULL, NULL, NULL, NULL, NULL, 'Helgkurser & Bootcamps', 'Utvalda helger erbjuder vi helgkurser och bootcamps i olika dansstilar med både lokala och internationella lärare.   Lite mer intensiva tillfällen då man lär sig mycket och utvecklas under kort tid samtidigt som man lära känna många andra dansare.', 'IMG_6225.jpg', 115, '1', 2, 1),
+(3, NULL, NULL, NULL, NULL, NULL, 'Socialdans', 'På torsdagar bjuder vi in till socialdans, kvällar då vi spelar skön musik och dansgolvet är öppet för både studenter och erfarna dansare.  Avslappnade kvällar med hög kvalité då fokus ligger på gemenskap och glädjen i dansen.  Både till för de som vill öva på nya danssteg och de som bara vill njuta av lite dans mitt i veckan.', 'IMG_6209.jpg', 75, '1', 3, 1),
+(4, NULL, NULL, NULL, NULL, NULL, 'Fester & Events', 'Flera gånger varje månad bjuder vi in till fester och andra events. \r\nLite lyxigare tillfällen då vi ofta har DJ:s, dansare från flera olika städer och bjuder på både happenings och överraskningar!\r\n<br><br>\r\n  Alla våra fester är alkohol- och narkotikafria.', 'IMG_6187.jpg', 75, '1', 4, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `schedule`
+-- Tabellstruktur `schedule`
 --
 
-CREATE TABLE `schedule` (
-  `id_schedule` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `schedule` (
+  `id_schedule` int(11) NOT NULL AUTO_INCREMENT,
   `via` int(11) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `level` int(255) DEFAULT NULL,
@@ -215,57 +256,74 @@ CREATE TABLE `schedule` (
   `day` int(11) DEFAULT NULL,
   `hour` varchar(255) DEFAULT NULL,
   `sal` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `status` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_schedule`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=40 ;
 
 --
--- Dumping data for table `schedule`
+-- Dumpning av Data i tabell `schedule`
 --
 
 INSERT INTO `schedule` (`id_schedule`, `via`, `name`, `level`, `teacher`, `duration`, `day`, `hour`, `sal`, `status`) VALUES
-(1, 5, 'UrbanKiz', 1, 'Lessly & Marie', 110, 1, '330', 1, 1),
-(2, 5, 'UrbanKiz', 2, 'Lorenz & Sofia', 220, 1, '0', 2, 1),
-(3, 5, 'Lady Styling', 4, 'Sussana Linden', 165, 2, '0', 1, 1),
-(4, 5, 'Dom Bachata', 1, 'Lorenz & Sofia', 220, 3, '0', 1, 1),
-(5, 5, 'Privatlektion', 1, '(Bokningbar)', 220, 4, '0', 1, 1),
-(6, 5, 'Bachata Sensual', 6, 'Peter & Ellin', 110, 1, '220', 2, 1),
-(8, 5, 'UrbanKiz', 5, 'Lessly & Marie', 165, 1, '165', 1, 1),
-(9, 5, 'Lady Styling', 3, 'Ellin', 165, 1, '0', 1, 1),
-(10, 5, 'Dom Bachata', 5, 'Lorenz & Sofia', 110, 2, '110', 2, 1),
-(11, 5, 'Privatlektion', 7, '(Bokningbar)', 110, 5, '0', 1, 1),
-(12, 5, 'men style', 1, 'Lessly', 110, 6, '330', 1, 1);
+(13, 5, 'TBA', 6, '-', 110, 1, '165', 1, 1),
+(15, 5, 'Dom Bachata', 1, 'Lorenz & Sofia', 110, 1, '275', 1, 1),
+(16, 5, 'UrbanKiz', 4, 'Lorenz & Sofia', 110, 3, '385', 1, 1),
+(17, 5, 'Balett', 1, 'Aurica Muntoiu', 165, 1, '110', 2, 1),
+(18, 5, 'TBA', 6, '-', 110, 1, '275', 2, 1),
+(19, 5, 'TBA', 6, '-', 110, 1, '385', 2, 1),
+(20, 5, 'PRAKTIKA', 6, '-', 110, 1, '495', 1, 1),
+(21, 5, 'PRAKTIKA', 6, '-', 110, 1, '495', 2, 1),
+(22, 5, 'UrbanKiz', 1, 'Lessly & Marie', 110, 3, '165', 1, 1),
+(23, 5, 'UrbanKiz', 2, 'Lessly & Marie', 110, 3, '275', 1, 1),
+(24, 5, 'UrbanKiz', 3, 'Lessly & Marie', 110, 1, '385', 1, 1),
+(25, 5, 'Kubansk Salsa', 1, 'Ali', 110, 3, '165', 2, 1),
+(26, 5, 'Kubansk Salsa', 2, 'Ali', 110, 3, '275', 2, 1),
+(27, 5, 'TBA', 5, '-', 110, 3, '385', 2, 1),
+(28, 5, 'PRAKTIKA', 6, '-', 110, 3, '495', 1, 1),
+(29, 5, 'PRAKTIKA', 6, '-', 110, 3, '495', 2, 1),
+(30, 5, 'DROP IN', 5, '-', 110, 4, '165', 1, 1),
+(31, 5, 'DROP IN', 5, '-', 110, 4, '165', 2, 1),
+(32, 5, 'SOCIAL', 6, '-', 385, 4, '275', 1, 1),
+(33, 5, 'SOCIAL', 6, '-', 385, 4, '275', 2, 1),
+(34, 5, 'Privatlektioner', 7, '-', 110, 1, '54', 1, 1),
+(35, 5, 'Privatlektioner', 7, '-', 110, 3, '54', 1, 1),
+(36, 5, 'Privatlektioner', 7, '-', 110, 3, '54', 2, 1),
+(37, 5, 'Privatlektioner', 7, '-', 110, 4, '54', 1, 1),
+(38, 5, 'Privatlektioner', 7, '-', 110, 4, '54', 2, 1),
+(39, 5, 'Privatlektioner', 7, '-', 110, 1, '0', 2, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `site_info`
+-- Tabellstruktur `site_info`
 --
 
-CREATE TABLE `site_info` (
-  `id_site` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `site_info` (
+  `id_site` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `adress` varchar(255) DEFAULT NULL,
   `post` varchar(255) DEFAULT NULL,
   `city` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `logo` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `logo` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_site`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- Dumping data for table `site_info`
+-- Dumpning av Data i tabell `site_info`
 --
 
 INSERT INTO `site_info` (`id_site`, `name`, `adress`, `post`, `city`, `email`, `logo`) VALUES
-(1, 'YANDALI', 'Ånäsvägen 44 (hållplats Ejdergatan)', '416 68', 'Göteborg', 'info@yandali.com', NULL);
+(1, 'YANDALI', 'Ånäsvägen 44-46 (hållplats Ejdergatan)', '416 68', 'Göteborg', 'info@yandali.se', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `students`
+-- Tabellstruktur `students`
 --
 
-CREATE TABLE `students` (
-  `id_student` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `students` (
+  `id_student` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `date` datetime DEFAULT NULL,
   `year` varchar(255) DEFAULT NULL,
   `month` varchar(255) DEFAULT NULL,
@@ -286,24 +344,26 @@ CREATE TABLE `students` (
   `status` varchar(255) DEFAULT NULL,
   `rank` int(11) DEFAULT NULL,
   `done` int(11) DEFAULT NULL,
-  `via` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `via` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_student`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=42 ;
 
 --
--- Dumping data for table `students`
+-- Dumpning av Data i tabell `students`
 --
 
 INSERT INTO `students` (`id_student`, `date`, `year`, `month`, `day`, `time`, `name`, `surname`, `email`, `password`, `personal_number`, `telephone`, `adress`, `post`, `city`, `sex`, `agree`, `package`, `status`, `rank`, `done`, `via`) VALUES
-(27, '2019-10-22 22:03:11', '2019', '10', '22', '22:03:11', 'Lorenzo', 'Knight', 'joellorenzo.k@gmail.com', 'newstudent246', '8409034157', 763199480, 'Siriusgatan 102', 41522, 'Göteborg', 'Man', 'yes', '1', NULL, NULL, NULL, NULL);
+(40, '2019-12-12 13:55:00', '2019', '12', '12', '13:55:00', 'Nicole', 'Hernandez Råsberg', 'nicole.rasberg@gmail.com', 'newstudent246', '9108194409', 760208190, 'Ånäsvägen 19B', 41668, 'Göteborg', 'Kvinna', 'yes', '1', 'Activ', NULL, NULL, NULL),
+(41, '2019-12-13 17:44:55', '2019', '12', '13', '17:44:55', 'Tussa', 'Bygdén', 'tussabygden@gmail.com', 'newstudent246', '9001100909', 768149480, 'Briljantgatan 18', 42149, 'Västra Frölunda', 'Kvinna', 'yes', '5', 'Activ', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `term`
+-- Tabellstruktur `term`
 --
 
-CREATE TABLE `term` (
-  `id_term` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `term` (
+  `id_term` int(11) NOT NULL AUTO_INCREMENT,
   `date` date DEFAULT NULL,
   `type` varchar(255) DEFAULT NULL,
   `term_name` varchar(255) DEFAULT NULL,
@@ -313,11 +373,12 @@ CREATE TABLE `term` (
   `stop_year` varchar(255) DEFAULT NULL,
   `stop_month` varchar(255) DEFAULT NULL,
   `stop_day` varchar(255) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `status` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_term`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `term`
+-- Dumpning av Data i tabell `term`
 --
 
 INSERT INTO `term` (`id_term`, `date`, `type`, `term_name`, `start_year`, `start_month`, `start_day`, `stop_year`, `stop_month`, `stop_day`, `status`) VALUES
@@ -327,22 +388,23 @@ INSERT INTO `term` (`id_term`, `date`, `type`, `term_name`, `start_year`, `start
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Tabellstruktur `users`
 --
 
-CREATE TABLE `users` (
-  `id_user` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `users` (
+  `id_user` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `surname` varchar(255) DEFAULT NULL,
   `mail` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `telefon` int(11) DEFAULT NULL,
   `rank` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `status` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_user`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
--- Dumping data for table `users`
+-- Dumpning av Data i tabell `users`
 --
 
 INSERT INTO `users` (`id_user`, `name`, `surname`, `mail`, `password`, `telefon`, `rank`, `status`) VALUES
@@ -352,146 +414,6 @@ INSERT INTO `users` (`id_user`, `name`, `surname`, `mail`, `password`, `telefon`
 (5, 'Lorenzo', 'Knight', 'joellorenzo.k@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 763199480, 0, 1),
 (6, 'Rebbeca', 'Hjärte', 'rebbeca@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 763199480, 3, 2),
 (8, 'Shael', 'Knight', 'shael@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 763199480, 2, 1);
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `banners`
---
-ALTER TABLE `banners`
-  ADD PRIMARY KEY (`id_banner`);
-
---
--- Indexes for table `courses`
---
-ALTER TABLE `courses`
-  ADD PRIMARY KEY (`id_course`);
-
---
--- Indexes for table `inscriptions`
---
-ALTER TABLE `inscriptions`
-  ADD PRIMARY KEY (`id_insc`);
-
---
--- Indexes for table `package`
---
-ALTER TABLE `package`
-  ADD PRIMARY KEY (`id_package`);
-
---
--- Indexes for table `pages`
---
-ALTER TABLE `pages`
-  ADD PRIMARY KEY (`id_page`);
-
---
--- Indexes for table `publications`
---
-ALTER TABLE `publications`
-  ADD PRIMARY KEY (`id_publications`);
-
---
--- Indexes for table `schedule`
---
-ALTER TABLE `schedule`
-  ADD PRIMARY KEY (`id_schedule`);
-
---
--- Indexes for table `site_info`
---
-ALTER TABLE `site_info`
-  ADD PRIMARY KEY (`id_site`);
-
---
--- Indexes for table `students`
---
-ALTER TABLE `students`
-  ADD PRIMARY KEY (`id_student`);
-
---
--- Indexes for table `term`
---
-ALTER TABLE `term`
-  ADD PRIMARY KEY (`id_term`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id_user`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `banners`
---
-ALTER TABLE `banners`
-  MODIFY `id_banner` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `courses`
---
-ALTER TABLE `courses`
-  MODIFY `id_course` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `inscriptions`
---
-ALTER TABLE `inscriptions`
-  MODIFY `id_insc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `package`
---
-ALTER TABLE `package`
-  MODIFY `id_package` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `pages`
---
-ALTER TABLE `pages`
-  MODIFY `id_page` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
-
---
--- AUTO_INCREMENT for table `publications`
---
-ALTER TABLE `publications`
-  MODIFY `id_publications` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `schedule`
---
-ALTER TABLE `schedule`
-  MODIFY `id_schedule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT for table `site_info`
---
-ALTER TABLE `site_info`
-  MODIFY `id_site` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `students`
---
-ALTER TABLE `students`
-  MODIFY `id_student` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
-
---
--- AUTO_INCREMENT for table `term`
---
-ALTER TABLE `term`
-  MODIFY `id_term` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

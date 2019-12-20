@@ -43,5 +43,5 @@ $totalRows_DatosSite = mysqli_num_rows($DatosSite);
     <p>Powered by:</p>
     <p><a href="www.lorenzknight.com" target="_blank">www.lorenzknight.com</a></p>
     <p>& <a href="www.heycommunication.com" target="_blank">Hey Communication</a></p>
-    <p>All Rights Reserved</p>
+    <p>All Rights Reserved <?php echo date("Y"); ?></p>
 </div>

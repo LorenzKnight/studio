@@ -5,7 +5,7 @@ if (!isset($_SESSION)) {
 }
 
 $hostname_con = "p:localhost";
-$database_con = "studio";
+$database_con = "yandali";
 $username_con = "root";
 $password_con = "root";
 $con = mysqli_connect($hostname_con, $username_con, $password_con, $database_con);

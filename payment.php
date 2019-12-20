@@ -67,7 +67,7 @@ $totalRows_DatosRegCourse = mysqli_num_rows($DatosRegCourse);
                 <input type="image" src="https://www.paypal.com/es_ES/ES/i/btn/btn_xpressCheckout.gif" name="image">
             </form>
         </div>
-        <a href="reg_done.php?control=<?php //echo $row_DatosReg["id_student"]; ?>">Click test</a>
+        <!-- <a href="reg_done.php?control=<?php //echo $row_DatosReg["id_student"]; ?>">Click test</a> -->
     </div>
     <?php include("inc/foot.php")?>
 </body>

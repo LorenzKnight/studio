@@ -156,7 +156,7 @@ $row_DatosTerm = mysqli_fetch_assoc($DatosTerm);
 $totalRows_DatosTerm = mysqli_num_rows($DatosTerm);
 ?>
 <!-- /////////////////////////////////// Final Consulta que recoje el ternim para insertarlo en un registro nuevo /////////////////////////////////////////// -->
-<!-- /////////////////////////////////// codigo para insertar un los cursos del usuario recien registrado /////////////////////////////////////////// -->
+<!-- /////////////////////////////////// codigo para insertar los cursos del usuario recien registrado /////////////////////////////////////////// -->
 <?php
 $editFormAction = $_SERVER['PHP_SELF'];
 if (isset($_SERVER['QUERY_STRING'])) {
@@ -167,8 +167,8 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequeste")) {
   $year = date("Y");
 	$month = date("m");
 	$day = date("d");
-  $insertSQL = sprintf("INSERT INTO inscriptions(date, year, month, day, time, id_student, term, package, course_1, course_2, course_3, course_4, payment) 
-                        VALUES (NOW(), $year, $month, $day, NOW(), %s, %s, %s, %s, %s, %s, %s, %s)",
+  $insertSQL = sprintf("INSERT INTO inscriptions(date, year, month, day, time, id_student, term, package, course_1, course_2, course_3, course_4, payment, status) 
+                        VALUES (NOW(), $year, $month, $day, NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s)",
                         GetSQLValueString($_POST["id_student"], "int"),                      
                         GetSQLValueString($_POST["term"], "int"),
                         GetSQLValueString($_POST["package"], "int"),
@@ -176,7 +176,8 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequeste")) {
                         GetSQLValueString($_POST["course_2"], "int"),
                         GetSQLValueString($_POST["course_3"], "int"),
                         GetSQLValueString($_POST["course_4"], "int"),
-                        GetSQLValueString($_POST["payment"], "int"));
+                        GetSQLValueString($_POST["payment"], "int"),
+                        GetSQLValueString($_POST["status"], "text"));
 
   
   $Result1 = mysqli_query($con,  $insertSQL) or die(mysqli_error($con));
@@ -190,7 +191,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequeste")) {
   header(sprintf("Location: %s", $insertGoTo));
 }
 ?>
-<!-- /////////////////////////////////// Final codigo para insertar un los cursos del usuario recien registrado /////////////////////////////////////////// -->
+<!-- /////////////////////////////////// Final codigo para insertar los cursos del usuario recien registrado /////////////////////////////////////////// -->
 <html>
 <head>
 <meta charset="iso-8859-1">

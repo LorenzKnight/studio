@@ -277,15 +277,15 @@ if (isset($_SERVER['QUERY_STRING'])) {
 <div class="user_div">
 <table width="100%" cellspacing="0" class="table_user" style="background-color: #F7B500;margin: 20px auto 0; ">
     <tr height="40" style="color: #FFF;">
-        <td width="10%" nowrap="nowrap" align="left" style="padding: 0 0 0 20px; border-bottom: 1px solid #F7B500;">Name</td>
-        <td width="10%" nowrap="nowrap" align="left" style="padding: 0 0 0 10px; border-bottom: 1px solid #F7B500;">Surname</td>
+        <td width="9%" nowrap="nowrap" align="left" style="padding: 0 0 0 20px; border-bottom: 1px solid #F7B500;">Name</td>
+        <td width="12%" nowrap="nowrap" align="left" style="padding: 0 0 0 10px; border-bottom: 1px solid #F7B500;">Surname</td>
         <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 0; border-bottom: 1px solid #F7B500;">Telefone</td>
-        <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 0; border-bottom: 1px solid #F7B500;">E-Mail</td>
+        <td width="15%" nowrap="nowrap" align="center" style="padding: 0 0 0 0; border-bottom: 1px solid #F7B500;">E-Mail</td>
         <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 0; border-bottom: 1px solid #F7B500;">Personal no.</td>
-        <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 0; border-bottom: 1px solid #F7B500;">sex</td>
+        <td width="5%" nowrap="nowrap" align="center" style="padding: 0 0 0 0; border-bottom: 1px solid #F7B500;">sex</td>
         <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 0; border-bottom: 1px solid #F7B500;">Package</td>
         <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 0; border-bottom: 1px solid #F7B500;">registration date</td>
-        <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 0; border-bottom: 1px solid #F7B500;">Status</td>
+        <td width="4%" nowrap="nowrap" align="center" style="padding: 0 0 0 0; border-bottom: 1px solid #F7B500;">Status</td>
         <td width="10%" nowrap="nowrap" align="center" style="padding: 0 10px 0 0; border-bottom: 1px solid #F7B500;">-</td>
     </tr>
 </table>
@@ -295,15 +295,15 @@ if (isset($_SERVER['QUERY_STRING'])) {
     <?php do { ?>
 <table width="100%" cellspacing="0" class="table_user" style="margin: 0 auto 15px; box-shadow: 0 .15rem 2rem 0 rgba(58,59,69,.15)!important;">
     <tr class="line" height="60">
-        <td width="10%" nowrap="nowrap" align="left" style="padding: 0 0 0 20px;"><?php echo ObtenerNombreStudent($row_DatosConsulta['id_student']); ?></td>
-        <td width="10%" nowrap="nowrap" align="left" style="padding: 0 0 0 20px;"><?php echo ObtenerApellidoStudent($row_DatosConsulta['id_student']); ?></td>
+        <td width="9%" nowrap="nowrap" align="left" style="padding: 0 0 0 20px;"><?php echo ObtenerNombreStudent($row_DatosConsulta['id_student']); ?></td>
+        <td width="12%" nowrap="nowrap" align="left" style="padding: 0 0 0 10px;"><?php echo ObtenerApellidoStudent($row_DatosConsulta['id_student']); ?></td>
         <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo ObtenerTelefonoStudent($row_DatosConsulta['id_student']); ?></td>
-        <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo ObtenerEmailStudent($row_DatosConsulta['id_student']); ?></td>
+        <td width="15%" nowrap="nowrap" align="left" style="padding: 0 0 0 0;"><?php echo ObtenerEmailStudent($row_DatosConsulta['id_student']); ?></td>
         <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo ObtenerNumeroPStudent($row_DatosConsulta['id_student']); ?></td>
-        <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo sex($row_DatosConsulta['id_student']); ?></td></td>
+        <td width="5%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo sex($row_DatosConsulta['id_student']); ?></td></td>
         <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo ObtenerNombrePacket($row_DatosConsulta['package']); ?></td>
         <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo $row_DatosConsulta['date']; ?></td>
-        <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo $row_DatosConsulta['status']; ?></td>
+        <td width="4%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo $row_DatosConsulta['status']; ?></td>
         <td width="10%" nowrap="nowrap" align="center" style="padding: 0 10px 0 0;">
         <div class="arternative">
             <button class="artbtn">o o o</button>

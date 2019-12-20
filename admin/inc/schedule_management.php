@@ -615,12 +615,12 @@ document.addEventListener('click', onClick)
                 <td width="50%" valign="middle" align="right" style="padding: 0 10px; color: #999; font-size: 14px;">
                     Nivå: 
                     <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="level" id="level" required>
-                    <option value="1">Beginning 1</option>
-                    <option value="2">Beginning 2</option>
-                    <option value="3">Intermediate 1</option>
-                    <option value="4">Intermediate 2</option>
-                    <option value="5">Advance 1</option>
-                    <option value="6">Advance 2</option>
+                    <option value="1">Steg 1</option>
+                    <option value="2">Steg 2</option>
+                    <option value="3">Steg 3</option>
+                    <option value="4">Steg 4</option>
+                    <option value="5">Open level</option>
+                    <option value="6">none</option>
                     <option value="7">Private class</option>
                     </select>
                 </td>
@@ -726,12 +726,12 @@ document.addEventListener('click', onClick)
                 <td width="50%" valign="middle" align="right" style="padding: 0 10px; color: #999; font-size: 14px;">
                     Nivå: 
                     <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="level" id="level" required>
-                    <option value="1" <?php if ($row_DatosEdit["level"]=="1") echo "selected"; ?>>Beginning 1</option>
-                    <option value="2" <?php if ($row_DatosEdit["level"]=="2") echo "selected"; ?>>Beginning 2</option>
-                    <option value="3" <?php if ($row_DatosEdit["level"]=="3") echo "selected"; ?>>Intermediate 1</option>
-                    <option value="4" <?php if ($row_DatosEdit["level"]=="4") echo "selected"; ?>>Intermediate 2</option>
-                    <option value="5" <?php if ($row_DatosEdit["level"]=="5") echo "selected"; ?>>Advance 1</option>
-                    <option value="6" <?php if ($row_DatosEdit["level"]=="6") echo "selected"; ?>>Advance 2</option>
+                    <option value="1" <?php if ($row_DatosEdit["level"]=="1") echo "selected"; ?>>Steg 1</option>
+                    <option value="2" <?php if ($row_DatosEdit["level"]=="2") echo "selected"; ?>>Steg 2</option>
+                    <option value="3" <?php if ($row_DatosEdit["level"]=="3") echo "selected"; ?>>Steg 3</option>
+                    <option value="4" <?php if ($row_DatosEdit["level"]=="4") echo "selected"; ?>>Steg 4</option>
+                    <option value="5" <?php if ($row_DatosEdit["level"]=="5") echo "selected"; ?>>Open level</option>
+                    <option value="6" <?php if ($row_DatosEdit["level"]=="6") echo "selected"; ?>>none</option>
                     <option value="7" <?php if ($row_DatosEdit["level"]=="7") echo "selected"; ?>>Private class</option>
                     </select>
                 </td>
@@ -818,3 +818,7 @@ document.addEventListener('click', onClick)
         </table>
     </form>
     <?php endif ?>
+    <?php
+    mysqli_free_result();
+    ?> 
+
