@@ -1,7 +1,7 @@
 // var url ="Evanstón, IN 47531, USA fkvgjííííúúuúúú";
 // document.write(ToSeoUrl(url));
   
-function ToSeoUrl(url) {
+function codificarSEO(url) {
         
   var encodedUrl = url.toString().toLowerCase(); 
   
@@ -18,5 +18,6 @@ function ToSeoUrl(url) {
   encodedUrl = encodedUrl.split(/-+/).join("-");
   encodedUrl = encodedUrl.trim('-'); 
 
+  //alert (encodedUrl);
   return encodedUrl; 
 }

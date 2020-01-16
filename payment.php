@@ -13,6 +13,12 @@ $DatosRegCourse = mysqli_query($con, $query_DatosRegCourse) or die(mysqli_error(
 $row_DatosRegCourse = mysqli_fetch_assoc($DatosRegCourse);
 $totalRows_DatosRegCourse = mysqli_num_rows($DatosRegCourse);
 ?>
+<?php
+$query_DatosPromoCode = sprintf("SELECT * FROM discount ORDER BY id_discount ASC");
+$DatosPromoCode = mysqli_query($con, $query_DatosPromoCode) or die(mysqli_error($con));
+$row_DatosPromoCode = mysqli_fetch_assoc($DatosPromoCode);
+$totalRows_DatosPromoCode = mysqli_num_rows($DatosPromoCode);
+?>
 <html>
 <head>
 <meta charset="iso-8859-1">
@@ -23,9 +29,35 @@ $totalRows_DatosRegCourse = mysqli_num_rows($DatosRegCourse);
 <body>
     <?php include("inc/head.php")?>
     <div class="space">
-        <div class="" style="background-color: white; width: 400px; overflow: auto; padding: 50px 0; margin: 0 auto; text-align: center; border: 1px solid #f1f1f1; border-radius: 7px;">
-            Paypal method...<br><br>
-            <?php //echo $_SESSION['ydl_UserId']; ?>
+        <div class="" style="background-color: white; width: 400px; overflow: auto; padding: 20px 0; margin: 0 auto; text-align: center; border: 1px solid #f1f1f1; border-radius: 7px;">           
+            
+            <!-- Paypal method...<br><h2> -->
+            <h2 style="text-align: center">STEG 2</h2>
+            <h3 style="text-align: center">- BETALA OCH SLUTFÖR DIN ANMÄLAN</h3>
+            <div class="warning">
+                <p>- OBS. Kvitto skickas efter att du har klickat på knappen längs ner efter slutförd Paypal betalningen.</p></br>
+                <img src="img/paypal_done_2.png" width="100%" height="" style="margin: 0 auto;">
+            </div>
+            </br>
+            <div class="payment_over">
+                <p>Klicka på den gula Paypal-ikonen.</p></br>
+                <p>I nästa steg kommer du få välja om du vill betala via PayPal eller med ditt vanliga kort.</p></br></br>
+            </div>
+            <div class="payment_over_center">
+                <form action="check_promocode.php" method="post">
+                    <p>Har du em promocode?</p></br>
+                    <input class="textf" type="text" placeholder="PROMO CODE" name="Fticket" id="Fticket" size="31"/> <input type="submit" class="button_check" value="Check" />
+                </form>
+                <?php if($_GET["check"]):?>
+                <?php echo $row_DatosRegCourse["promocode"]; ?></br>
+                <?php echo ObtenerGift($row_DatosRegCourse["promocode"]); ?>
+                <?php endif ?>
+                <?php if($_GET["error"]):?>
+                <p style="color:red; font-size:12px;">Ogiltigt promo code.</p>
+                <?php endif ?>
+            </div>
+                
+                <?php //echo $_SESSION['ydl_UserId']; ?>
             <h3><?php echo ObtenerNombrePacket($row_DatosReg["package"]); ?> - <?php echo ObtenerPrecioPacket($row_DatosReg["package"]); ?> SEK</h3>
             <?php if ($row_DatosRegCourse["course_1"] != "") { ?>
             Kurs 1: <?php echo ObtenerNombreCurso($row_DatosRegCourse["course_1"]); ?><br>
@@ -39,7 +71,7 @@ $totalRows_DatosRegCourse = mysqli_num_rows($DatosRegCourse);
             <?php if ($row_DatosRegCourse["course_4"] != "") { ?>
             Kurs 4: <?php echo ObtenerNombreCurso($row_DatosRegCourse["course_4"]); ?><br>
             <?php } ?>
-            <br><br>
+            <br>
             <?php
             //DATOS FAKE
             //$urlpaypal="https://www.sandbox.paypal.com/cgi-bin/webscr";
@@ -64,7 +96,7 @@ $totalRows_DatosRegCourse = mysqli_num_rows($DatosRegCourse);
                 <input type="hidden" name="rm" value="2" />
                 <input type="hidden" name="bn" value="PRESTASHOP_WPS" />
                 <input type="hidden" name="cbt" value="Volver a www.yandali.se" />
-                <input type="image" src="https://www.paypal.com/es_ES/ES/i/btn/btn_xpressCheckout.gif" name="image">
+                <input type="image" src="https://www.paypal.com/es_ES/ES/i/btn/btn_xpressCheckout.gif" name="image" style="cursor: pointer;">
             </form>
         </div>
         <!-- <a href="reg_done.php?control=<?php //echo $row_DatosReg["id_student"]; ?>">Click test</a> -->

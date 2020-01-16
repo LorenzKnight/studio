@@ -172,7 +172,10 @@
     .big_button:hover {
         background-color:rgb(1, 77, 1);
     }
-
+    .button_check {
+        width: 100px;
+        padding: 10px 0;
+    }
     .signup_graf {
         width: 50%;
         height: 700px;
@@ -459,7 +462,7 @@
         border-radius: 4px;
         box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
     }
-    .about_pic{
+    .about_pic {
         width: 96%;
         height: 650px;
         background-color: black;
@@ -467,7 +470,7 @@
         overflow: hidden;
         position: relative;
     }
-    .about_text{
+    .about_text {
         margin: 0 auto;
         padding: 0 150px 50px;
         position:absolute;
@@ -475,6 +478,18 @@
         color: #FFF;
         text-shadow: 1px 1px 15px #333;
         text-align: justify;
+    }
+    .warning {
+        width: 90%;
+        border-radius: 4px;
+        border: 1px solid rgb(252, 166, 166);
+        padding: 5px 10px 10px;
+        margin-bottom: 50px;
+        background-color: rgb(250, 189, 189);
+        color: rgb(139, 52, 52);
+        font-size: 14px;
+        text-align: left;
+        margin: 0 auto;
     }
 }
 @media only screen and (device-width : 375px) and (device-height : 812px) and (-webkit-device-pixel-ratio : 3) { 
@@ -942,6 +957,18 @@
         width: 150px;
         height: 100px;
         background-color: #E34747;
+    }
+    .warning {
+        width: 90%;
+        border-radius: 4px;
+        border: 1px solid rgb(252, 166, 166);
+        padding: 5px 10px 10px;
+        margin-bottom: 50px;
+        background-color: rgb(250, 189, 189);
+        color: rgb(139, 52, 52);
+        font-size: 14px;
+        text-align: left;
+        margin: 0 auto;
     }
 }
 @media (min-width: 425px) {
@@ -1415,6 +1442,18 @@
         height: 100px;
         background-color: #E34747;
     }
+    .warning {
+        width: 90%;
+        border-radius: 4px;
+        border: 1px solid rgb(252, 166, 166);
+        padding: 5px 10px 10px;
+        margin-bottom: 50px;
+        background-color: rgb(250, 189, 189);
+        color: rgb(139, 52, 52);
+        font-size: 14px;
+        text-align: left;
+        margin: 0 auto;
+    }
 }
 @media (min-width: 1024px) {
     body {
@@ -1582,6 +1621,14 @@
     }
     .big_button:hover {
         background-color:rgb(1, 77, 1);
+    }
+    .button_check {
+        width: 100px;
+        padding: 12px 0;
+        background-color: green;
+        color: white;
+        border: 0;
+        border-radius: 7px;
     }
     .signup_graf {
         width: 50%;
@@ -1891,5 +1938,31 @@
         padding: 15px 0 0;
         background-color: #E34747;
         color: #FFF;
+    }
+    .warning {
+        width: 85%;
+        border-radius: 4px;
+        border: 1px solid rgb(252, 166, 166);
+        padding: 5px 10px 10px;
+        margin-bottom: 50px;
+        background-color: rgb(250, 189, 189);
+        color: rgb(139, 52, 52);
+        font-size: 14px;
+        text-align: left;
+        margin: 0 auto;
+    }
+    .payment_over {
+        width: 85%;
+        font-size: 14px;
+        text-align: left;
+        margin: 0 auto;
+    }
+    .payment_over_center {
+        width: 85%;
+        background-color: #F0F0F0;
+        padding: 10px;
+        font-size: 14px;
+        text-align: center;
+        margin: 0 auto 30px;
     }
 }

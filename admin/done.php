@@ -17,8 +17,8 @@
     <div class="wrapp">
         <?php include("inc/head.php"); ?>
         <div class="container">
-          <div class="title"><h2>Dashboard</h2></div>
-          <?php include("inc/dashboard_content.php"); ?>
+          <div class="title"><h2></h2></div>
+          <?php include("inc/done_msn.php"); ?>
         </div>
     </div>
 </body>

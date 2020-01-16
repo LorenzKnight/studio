@@ -131,7 +131,7 @@
                 </tr>
                 <input type="hidden" name="package" id="package" value="<?php echo $_GET['id']; ?>"/>
                 <input type="hidden" name="password" id="password" value="newstudent246"/>
-                <input type="hidden" name="status" id="status" value="Activ"/>
+                <input type="hidden" name="via" id="via" value="1000"/>
                 <input type="hidden" name="MM_insert" id="MM_insert" value="formrequest" />
             </table>
         </form>
@@ -237,6 +237,7 @@
                         <?php //echo $_SESSION['ydl_UserId'];?>
                     </td>
                 </tr>
+                <?php if($row_DatosReg["package"] <= 4):?>
                 <tr height="30">
                     <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
                     Scrolla i listorna för att välja dina kurser.
@@ -246,7 +247,6 @@
                 </tr> 
                 <tr>
                     <td colspan="2" valign="middle" align="center">
-                        <?php if($row_DatosReg["package"] <= 4):?>
                         <div class="courses">
                             <div class="class1" style="flex: 1;">
                                 <p>Kurs 1</p>
@@ -330,10 +330,12 @@
                 <tr height="20">
                 </tr>
                 <input type="hidden" name="term" id="term" value="<?php echo $row_DatosTerm["id_term"]; ?>"/>
+                <input type="hidden" name="term_start" id="term_start" value="<?php echo $row_DatosTerm["term_start"]; ?>"/>
+                <input type="hidden" name="term_stop" id="term_stop" value="<?php echo $row_DatosTerm["term_stop"]; ?>"/>
                 <input type="hidden" name="package" id="package" value="<?php echo $row_DatosReg["package"]; ?>"/>
                 <input type="hidden" name="id_student" id="id_student" value="<?php echo $_SESSION['ydl_UserId'];?>"/>
                 <input type="hidden" name="payment" id="payment" value="1"/>
-                <input type="hidden" name="status" id="status" value="Activ"/>
+                <input type="hidden" name="status" id="status" value="1"/>
                 <input type="hidden" name="MM_insert" id="MM_insert" value="formrequeste" />
             </table>
         </form>

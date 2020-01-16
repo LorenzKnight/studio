@@ -49,7 +49,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequest")) {
   $year = date("Y");
 	$month = date("m");
 	$day = date("d");
-  $insertSQL = sprintf("INSERT INTO students(date, year, month, day, time, name, surname, email, password, personal_number, telephone, adress, post, city, sex, agree, status, package) 
+  $insertSQL = sprintf("INSERT INTO students(date, year, month, day, time, name, surname, email, password, personal_number, telephone, adress, post, city, sex, agree, package, via) 
                         VALUES (NOW(), $year, $month, $day, NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
                         GetSQLValueString($_POST["name"], "text"),                      
                         GetSQLValueString($_POST["surname"], "text"),
@@ -62,8 +62,8 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequest")) {
                         GetSQLValueString($_POST["city"], "text"),
                         GetSQLValueString($_POST["sex"], "text"),
                         GetSQLValueString($_POST["agree"], "text"),
-                        GetSQLValueString($_POST["status"], "text"),
-                        GetSQLValueString($_POST["package"], "int"));
+                        GetSQLValueString($_POST["package"], "int"),
+                        GetSQLValueString($_POST["via"], "int"));
 
   
   $Result1 = mysqli_query($con,  $insertSQL) or die(mysqli_error($con));
@@ -150,7 +150,7 @@ if (isset($_POST['email'])) {
 <!-- /////////////////////////////////// Codigo para acceder con el usuario recien registrado /////////////////////////////////////////// -->
 <!-- /////////////////////////////////// Consulta que recoje el ternim para insertarlo en un registro nuevo /////////////////////////////////////////// -->
 <?php
-$query_DatosTerm = sprintf("SELECT * FROM term ORDER BY id_term ASC");
+$query_DatosTerm = sprintf("SELECT * FROM term WHERE status = 1 ORDER BY id_term ASC");
 $DatosTerm = mysqli_query($con, $query_DatosTerm) or die(mysqli_error($con));
 $row_DatosTerm = mysqli_fetch_assoc($DatosTerm);
 $totalRows_DatosTerm = mysqli_num_rows($DatosTerm);
@@ -167,17 +167,19 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequeste")) {
   $year = date("Y");
 	$month = date("m");
 	$day = date("d");
-  $insertSQL = sprintf("INSERT INTO inscriptions(date, year, month, day, time, id_student, term, package, course_1, course_2, course_3, course_4, payment, status) 
-                        VALUES (NOW(), $year, $month, $day, NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+  $insertSQL = sprintf("INSERT INTO inscriptions(date, year, month, day, time, id_student, term, term_start, term_stop, package, course_1, course_2, course_3, course_4, payment, status) 
+                        VALUES (NOW(), $year, $month, $day, NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
                         GetSQLValueString($_POST["id_student"], "int"),                      
                         GetSQLValueString($_POST["term"], "int"),
+                        GetSQLValueString($_POST["term_start"], "text"),
+                        GetSQLValueString($_POST["term_stop"], "text"),
                         GetSQLValueString($_POST["package"], "int"),
                         GetSQLValueString($_POST["course_1"], "int"),
                         GetSQLValueString($_POST["course_2"], "int"),
                         GetSQLValueString($_POST["course_3"], "int"),
                         GetSQLValueString($_POST["course_4"], "int"),
                         GetSQLValueString($_POST["payment"], "int"),
-                        GetSQLValueString($_POST["status"], "text"));
+                        GetSQLValueString($_POST["status"], "int"));
 
   
   $Result1 = mysqli_query($con,  $insertSQL) or die(mysqli_error($con));

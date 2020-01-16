@@ -1,0 +1,23 @@
+RewriteBase /
+RewriteEngine On
+
+Rewritecond %{REQUEST_FILENAME} !-d
+Rewritecond %{REQUEST_FILENAME}.html -f
+Rewriterule ^(.*)$ $1.html
+
+Rewritecond %{REQUEST_FILENAME} !-d
+Rewritecond %{REQUEST_FILENAME}.php -f
+Rewriterule ^(.*)$ $1.php
+
+
+
+
+Options +FollowSymlinks
+RewriteEngine Options
+
+rewritecond %{http_host} ^yandali.se [nc]
+rewriterule ^(.*)$ http://www.yandali.se/$1 [r=301,nc]
+
+RewriteRule âdmin/.*$ - [PT]
+
+RewriteRule ^(.*)/$ price_registration.php=$1 
