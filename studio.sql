@@ -1,43 +1,40 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.10.1deb1
--- http://www.phpmyadmin.net
+-- version 4.9.0.1
+-- https://www.phpmyadmin.net/
 --
--- Värd: 10.209.2.58
--- Skapad: 20 dec 2019 kl 16:01
--- Serverversion: 5.5.52
--- PHP-version: 5.3.10-1ubuntu3.11
+-- Host: localhost:8889
+-- Generation Time: Jan 16, 2020 at 02:15 PM
+-- Server version: 5.7.26
+-- PHP Version: 7.3.8
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Databas: `158575-studio`
+-- Database: `yandali`
 --
-CREATE DATABASE `158575-studio` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `158575-studio`;
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `banners`
+-- Table structure for table `banners`
 --
 
-CREATE TABLE IF NOT EXISTS `banners` (
-  `id_banner` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `banners` (
+  `id_banner` int(11) NOT NULL,
   `foto` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
-  `position` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_banner`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  `position` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumpning av Data i tabell `banners`
+-- Dumping data for table `banners`
 --
 
 INSERT INTO `banners` (`id_banner`, `foto`, `title`, `position`) VALUES
@@ -48,20 +45,19 @@ INSERT INTO `banners` (`id_banner`, `foto`, `title`, `position`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `courses`
+-- Table structure for table `courses`
 --
 
-CREATE TABLE IF NOT EXISTS `courses` (
-  `id_course` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `courses` (
+  `id_course` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `description` text,
   `teacher` varchar(255) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_course`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumpning av Data i tabell `courses`
+-- Dumping data for table `courses`
 --
 
 INSERT INTO `courses` (`id_course`, `name`, `description`, `teacher`, `status`) VALUES
@@ -77,11 +73,34 @@ INSERT INTO `courses` (`id_course`, `name`, `description`, `teacher`, `status`) 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `events`
+-- Table structure for table `discount`
 --
 
-CREATE TABLE IF NOT EXISTS `events` (
-  `id_event` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `discount` (
+  `id_discount` int(11) NOT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `gift` varchar(255) DEFAULT NULL,
+  `percent` int(11) DEFAULT NULL,
+  `quanti` int(11) DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `stop_date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `discount`
+--
+
+INSERT INTO `discount` (`id_discount`, `code`, `gift`, `percent`, `quanti`, `start_date`, `stop_date`) VALUES
+(1, 'SPRING2020', '1 Gratis privat Salsa lektion', NULL, 100, '2020-01-03', '2020-01-13');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `events`
+--
+
+CREATE TABLE `events` (
+  `id_event` int(11) NOT NULL,
   `date` date NOT NULL,
   `time` time DEFAULT NULL,
   `foto` varchar(255) DEFAULT NULL,
@@ -89,12 +108,11 @@ CREATE TABLE IF NOT EXISTS `events` (
   `description` text,
   `event_date` date DEFAULT NULL,
   `link` text,
-  `status` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_event`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumpning av Data i tabell `events`
+-- Dumping data for table `events`
 --
 
 INSERT INTO `events` (`id_event`, `date`, `time`, `foto`, `name`, `description`, `event_date`, `link`, `status`) VALUES
@@ -107,53 +125,68 @@ INSERT INTO `events` (`id_event`, `date`, `time`, `foto`, `name`, `description`,
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `inscriptions`
+-- Table structure for table `inscriptions`
 --
 
-CREATE TABLE IF NOT EXISTS `inscriptions` (
-  `id_insc` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `inscriptions` (
+  `id_insc` int(11) NOT NULL,
   `date` date DEFAULT NULL,
   `year` varchar(255) DEFAULT NULL,
   `month` varchar(255) DEFAULT NULL,
   `day` varchar(255) DEFAULT NULL,
   `time` time DEFAULT NULL,
   `id_student` int(11) DEFAULT NULL,
+  `sex` varchar(11) DEFAULT NULL,
   `term` int(11) DEFAULT NULL,
+  `term_start` date DEFAULT NULL,
+  `term_stop` date DEFAULT NULL,
   `package` int(11) DEFAULT NULL,
   `course_1` int(11) DEFAULT NULL,
   `course_2` int(11) DEFAULT NULL,
   `course_3` int(11) DEFAULT NULL,
   `course_4` int(11) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
-  `payment` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_insc`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+  `promocode` varchar(255) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `done` int(11) DEFAULT '0',
+  `payment` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumpning av Data i tabell `inscriptions`
+-- Dumping data for table `inscriptions`
 --
 
-INSERT INTO `inscriptions` (`id_insc`, `date`, `year`, `month`, `day`, `time`, `id_student`, `term`, `package`, `course_1`, `course_2`, `course_3`, `course_4`, `status`, `payment`) VALUES
-(15, '2019-12-12', '2019', '12', '12', '13:55:47', 40, 1, 1, 1, NULL, NULL, NULL, NULL, 1),
-(16, '2019-12-13', '2019', '12', '13', '17:45:07', 41, 1, 5, NULL, NULL, NULL, NULL, NULL, 1);
+INSERT INTO `inscriptions` (`id_insc`, `date`, `year`, `month`, `day`, `time`, `id_student`, `sex`, `term`, `term_start`, `term_stop`, `package`, `course_1`, `course_2`, `course_3`, `course_4`, `promocode`, `status`, `done`, `payment`) VALUES
+(15, '2019-12-12', '2019', '12', '12', '13:55:47', 40, NULL, 2, '2020-01-13', '2020-03-20', 1, 1, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(16, '2019-12-13', '2019', '12', '13', '17:45:07', 41, NULL, 1, '2020-01-13', '2020-03-20', 5, NULL, NULL, NULL, NULL, NULL, 1, 0, 1),
+(20, '2019-12-20', '2019', '12', '20', '19:42:57', 45, NULL, 1, '2020-01-13', '2020-03-20', 5, NULL, NULL, NULL, NULL, NULL, 0, 1, 1),
+(21, '2019-12-30', '2019', '12', '30', '21:25:06', 46, NULL, 1, '2020-01-13', '2020-03-20', 5, NULL, NULL, NULL, NULL, NULL, 1, 1, 1),
+(22, '2019-12-31', '2019', '12', '30', '00:52:13', 47, NULL, 1, '2020-01-13', '2020-03-20', 4, 1, 2, 3, 6, NULL, 1, 1, 1),
+(28, '2020-01-03', '2020', '1', '3', '18:49:52', 46, NULL, 1, '2020-01-13', '2020-03-20', 5, NULL, NULL, NULL, NULL, NULL, 1, 0, 1),
+(30, '2020-01-08', '2020', '1', '8', '17:30:10', 52, NULL, 1, NULL, NULL, 3, 1, 2, 3, NULL, NULL, 1, 1, 1),
+(33, '2020-01-10', '2020', '1', '10', '11:34:07', 69, NULL, 1, NULL, NULL, 1, 3, NULL, NULL, NULL, NULL, 1, NULL, 1),
+(35, '2020-01-10', '2020', '1', '10', '11:57:19', 70, NULL, 1, NULL, NULL, 1, 6, NULL, NULL, NULL, NULL, 1, NULL, 1),
+(43, '2020-01-11', '2020', '1', '11', '01:37:12', 72, NULL, 1, '2020-01-13', '2020-03-20', 1, 6, NULL, NULL, NULL, NULL, 1, 1, 1),
+(44, '2020-01-13', '2020', '1', '13', '20:39:45', 73, NULL, 1, '2020-01-13', '2020-03-20', 2, 6, 7, NULL, NULL, NULL, 1, 0, 1),
+(45, '2020-01-16', '2020', '1', '16', '13:00:30', 76, 'Man', 1, '2020-01-13', '2020-03-20', 1, 3, NULL, NULL, NULL, NULL, 1, 1, 1),
+(46, '2020-01-16', '2020', '1', '16', '13:02:54', 77, 'Man', 1, '2020-01-13', '2020-03-20', 1, 3, NULL, NULL, NULL, NULL, 1, 1, 1),
+(47, '2020-01-16', '2020', '1', '16', '13:12:57', 78, 'Man', 1, '2020-01-13', '2020-03-20', 1, 2, NULL, NULL, NULL, NULL, 1, 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `package`
+-- Table structure for table `package`
 --
 
-CREATE TABLE IF NOT EXISTS `package` (
-  `id_package` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `package` (
+  `id_package` int(11) NOT NULL,
   `package_name` varchar(255) DEFAULT NULL,
   `description` text,
   `price` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_package`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumpning av Data i tabell `package`
+-- Dumping data for table `package`
 --
 
 INSERT INTO `package` (`id_package`, `package_name`, `description`, `price`, `status`) VALUES
@@ -166,11 +199,11 @@ INSERT INTO `package` (`id_package`, `package_name`, `description`, `price`, `st
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `pages`
+-- Table structure for table `pages`
 --
 
-CREATE TABLE IF NOT EXISTS `pages` (
-  `id_page` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `pages` (
+  `id_page` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `level` int(11) DEFAULT NULL,
   `foto` varchar(255) DEFAULT NULL,
@@ -181,12 +214,11 @@ CREATE TABLE IF NOT EXISTS `pages` (
   `pbottom` int(11) DEFAULT NULL,
   `pleft` int(11) DEFAULT NULL,
   `padre` int(11) DEFAULT NULL,
-  `padre 2` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_page`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
+  `padre 2` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumpning av Data i tabell `pages`
+-- Dumping data for table `pages`
 --
 
 INSERT INTO `pages` (`id_page`, `name`, `level`, `foto`, `background`, `color`, `ptop`, `pright`, `pbottom`, `pleft`, `padre`, `padre 2`) VALUES
@@ -210,11 +242,11 @@ INSERT INTO `pages` (`id_page`, `name`, `level`, `foto`, `background`, `color`, 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `publications`
+-- Table structure for table `publications`
 --
 
-CREATE TABLE IF NOT EXISTS `publications` (
-  `id_publications` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `publications` (
+  `id_publications` int(11) NOT NULL,
   `date` date DEFAULT NULL,
   `year` varchar(255) DEFAULT NULL,
   `month` varchar(255) DEFAULT NULL,
@@ -226,12 +258,11 @@ CREATE TABLE IF NOT EXISTS `publications` (
   `settings` int(11) DEFAULT NULL,
   `site` varchar(255) DEFAULT NULL,
   `position` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_publications`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumpning av Data i tabell `publications`
+-- Dumping data for table `publications`
 --
 
 INSERT INTO `publications` (`id_publications`, `date`, `year`, `month`, `day`, `time`, `title`, `content`, `foto`, `settings`, `site`, `position`, `status`) VALUES
@@ -243,11 +274,11 @@ INSERT INTO `publications` (`id_publications`, `date`, `year`, `month`, `day`, `
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `schedule`
+-- Table structure for table `schedule`
 --
 
-CREATE TABLE IF NOT EXISTS `schedule` (
-  `id_schedule` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `schedule` (
+  `id_schedule` int(11) NOT NULL,
   `via` int(11) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `level` int(255) DEFAULT NULL,
@@ -256,12 +287,11 @@ CREATE TABLE IF NOT EXISTS `schedule` (
   `day` int(11) DEFAULT NULL,
   `hour` varchar(255) DEFAULT NULL,
   `sal` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_schedule`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=40 ;
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumpning av Data i tabell `schedule`
+-- Dumping data for table `schedule`
 --
 
 INSERT INTO `schedule` (`id_schedule`, `via`, `name`, `level`, `teacher`, `duration`, `day`, `hour`, `sal`, `status`) VALUES
@@ -295,22 +325,21 @@ INSERT INTO `schedule` (`id_schedule`, `via`, `name`, `level`, `teacher`, `durat
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `site_info`
+-- Table structure for table `site_info`
 --
 
-CREATE TABLE IF NOT EXISTS `site_info` (
-  `id_site` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `site_info` (
+  `id_site` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `adress` varchar(255) DEFAULT NULL,
   `post` varchar(255) DEFAULT NULL,
   `city` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `logo` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id_site`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `logo` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumpning av Data i tabell `site_info`
+-- Dumping data for table `site_info`
 --
 
 INSERT INTO `site_info` (`id_site`, `name`, `adress`, `post`, `city`, `email`, `logo`) VALUES
@@ -319,11 +348,11 @@ INSERT INTO `site_info` (`id_site`, `name`, `adress`, `post`, `city`, `email`, `
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `students`
+-- Table structure for table `students`
 --
 
-CREATE TABLE IF NOT EXISTS `students` (
-  `id_student` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `students` (
+  `id_student` int(11) UNSIGNED NOT NULL,
   `date` datetime DEFAULT NULL,
   `year` varchar(255) DEFAULT NULL,
   `month` varchar(255) DEFAULT NULL,
@@ -341,70 +370,78 @@ CREATE TABLE IF NOT EXISTS `students` (
   `sex` varchar(255) DEFAULT NULL,
   `agree` varchar(255) DEFAULT NULL,
   `package` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
   `rank` int(11) DEFAULT NULL,
   `done` int(11) DEFAULT NULL,
-  `via` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_student`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=42 ;
+  `via` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumpning av Data i tabell `students`
+-- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`id_student`, `date`, `year`, `month`, `day`, `time`, `name`, `surname`, `email`, `password`, `personal_number`, `telephone`, `adress`, `post`, `city`, `sex`, `agree`, `package`, `status`, `rank`, `done`, `via`) VALUES
-(40, '2019-12-12 13:55:00', '2019', '12', '12', '13:55:00', 'Nicole', 'Hernandez Råsberg', 'nicole.rasberg@gmail.com', 'newstudent246', '9108194409', 760208190, 'Ånäsvägen 19B', 41668, 'Göteborg', 'Kvinna', 'yes', '1', 'Activ', NULL, NULL, NULL),
-(41, '2019-12-13 17:44:55', '2019', '12', '13', '17:44:55', 'Tussa', 'Bygdén', 'tussabygden@gmail.com', 'newstudent246', '9001100909', 768149480, 'Briljantgatan 18', 42149, 'Västra Frölunda', 'Kvinna', 'yes', '5', 'Activ', NULL, NULL, NULL);
+INSERT INTO `students` (`id_student`, `date`, `year`, `month`, `day`, `time`, `name`, `surname`, `email`, `password`, `personal_number`, `telephone`, `adress`, `post`, `city`, `sex`, `agree`, `package`, `rank`, `done`, `via`) VALUES
+(40, '2019-12-12 13:55:00', '2019', '12', '12', '13:55:00', 'Nicole', 'Hernandez Råsberg', 'nicole.rasberg@gmail.com', 'newstudent246', '9108194409', 760208190, 'Ånäsvägen 19B', 41668, 'Göteborg', 'Kvinna', 'yes', '1', NULL, NULL, NULL),
+(41, '2019-12-13 17:44:55', '2019', '12', '13', '17:44:55', 'Tussa', 'Bygdén', 'tussabygden@gmail.com', 'newstudent246', '9001100909', 768149480, 'Briljantgatan 18', 42149, 'Västra Frölunda', 'Kvinna', 'yes', '5', NULL, NULL, NULL),
+(45, '2019-12-20 19:42:04', '2019', '12', '20', '19:42:04', 'Carlos', 'Corleones', 'carlos@gmail.com', 'newstudent246', '8501305611', 763199455, 'Hörte 11', 41516, 'Oslo', 'Man', 'yes', '5', NULL, NULL, NULL),
+(46, '2019-12-30 21:24:58', '2019', '12', '30', '21:24:58', 'Ramon', 'Ramirez', 'ramon@gmail.com', 'newstudent246', '8501305611', 763199411, 'Hörte 22', 41516, 'Oslo', 'Man', 'yes', '5', NULL, NULL, NULL),
+(47, '2019-12-31 00:52:00', '2019', '12', '30', '00:52:00', 'Sofia', 'Franzen', 'sofiafranzen@gmail.com', 'newstudent246', '8501305699', 763199420, 'Hörte 12', 41516, 'Oslo', 'Kvinna', 'yes', '4', NULL, NULL, NULL),
+(51, '2020-01-03 18:49:50', '2020', '1', '3', '18:49:50', 'Ramon', 'Ramirez', 'ramon@gmail.com', 'newstudent246', '8501305611', 763199411, 'Hörte 22', 41516, 'Oslo', 'Man', 'yes', '5', NULL, NULL, NULL),
+(52, '2020-01-08 17:27:08', '2020', '1', '8', '17:27:08', 'Rosario', 'Bustamante', 'rosario@gmail.com', 'newstudent246', '8501305699', 763199499, 'Siriusgatan 102', 41522, 'Göteborg', 'Kvinna', NULL, '3', NULL, NULL, 5),
+(66, '2020-01-08 19:04:21', '2020', '1', '8', '19:04:21', 'Carlos', 'Corleones', 'carlos@gmail.com', 'newstudent246', '8501305620', 763199455, 'Hörte 11', 41516, 'Oslo', 'Man', NULL, '1', NULL, NULL, 5),
+(67, '2020-01-08 19:05:38', '2020', '1', '8', '19:05:38', 'Carlos', 'Corleones', 'carlos@gmail.com', 'newstudent246', '8501305620', 763199455, 'Hörte 11', 41516, 'Oslo', 'Man', NULL, '1', NULL, NULL, 5),
+(68, '2020-01-08 19:05:46', '2020', '1', '8', '19:05:46', 'Marita Jenssen', 'Jenssen', 'marita@gmail.com', 'newstudent246', '8501305611', 763199411, 'Hörte 11', 41516, 'Oslo', 'Man', NULL, '1', NULL, NULL, 5),
+(69, '2020-01-10 11:30:30', '2020', '1', '10', '11:30:30', 'Jose', 'Lopez', 'Joselopez@gmail.com', 'newstudent246', '8501305699', 763199499, 'Hörte 12', 41516, 'Oslo', 'Man', NULL, '1', NULL, NULL, 5),
+(70, '2020-01-10 11:57:08', '2020', '1', '10', '11:57:08', 'Fernando', 'Fonseca', 'Fernando@gmail.com', 'newstudent246', '8409034157', 763199420, 'Hörte 11', 41516, 'Oslo', 'Man', NULL, '1', NULL, NULL, 5),
+(72, '2020-01-11 01:35:56', '2020', '1', '11', '01:35:56', 'Rangel', 'Fortunato', 'rangel@gmail.com', 'newstudent246', '8501305611', 763199499, 'Siriusgatan 102', 41522, 'Göteborg', 'Man', NULL, '1', NULL, NULL, 5),
+(73, '2020-01-13 20:39:02', '2020', '1', '13', '20:39:02', 'Adrian', 'Hedström', 'adrian.hedstrom@hotmail.com', 'newstudent246', '8306281513', 737662430, 'Lilla Tunnlandsgatan 3', 41477, 'Göteborg', 'Man', 'yes', '2', NULL, NULL, 1000),
+(76, '2020-01-16 13:00:27', '2020', '1', '16', '13:00:27', 'Bernardo', 'Benet', 'bernando@gmail.com', 'newstudent246', '8501305699', 763199411, 'Hörte 11', 41516, 'Oslo', 'Man', NULL, '1', NULL, NULL, 5),
+(77, '2020-01-16 13:02:50', '2020', '1', '16', '13:02:50', 'Santiago', 'Matias', 'Santiago@gmail.com', 'newstudent246', '8501305611', 737662430, 'Lilla Tunnlandsgatan 3', 41477, 'Göteborg', 'Man', NULL, '1', NULL, NULL, 5),
+(78, '2020-01-16 13:12:51', '2020', '1', '16', '13:12:51', 'Vinsent', 'Carmona', 'vinsent@gmail.com', 'newstudent246', '8501305611', 737662430, 'Lilla Tunnlandsgatan 3', 41477, 'Göteborg', 'Man', NULL, '1', NULL, NULL, 5),
+(79, '2020-01-16 13:16:57', '2020', '1', '16', '13:16:57', 'Jessica', 'Pereira', 'jessica@gmail.com', 'newstudent246', '8501305620', 763199411, 'Hörte 11', 41516, 'Oslo', 'Kvinna', NULL, '1', NULL, NULL, 5);
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `term`
+-- Table structure for table `term`
 --
 
-CREATE TABLE IF NOT EXISTS `term` (
-  `id_term` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `term` (
+  `id_term` int(11) NOT NULL,
   `date` date DEFAULT NULL,
   `type` varchar(255) DEFAULT NULL,
   `term_name` varchar(255) DEFAULT NULL,
-  `start_year` varchar(255) DEFAULT NULL,
-  `start_month` varchar(255) DEFAULT NULL,
-  `start_day` varchar(255) DEFAULT NULL,
-  `stop_year` varchar(255) DEFAULT NULL,
-  `stop_month` varchar(255) DEFAULT NULL,
-  `stop_day` varchar(255) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_term`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `term_start` date DEFAULT NULL,
+  `term_stop` date DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumpning av Data i tabell `term`
+-- Dumping data for table `term`
 --
 
-INSERT INTO `term` (`id_term`, `date`, `type`, `term_name`, `start_year`, `start_month`, `start_day`, `stop_year`, `stop_month`, `stop_day`, `status`) VALUES
-(1, '2019-09-05', '1', 'Var Termin', '2020', '1', '2', '2020', '3', '30', 1),
-(2, '2019-09-05', '1', 'Vinter Termin', '2019', '1', '2', '2019', '3', '30', 0);
+INSERT INTO `term` (`id_term`, `date`, `type`, `term_name`, `term_start`, `term_stop`, `status`) VALUES
+(1, '2019-09-05', '1', 'Var Termin', '2020-01-13', '2020-03-20', 1),
+(2, '2019-09-05', '1', 'Vinter Termin', NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `users`
+-- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
-  `id_user` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+  `id_user` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `surname` varchar(255) DEFAULT NULL,
   `mail` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `telefon` int(11) DEFAULT NULL,
   `rank` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumpning av Data i tabell `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id_user`, `name`, `surname`, `mail`, `password`, `telefon`, `rank`, `status`) VALUES
@@ -414,6 +451,170 @@ INSERT INTO `users` (`id_user`, `name`, `surname`, `mail`, `password`, `telefon`
 (5, 'Lorenzo', 'Knight', 'joellorenzo.k@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 763199480, 0, 1),
 (6, 'Rebbeca', 'Hjärte', 'rebbeca@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 763199480, 3, 2),
 (8, 'Shael', 'Knight', 'shael@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 763199480, 2, 1);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `banners`
+--
+ALTER TABLE `banners`
+  ADD PRIMARY KEY (`id_banner`);
+
+--
+-- Indexes for table `courses`
+--
+ALTER TABLE `courses`
+  ADD PRIMARY KEY (`id_course`);
+
+--
+-- Indexes for table `discount`
+--
+ALTER TABLE `discount`
+  ADD PRIMARY KEY (`id_discount`);
+
+--
+-- Indexes for table `events`
+--
+ALTER TABLE `events`
+  ADD PRIMARY KEY (`id_event`);
+
+--
+-- Indexes for table `inscriptions`
+--
+ALTER TABLE `inscriptions`
+  ADD PRIMARY KEY (`id_insc`);
+
+--
+-- Indexes for table `package`
+--
+ALTER TABLE `package`
+  ADD PRIMARY KEY (`id_package`);
+
+--
+-- Indexes for table `pages`
+--
+ALTER TABLE `pages`
+  ADD PRIMARY KEY (`id_page`);
+
+--
+-- Indexes for table `publications`
+--
+ALTER TABLE `publications`
+  ADD PRIMARY KEY (`id_publications`);
+
+--
+-- Indexes for table `schedule`
+--
+ALTER TABLE `schedule`
+  ADD PRIMARY KEY (`id_schedule`);
+
+--
+-- Indexes for table `site_info`
+--
+ALTER TABLE `site_info`
+  ADD PRIMARY KEY (`id_site`);
+
+--
+-- Indexes for table `students`
+--
+ALTER TABLE `students`
+  ADD PRIMARY KEY (`id_student`);
+
+--
+-- Indexes for table `term`
+--
+ALTER TABLE `term`
+  ADD PRIMARY KEY (`id_term`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id_user`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `banners`
+--
+ALTER TABLE `banners`
+  MODIFY `id_banner` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `courses`
+--
+ALTER TABLE `courses`
+  MODIFY `id_course` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `discount`
+--
+ALTER TABLE `discount`
+  MODIFY `id_discount` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `events`
+--
+ALTER TABLE `events`
+  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `inscriptions`
+--
+ALTER TABLE `inscriptions`
+  MODIFY `id_insc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+
+--
+-- AUTO_INCREMENT for table `package`
+--
+ALTER TABLE `package`
+  MODIFY `id_package` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `pages`
+--
+ALTER TABLE `pages`
+  MODIFY `id_page` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT for table `publications`
+--
+ALTER TABLE `publications`
+  MODIFY `id_publications` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `schedule`
+--
+ALTER TABLE `schedule`
+  MODIFY `id_schedule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT for table `site_info`
+--
+ALTER TABLE `site_info`
+  MODIFY `id_site` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `students`
+--
+ALTER TABLE `students`
+  MODIFY `id_student` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+
+--
+-- AUTO_INCREMENT for table `term`
+--
+ALTER TABLE `term`
+  MODIFY `id_term` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
