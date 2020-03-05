@@ -41,10 +41,10 @@
 
 </script>
 
-<?php include("students_form.php")?>
+<?php include("students_form_old.php")?>
 <div class="search">
     <div class="filter">
-        <form action="students.php" method="get" name="formsearch" id="formsearch">
+        <form action="students_old.php" method="get" name="formsearch" id="formsearch">
             <input class="textf" placeholder="sök" name="search" id="search" size="50" />
             <button type="submit" class="button_small">Sök</button>
             
@@ -52,10 +52,10 @@
         </form>
     </div>
     <div style="width:100px; text-align:center; padding:5px 0;">
-        <a style="margin: 0;" href="students.php"><button type="" class="button_small" value="">Rensa</button> </a>
+        <a style="margin: 0;" href="students_old.php"><button type="" class="button_small" value="">Rensa</button> </a>
     </div>
     <div class="filter">
-        <form action="students.php" method="get" name="formfilter" id="formfilter">
+        <form action="students_old.php" method="get" name="formfilter" id="formfilter">
             Filtrera efter klass: 
             <select class="textf" style="font-size: 14px; color: #999;" name="course" id="course">
             <?php
@@ -79,7 +79,7 @@
             <td width="14%" nowrap="nowrap" align="center" style="padding: 0 0 0 0; border-bottom: 1px solid #F7B500;">Telefone</td>
             <td width="20%" nowrap="nowrap" align="center" style="padding: 0 0 0 0; border-bottom: 1px solid #F7B500;">E-Mail</td>
             <td width="5%" nowrap="nowrap" align="center" style="padding: 0 0 0 0; border-bottom: 1px solid #F7B500;">sex</td>
-            <td width="15%" nowrap="nowrap" align="center" style="padding: 0 0 0 0; border-bottom: 1px solid #F7B500;">Course Package</td>
+            <td width="15%" nowrap="nowrap" align="center" style="padding: 0 0 0 0; border-bottom: 1px solid #F7B500;">registration date</td>
             <td width="4%" nowrap="nowrap" align="center" style="padding: 0 0 0 0; border-bottom: 1px solid #F7B500;">Status</td>
             <td width="10%" nowrap="nowrap" align="center" style="padding: 0 10px 0 0; border-bottom: 1px solid #F7B500;">-</td>
         </tr>
@@ -95,8 +95,8 @@
                 <td width="14%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo ObtenerTelefonoStudent($row_DatosConsulta['id_student']); ?></td>
                 <td width="20%" nowrap="nowrap" align="left" style="padding: 0 0 0 0;"><?php echo ObtenerEmailStudent($row_DatosConsulta['id_student']); ?></td>
                 <td width="5%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo sex($row_DatosConsulta['id_student']); ?></td></td>
-                <td width="15%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo OptenerPaqueteEnLista($row_DatosConsulta['id_student'], $row_DatosTerm['id_term']); ?></td>
-                <td width="4%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo status($row_DatosConsulta['id_student']); ?></td>
+                <td width="15%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo $row_DatosConsulta['date']; ?></td>
+                <td width="4%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo status($row_DatosConsulta['status']); ?></td>
                 <td width="10%" nowrap="nowrap" align="center" style="padding: 0 10px 0 0;">
                 <div class="arternative">
                     <button class="artbtn">o o o</button>

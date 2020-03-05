@@ -6,10 +6,10 @@
             <br><br>
             Hos oss hittar du danslärare som undervisar i flera olika stilar och i danser med ursprung från olika delar av världen.
             <br><br>
-            Under vecka 3 i januari börjar vårens kurser. Information om vilka kurser vi erbjuder och schemat hittar du <a href="schemma.php">här</a>. 
+            Information om vilka kurser vi erbjuder och schemat hittar du <a href="schemma.php">här</a>. 
             </div>
             <br>
-            <a href="price_registration.php">Anmäla här</a>
+            <a href="price_registration.php">Anmäl dig här</a>
     </div>
     <div class="signup_graf">
         <div class="foto_frame">

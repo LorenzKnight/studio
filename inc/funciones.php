@@ -31,12 +31,10 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
-
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
-
 
 function comprobaremailunico($email)
 {
@@ -44,6 +42,29 @@ function comprobaremailunico($email)
 	
 	$query_ConsultaFuncion = sprintf("SELECT email FROM users WHERE email = %s ",
 		 GetSQLValueString($email, "text"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	if ($totalRows_ConsultaFuncion==0) 
+		return true;
+	else return false;
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function comprobaremailestudiante($EstudianteUnico)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT email FROM students WHERE email = %s ",
+		 GetSQLValueString($EstudianteUnico, "text"));
 	//echo $query_ConsultaFuncion;
 	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
 	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
@@ -236,6 +257,69 @@ function ObtenerNombreCurso($nombreCurso)
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
+function CourseCategory($categoriaCurso)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT category FROM courses WHERE id_course = %s ",
+		 GetSQLValueString($categoriaCurso, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["category"];	
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function ObtenerEsquemaCurso($nombreCurso) 
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT schedule FROM courses WHERE id_course = %s ",
+		 GetSQLValueString($nombreCurso, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["schedule"];	
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function ObtenerPrecioCurso($precioCurso)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT price FROM courses WHERE id_course = %s ",
+		 GetSQLValueString($precioCurso, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["price"];	
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
 function packet2($packet, $currentPacket)
 {
 	if ($packet >= $currentPacket) return "initial";
@@ -247,11 +331,39 @@ function packet2($packet, $currentPacket)
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
+function ObtenerCursosSeleccionados($cursosSeleccionado)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM cart WHERE id_student=%s AND transaction_made!=0 ORDER BY id_counter ASC",
+			GetSQLValueString($cursosSeleccionado, "int"));
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+
+?>
+<?php
+	if ($totalRows_ConsultaFuncion > 0) {
+	do {
+	?> 
+			<p style="color:#999;"><?php echo ObtenerNombreCurso($row_ConsultaFuncion['id_course']);?></p>
+	<?php
+	} while ($row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion));
+	}
+
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
 function SendMailHtml($destinatario, $contenido, $asunto)
 {
 	$mensaje = '<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Documento sin título</title>
 </head>
 
@@ -262,11 +374,12 @@ function SendMailHtml($destinatario, $contenido, $asunto)
   </tr>
   <tr>
 	<td>
+		<br/>'; 
+		$mensaje.= $nombre;
+		':
 		<br/>
-		<p>Kära Elev:</p>
 		<br/>
-		<br/>
-		<p>'; 
+		<p>';
 		$mensaje.= $contenido;
 		$mensaje.='</p>
 		<br/><br/>
@@ -276,7 +389,7 @@ function SendMailHtml($destinatario, $contenido, $asunto)
 	<td>
 	<p style="color:#666;">FRISKVÅRDSBIDRAG?</p>
 	<br/>
-	<p style="font-size:15px; color:#666;">Detta mejl gäller som kvitto och går hos de flesta arbetsgivare att använda för friskvårdsbidrag. 
+	<p style="font-size:12px; color:#666;">Detta mejl gäller som kvitto och går hos de flesta arbetsgivare att använda för friskvårdsbidrag. 
 	Om du vill ha ett mer utfärligt intyg så kan du kontakta oss på <a style="font-size:14px;" href="mailto:ekonomi@yandali.se">ekonomi@yandali.se</a> </p>
 	</td>
   </tr>
@@ -318,6 +431,28 @@ function ObtenerPrecioPacket($precio)
 	mysqli_free_result($ConsultaFuncion);
 }
 
+//DELETE//////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function ObtenerPaqueteCursos($idstudiante, $idtransaccion)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM cart WHERE id_student=%s AND transaction_made=%s",
+							GetSQLValueString($idstudiante, "int"),
+							GetSQLValueString($idtransaccion, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["id_counter"];	
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -344,10 +479,45 @@ function ObtenerNombrePacket($tipo)
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
+function GetPacket($GetPacket)
+{
+	if ($GetPacket == 1) return "Bronspaket";
+	if ($GetPacket == 2) return "Silverpaket";
+	if ($GetPacket == 3) return "Guldpaket";
+	if ($GetPacket == 4) return "VIP-paket";
+	if ($GetPacket > 4) return "VIP PLUS";
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
 function status($status)
 {
-	if ($status == 1) return "Active";
-	return "Inactive";
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT status FROM students WHERE id_student = %s ",
+		 GetSQLValueString($status, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["status"];	
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function statusBinario($statusB)
+{
+	if ($statusB == 1) return "Aktiv";
+	else return "Inaktiv";
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -500,6 +670,69 @@ function ObtenerNumeroPStudent($numeroPS)
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
+function ObtenerAdressStudent($Adress)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT adress FROM students WHERE id_student = %s ",
+		 GetSQLValueString($Adress, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["adress"];	
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function ObtenerPostStudent($Post)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT post FROM students WHERE id_student = %s ",
+		 GetSQLValueString($Post, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["post"];	
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function ObtenerCityStudent($City)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT city FROM students WHERE id_student = %s ",
+		 GetSQLValueString($City, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["city"];	
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
 function sex($sex)
 {
 	global $con;
@@ -533,6 +766,31 @@ function statusS($statusS)
 	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
 	
 	return $row_ConsultaFuncion["status"];	
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function OptenerPaqueteEnLista($Paquete)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM cart WHERE id_student = %s ",
+		 GetSQLValueString($Paquete, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+
+	if ($totalRows_ConsultaFuncion == 1) return "Bronspaket";
+	if ($totalRows_ConsultaFuncion == 2) return "Silverpaket";
+	if ($totalRows_ConsultaFuncion == 3) return "Guldpaket";
+	if ($totalRows_ConsultaFuncion == 4) return "VIP-Paket";
+	if ($totalRows_ConsultaFuncion > 4) return "VIP PLUS";
 	
 	mysqli_free_result($ConsultaFuncion);
 }
@@ -741,6 +999,27 @@ function comprobarpromocode($promocode)
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
+function ObtenerPDescuento($Pdescuento)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT percent FROM pack_discount WHERE valor = %s ",
+		 GetSQLValueString($Pdescuento, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["percent"];	
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
 function ObtenerGift($gift)
 {
 	global $con;
@@ -753,6 +1032,138 @@ function ObtenerGift($gift)
 	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
 	
 	return $row_ConsultaFuncion["gift"];	
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function ActualizacionCarrito($Inscription)
+{
+	global $con;
+		$updateSQL = sprintf("UPDATE cart SET transaction_made=%s WHERE id_student=%s AND transaction_made= 0",
+			$Inscription,
+			$_SESSION["ydl_UserId"]);
+  
+  $Result1 = mysqli_query($con, $updateSQL) or die(mysqli_error($con));
+	}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function ConfirmationPago($ano, $mes, $dia, $hora, $sex, $Termin, $TerminStart, $TerminStop, $Package, $total)
+{
+	global $con;
+	
+	$insertSQL = sprintf("INSERT INTO inscriptions (date, year, month, day, time, id_student, sex, term, term_start, term_stop, package, payment, status, total) 
+									VALUES (NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+									 GetSQLValueString($ano, "text"),
+									 GetSQLValueString($mes, "int"),
+									 GetSQLValueString($dia, "text"),
+									 GetSQLValueString($hora, "text"),
+									 GetSQLValueString($_SESSION["ydl_UserId"], "int"),
+									 GetSQLValueString($sex, "text"),
+									 GetSQLValueString($Termin, "text"),
+									 GetSQLValueString($TerminStart, "text"),
+									 GetSQLValueString($TerminStop, "text"),
+									 GetSQLValueString($Package, "text"),
+									 1,
+									 1,
+									 GetSQLValueString($total, "text"));
+	//echo $insertSQL;
+	$Result1 = mysqli_query($con, $insertSQL) or die(mysqli_error($con));
+	$ultimacompra = mysqli_insert_id($con);
+	ActualizacionCarrito($ultimacompra);
+	
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function ActualizacionCarrito2($Inscription2, $studentadmin)
+{
+	global $con;
+		$updateSQL = sprintf("UPDATE cart SET transaction_made=%s WHERE id_student=%s AND transaction_made= 0",
+			$Inscription2,
+			$studentadmin);
+  
+  $Result1 = mysqli_query($con, $updateSQL) or die(mysqli_error($con));
+	}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function ConfirmationDone($ano, $mes, $dia, $hora, $studentadmin, $sexadmin, $Termin, $TerminStart, $TerminStop, $Package, $total)
+{
+	global $con;
+	
+	$insertSQL = sprintf("INSERT INTO inscriptions (date, year, month, day, time, id_student, sex, term, term_start, term_stop, package, payment, total) 
+									VALUES (NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+									 GetSQLValueString($ano, "text"),
+									 GetSQLValueString($mes, "int"),
+									 GetSQLValueString($dia, "text"),
+									 GetSQLValueString($hora, "text"),
+									 GetSQLValueString($studentadmin, "int"),
+									 GetSQLValueString($sexadmin, "text"),
+									 GetSQLValueString($Termin, "text"),
+									 GetSQLValueString($TerminStart, "text"),
+									 GetSQLValueString($TerminStop, "text"),
+									 GetSQLValueString($Package, "text"),
+									 1,
+									 GetSQLValueString($total, "text"));
+	//echo $insertSQL;
+	$Result1 = mysqli_query($con, $insertSQL) or die(mysqli_error($con));
+	$ultimacompra = mysqli_insert_id($con);
+	ActualizacionCarrito2($ultimacompra, $studentadmin);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function ObtenerTransaccion($trans)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM cart WHERE id_student = %s ",
+		 GetSQLValueString($trans, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["transaction_made"];	
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function ObtenerTransaccionEdit($transE)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM inscriptions WHERE id_student = %s ",
+		 GetSQLValueString($transE, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["id_insc"];	
 	
 	mysqli_free_result($ConsultaFuncion);
 }

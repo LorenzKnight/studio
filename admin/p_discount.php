@@ -1,17 +1,12 @@
 <?php require_once('../connections/conexion.php');?>
 <?php require_once('inc/seguridad.php');?>
 <?php
-$variable_Consulta = "0";
-if (isset($VARIABLE)) {
-  $variable_Consulta = $VARIABLE;
-}
-$query_DatosPeriod = sprintf("SELECT * FROM term ORDER BY id_term DESC");
-$DatosPeriod = mysqli_query($con, $query_DatosPeriod) or die(mysqli_error($con));
-$row_DatosPeriod = mysqli_fetch_assoc($DatosPeriod);
-$totalRows_DatosPeriod = mysqli_num_rows($DatosPeriod);
+ $query_DatosConsulta = sprintf("SELECT * FROM pack_discount ORDER BY id_p_discount"); 
+ $DatosConsulta = mysqli_query($con, $query_DatosConsulta) or die(mysqli_error($con));
+ $row_DatosConsulta = mysqli_fetch_assoc($DatosConsulta);
+ $totalRows_DatosConsulta = mysqli_num_rows($DatosConsulta);
 ?>
 <!--/////////////////////////////////////////////////BACK-END INSERT/////////////////////////////////////////////////////////-->
-
 <?php
 $editFormAction = $_SERVER['PHP_SELF'];
 if (isset($_SERVER['QUERY_STRING'])) {
@@ -22,19 +17,17 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequest")) {
   $year = date("Y");
 	$month = date("m");
 	$day = date("d");
-  $insertSQL = sprintf("INSERT INTO term(date, term_name, start_week, term_start, term_stop, status) 
-                        VALUES (NOW(), %s, %s, %s, %s, %s)",
-                        GetSQLValueString($_POST["term_name"], "text"),                      
-                        GetSQLValueString($_POST["start_week"], "text"),
-                        GetSQLValueString($_POST["term_start"], "text"),
-                        GetSQLValueString($_POST["term_stop"], "text"),
-                        GetSQLValueString($_POST["status"], "int"));
+  $insertSQL = sprintf("INSERT INTO pack_discount(package_conditions, valor, percent) 
+                        VALUES (%s, %s, %s)",
+                        GetSQLValueString($_POST["package_conditions"], "text"),                      
+                        GetSQLValueString($_POST["valor"], "int"),
+                        GetSQLValueString($_POST["percent"], "int"));
 
   
   $Result1 = mysqli_query($con,  $insertSQL) or die(mysqli_error($con));
   
   
-  $insertGoTo = "periods.php";
+  $insertGoTo = "p_discount.php";
   if (isset($_SERVER['QUERY_STRING'])) {
     $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
     $insertGoTo .= $_SERVER['QUERY_STRING'];
@@ -45,7 +38,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequest")) {
 <!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 <!--/////////////////////////////////////////////////BACK-END EDIT/////////////////////////////////////////////////////////-->
 <?php
- $query_DatosEdit = sprintf("SELECT * FROM term WHERE id_term=%s", GetSQLValueString($_GET["editp"], "int")); 
+ $query_DatosEdit = sprintf("SELECT * FROM pack_discount WHERE id_p_discount=%s", GetSQLValueString($_GET["editp"], "int")); 
  $DatosEdit = mysqli_query($con, $query_DatosEdit) or die(mysqli_error($con));
  $row_DatosEdit = mysqli_fetch_assoc($DatosEdit);
  $totalRows_DatosEdit = mysqli_num_rows($DatosEdit);
@@ -55,34 +48,23 @@ $editFormAction = $_SERVER['PHP_SELF'];
 if (isset($_SERVER['QUERY_STRING'])) {
   $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
 }
-
-if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formedit")) {
-     //if (comprobaridunico($_POST["given_id"]))
-    //{
-  $updateSQL = sprintf("UPDATE term SET term_name=%s, start_week=%s, term_start=%s, term_stop=%s, status=%s WHERE id_term=%s",
-                        GetSQLValueString($_POST["term_name"], "text"),                      
-                        GetSQLValueString($_POST["start_week"], "text"),
-                        GetSQLValueString($_POST["term_start"], "text"),
-                        GetSQLValueString($_POST["term_stop"], "text"),
-                        GetSQLValueString($_POST["status"], "int"),
-                        GetSQLValueString($_POST["id_term"], "int"));
+if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formeditp")) {
+     
+     $updateSQL = sprintf("UPDATE pack_discount SET package_conditions=%s, valor=%s, percent=%s WHERE id_p_discount=%s",
+                          GetSQLValueString($_POST["package_conditions"], "text"),
+                          GetSQLValueString($_POST["valor"], "int"),
+                          GetSQLValueString($_POST["percent"], "int"),
+                          GetSQLValueString($_POST["id_p_discount"], "int"));
 		
 
 $Result1 = mysqli_query($con, $updateSQL) or die(mysqli_error($con));
 
-  $updateGoTo = "periods.php";
-  if (isset($_SERVER['QUERY_STRING'])) {
+$updateGoTo = "p_discount.php";
+if (isset($_SERVER['QUERY_STRING'])) {
     $updateGoTo .= (strpos($updateGoTo, '?')) ? "&" : "?";
     $updateGoTo .= $_SERVER['QUERY_STRING'];
   }
   header(sprintf("Location: %s", $updateGoTo));
-     //}
-     //else
-     //{
-     // EL ID NO ES UNICO
-     //$insertGoTo ="error.php";
-     //header(sprintf("Location: %s", $insertGoTo));
-     //}
 }
 ?>
 <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
@@ -92,8 +74,7 @@ $Result1 = mysqli_query($con, $updateSQL) or die(mysqli_error($con));
 <title>Studio</title>
 <link rel="shortcut icon" href="favicon-32x32.png">
 <link href="css/style_adm.css" rel="stylesheet" type="text/css"  media="all" />
-<link rel="stylesheet" type="text/css" href="simple_calendar/tcal.css" />
-<script type="text/javascript" src="simple_calendar/tcal.js"></script> 
+
 <style>
     
 </style>
@@ -103,8 +84,8 @@ $Result1 = mysqli_query($con, $updateSQL) or die(mysqli_error($con));
         <?php include("inc/head.php"); ?>
         <div class="container">
           <?php //echo $_SESSION['std_UserId']; ?>
-          <div class="title"><h2>Terminer</h2></div> 
-          <?php include("inc/periods_list.php"); ?>
+          <div class="title"><h2>Paket Discounts</h2></div>
+          <?php include("inc/p_discount_list.php"); ?>
         </div>
     </div>
 </body>

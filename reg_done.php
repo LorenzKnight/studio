@@ -2,11 +2,24 @@
 <!-- Esta linea en conjunto con la funcion "ConfirmacionPago" hace que la celda done cambie su valor-->
 <?php ConfirmacionPago(1, date('Ymd')); ?>
 <?php
+$query_DatosTerm = sprintf("SELECT * FROM term WHERE status=1 ORDER BY id_term ASC");
+$DatosTerm = mysqli_query($con, $query_DatosTerm) or die(mysqli_error($con));
+$row_DatosTerm = mysqli_fetch_assoc($DatosTerm);
+$totalRows_DatosTerm = mysqli_num_rows($DatosTerm);
+?>
+<?php
 $query_DatosReg = sprintf("SELECT * FROM students WHERE id_student=%s ORDER BY id_student ASC",
 GetSQLValueString($_SESSION['ydl_UserId'], "int"));
 $DatosReg = mysqli_query($con, $query_DatosReg) or die(mysqli_error($con));
 $row_DatosReg = mysqli_fetch_assoc($DatosReg);
 $totalRows_DatosReg = mysqli_num_rows($DatosReg);
+?>
+<?php
+$query_DatosCart = sprintf("SELECT * FROM cart WHERE id_student=%s AND transaction_made!=0 ORDER BY id_counter ASC",
+GetSQLValueString($_SESSION['ydl_UserId'], "int"));
+$DatosCart = mysqli_query($con, $query_DatosCart) or die(mysqli_error($con));
+$row_DatosCart = mysqli_fetch_assoc($DatosCart);
+$totalRows_DatosCart = mysqli_num_rows($DatosCart);
 ?>
 <?php
 $query_DatosRegDone = sprintf("SELECT * FROM inscriptions WHERE id_student=%s ORDER BY id_insc ASC",
@@ -17,8 +30,8 @@ $totalRows_DatosRegDone = mysqli_num_rows($DatosRegDone);
 ?>
 <html>
 <head>
-<meta charset="iso-8859-1">
 <title>Yandali Studio</title>
+<meta charset="ISO-8859-1">
 <link rel="shortcut icon" href="favicon-32x32.png">
 <link href="css/style.css" rel="stylesheet" type="text/css"  media="all" />
 </head>
@@ -27,28 +40,21 @@ $totalRows_DatosRegDone = mysqli_num_rows($DatosRegDone);
     <div class="space">
         <div class="theemail">
             <?php //echo $_SESSION['ydl_UserId']; ?>
-            <?php //echo $_GET["control"];?>
             <?php 
-                $curso1 = $row_DatosRegDone["course_1"];
-                $curso2 = $row_DatosRegDone["course_2"];
-                $curso3 = $row_DatosRegDone["course_3"];
-                $curso4 = $row_DatosRegDone["course_4"];
-
-                $price = $row_DatosRegDone['package'];
+                $nombre = $row_DatosRegDone['id_student'];
+                $packet = $row_DatosRegDone['package'];
+                $week = $row_DatosTerm['start_week'];
+                $date = $row_DatosRegDone['date'];
+                $price = $row_DatosRegDone['total'];
             ?>
             <?php
-            $contenido ='<p>Du är nu anmäld till kursen/kurserna</p><br/><p style="color:#666;">'; 
-            $contenido.=ObtenerNombreCurso($curso1); $contenido.='</p><p style="color:#666;">';
-            $contenido.=ObtenerNombreCurso($curso2); $contenido.='</p><p style="color:#666;">';
-            $contenido.=ObtenerNombreCurso($curso3); $contenido.='</p><p style="color:#666;">';
-            $contenido.=ObtenerNombreCurso($curso4); $contenido.='</p></br>';
-
-            $contenido.='Priset för din kurs/kurser är totalt ('; $contenido.=ObtenerPrecioPacket($price); $contenido.=' kr) inkl 0% moms.
-            <br/>
+            $contenido='<p>Kära '; $contenido.=ObtenerNombreStudent($nombre); $contenido.='&nbsp;'; $contenido.=ObtenerApellidoStudent($nombre);
+            $contenido.='</p><p>Du är anmält f.o.m. '; $contenido.=$date; $contenido.=' med '; $contenido.=$packet; $contenido.='.</p></br>';
+            $contenido.='<p>Priset för din kurspacket är totalt ('; $contenido.=$price; $contenido.=' kr) inkl 0% moms.</p>
             <br/>
             <p>Vi ser verkligen fram emot vårens termin och är så glada att du vill vara en del av vår dansskola!</p>
             <br/>
-            <p>Kurserna startar v.3.</p>
+            <p>Kurserna startar '; $contenido.=$week; $contenido.='</p>
             <p>Om du har några frågor inför start så är det bara att höra av dig till oss via mejl på <a href="mailto:info@yandali.se">info@yandali.se</a></p>
             <br/>
             <br/>
@@ -57,17 +63,6 @@ $totalRows_DatosRegDone = mysqli_num_rows($DatosRegDone);
             <br/>
             <p>Vi ses snart!</p>
             <p>/ Yandali</p>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
             <br/>
             <br/>
             <br/>
@@ -82,3 +77,13 @@ $totalRows_DatosRegDone = mysqli_num_rows($DatosRegDone);
     <?php include("inc/foot.php")?>
 </body>
 </html>
+
+<style>
+.theemail {
+    width: 680px;
+    margin: 0 auto;
+    padding: 3% 2%;
+    background-color: white;
+    box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
+}
+</style>

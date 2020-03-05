@@ -338,20 +338,6 @@
         height:100%;
         border:1px solid #CCC;
     }
-    .paquetes {
-        width: 95%;
-        margin: 10px auto;
-        border-bottom: 1px solid rgba(201,172,140,1);
-    }
-    .paquetes:hover{
-        background-image: linear-gradient(to right, rgb(96, 42, 245), rgb(150, 115, 247), rgb(183, 195, 250), #f0f0f0, #f0f0f0);
-        color: #FFF;
-        -moz-transition: all 300ms ease-in-out 100ms;
-        -ms-transition: all 300ms ease-in-out 100ms;
-        -o-transition: all 300ms ease-in-out 100ms;
-        -webkit-transition: all 300ms ease-in-out 100ms;
-        transition: all 300ms ease-in-out 100ms;
-    }
     .heading {
         text-align: center;
         margin: 0 0 30px;
@@ -421,16 +407,42 @@
     }
     .class1 {
         height: 250px;
-        overflow: auto;
         float: left;
         flex: 1;
     }
-    .theemail {
-        width: 56%;
-        margin: 0 auto;
-        padding: 3% 2%;
-        background-color: white;
-        box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
+    .lista_C {
+        width: 98%;
+        height: 220px;
+        overflow: auto;
+        border-top: 1px solid #CCC;
+        margin: 5px 0 0;
+        padding: 0 1%;
+        /* background-color: cadetblue; */
+    }
+    .lista_C a {
+        color: rgba(201,172,140,1);
+        font-size: 11px;
+    }
+    .lista_C a:hover {
+        color: green;
+        font-size: 11px;
+    }
+    .lista_C_delete {
+        width: 98%;
+        height: 220px;
+        overflow: auto;
+        border-top: 1px solid #CCC;
+        margin: 5px 0 0;
+        padding: 0 1%;
+        /* background-color: cadetblue; */
+    }
+    .lista_C_delete a {
+        color: rgba(201,172,140,1);
+        font-size: 11px;
+    }
+    .lista_C_delete a:hover {
+        color: red;
+        font-size: 11px;
     }
     .newspost {
         width: 90%;
@@ -895,16 +907,42 @@
     }
     .class1 {
         height: 250px;
-        overflow: auto;
         float: left;
         flex: 1;
     }
-    .theemail {
-        width: 56%;
-        margin: 0 auto;
-        padding: 3% 2%;
-        background-color: white;
-        box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
+    .lista_C {
+        width: 98%;
+        height: 220px;
+        overflow: auto;
+        border-top: 1px solid #CCC;
+        margin: 5px 0 0;
+        padding: 0 1%;
+        /* background-color: cadetblue; */
+    }
+    .lista_C a {
+        color: rgba(201,172,140,1);
+        font-size: 11px;
+    }
+    .lista_C a:hover {
+        color: green;
+        font-size: 11px;
+    }
+    .lista_C_delete {
+        width: 98%;
+        height: 220px;
+        overflow: auto;
+        border-top: 1px solid #CCC;
+        margin: 5px 0 0;
+        padding: 0 1%;
+        /* background-color: cadetblue; */
+    }
+    .lista_C_delete a {
+        color: rgba(201,172,140,1);
+        font-size: 11px;
+    }
+    .lista_C_delete a:hover {
+        color: red;
+        font-size: 11px;
     }
     .newspost {
         width: 90%;
@@ -1379,16 +1417,42 @@
     }
     .class1 {
         height: 250px;
-        overflow: auto;
         float: left;
         flex: 1;
     }
-    .theemail {
-        width: 56%;
-        margin: 0 auto;
-        padding: 3% 2%;
-        background-color: white;
-        box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
+    .lista_C {
+        width: 98%;
+        height: 220px;
+        overflow: auto;
+        border-top: 1px solid #CCC;
+        margin: 5px 0 0;
+        padding: 0 1%;
+        /* background-color: cadetblue; */
+    }
+    .lista_C a {
+        color: rgba(201,172,140,1);
+        font-size: 11px;
+    }
+    .lista_C a:hover {
+        color: green;
+        font-size: 11px;
+    }
+    .lista_C_delete {
+        width: 98%;
+        height: 220px;
+        overflow: auto;
+        border-top: 1px solid #CCC;
+        margin: 5px 0 0;
+        padding: 0 1%;
+        /* background-color: cadetblue; */
+    }
+    .lista_C_delete a {
+        color: rgba(201,172,140,1);
+        font-size: 11px;
+    }
+    .lista_C_delete a:hover {
+        color: red;
+        font-size: 11px;
     }
     .newspost {
         width: 90%;
@@ -1875,16 +1939,42 @@
     }
     .class1 {
         height: 250px;
-        overflow: auto;
         float: left;
         flex: 1;
     }
-    .theemail {
-        width: 56%;
-        margin: 0 auto;
-        padding: 3% 2%;
-        background-color: white;
-        box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
+    .lista_C {
+        width: 98%;
+        height: 220px;
+        overflow: auto;
+        border-top: 1px solid #CCC;
+        margin: 5px 0 0;
+        padding: 0 1%;
+        /* background-color: cadetblue; */
+    }
+    .lista_C a {
+        color: rgba(201,172,140,1);
+        font-size: 11px;
+    }
+    .lista_C a:hover {
+        color: green;
+        font-size: 11px;
+    }
+    .lista_C_delete {
+        width: 98%;
+        height: 220px;
+        overflow: auto;
+        border-top: 1px solid #CCC;
+        margin: 5px 0 0;
+        padding: 0 1%;
+        /* background-color: cadetblue; */
+    }
+    .lista_C_delete a {
+        color: rgba(201,172,140,1);
+        font-size: 11px;
+    }
+    .lista_C_delete a:hover {
+        color: red;
+        font-size: 11px;
     }
     .newspost {
         width: 90%;

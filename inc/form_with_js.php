@@ -313,7 +313,31 @@
                                 ?>
                             </div>
                         </div>
-                        <?php endif ?>
+                <?php endif ?>
+                    </td>
+                </tr>
+                <?php if($row_DatosReg["package"] > 4):?>
+                <tr>
+                    <td colspan="2" valign="middle" align="center">
+                        <div class="courses">
+                            <div class="class1" style="flex: 1;">
+                                <p>Kurs nivå</p>
+                                <hr>
+                                <?php
+                                if ($totalRows_DatosSpecialCourse > 0) {
+                                do { ?>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+                                    <tr height="50">
+                                        <td width="20%" align="center" ><input style ="font-size: 14px;" type="radio" name="course_s1" value="<?php echo $row_DatosSpecialCourse['id_course'];?>"></td>
+                                        <td width="80%" align="left" style ="font-size: 12px;"><?php echo $row_DatosSpecialCourse['name'];?></td>
+                                    <tr>
+                                </table>
+                                <?php } while ($row_DatosSpecialCourse = mysqli_fetch_assoc($DatosSpecialCourse));
+                                }
+                                ?>
+                            </div>
+                        </div>
+                <?php endif ?>    
                     </td>
                 </tr>
                 <tr height="60">

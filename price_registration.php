@@ -17,25 +17,31 @@ $totalRows_DatosPackage2 = mysqli_num_rows($DatosPackage2);
 <!-- /////////////////////////////////// Final Consulta para optener el paquete que se muestra en el formulario/////////////////////////////////////////// -->
 <!-- /////////////////////////////////// Consulta para optener el lista de cursos que se muestran en el formulario/////////////////////////////////////////// -->
 <?php
- $query_DatosCourse = sprintf("SELECT * FROM courses WHERE status = 1 ORDER BY id_course ASC"); 
+ $query_DatosCourse = sprintf("SELECT * FROM courses WHERE category = 1 AND status = 1 ORDER BY id_course ASC"); 
  $DatosCourse = mysqli_query($con, $query_DatosCourse) or die(mysqli_error($con));
 $row_DatosCourse = mysqli_fetch_assoc($DatosCourse);
 $totalRows_DatosCourse = mysqli_num_rows($DatosCourse);
 
- $query_DatosCourse2 = sprintf("SELECT * FROM courses WHERE status = 1 ORDER BY id_course ASC"); 
+ $query_DatosCourse2 = sprintf("SELECT * FROM courses WHERE category = 1 AND status = 1 ORDER BY id_course ASC"); 
  $DatosCourse2 = mysqli_query($con, $query_DatosCourse2) or die(mysqli_error($con));
 $row_DatosCourse2 = mysqli_fetch_assoc($DatosCourse2);
 $totalRows_DatosCourse2 = mysqli_num_rows($DatosCourse2);
 
-$query_DatosCourse3 = sprintf("SELECT * FROM courses WHERE status = 1 ORDER BY id_course ASC"); 
+$query_DatosCourse3 = sprintf("SELECT * FROM courses WHERE category = 1 AND status = 1 ORDER BY id_course ASC"); 
  $DatosCourse3 = mysqli_query($con, $query_DatosCourse3) or die(mysqli_error($con));
 $row_DatosCourse3 = mysqli_fetch_assoc($DatosCourse3);
 $totalRows_DatosCourse3 = mysqli_num_rows($DatosCourse3);
 
-$query_DatosCourse4 = sprintf("SELECT * FROM courses WHERE status = 1 ORDER BY id_course ASC"); 
+$query_DatosCourse4 = sprintf("SELECT * FROM courses WHERE category = 1 AND status = 1 ORDER BY id_course ASC"); 
  $DatosCourse4 = mysqli_query($con, $query_DatosCourse4) or die(mysqli_error($con));
 $row_DatosCourse4 = mysqli_fetch_assoc($DatosCourse4);
 $totalRows_DatosCourse4 = mysqli_num_rows($DatosCourse4);
+?>
+<?php
+$query_DatosSpecialCourse = sprintf("SELECT * FROM courses WHERE category > 1 AND status = 1 ORDER BY id_course ASC"); 
+$DatosSpecialCourse = mysqli_query($con, $query_DatosSpecialCourse) or die(mysqli_error($con));
+$row_DatosSpecialCourse = mysqli_fetch_assoc($DatosSpecialCourse);
+$totalRows_DatosSpecialCourse = mysqli_num_rows($DatosSpecialCourse);
 ?>
 <!-- /////////////////////////////////// Final Consulta para optener el lista de cursos que se muestran en el formulario/////////////////////////////////////////// -->
 <!-- /////////////////////////////////// codigo para insertar un registro nuevo /////////////////////////////////////////// -->
@@ -80,7 +86,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequest")) {
 <!-- /////////////////////////////////// Final codigo para insertar un registro nuevo /////////////////////////////////////////// -->
 <!-- /////////////////////////////////// Consulta que recoje el paquete para insertarlo en un registro nuevo /////////////////////////////////////////// -->
 <?php
-$query_DatosReg = sprintf("SELECT * FROM students ORDER BY id_student DESC");
+$query_DatosReg = sprintf("SELECT * FROM students ORDER BY id_student ASC");
 $DatosReg = mysqli_query($con, $query_DatosReg) or die(mysqli_error($con));
 $row_DatosReg = mysqli_fetch_assoc($DatosReg);
 $totalRows_DatosReg = mysqli_num_rows($DatosReg);
@@ -167,8 +173,8 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequeste")) {
   $year = date("Y");
 	$month = date("m");
 	$day = date("d");
-  $insertSQL = sprintf("INSERT INTO inscriptions(date, year, month, day, time, id_student, term, term_start, term_stop, package, course_1, course_2, course_3, course_4, payment, status) 
-                        VALUES (NOW(), $year, $month, $day, NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+  $insertSQL = sprintf("INSERT INTO inscriptions(date, year, month, day, time, id_student, term, term_start, term_stop, package, course_1, course_2, course_3, course_4, course_s1, payment, status) 
+                        VALUES (NOW(), $year, $month, $day, NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
                         GetSQLValueString($_POST["id_student"], "int"),                      
                         GetSQLValueString($_POST["term"], "int"),
                         GetSQLValueString($_POST["term_start"], "text"),
@@ -178,6 +184,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequeste")) {
                         GetSQLValueString($_POST["course_2"], "int"),
                         GetSQLValueString($_POST["course_3"], "int"),
                         GetSQLValueString($_POST["course_4"], "int"),
+                        GetSQLValueString($_POST["course_s1"], "int"),
                         GetSQLValueString($_POST["payment"], "int"),
                         GetSQLValueString($_POST["status"], "int"));
 

@@ -30,11 +30,11 @@ window.onclick = function(event) {
         <li><a href="dashboard.php">Start</a></li>
         <li><a href="students.php">Students</a></li>
         <li><a href="periods.php">Periods</a></li>
-        <li><a href="#">Tickets</a>
+        <li><a href="courses.php">Courses <div class="flecha_derecha" style="float:right;"></div></a>
           <div class="dropdown2-content">
             <ul>
-              <li><a href="courses.php">Courses</a></li>
-              <li><a href="#">Events</a></li>
+              <li><a href="#">Discount codes</a></li>
+              <li><a href="p_discount.php">Package discount</a></li>
             </ul>
           </div>
         </li>
@@ -42,7 +42,7 @@ window.onclick = function(event) {
         <hr>
         <h5>SITE</h5>
         <li><a href="publications.php">Publications/News/Vlog</a></li>
-        <li><a href="#about">Plugins</a>
+        <li><a href="#about">Plugins <div class="flecha_derecha" style="float: right;"></div></a>
           <div class="dropdown2-content">
             <ul>
               <li><a href="schedule.php">Schedule</a></li>
@@ -55,3 +55,13 @@ window.onclick = function(event) {
         </ul>
     </div>
 </div>
+ <style>
+    .flecha_derecha {
+    width: 0;
+    height: 0;
+    border-left: 8px solid #999;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    margin:5px 0;
+    }
+ </style>
