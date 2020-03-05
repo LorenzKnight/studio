@@ -2,10 +2,10 @@
 -- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8889
--- Generation Time: Jan 16, 2020 at 02:15 PM
--- Server version: 5.7.26
--- PHP Version: 7.3.8
+-- Värd: localhost:8889
+-- Tid vid skapande: 05 mars 2020 kl 12:28
+-- Serverversion: 5.7.26
+-- PHP-version: 7.3.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `yandali`
+-- Databas: `yandali`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `banners`
+-- Tabellstruktur `banners`
 --
 
 CREATE TABLE `banners` (
@@ -34,7 +34,7 @@ CREATE TABLE `banners` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `banners`
+-- Dumpning av Data i tabell `banners`
 --
 
 INSERT INTO `banners` (`id_banner`, `foto`, `title`, `position`) VALUES
@@ -45,35 +45,86 @@ INSERT INTO `banners` (`id_banner`, `foto`, `title`, `position`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `courses`
+-- Tabellstruktur `cart`
+--
+
+CREATE TABLE `cart` (
+  `id_counter` int(11) NOT NULL,
+  `id_student` int(11) DEFAULT NULL,
+  `id_course` int(11) DEFAULT NULL,
+  `course_category` int(11) DEFAULT NULL,
+  `id_term` int(11) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `transaction_made` int(11) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumpning av Data i tabell `cart`
+--
+
+INSERT INTO `cart` (`id_counter`, `id_student`, `id_course`, `course_category`, `id_term`, `date`, `transaction_made`) VALUES
+(146, 103, 2, NULL, 1, '2020-02-10', 162),
+(147, 103, 3, NULL, 1, '2020-02-10', 162),
+(148, 103, 4, NULL, 1, '2020-02-10', 162),
+(149, 103, 5, NULL, 1, '2020-02-10', 162),
+(519, 45, 1, NULL, 1, '2020-02-11', 163),
+(520, 45, 2, NULL, 1, '2020-02-13', 163),
+(521, 45, 3, NULL, 1, '2020-02-13', 163),
+(535, 107, 1, NULL, 1, '2020-02-18', 174),
+(536, 107, 2, NULL, 1, '2020-02-18', 174),
+(537, 108, 1, NULL, 1, '2020-02-18', 175),
+(540, 68, 1, NULL, 1, '2020-02-18', 185),
+(541, 68, 2, NULL, 1, '2020-02-18', 185),
+(542, 68, 3, NULL, 1, '2020-02-18', 185),
+(612, 76, 1, 1, 1, '2020-03-03', 187),
+(613, 76, 2, 1, 1, '2020-03-03', 187),
+(614, 76, 3, 1, 1, '2020-03-03', 187),
+(615, 76, 10, 2, 1, '2020-03-03', 187),
+(616, 76, 4, 1, 1, '2020-03-03', 187),
+(641, 103, 1, 1, 3, '2020-03-05', 0),
+(648, 103, 2, 1, 3, '2020-03-05', 0),
+(649, 103, 3, 1, 3, '2020-03-05', 0),
+(650, 103, 4, 1, 3, '2020-03-05', 0),
+(652, 103, 5, 1, 3, '2020-03-05', 0),
+(653, 103, 6, 1, 3, '2020-03-05', 0),
+(654, 103, 10, 2, 3, '2020-03-05', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Tabellstruktur `courses`
 --
 
 CREATE TABLE `courses` (
   `id_course` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `description` text,
+  `schedule` text,
   `teacher` varchar(255) DEFAULT NULL,
+  `category` int(11) DEFAULT '1',
+  `price` varchar(255) DEFAULT NULL,
   `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `courses`
+-- Dumpning av Data i tabell `courses`
 --
 
-INSERT INTO `courses` (`id_course`, `name`, `description`, `teacher`, `status`) VALUES
-(1, 'Urban kiz steg 1 (ons 18.30-19.30)', 'safkklsdfj lkjasdfkl jsdlifj alösdjf öasldkjhf ölasjfajsdflasjdfljasfasfölgasflögkaslfgölasfgölafgsölkafsg', 'Lessly & Marie', 1),
-(2, 'Urban kiz steg 2 (ons 19.30-20.30)', 'asdfsda asdf asdf asfsdfsa asdf asdfasdfsfasdfsdf sadf sfasdf asdf asdfasdfasdfsdfsad sdfsadf', 'Lessly & Marie', 1),
-(3, 'Urban kiz steg 3 (ons 20.30-21.30)', 'adfa sdfasdf sadf asdfsadfsadfsadf asdf sdaf asdf asdfasdf asdf asdfasdf sdf asdfas', 'Lessly & Marie', 1),
-(4, 'Urban kiz steg 4 (mån 20.30-21.30)', 'asdf asdf asdf asdf asdfasdfasdf asdf asdf fasdfsadfasdf asdf dsf asdf asdfasdf', 'Lorenz & Sofia', 1),
-(5, 'Balett steg 1 (mån 18.00-19.30)', 'asdfakjsdf khdsf aslkdfl jskdjf asdöf jasödfj asdfjk f kajsdf ljasldjfakl sdfkjsdf kljsdf öjasdjflkj sklfjsdf sdlfj laskdjf lkjasdf', 'Aurica Muntoiu', 1),
-(6, 'Dominikansk bachata steg 1 (mån 19.30-20.30)', NULL, 'Lorenz & Sofia', 1),
-(7, 'Kubansk salsa steg 1 (ons 18.30-19.30)', NULL, 'Ali', 1),
-(8, 'Kubansk salsa steg 2 (ons 19.30-20.30)', NULL, 'Ali', 1);
+INSERT INTO `courses` (`id_course`, `name`, `schedule`, `teacher`, `category`, `price`, `status`) VALUES
+(1, 'Urban kiz steg 1', '(ons 18.30-19.30)', 'Lessly & Marie', 1, '980', 1),
+(2, 'Urban kiz steg 2', '(ons 19.30-20.30)', 'Lessly & Marie', 1, '980', 1),
+(3, 'Urban kiz steg 3', '(ons 20.30-21.30)', 'Lessly & Marie', 1, '980', 1),
+(4, 'Urban kiz steg 4', '(mån 20.30-21.30)', 'Lorenz & Sofia', 1, '980', 1),
+(5, 'Dominikansk bachata 1', '(mån 19.30-20.30)', 'Lorenz & Sofia', 1, '980', 1),
+(6, 'Dominikansk bachata 2', '(mån 19.30-20.30)', 'Lorenz & Sofia', 1, '980', 1),
+(7, 'Kubansk salsa 1', '(ons 18.30-19.30)', 'Ali', 1, '980', 1),
+(8, 'Kubansk salsa 2', '(ons 19.30-20.30)', 'Ali', 1, '980', 1),
+(9, 'Balett 1', '(mån 18.00-19.30)', 'Aurica', 1, '1290', 1),
+(10, 'Test course', '(mån 18.00-19.30)', 'Test teacher', 2, '1290', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `discount`
+-- Tabellstruktur `discount`
 --
 
 CREATE TABLE `discount` (
@@ -87,7 +138,7 @@ CREATE TABLE `discount` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `discount`
+-- Dumpning av Data i tabell `discount`
 --
 
 INSERT INTO `discount` (`id_discount`, `code`, `gift`, `percent`, `quanti`, `start_date`, `stop_date`) VALUES
@@ -96,7 +147,7 @@ INSERT INTO `discount` (`id_discount`, `code`, `gift`, `percent`, `quanti`, `sta
 -- --------------------------------------------------------
 
 --
--- Table structure for table `events`
+-- Tabellstruktur `events`
 --
 
 CREATE TABLE `events` (
@@ -112,7 +163,7 @@ CREATE TABLE `events` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `events`
+-- Dumpning av Data i tabell `events`
 --
 
 INSERT INTO `events` (`id_event`, `date`, `time`, `foto`, `name`, `description`, `event_date`, `link`, `status`) VALUES
@@ -125,7 +176,7 @@ INSERT INTO `events` (`id_event`, `date`, `time`, `foto`, `name`, `description`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `inscriptions`
+-- Tabellstruktur `inscriptions`
 --
 
 CREATE TABLE `inscriptions` (
@@ -140,41 +191,35 @@ CREATE TABLE `inscriptions` (
   `term` int(11) DEFAULT NULL,
   `term_start` date DEFAULT NULL,
   `term_stop` date DEFAULT NULL,
-  `package` int(11) DEFAULT NULL,
+  `package` varchar(255) DEFAULT NULL,
   `course_1` int(11) DEFAULT NULL,
   `course_2` int(11) DEFAULT NULL,
   `course_3` int(11) DEFAULT NULL,
   `course_4` int(11) DEFAULT NULL,
+  `course_s1` int(11) DEFAULT NULL,
   `promocode` varchar(255) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `done` int(11) DEFAULT '0',
-  `payment` int(11) DEFAULT NULL
+  `payment` int(11) DEFAULT NULL,
+  `total` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `inscriptions`
+-- Dumpning av Data i tabell `inscriptions`
 --
 
-INSERT INTO `inscriptions` (`id_insc`, `date`, `year`, `month`, `day`, `time`, `id_student`, `sex`, `term`, `term_start`, `term_stop`, `package`, `course_1`, `course_2`, `course_3`, `course_4`, `promocode`, `status`, `done`, `payment`) VALUES
-(15, '2019-12-12', '2019', '12', '12', '13:55:47', 40, NULL, 2, '2020-01-13', '2020-03-20', 1, 1, NULL, NULL, NULL, NULL, NULL, 0, 1),
-(16, '2019-12-13', '2019', '12', '13', '17:45:07', 41, NULL, 1, '2020-01-13', '2020-03-20', 5, NULL, NULL, NULL, NULL, NULL, 1, 0, 1),
-(20, '2019-12-20', '2019', '12', '20', '19:42:57', 45, NULL, 1, '2020-01-13', '2020-03-20', 5, NULL, NULL, NULL, NULL, NULL, 0, 1, 1),
-(21, '2019-12-30', '2019', '12', '30', '21:25:06', 46, NULL, 1, '2020-01-13', '2020-03-20', 5, NULL, NULL, NULL, NULL, NULL, 1, 1, 1),
-(22, '2019-12-31', '2019', '12', '30', '00:52:13', 47, NULL, 1, '2020-01-13', '2020-03-20', 4, 1, 2, 3, 6, NULL, 1, 1, 1),
-(28, '2020-01-03', '2020', '1', '3', '18:49:52', 46, NULL, 1, '2020-01-13', '2020-03-20', 5, NULL, NULL, NULL, NULL, NULL, 1, 0, 1),
-(30, '2020-01-08', '2020', '1', '8', '17:30:10', 52, NULL, 1, NULL, NULL, 3, 1, 2, 3, NULL, NULL, 1, 1, 1),
-(33, '2020-01-10', '2020', '1', '10', '11:34:07', 69, NULL, 1, NULL, NULL, 1, 3, NULL, NULL, NULL, NULL, 1, NULL, 1),
-(35, '2020-01-10', '2020', '1', '10', '11:57:19', 70, NULL, 1, NULL, NULL, 1, 6, NULL, NULL, NULL, NULL, 1, NULL, 1),
-(43, '2020-01-11', '2020', '1', '11', '01:37:12', 72, NULL, 1, '2020-01-13', '2020-03-20', 1, 6, NULL, NULL, NULL, NULL, 1, 1, 1),
-(44, '2020-01-13', '2020', '1', '13', '20:39:45', 73, NULL, 1, '2020-01-13', '2020-03-20', 2, 6, 7, NULL, NULL, NULL, 1, 0, 1),
-(45, '2020-01-16', '2020', '1', '16', '13:00:30', 76, 'Man', 1, '2020-01-13', '2020-03-20', 1, 3, NULL, NULL, NULL, NULL, 1, 1, 1),
-(46, '2020-01-16', '2020', '1', '16', '13:02:54', 77, 'Man', 1, '2020-01-13', '2020-03-20', 1, 3, NULL, NULL, NULL, NULL, 1, 1, 1),
-(47, '2020-01-16', '2020', '1', '16', '13:12:57', 78, 'Man', 1, '2020-01-13', '2020-03-20', 1, 2, NULL, NULL, NULL, NULL, 1, 1, 1);
+INSERT INTO `inscriptions` (`id_insc`, `date`, `year`, `month`, `day`, `time`, `id_student`, `sex`, `term`, `term_start`, `term_stop`, `package`, `course_1`, `course_2`, `course_3`, `course_4`, `course_s1`, `promocode`, `status`, `done`, `payment`, `total`) VALUES
+(162, '2020-02-10', '2020', '2', '10', '13:50:51', 103, NULL, 1, '2020-01-13', '2020-03-20', 'Packet VIP PLUS', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 1, 2848),
+(163, '2020-02-10', '2020', '2', '10', '18:50:45', 45, NULL, 1, '2020-01-13', '2020-03-20', 'Guld Packet', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 1, 2269.5),
+(174, '2020-02-18', '2020', '2', '18', '12:25:56', 107, 'Kvinna', 1, '2020-01-13', '2020-03-20', 'Silver Packet', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 1, 1602),
+(175, '2020-02-18', '2020', '2', '18', '12:50:45', 108, 'Kvinna', 1, '2020-01-13', '2020-03-20', 'Brons Packet', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 1, 890),
+(185, '2020-02-18', '2020', '2', '18', '14:32:30', 68, 'Kvinna', 1, '2020-01-13', '2020-03-20', 'Guld Packet', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 1, 2269.5),
+(187, '2020-03-03', '2020', '3', '03', '22:29:00', 76, 'Man', 1, '2020-01-13', '2020-03-20', 'VIP PLUS', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 1, 4034);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `package`
+-- Tabellstruktur `package`
 --
 
 CREATE TABLE `package` (
@@ -186,7 +231,7 @@ CREATE TABLE `package` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `package`
+-- Dumpning av Data i tabell `package`
 --
 
 INSERT INTO `package` (`id_package`, `package_name`, `description`, `price`, `status`) VALUES
@@ -199,7 +244,34 @@ INSERT INTO `package` (`id_package`, `package_name`, `description`, `price`, `st
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pages`
+-- Tabellstruktur `pack_discount`
+--
+
+CREATE TABLE `pack_discount` (
+  `id_p_discount` int(11) NOT NULL,
+  `package_conditions` text,
+  `percent` int(11) DEFAULT NULL,
+  `valor` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumpning av Data i tabell `pack_discount`
+--
+
+INSERT INTO `pack_discount` (`id_p_discount`, `package_conditions`, `percent`, `valor`) VALUES
+(1, '10% rabbat för 2 kurser', 10, 2),
+(2, '20% rabbat för 3 kurser', 20, 3),
+(3, '30% rabbat för 4 kurser', 30, 4),
+(4, '30% rabbat för 5 kurser', 30, 5),
+(5, '30% rabbat för 6 kurser', 30, 6),
+(6, '30% rabbat för 7 kurser', 30, 7),
+(7, '30% rabbat för 8 kurser', 30, 8),
+(8, '30% rabbat för 9 kurser', 30, 9);
+
+-- --------------------------------------------------------
+
+--
+-- Tabellstruktur `pages`
 --
 
 CREATE TABLE `pages` (
@@ -214,14 +286,14 @@ CREATE TABLE `pages` (
   `pbottom` int(11) DEFAULT NULL,
   `pleft` int(11) DEFAULT NULL,
   `padre` int(11) DEFAULT NULL,
-  `padre 2` int(11) DEFAULT NULL
+  `padre2` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `pages`
+-- Dumpning av Data i tabell `pages`
 --
 
-INSERT INTO `pages` (`id_page`, `name`, `level`, `foto`, `background`, `color`, `ptop`, `pright`, `pbottom`, `pleft`, `padre`, `padre 2`) VALUES
+INSERT INTO `pages` (`id_page`, `name`, `level`, `foto`, `background`, `color`, `ptop`, `pright`, `pbottom`, `pleft`, `padre`, `padre2`) VALUES
 (1, 'vlog', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
 (2, 'om oss', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
 (3, 'tjänster', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
@@ -242,7 +314,7 @@ INSERT INTO `pages` (`id_page`, `name`, `level`, `foto`, `background`, `color`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `publications`
+-- Tabellstruktur `publications`
 --
 
 CREATE TABLE `publications` (
@@ -262,7 +334,7 @@ CREATE TABLE `publications` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `publications`
+-- Dumpning av Data i tabell `publications`
 --
 
 INSERT INTO `publications` (`id_publications`, `date`, `year`, `month`, `day`, `time`, `title`, `content`, `foto`, `settings`, `site`, `position`, `status`) VALUES
@@ -274,7 +346,7 @@ INSERT INTO `publications` (`id_publications`, `date`, `year`, `month`, `day`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `schedule`
+-- Tabellstruktur `schedule`
 --
 
 CREATE TABLE `schedule` (
@@ -291,7 +363,7 @@ CREATE TABLE `schedule` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `schedule`
+-- Dumpning av Data i tabell `schedule`
 --
 
 INSERT INTO `schedule` (`id_schedule`, `via`, `name`, `level`, `teacher`, `duration`, `day`, `hour`, `sal`, `status`) VALUES
@@ -325,7 +397,7 @@ INSERT INTO `schedule` (`id_schedule`, `via`, `name`, `level`, `teacher`, `durat
 -- --------------------------------------------------------
 
 --
--- Table structure for table `site_info`
+-- Tabellstruktur `site_info`
 --
 
 CREATE TABLE `site_info` (
@@ -339,7 +411,7 @@ CREATE TABLE `site_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `site_info`
+-- Dumpning av Data i tabell `site_info`
 --
 
 INSERT INTO `site_info` (`id_site`, `name`, `adress`, `post`, `city`, `email`, `logo`) VALUES
@@ -348,7 +420,7 @@ INSERT INTO `site_info` (`id_site`, `name`, `adress`, `post`, `city`, `email`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `students`
+-- Tabellstruktur `students`
 --
 
 CREATE TABLE `students` (
@@ -363,46 +435,56 @@ CREATE TABLE `students` (
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `personal_number` varchar(255) DEFAULT NULL,
-  `telephone` int(11) DEFAULT NULL,
+  `telephone` varchar(255) DEFAULT NULL,
   `adress` varchar(255) DEFAULT NULL,
   `post` int(11) DEFAULT NULL,
   `city` varchar(255) DEFAULT NULL,
   `sex` varchar(255) DEFAULT NULL,
   `agree` varchar(255) DEFAULT NULL,
   `package` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
   `rank` int(11) DEFAULT NULL,
-  `done` int(11) DEFAULT NULL,
   `via` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `students`
+-- Dumpning av Data i tabell `students`
 --
 
-INSERT INTO `students` (`id_student`, `date`, `year`, `month`, `day`, `time`, `name`, `surname`, `email`, `password`, `personal_number`, `telephone`, `adress`, `post`, `city`, `sex`, `agree`, `package`, `rank`, `done`, `via`) VALUES
-(40, '2019-12-12 13:55:00', '2019', '12', '12', '13:55:00', 'Nicole', 'Hernandez Råsberg', 'nicole.rasberg@gmail.com', 'newstudent246', '9108194409', 760208190, 'Ånäsvägen 19B', 41668, 'Göteborg', 'Kvinna', 'yes', '1', NULL, NULL, NULL),
-(41, '2019-12-13 17:44:55', '2019', '12', '13', '17:44:55', 'Tussa', 'Bygdén', 'tussabygden@gmail.com', 'newstudent246', '9001100909', 768149480, 'Briljantgatan 18', 42149, 'Västra Frölunda', 'Kvinna', 'yes', '5', NULL, NULL, NULL),
-(45, '2019-12-20 19:42:04', '2019', '12', '20', '19:42:04', 'Carlos', 'Corleones', 'carlos@gmail.com', 'newstudent246', '8501305611', 763199455, 'Hörte 11', 41516, 'Oslo', 'Man', 'yes', '5', NULL, NULL, NULL),
-(46, '2019-12-30 21:24:58', '2019', '12', '30', '21:24:58', 'Ramon', 'Ramirez', 'ramon@gmail.com', 'newstudent246', '8501305611', 763199411, 'Hörte 22', 41516, 'Oslo', 'Man', 'yes', '5', NULL, NULL, NULL),
-(47, '2019-12-31 00:52:00', '2019', '12', '30', '00:52:00', 'Sofia', 'Franzen', 'sofiafranzen@gmail.com', 'newstudent246', '8501305699', 763199420, 'Hörte 12', 41516, 'Oslo', 'Kvinna', 'yes', '4', NULL, NULL, NULL),
-(51, '2020-01-03 18:49:50', '2020', '1', '3', '18:49:50', 'Ramon', 'Ramirez', 'ramon@gmail.com', 'newstudent246', '8501305611', 763199411, 'Hörte 22', 41516, 'Oslo', 'Man', 'yes', '5', NULL, NULL, NULL),
-(52, '2020-01-08 17:27:08', '2020', '1', '8', '17:27:08', 'Rosario', 'Bustamante', 'rosario@gmail.com', 'newstudent246', '8501305699', 763199499, 'Siriusgatan 102', 41522, 'Göteborg', 'Kvinna', NULL, '3', NULL, NULL, 5),
-(66, '2020-01-08 19:04:21', '2020', '1', '8', '19:04:21', 'Carlos', 'Corleones', 'carlos@gmail.com', 'newstudent246', '8501305620', 763199455, 'Hörte 11', 41516, 'Oslo', 'Man', NULL, '1', NULL, NULL, 5),
-(67, '2020-01-08 19:05:38', '2020', '1', '8', '19:05:38', 'Carlos', 'Corleones', 'carlos@gmail.com', 'newstudent246', '8501305620', 763199455, 'Hörte 11', 41516, 'Oslo', 'Man', NULL, '1', NULL, NULL, 5),
-(68, '2020-01-08 19:05:46', '2020', '1', '8', '19:05:46', 'Marita Jenssen', 'Jenssen', 'marita@gmail.com', 'newstudent246', '8501305611', 763199411, 'Hörte 11', 41516, 'Oslo', 'Man', NULL, '1', NULL, NULL, 5),
-(69, '2020-01-10 11:30:30', '2020', '1', '10', '11:30:30', 'Jose', 'Lopez', 'Joselopez@gmail.com', 'newstudent246', '8501305699', 763199499, 'Hörte 12', 41516, 'Oslo', 'Man', NULL, '1', NULL, NULL, 5),
-(70, '2020-01-10 11:57:08', '2020', '1', '10', '11:57:08', 'Fernando', 'Fonseca', 'Fernando@gmail.com', 'newstudent246', '8409034157', 763199420, 'Hörte 11', 41516, 'Oslo', 'Man', NULL, '1', NULL, NULL, 5),
-(72, '2020-01-11 01:35:56', '2020', '1', '11', '01:35:56', 'Rangel', 'Fortunato', 'rangel@gmail.com', 'newstudent246', '8501305611', 763199499, 'Siriusgatan 102', 41522, 'Göteborg', 'Man', NULL, '1', NULL, NULL, 5),
-(73, '2020-01-13 20:39:02', '2020', '1', '13', '20:39:02', 'Adrian', 'Hedström', 'adrian.hedstrom@hotmail.com', 'newstudent246', '8306281513', 737662430, 'Lilla Tunnlandsgatan 3', 41477, 'Göteborg', 'Man', 'yes', '2', NULL, NULL, 1000),
-(76, '2020-01-16 13:00:27', '2020', '1', '16', '13:00:27', 'Bernardo', 'Benet', 'bernando@gmail.com', 'newstudent246', '8501305699', 763199411, 'Hörte 11', 41516, 'Oslo', 'Man', NULL, '1', NULL, NULL, 5),
-(77, '2020-01-16 13:02:50', '2020', '1', '16', '13:02:50', 'Santiago', 'Matias', 'Santiago@gmail.com', 'newstudent246', '8501305611', 737662430, 'Lilla Tunnlandsgatan 3', 41477, 'Göteborg', 'Man', NULL, '1', NULL, NULL, 5),
-(78, '2020-01-16 13:12:51', '2020', '1', '16', '13:12:51', 'Vinsent', 'Carmona', 'vinsent@gmail.com', 'newstudent246', '8501305611', 737662430, 'Lilla Tunnlandsgatan 3', 41477, 'Göteborg', 'Man', NULL, '1', NULL, NULL, 5),
-(79, '2020-01-16 13:16:57', '2020', '1', '16', '13:16:57', 'Jessica', 'Pereira', 'jessica@gmail.com', 'newstudent246', '8501305620', 763199411, 'Hörte 11', 41516, 'Oslo', 'Kvinna', NULL, '1', NULL, NULL, 5);
+INSERT INTO `students` (`id_student`, `date`, `year`, `month`, `day`, `time`, `name`, `surname`, `email`, `password`, `personal_number`, `telephone`, `adress`, `post`, `city`, `sex`, `agree`, `package`, `status`, `rank`, `via`) VALUES
+(40, '2019-12-12 13:55:00', '2019', '12', '12', '13:55:00', 'Nicole', 'Hernandez Råsberg', 'nicole.rasberg@gmail.com', 'newstudent246', '9108194409', '0760208190', 'Ånäsvägen 19B', 41668, 'Göteborg', 'Kvinna', 'yes', '1', 'Active', NULL, NULL),
+(41, '2019-12-13 17:44:55', '2019', '12', '13', '17:44:55', 'Tussa', 'Bygdén', 'tussabygden@gmail.com', 'newstudent246', '9001100909', '0768149480', 'Briljantgatan 18', 42149, 'Västra Frölunda', 'Kvinna', 'yes', '5', 'Active', NULL, NULL),
+(45, '2019-12-20 19:42:04', '2019', '12', '20', '19:42:04', 'Carlos', 'Corleones', 'carlos@gmail.com', 'newstudent246', '8501305611', '0763199455', 'Hörte 11', 41516, 'Oslo', 'Man', 'yes', '5', 'Active', NULL, NULL),
+(46, '2019-12-30 21:24:58', '2019', '12', '30', '21:24:58', 'Ramon', 'Ramirez', 'ramon@gmail.com', 'newstudent246', '8501305611', '0763199411', 'Hörte 22', 41516, 'Oslo', 'Man', 'yes', '5', 'Active', NULL, NULL),
+(47, '2019-12-31 00:52:00', '2019', '12', '30', '00:52:00', 'Sofia', 'Franzen', 'sofiafranzen@gmail.com', 'newstudent246', '8501305699', '0763199420', 'Hörte 12', 41516, 'Oslo', 'Kvinna', 'yes', '4', 'Active', NULL, NULL),
+(51, '2020-01-03 18:49:50', '2020', '1', '3', '18:49:50', 'Ramon', 'Ramirez', 'ramon@gmail.com', 'newstudent246', '8501305611', '0763199411', 'Hörte 22', 41516, 'Oslo', 'Man', 'yes', '5', 'Active', NULL, NULL),
+(52, '2020-01-08 17:27:08', '2020', '1', '8', '17:27:08', 'Rosario', 'Bustamante', 'rosario@gmail.com', 'newstudent246', '8501305699', '0763199499', 'Siriusgatan 102', 41522, 'Göteborg', 'Kvinna', NULL, '3', 'Active', NULL, 5),
+(66, '2020-01-08 19:04:21', '2020', '1', '8', '19:04:21', 'Carlos', 'Corleones', 'carlos@gmail.com', 'newstudent246', '8501305620', '0763199455', 'Hörte 11', 41516, 'Oslo', 'Man', NULL, '1', 'Active', NULL, 5),
+(67, '2020-01-08 19:05:38', '2020', '1', '8', '19:05:38', 'Carlos', 'Corleones', 'carlos@gmail.com', 'newstudent246', '8501305620', '0763199455', 'Hörte 11', 41516, 'Oslo', 'Man', NULL, '1', 'Active', NULL, 5),
+(68, '2020-01-08 19:05:46', '2020', '1', '8', '19:05:46', 'Marita', 'Jenssen', 'marita@gmail.com', 'newstudent246', '8501305611', '0763199411', 'Hörte 11', 41516, 'Oslo', 'Kvinna', NULL, '1', 'Active', NULL, 5),
+(69, '2020-01-10 11:30:30', '2020', '1', '10', '11:30:30', 'Jose', 'Lopez', 'Joselopez@gmail.com', 'newstudent246', '8501305699', '0763199499', 'Hörte 12', 41516, 'Oslo', 'Man', NULL, '1', 'Active', NULL, 5),
+(70, '2020-01-10 11:57:08', '2020', '1', '10', '11:57:08', 'Fernando', 'Fonseca', 'Fernando@gmail.com', 'newstudent246', '8409034157', '0763199420', 'Hörte 11', 41516, 'Oslo', 'Man', NULL, '1', 'Active', NULL, 5),
+(72, '2020-01-11 01:35:56', '2020', '1', '11', '01:35:56', 'Rangel', 'Fortunato', 'rangel@gmail.com', 'newstudent246', '8501305611', '0763199499', 'Siriusgatan 102', 41522, 'Göteborg', 'Man', NULL, '1', 'Active', NULL, 5),
+(73, '2020-01-13 20:39:02', '2020', '1', '13', '20:39:02', 'Adrian', 'Hedström', 'adrian.hedstrom@hotmail.com', 'newstudent246', '8306281513', '0737662430', 'Lilla Tunnlandsgatan 3', 41477, 'Göteborg', 'Man', 'yes', '2', 'Active', NULL, 1000),
+(76, '2020-01-16 13:00:27', '2020', '1', '16', '13:00:27', 'Bernardo', 'Benet', 'bernando@gmail.com', 'newstudent246', '8501305699', '0763199411', 'Hörte 11', 41516, 'Oslo', 'Man', NULL, '1', 'Active', NULL, 5),
+(77, '2020-01-16 13:02:50', '2020', '1', '16', '13:02:50', 'Santiago', 'Matias', 'Santiago@gmail.com', 'newstudent246', '8501305611', '0737662430', 'Lilla Tunnlandsgatan 3', 41477, 'Göteborg', 'Man', NULL, '1', 'Active', NULL, 5),
+(78, '2020-01-16 13:12:51', '2020', '1', '16', '13:12:51', 'Vinsent', 'Carmona', 'vinsent@gmail.com', 'newstudent246', '8501305611', '0737662430', 'Lilla Tunnlandsgatan 3', 41477, 'Göteborg', 'Man', NULL, '1', 'Active', NULL, 5),
+(79, '2020-01-16 13:16:57', '2020', '1', '16', '13:16:57', 'Jessica', 'Pereira', 'jessica@gmail.com', 'newstudent246', '8501305620', '0763199411', 'Hörte 11', 41516, 'Oslo', 'Kvinna', NULL, '1', 'Active', NULL, 5),
+(80, '2020-01-16 18:04:50', '2020', '1', '16', '18:04:50', 'Sarah', 'Sabine', 'Sarah@gmail.com', 'newstudent246', '8501305622', '0763199499', 'Siriusgatan 102', 41522, 'Göteborg', 'Kvinna', NULL, '5', 'Active', NULL, 5),
+(81, '2020-01-16 18:17:21', '2020', '1', '16', '18:17:21', 'Angela', 'Garcia', 'angela@gmail.com', 'newstudent246', '8501305699', '0763199411', 'Hörte 11', 41516, 'Oslo', 'Kvinna', 'yes', '5', 'Active', NULL, 1000),
+(83, '2020-01-17 16:54:08', '2020', '1', '17', '16:54:08', 'Angelina', 'Prado', 'angelina@gmail.com', 'newstudent246', '8501305611', '0763199411', 'Hörte 11', 41516, 'Oslo', 'Kvinna', 'yes', '4', 'Active', NULL, 1000),
+(84, '2020-01-18 12:33:55', '2020', '1', '18', '12:33:55', 'Marita ', 'Jessen', 'marita@gmail.com', 'newstudent246', '8501305611', '0763199411', 'Hörte 11', 41516, 'Oslo', 'Man', 'yes', '1', 'Active', NULL, 1000),
+(85, '2020-01-20 00:09:21', '2020', '1', '19', '00:09:21', 'Ruben', 'Gonzalez', 'Ruben@gmail.com', 'newstudent246', '8409034100', '763199400', 'Hörte 19', 41516, 'Oslo', 'None', 'yes', '2', 'Active', NULL, 1000),
+(96, '2020-01-31 18:51:15', '2020', '1', '31', '18:51:15', 'Carlos', 'Corleones', 'carlos2@gmail.com', 'newstudent246', '8501305699', '763199455', 'Hörte 11', 41516, 'Oslo', 'Man', 'yes', NULL, 'Active', NULL, 1000),
+(98, '2020-01-31 19:04:10', '2020', '1', '31', '19:04:10', 'Sofia', 'Franzen', 'sofiafranzen2@gmail.com', 'newstudent246', '8409034158', '763199420', 'Hörte 11', 41516, 'Oslo', 'Kvinna', 'yes', NULL, 'Active', NULL, 1000),
+(103, '2020-02-09 16:13:42', '2020', '2', '9', '16:13:42', 'Lorenzo', 'Knight', 'joellorenzo.k@gmail.com', 'newstudent246', '8409034157', '763199480', 'Siriusgatan 102', 41522, 'Göteborg', 'Man', 'yes', NULL, 'Active', NULL, 1000),
+(107, '2020-02-18 12:25:48', '2020', '2', '18', '12:25:48', 'Carolina', 'Bustamante', 'carolina@gmail.com', 'newstudent246', '8501305699', '763199499', 'Siriusgatan 106', 41522, 'Göteborg', 'Kvinna', NULL, NULL, 'Active', NULL, 5),
+(108, '2020-02-18 12:50:25', '2020', '2', '18', '12:50:25', 'Rosario', 'Bustamante', 'rosario@gmail.com', 'newstudent246', '8501305611', '763199499', 'Siriusgatan 102', 41522, 'Göteborg', 'Kvinna', NULL, NULL, 'Active', NULL, 5);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `term`
+-- Tabellstruktur `term`
 --
 
 CREATE TABLE `term` (
@@ -410,23 +492,25 @@ CREATE TABLE `term` (
   `date` date DEFAULT NULL,
   `type` varchar(255) DEFAULT NULL,
   `term_name` varchar(255) DEFAULT NULL,
+  `start_week` varchar(255) DEFAULT NULL,
   `term_start` date DEFAULT NULL,
   `term_stop` date DEFAULT NULL,
   `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `term`
+-- Dumpning av Data i tabell `term`
 --
 
-INSERT INTO `term` (`id_term`, `date`, `type`, `term_name`, `term_start`, `term_stop`, `status`) VALUES
-(1, '2019-09-05', '1', 'Var Termin', '2020-01-13', '2020-03-20', 1),
-(2, '2019-09-05', '1', 'Vinter Termin', NULL, NULL, 0);
+INSERT INTO `term` (`id_term`, `date`, `type`, `term_name`, `start_week`, `term_start`, `term_stop`, `status`) VALUES
+(1, '2019-09-05', '1', 'Var Termin', 'Vecka 3', '2020-01-13', '2020-03-20', 0),
+(3, '2020-02-26', NULL, 'Sommar Termin', 'Vecka 14', '2020-03-30', '2020-06-01', 1),
+(4, '2020-02-27', NULL, NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Tabellstruktur `users`
 --
 
 CREATE TABLE `users` (
@@ -441,7 +525,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `users`
+-- Dumpning av Data i tabell `users`
 --
 
 INSERT INTO `users` (`id_user`, `name`, `surname`, `mail`, `password`, `telefon`, `rank`, `status`) VALUES
@@ -453,165 +537,189 @@ INSERT INTO `users` (`id_user`, `name`, `surname`, `mail`, `password`, `telefon`
 (8, 'Shael', 'Knight', 'shael@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 763199480, 2, 1);
 
 --
--- Indexes for dumped tables
+-- Index för dumpade tabeller
 --
 
 --
--- Indexes for table `banners`
+-- Index för tabell `banners`
 --
 ALTER TABLE `banners`
   ADD PRIMARY KEY (`id_banner`);
 
 --
--- Indexes for table `courses`
+-- Index för tabell `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`id_counter`);
+
+--
+-- Index för tabell `courses`
 --
 ALTER TABLE `courses`
   ADD PRIMARY KEY (`id_course`);
 
 --
--- Indexes for table `discount`
+-- Index för tabell `discount`
 --
 ALTER TABLE `discount`
   ADD PRIMARY KEY (`id_discount`);
 
 --
--- Indexes for table `events`
+-- Index för tabell `events`
 --
 ALTER TABLE `events`
   ADD PRIMARY KEY (`id_event`);
 
 --
--- Indexes for table `inscriptions`
+-- Index för tabell `inscriptions`
 --
 ALTER TABLE `inscriptions`
   ADD PRIMARY KEY (`id_insc`);
 
 --
--- Indexes for table `package`
+-- Index för tabell `package`
 --
 ALTER TABLE `package`
   ADD PRIMARY KEY (`id_package`);
 
 --
--- Indexes for table `pages`
+-- Index för tabell `pack_discount`
+--
+ALTER TABLE `pack_discount`
+  ADD PRIMARY KEY (`id_p_discount`);
+
+--
+-- Index för tabell `pages`
 --
 ALTER TABLE `pages`
   ADD PRIMARY KEY (`id_page`);
 
 --
--- Indexes for table `publications`
+-- Index för tabell `publications`
 --
 ALTER TABLE `publications`
   ADD PRIMARY KEY (`id_publications`);
 
 --
--- Indexes for table `schedule`
+-- Index för tabell `schedule`
 --
 ALTER TABLE `schedule`
   ADD PRIMARY KEY (`id_schedule`);
 
 --
--- Indexes for table `site_info`
+-- Index för tabell `site_info`
 --
 ALTER TABLE `site_info`
   ADD PRIMARY KEY (`id_site`);
 
 --
--- Indexes for table `students`
+-- Index för tabell `students`
 --
 ALTER TABLE `students`
   ADD PRIMARY KEY (`id_student`);
 
 --
--- Indexes for table `term`
+-- Index för tabell `term`
 --
 ALTER TABLE `term`
   ADD PRIMARY KEY (`id_term`);
 
 --
--- Indexes for table `users`
+-- Index för tabell `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT för dumpade tabeller
 --
 
 --
--- AUTO_INCREMENT for table `banners`
+-- AUTO_INCREMENT för tabell `banners`
 --
 ALTER TABLE `banners`
   MODIFY `id_banner` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `courses`
+-- AUTO_INCREMENT för tabell `cart`
 --
-ALTER TABLE `courses`
-  MODIFY `id_course` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+ALTER TABLE `cart`
+  MODIFY `id_counter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=655;
 
 --
--- AUTO_INCREMENT for table `discount`
+-- AUTO_INCREMENT för tabell `courses`
+--
+ALTER TABLE `courses`
+  MODIFY `id_course` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT för tabell `discount`
 --
 ALTER TABLE `discount`
   MODIFY `id_discount` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `events`
+-- AUTO_INCREMENT för tabell `events`
 --
 ALTER TABLE `events`
   MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `inscriptions`
+-- AUTO_INCREMENT för tabell `inscriptions`
 --
 ALTER TABLE `inscriptions`
-  MODIFY `id_insc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id_insc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=189;
 
 --
--- AUTO_INCREMENT for table `package`
+-- AUTO_INCREMENT för tabell `package`
 --
 ALTER TABLE `package`
   MODIFY `id_package` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `pages`
+-- AUTO_INCREMENT för tabell `pack_discount`
+--
+ALTER TABLE `pack_discount`
+  MODIFY `id_p_discount` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT för tabell `pages`
 --
 ALTER TABLE `pages`
   MODIFY `id_page` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- AUTO_INCREMENT for table `publications`
+-- AUTO_INCREMENT för tabell `publications`
 --
 ALTER TABLE `publications`
   MODIFY `id_publications` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `schedule`
+-- AUTO_INCREMENT för tabell `schedule`
 --
 ALTER TABLE `schedule`
   MODIFY `id_schedule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
--- AUTO_INCREMENT for table `site_info`
+-- AUTO_INCREMENT för tabell `site_info`
 --
 ALTER TABLE `site_info`
   MODIFY `id_site` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `students`
+-- AUTO_INCREMENT för tabell `students`
 --
 ALTER TABLE `students`
-  MODIFY `id_student` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id_student` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
--- AUTO_INCREMENT for table `term`
+-- AUTO_INCREMENT för tabell `term`
 --
 ALTER TABLE `term`
-  MODIFY `id_term` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_term` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT för tabell `users`
 --
 ALTER TABLE `users`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
