@@ -101,10 +101,10 @@
                 <div class="arternative">
                     <button class="artbtn">o o o</button>
                     <div class="arternative-content">
-                        <a href="students.php?see=<?php echo $row_DatosConsulta['id_student']; ?>" class="alt_button">See more</a>
-                        <a href="students.php?editi=<?php echo $row_DatosConsulta['id_student']; ?>" class="alt_button">Edit info</a>
-                        <a href="students.php?editc=<?php echo $row_DatosConsulta['id_student']; ?>" class="alt_button">Edit course</a>
-                        <a href="student_delete.php?id=<?php echo $row_DatosConsulta['id_insc']; ?>" class="alt_button">Delete</a>
+                        <a href="students_old.php?see=<?php echo $row_DatosConsulta['id_student']; ?>" class="alt_button">See more</a>
+                        <a href="students_old.php?editi=<?php echo $row_DatosConsulta['id_student']; ?>" class="alt_button">Edit info</a>
+                        <a href="students_old.php?editc=<?php echo $row_DatosConsulta['id_student']; ?>" class="alt_button">Edit course</a>
+                        <a href="student_old_delete.php?id=<?php echo $row_DatosConsulta['id_insc']; ?>" class="alt_button">Delete</a>
                     </div>
                 </div>
                 </td>

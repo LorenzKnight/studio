@@ -12,7 +12,7 @@ $totalRows_DatosCourse = mysqli_num_rows($DatosCourse);
 $query_DatosCourse2 = sprintf("SELECT * FROM courses WHERE category = 2 AND status = 1 ORDER BY id_course ASC"); 
 $DatosCourse2 = mysqli_query($con, $query_DatosCourse2) or die(mysqli_error($con));
 $row_DatosCourse2 = mysqli_fetch_assoc($DatosCourse2);
-$totalRows_DatosCourse2 = mysqli_num_rows($DatosCourse2);
+$totalRows_DatosCourse2 = mysqli_num_rows($DatosCourse2); 
 ?>
 <!-- /////////////////////////////////// Final Consulta para optener el lista de cursos que se muestran en el formulario con categoria 1/////////////////////////////////////////// -->
 <!-- /////////////////////////////////// Consulta para optener el porsiento de rebajas que se muestran en el formulario/////////////////////////////////////////// -->

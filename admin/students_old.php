@@ -1,10 +1,6 @@
 <?php require_once('../connections/conexion.php');?>
 <?php require_once('inc/seguridad.php');?>
 <?php
-$variable_Consulta = "0";
-if (isset($VARIABLE)) {
-  $variable_Consulta = $VARIABLE;
-}
 $query_DatosTerm = sprintf("SELECT * FROM term WHERE status = 1 ORDER BY id_term ASC");
 $DatosTerm = mysqli_query($con, $query_DatosTerm) or die(mysqli_error($con));
 $row_DatosTerm = mysqli_fetch_assoc($DatosTerm);
@@ -15,13 +11,13 @@ $TermAct = $row_DatosTerm['id_term'];
 <?php
 if ((isset($_GET["MM_search"])) && ($_GET["MM_search"]=="formsearch"))
 {   
-     $query_DatosConsulta = sprintf("SELECT * FROM inscriptions WHERE id_student LIKE %s AND id_student LIKE %s AND term = $TermAct ORDER BY id_insc ASC",
+     $query_DatosConsulta = sprintf("SELECT * FROM inscriptions WHERE id_student LIKE %s AND id_student LIKE %s AND term = 1 ORDER BY id_insc ASC",
                               GetSQLValueString("%".ObtenerNombreParaBuscar($_GET["search"])."%", "text"),
                               GetSQLValueString("%".ObtenerApellidoParaBuscar($_GET["search"])."%", "text"));
 }
 else if ((isset($_GET["MM_search"])) && ($_GET["MM_search"]=="formfilter"))
 {   
-     $query_DatosConsulta = sprintf("SELECT * FROM inscriptions WHERE course_1 LIKE %s OR course_2 LIKE %s OR course_3 LIKE %s OR course_4 LIKE %s OR course_s1 LIKE %s AND term = $TermAct ORDER BY id_insc ASC",
+     $query_DatosConsulta = sprintf("SELECT * FROM inscriptions WHERE course_1 LIKE %s OR course_2 LIKE %s OR course_3 LIKE %s OR course_4 LIKE %s OR course_s1 LIKE %s AND term = 1 ORDER BY id_insc ASC",
                               GetSQLValueString("%".$_GET["course"]."%", "text"),
                               GetSQLValueString("%".$_GET["course"]."%", "text"),
                               GetSQLValueString("%".$_GET["course"]."%", "text"),
@@ -30,7 +26,7 @@ else if ((isset($_GET["MM_search"])) && ($_GET["MM_search"]=="formfilter"))
 }
 else
 {
- $query_DatosConsulta = sprintf("SELECT * FROM inscriptions WHERE term = $TermAct ORDER BY id_insc");
+ $query_DatosConsulta = sprintf("SELECT * FROM inscriptions WHERE term = 1 ORDER BY id_insc");
 }
  $DatosConsulta = mysqli_query($con, $query_DatosConsulta) or die(mysqli_error($con));
  $row_DatosConsulta = mysqli_fetch_assoc($DatosConsulta);
@@ -100,7 +96,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequest")) {
   $Result1 = mysqli_query($con,  $insertSQL) or die(mysqli_error($con));
   
   
-  $insertGoTo1 = "students.php?newcompl=1";
+  $insertGoTo1 = "students_old.php?newcompl=1";
   if (isset($_SERVER['QUERY_STRING'])) {
     $insertGoTo1 .= (strpos($insertGoTo1, '?')) ? "&" : "?";
     $insertGoTo1 .= $_SERVER['QUERY_STRING'];
@@ -147,7 +143,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formcompl")) {
   $Result1 = mysqli_query($con,  $insertSQL) or die(mysqli_error($con));
   
   
-  $insertGoTo = "students.php";
+  $insertGoTo = "students_old.php";
   if (isset($_SERVER['QUERY_STRING'])) {
     $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
     $insertGoTo .= $_SERVER['QUERY_STRING'];
@@ -185,7 +181,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formediti")) {
 
 $Result1 = mysqli_query($con, $updateSQL) or die(mysqli_error($con));
 
-$updateGoTo = "students.php";
+$updateGoTo = "students_old.php";
 if (isset($_SERVER['QUERY_STRING'])) {
     $updateGoTo .= (strpos($updateGoTo, '?')) ? "&" : "?";
     $updateGoTo .= $_SERVER['QUERY_STRING'];
@@ -247,7 +243,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formeditc")) {
                           GetSQLValueString($_POST["status"], "int"),
                           GetSQLValueString($_POST["id_student"], "int"));
 $Result1 = mysqli_query($con, $updateSQL) or die(mysqli_error($con));
-$updateGoTo = "students.php";
+$updateGoTo = "students_old.php";
 if (isset($_SERVER['QUERY_STRING'])) {
 $updateGoTo .= (strpos($updateGoTo, '?')) ? "&" : "?";
 $updateGoTo .= $_SERVER['QUERY_STRING'];

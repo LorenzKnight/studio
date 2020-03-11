@@ -1,10 +1,6 @@
 <?php require_once('../connections/conexion.php');?>
 <?php require_once('inc/seguridad.php');?>
 <?php
-$variable_Consulta = "0";
-if (isset($VARIABLE)) {
-  $variable_Consulta = $VARIABLE;
-}
 $query_DatosTerm = sprintf("SELECT * FROM term WHERE status = 1 ORDER BY id_term ASC");
 $DatosTerm = mysqli_query($con, $query_DatosTerm) or die(mysqli_error($con));
 $row_DatosTerm = mysqli_fetch_assoc($DatosTerm);
@@ -34,10 +30,16 @@ else
 ?>
 <!--/////////////////////////////////////////////////BACK-END INSERT/////////////////////////////////////////////////////////-->
 <?php
-$query_DatosCourse = sprintf("SELECT * FROM courses WHERE status = 1 ORDER BY id_course ASC"); 
+$query_DatosCourse = sprintf("SELECT * FROM courses WHERE category = 1 AND status = 1 ORDER BY id_course ASC"); 
 $DatosCourse = mysqli_query($con, $query_DatosCourse) or die(mysqli_error($con));
 $row_DatosCourse = mysqli_fetch_assoc($DatosCourse);
 $totalRows_DatosCourse = mysqli_num_rows($DatosCourse);
+?>
+<?php
+$query_DatosCourse2 = sprintf("SELECT * FROM courses WHERE category = 2 AND status = 1 ORDER BY id_course ASC"); 
+$DatosCourse2 = mysqli_query($con, $query_DatosCourse2) or die(mysqli_error($con));
+$row_DatosCourse2 = mysqli_fetch_assoc($DatosCourse2);
+$totalRows_DatosCourse2 = mysqli_num_rows($DatosCourse2);
 ?>
 <?php
 $editFormAction = $_SERVER['PHP_SELF'];
@@ -46,6 +48,10 @@ if (isset($_SERVER['QUERY_STRING'])) {
 }
 
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequest")) {
+
+  if (comprobaremailestudiante($_POST["email"])) 
+  {
+    
   $year = date("Y");
   $month = date("m");
   $day = date("d");
@@ -62,7 +68,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequest")) {
                         GetSQLValueString($_POST["city"], "text"),
                         GetSQLValueString($_POST["sex"], "text"),
                         GetSQLValueString($_POST["agree"], "text"),
-                        GetSQLValueString($_POST["status"], "int"),
+                        GetSQLValueString($_POST["status"], "text"),
                         GetSQLValueString($_POST["via"], "int"));
 
   
@@ -76,7 +82,22 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequest")) {
   }
   header(sprintf("Location: %s", $insertGoTo1));
 }
+
+else {
+
+  $query_DatosIdentidad = sprintf("SELECT * FROM students WHERE email=%s ORDER BY id_student DESC",
+                              GetSQLValueString($_POST["email"], "text")); 
+  $DatosIdentidad = mysqli_query($con, $query_DatosIdentidad) or die(mysqli_error($con));
+  $row_DatosIdentidad = mysqli_fetch_assoc($DatosIdentidad);
+  $totalRows_DatosIdentidad = mysqli_num_rows($DatosIdentidad);
+  
+  $StEmail = $row_DatosIdentidad["id_student"];
+  $insertGoTo1 = "students.php?id=$StEmail";
+  header(sprintf("Location: %s", $insertGoTo1));
+ }
+}
 ?>
+
 <?php
  $query_DatosInsc = sprintf("SELECT * FROM students WHERE via=%s ORDER BY id_student DESC",
                             GetSQLValueString($_SESSION['std_UserId'], "int")); 
@@ -85,12 +106,28 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequest")) {
  $totalRows_DatosInsc = mysqli_num_rows($DatosInsc);
 ?>
 <?php
-$query_DatosCart2 = sprintf("SELECT * FROM cart WHERE id_student=%s AND transaction_made=0 ORDER BY id_counter ASC",
+$query_DatosCart = sprintf("SELECT * FROM cart WHERE id_student=%s AND course_category = 1 AND transaction_made = 0 ORDER BY id_counter ASC",
+                            GetSQLValueString($row_DatosInsc["id_student"], "int")); 
+$DatosCart = mysqli_query($con, $query_DatosCart) or die(mysqli_error($con));
+$row_DatosCart = mysqli_fetch_assoc($DatosCart);
+$totalRows_DatosCart = mysqli_num_rows($DatosCart);
+?>
+<?php
+$query_DatosCart2 = sprintf("SELECT * FROM cart WHERE id_student=%s AND course_category = 2 AND transaction_made = 0 ORDER BY id_counter ASC",
                             GetSQLValueString($row_DatosInsc["id_student"], "int")); 
 $DatosCart2 = mysqli_query($con, $query_DatosCart2) or die(mysqli_error($con));
 $row_DatosCart2 = mysqli_fetch_assoc($DatosCart2);
 $totalRows_DatosCart2 = mysqli_num_rows($DatosCart2);
 ?>
+<!-- /////////////////////////////////// Consulta para optener la lista de cursos seleccionados para el paquete /////////////////////////////////////////// -->
+<?php
+$query_DatosParaPaquete = sprintf("SELECT * FROM cart WHERE id_student = %s AND transaction_made = 0 ORDER BY id_counter ASC",
+                            GetSQLValueString($row_DatosInsc["id_student"], "int")); 
+$DatosParaPaquete = mysqli_query($con, $query_DatosParaPaquete) or die(mysqli_error($con));
+$row_DatosParaPaquete = mysqli_fetch_assoc($DatosParaPaquete);
+$totalRows_DatosParaPaquete = mysqli_num_rows($DatosParaPaquete);
+?>
+<!-- /////////////////////////////////// Final Consulta para optener la lista de cursos seleccionados para el paquete /////////////////////////////////////////// -->
 <?php
 $editFormAction = $_SERVER['PHP_SELF'];
 if (isset($_SERVER['QUERY_STRING'])) {
@@ -138,6 +175,15 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formcompl")) {
  $row_DatosEdit = mysqli_fetch_assoc($DatosEdit);
  $totalRows_DatosEdit = mysqli_num_rows($DatosEdit);
 ?>
+<!--Consulta para traer datos para usuarios existentes-->
+<?php
+// $query_DatosIdent = sprintf("SELECT * FROM students WHERE id_student=%s ORDER BY id_student DESC",
+//                             GetSQLValueString($_GET["exist"], "int")); 
+// $DatosIdent = mysqli_query($con, $query_DatosIdent) or die(mysqli_error($con));
+// $row_DatosIdent = mysqli_fetch_assoc($DatosIdent);
+// $totalRows_DatosIdent = mysqli_num_rows($DatosIdent);
+?>
+<!--Fin de consulta para traer datos para usuarios existentes-->
 <?php
 $editFormAction = $_SERVER['PHP_SELF'];
 if (isset($_SERVER['QUERY_STRING'])) {
@@ -145,7 +191,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
 }
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formediti")) {
      
-     $updateSQL = sprintf("UPDATE students SET name=%s, surname=%s, email=%s, personal_number=%s, telephone=%s, sex=%s, adress=%s, post=%s, city=%s WHERE id_student=%s",
+     $updateSQL = sprintf("UPDATE students SET name=%s, surname=%s, email=%s, personal_number=%s, telephone=%s, sex=%s, adress=%s, post=%s, city=%s, status=%s WHERE id_student=%s",
                           GetSQLValueString($_POST["name"], "text"),
                           GetSQLValueString($_POST["surname"], "text"),
                           GetSQLValueString($_POST["email"], "text"),
@@ -155,6 +201,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formediti")) {
                           GetSQLValueString($_POST["adress"], "text"),
                           GetSQLValueString($_POST["post"], "int"),
                           GetSQLValueString($_POST["city"], "text"),
+                          GetSQLValueString($_POST["status"], "text"),
                           GetSQLValueString($_POST["id_student"], "int"));
 		
 
@@ -183,14 +230,37 @@ $row_DatosCourseEdit = mysqli_fetch_assoc($DatosCourseEdit);
 $totalRows_DatosCourseEdit = mysqli_num_rows($DatosCourseEdit);
 ?>
 <?php
-$query_DatosCart = sprintf("SELECT * FROM cart WHERE id_student=%s AND transaction_made=%s ORDER BY id_counter ASC",
+$query_DatosCourseEdit2 = sprintf("SELECT * FROM courses WHERE category = 2 AND status = 1 ORDER BY id_course ASC"); 
+$DatosCourseEdit2 = mysqli_query($con, $query_DatosCourseEdit2) or die(mysqli_error($con));
+$row_DatosCourseEdit2 = mysqli_fetch_assoc($DatosCourseEdit2);
+$totalRows_DatosCourseEdit2 = mysqli_num_rows($DatosCourseEdit2);
+?>
+<?php
+$query_DatosCartEdit = sprintf("SELECT * FROM cart WHERE id_student=%s AND course_category=%s AND transaction_made=%s ORDER BY id_counter ASC",
+                            GetSQLValueString($_GET["editc"], "int"),
+                            1,
+                            GetSQLValueString($row_DatosEditInc["id_insc"], "int")); 
+$DatosCartEdit = mysqli_query($con, $query_DatosCartEdit) or die(mysqli_error($con));
+$row_DatosCartEdit = mysqli_fetch_assoc($DatosCartEdit);
+$totalRows_DatosCartEdit = mysqli_num_rows($DatosCartEdit);
+?>
+<?php
+$query_DatosCartEdit2 = sprintf("SELECT * FROM cart WHERE id_student=%s AND course_category=%s AND transaction_made=%s ORDER BY id_counter ASC",
+                            GetSQLValueString($_GET["editc"], "int"),
+                            2,
+                            GetSQLValueString($row_DatosEditInc["id_insc"], "int")); 
+$DatosCartEdit2 = mysqli_query($con, $query_DatosCartEdit2) or die(mysqli_error($con));
+$row_DatosCartEdit2 = mysqli_fetch_assoc($DatosCartEdit2);
+$totalRows_DatosCartEdit2 = mysqli_num_rows($DatosCartEdit2);
+?>
+<?php
+$query_DatosCartEditPackage = sprintf("SELECT * FROM cart WHERE id_student=%s AND transaction_made=%s ORDER BY id_counter ASC",
                             GetSQLValueString($_GET["editc"], "int"),
                             GetSQLValueString($row_DatosEditInc["id_insc"], "int")); 
-$DatosCart = mysqli_query($con, $query_DatosCart) or die(mysqli_error($con));
-$row_DatosCart = mysqli_fetch_assoc($DatosCart);
-$totalRows_DatosCart = mysqli_num_rows($DatosCart);
+$DatosCartEditPackage = mysqli_query($con, $query_DatosCartEditPackage) or die(mysqli_error($con));
+$row_DatosCartEditPackage = mysqli_fetch_assoc($DatosCartEditPackage);
+$totalRows_DatosCartEditPackage = mysqli_num_rows($DatosCartEditPackage);
 ?>
-
 <?php
 $editFormAction = $_SERVER['PHP_SELF'];
 if (isset($_SERVER['QUERY_STRING'])) {
@@ -223,7 +293,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
  $totalRows_DatosSee = mysqli_num_rows($DatosSee);
 ?>
 <?php
-$query_DatosPackage = sprintf("SELECT * FROM cart WHERE id_student=%s AND transaction_made=%s ORDER BY id_counter ASC",
+$query_DatosPackage = sprintf("SELECT * FROM cart WHERE id_student=%s AND transaction_made=%s ORDER BY id_course ASC",
                               GetSQLValueString($_GET["see"], "int"),
                               GetSQLValueString(ObtenerTransaccion($_GET["see"]), "int"));
 $DatosPackage = mysqli_query($con, $query_DatosPackage) or die(mysqli_error($con));

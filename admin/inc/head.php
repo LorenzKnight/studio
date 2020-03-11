@@ -4,7 +4,7 @@
         <ul>
             <!--<li><a href="">Config</a></li>-->
             <li><a href="inc/logout.php">Log out</a></li>
-            <li><a href="">
+            <li><a href="index.php">
             <?php
             if ((isset($_SESSION['MM_Username'])) && ($_SESSION['MM_Username'] != ""))
             {

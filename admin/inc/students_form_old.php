@@ -1,6 +1,6 @@
 <?php if($_GET["new"]):?>
 <div class="subform_cont1">
-    <form action="students.php" method="post" name="formrequest" id="formrequest">
+    <form action="students_old.php" method="post" name="formrequest" id="formrequest">
         <table class="formulario" border="0" cellspacing="0" cellpadding="0">
             <tr height="80">
                 <td colspan="2" valign="middle" align="center" style="color: #333; padding: 30px 0 0 0;">
@@ -46,7 +46,7 @@
             </tr>
             <tr height="80">
                 <td colspan="2" valign="middle" align="center" style="color: #666; font-size: 14px;">
-                        <a href="students.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input style="padding: 20px 65px;" type="submit" class="button" value="Nästa" />
+                        <a href="students_old.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input style="padding: 20px 65px;" type="submit" class="button" value="Nästa" />
                 </td>
             </tr>
             <tr height="30">
@@ -64,7 +64,7 @@
 
 <?php if($_GET["newcompl"]):?>
 <div class="subform_cont1">
-    <form action="students.php" method="post" name="formcompl" id="formcompl">
+    <form action="students_old.php" method="post" name="formcompl" id="formcompl">
       <table class="formulario" border="0" cellspacing="0" cellpadding="0">
           <tr height="80">
               <td colspan="2" valign="middle" align="center" style="color: #333; padding: 30px 0 0 0;">
@@ -336,7 +336,7 @@
                 </tr>
                 <tr height="30">
                     <td colspan="2" valign="middle" align="center" style="color: #333; padding: 30px 0 0 0;">
-                    <a href="students.php"><input class="button_a" style="width: 170px; text-align: center;" value="Stänga" /></a>
+                    <a href="students_old.php"><input class="button_a" style="width: 170px; text-align: center;" value="Stänga" /></a>
                     </td>
                 </tr>
                 <tr height="20">
@@ -348,7 +348,7 @@
 
 <?php if($_GET["editi"]):?>
     <div class="subform_cont1">
-        <form action="students.php" method="post" name="formediti" id="formediti">
+        <form action="students_old.php" method="post" name="formediti" id="formediti">
             <table class="formulario" border="0" cellspacing="0" cellpadding="0">
                 <tr height="30">
                     <td colspan="2" valign="middle" align="center">
@@ -385,7 +385,7 @@
                 </tr>
                 <tr height="80">
                     <td colspan="2" valign="middle" align="center" style="color: #666; font-size: 14px;">
-                            <a href="students.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Uppdatera" />
+                            <a href="students_old.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Uppdatera" />
                     </td>
                 </tr>
                 <tr height="30">
@@ -402,7 +402,7 @@
 
 <?php if($_GET["editc"]):?>
     <div class="subform_cont1">
-        <form action="students.php" method="post" name="formeditc" id="formeditc">
+        <form action="students_old.php" method="post" name="formeditc" id="formeditc">
             <table class="formulario_e" border="0" cellspacing="0" cellpadding="0">
                 <tr height="60">
                     <td colspan="2" valign="middle" align="center" style="color: #333; padding: 30px 0 0 0;">
@@ -520,7 +520,7 @@
                 </tr>
                 <tr height="80">
                     <td colspan="2" valign="middle" align="center" style="color: #666; font-size: 14px;">
-                            <a href="students.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Uppdatera !" />
+                            <a href="students_old.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Uppdatera !" />
                     </td>
                 </tr>
                 <tr height="30">

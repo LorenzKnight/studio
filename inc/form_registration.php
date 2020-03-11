@@ -374,9 +374,9 @@
                                     <?php } while ($row_DatosCourse = mysqli_fetch_assoc($DatosCourse));
                                     }
                                     ?>
-                                <?php if ($totalRows_DatosCourse2 > 0) {?>
-                                <p style="font-size:12px; color:#999;">Kurser utan rabatt</p>
-                                <?php } ?>
+                                    <?php if ($totalRows_DatosCourse2 > 0) {?>
+                                    <p style="font-size:12px; color:#999;">Kurser utan rabatt</p>
+                                    <?php } ?>
                                     <?php
                                     if ($totalRows_DatosCourse2 > 0) {
                                     do { ?>
@@ -422,9 +422,9 @@
                                     <?php } while ($row_DatosCart = mysqli_fetch_assoc($DatosCart));
                                     }
                                     ?>
-                                <?php if ($totalRows_DatosCart2 > 0) {?>
-                                <p style="font-size:12px; color:#999;">Kurser utan rabatt</p>
-                                <?php } ?>
+                                        <?php if ($totalRows_DatosCart2 > 0) {?>
+                                        <p style="font-size:12px; color:#999;">Kurser utan rabatt</p>
+                                        <?php } ?>
                                     <?php
                                     if ($totalRows_DatosCart2 > 0) {
                                     do { ?>
@@ -493,7 +493,7 @@
                     </table>
 
                     <?php $_SESSION["TotalCompra"] = $precioTotal;?>
-                    <?php $_SESSION["paquete"] = GetPacket($totalRows_DatosParaPaquete);?>
+                    <?php //$_SESSION["paquete"] = GetPacket($totalRows_DatosParaPaquete);?>
                     <?php $_SESSION["sex"] = sex($_SESSION['ydl_UserId']);?>
                     
                     <!-- Pay method:<br/>
