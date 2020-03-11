@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Värd: localhost:8889
--- Tid vid skapande: 05 mars 2020 kl 12:28
+-- Tid vid skapande: 11 mars 2020 kl 22:52
 -- Serverversion: 5.7.26
 -- PHP-version: 7.3.8
 
@@ -63,31 +63,31 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id_counter`, `id_student`, `id_course`, `course_category`, `id_term`, `date`, `transaction_made`) VALUES
-(146, 103, 2, NULL, 1, '2020-02-10', 162),
-(147, 103, 3, NULL, 1, '2020-02-10', 162),
-(148, 103, 4, NULL, 1, '2020-02-10', 162),
-(149, 103, 5, NULL, 1, '2020-02-10', 162),
-(519, 45, 1, NULL, 1, '2020-02-11', 163),
-(520, 45, 2, NULL, 1, '2020-02-13', 163),
-(521, 45, 3, NULL, 1, '2020-02-13', 163),
-(535, 107, 1, NULL, 1, '2020-02-18', 174),
-(536, 107, 2, NULL, 1, '2020-02-18', 174),
-(537, 108, 1, NULL, 1, '2020-02-18', 175),
-(540, 68, 1, NULL, 1, '2020-02-18', 185),
-(541, 68, 2, NULL, 1, '2020-02-18', 185),
-(542, 68, 3, NULL, 1, '2020-02-18', 185),
+(146, 103, 2, 1, 1, '2020-02-10', 162),
+(147, 103, 3, 1, 1, '2020-02-10', 162),
+(148, 103, 4, 1, 1, '2020-02-10', 162),
+(149, 103, 5, 1, 1, '2020-02-10', 162),
+(519, 45, 1, 1, 1, '2020-02-11', 163),
+(520, 45, 2, 1, 1, '2020-02-13', 163),
+(521, 45, 3, 1, 1, '2020-02-13', 163),
+(535, 107, 1, 1, 1, '2020-02-18', 174),
+(536, 107, 2, 1, 1, '2020-02-18', 174),
+(537, 108, 1, 1, 1, '2020-02-18', 175),
+(540, 68, 1, 1, 1, '2020-02-18', 185),
+(541, 68, 2, 1, 1, '2020-02-18', 185),
+(542, 68, 3, 1, 1, '2020-02-18', 185),
 (612, 76, 1, 1, 1, '2020-03-03', 187),
-(613, 76, 2, 1, 1, '2020-03-03', 187),
-(614, 76, 3, 1, 1, '2020-03-03', 187),
-(615, 76, 10, 2, 1, '2020-03-03', 187),
-(616, 76, 4, 1, 1, '2020-03-03', 187),
-(641, 103, 1, 1, 3, '2020-03-05', 0),
-(648, 103, 2, 1, 3, '2020-03-05', 0),
-(649, 103, 3, 1, 3, '2020-03-05', 0),
-(650, 103, 4, 1, 3, '2020-03-05', 0),
-(652, 103, 5, 1, 3, '2020-03-05', 0),
-(653, 103, 6, 1, 3, '2020-03-05', 0),
-(654, 103, 10, 2, 3, '2020-03-05', 0);
+(662, 113, 1, 1, 3, '2020-03-10', 195),
+(663, 113, 2, 1, 3, '2020-03-10', 195),
+(666, 113, 9, 2, 3, '2020-03-10', 195),
+(669, 113, 3, 1, 3, '2020-03-10', 195),
+(670, 113, 4, 1, 3, '2020-03-10', 195),
+(707, 76, 2, 1, 3, '2020-03-11', 187),
+(711, 76, 9, 2, 3, '2020-03-11', 187),
+(712, 113, 1, 1, 3, '2020-03-11', 251),
+(713, 113, 2, 1, 3, '2020-03-11', 251),
+(714, 113, 3, 1, 3, '2020-03-11', 251),
+(715, 113, 4, 1, 3, '2020-03-11', 251);
 
 -- --------------------------------------------------------
 
@@ -99,6 +99,7 @@ CREATE TABLE `courses` (
   `id_course` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `schedule` text,
+  `term` int(11) DEFAULT NULL,
   `teacher` varchar(255) DEFAULT NULL,
   `category` int(11) DEFAULT '1',
   `price` varchar(255) DEFAULT NULL,
@@ -109,17 +110,17 @@ CREATE TABLE `courses` (
 -- Dumpning av Data i tabell `courses`
 --
 
-INSERT INTO `courses` (`id_course`, `name`, `schedule`, `teacher`, `category`, `price`, `status`) VALUES
-(1, 'Urban kiz steg 1', '(ons 18.30-19.30)', 'Lessly & Marie', 1, '980', 1),
-(2, 'Urban kiz steg 2', '(ons 19.30-20.30)', 'Lessly & Marie', 1, '980', 1),
-(3, 'Urban kiz steg 3', '(ons 20.30-21.30)', 'Lessly & Marie', 1, '980', 1),
-(4, 'Urban kiz steg 4', '(mån 20.30-21.30)', 'Lorenz & Sofia', 1, '980', 1),
-(5, 'Dominikansk bachata 1', '(mån 19.30-20.30)', 'Lorenz & Sofia', 1, '980', 1),
-(6, 'Dominikansk bachata 2', '(mån 19.30-20.30)', 'Lorenz & Sofia', 1, '980', 1),
-(7, 'Kubansk salsa 1', '(ons 18.30-19.30)', 'Ali', 1, '980', 1),
-(8, 'Kubansk salsa 2', '(ons 19.30-20.30)', 'Ali', 1, '980', 1),
-(9, 'Balett 1', '(mån 18.00-19.30)', 'Aurica', 1, '1290', 1),
-(10, 'Test course', '(mån 18.00-19.30)', 'Test teacher', 2, '1290', 1);
+INSERT INTO `courses` (`id_course`, `name`, `schedule`, `term`, `teacher`, `category`, `price`, `status`) VALUES
+(1, 'Urban kiz 1', '(ons 18.30-19.30)', 3, 'Lessly & Marie', 1, '980', 1),
+(2, 'Urban kiz 2', '(ons 19.30-20.30)', 3, 'Lessly & Marie', 1, '980', 1),
+(3, 'Urban kiz 3', '(ons 20.30-21.30)', 3, 'Lessly & Marie', 1, '980', 1),
+(4, 'Urban kiz 4', '(mån 20.30-21.30)', 3, 'Lorenz & Sofia', 1, '980', 1),
+(5, 'Dominikansk bachata 1', '(mån 19.30-20.30)', 3, 'Lorenz & Sofia', 1, '980', 1),
+(6, 'Dominikansk bachata 2', '(mån 19.30-20.30)', 3, 'Lorenz & Sofia', 1, '980', 1),
+(7, 'Kubansk salsa 1', '(ons 18.30-19.30)', 3, 'Ali', 1, '980', 1),
+(8, 'Kubansk salsa 2', '(ons 19.30-20.30)', 3, 'Ali', 1, '980', 1),
+(9, 'Balett 1', '(mån 18.00-19.30)', 3, 'Aurica', 2, '1290', 1),
+(10, 'Test course', '(mån 18.00-19.30)', 3, 'Test teacher', 2, '1290', 1);
 
 -- --------------------------------------------------------
 
@@ -214,7 +215,9 @@ INSERT INTO `inscriptions` (`id_insc`, `date`, `year`, `month`, `day`, `time`, `
 (174, '2020-02-18', '2020', '2', '18', '12:25:56', 107, 'Kvinna', 1, '2020-01-13', '2020-03-20', 'Silver Packet', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 1, 1602),
 (175, '2020-02-18', '2020', '2', '18', '12:50:45', 108, 'Kvinna', 1, '2020-01-13', '2020-03-20', 'Brons Packet', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 1, 890),
 (185, '2020-02-18', '2020', '2', '18', '14:32:30', 68, 'Kvinna', 1, '2020-01-13', '2020-03-20', 'Guld Packet', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 1, 2269.5),
-(187, '2020-03-03', '2020', '3', '03', '22:29:00', 76, 'Man', 1, '2020-01-13', '2020-03-20', 'VIP PLUS', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 1, 4034);
+(187, '2020-03-03', '2020', '3', '03', '22:29:00', 76, 'Man', 3, '2020-01-13', '2020-03-20', '0', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 1, 882),
+(195, '2020-03-10', '2020', '3', '10', '14:28:13', 113, 'Kvinna', 3, '2020-03-30', '2020-06-01', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, 1764),
+(251, '2020-03-11', '2020', '3', '11', '16:05:30', 113, 'Kvinna', 3, '2020-03-30', '2020-06-01', 'VIP-paket', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, 2744);
 
 -- --------------------------------------------------------
 
@@ -479,7 +482,8 @@ INSERT INTO `students` (`id_student`, `date`, `year`, `month`, `day`, `time`, `n
 (98, '2020-01-31 19:04:10', '2020', '1', '31', '19:04:10', 'Sofia', 'Franzen', 'sofiafranzen2@gmail.com', 'newstudent246', '8409034158', '763199420', 'Hörte 11', 41516, 'Oslo', 'Kvinna', 'yes', NULL, 'Active', NULL, 1000),
 (103, '2020-02-09 16:13:42', '2020', '2', '9', '16:13:42', 'Lorenzo', 'Knight', 'joellorenzo.k@gmail.com', 'newstudent246', '8409034157', '763199480', 'Siriusgatan 102', 41522, 'Göteborg', 'Man', 'yes', NULL, 'Active', NULL, 1000),
 (107, '2020-02-18 12:25:48', '2020', '2', '18', '12:25:48', 'Carolina', 'Bustamante', 'carolina@gmail.com', 'newstudent246', '8501305699', '763199499', 'Siriusgatan 106', 41522, 'Göteborg', 'Kvinna', NULL, NULL, 'Active', NULL, 5),
-(108, '2020-02-18 12:50:25', '2020', '2', '18', '12:50:25', 'Rosario', 'Bustamante', 'rosario@gmail.com', 'newstudent246', '8501305611', '763199499', 'Siriusgatan 102', 41522, 'Göteborg', 'Kvinna', NULL, NULL, 'Active', NULL, 5);
+(108, '2020-02-18 12:50:25', '2020', '2', '18', '12:50:25', 'Rosario', 'Bustamante', 'rosario@gmail.com', 'newstudent246', '8501305611', '763199499', 'Siriusgatan 102', 41522, 'Göteborg', 'Kvinna', NULL, NULL, 'Active', NULL, 5),
+(113, '2020-03-10 13:26:30', '2020', '3', '10', '13:26:30', 'Carola', 'De la Rosa', 'carola@gmail.com', 'newstudent246', '8501305620', '763199499', 'Siriusgatan 102', 41522, 'Göteborg', 'Kvinna', NULL, NULL, 'Active', NULL, 5);
 
 -- --------------------------------------------------------
 
@@ -504,8 +508,7 @@ CREATE TABLE `term` (
 
 INSERT INTO `term` (`id_term`, `date`, `type`, `term_name`, `start_week`, `term_start`, `term_stop`, `status`) VALUES
 (1, '2019-09-05', '1', 'Var Termin', 'Vecka 3', '2020-01-13', '2020-03-20', 0),
-(3, '2020-02-26', NULL, 'Sommar Termin', 'Vecka 14', '2020-03-30', '2020-06-01', 1),
-(4, '2020-02-27', NULL, NULL, NULL, NULL, NULL, 0);
+(3, '2020-02-26', NULL, 'Sommar Termin', 'Vecka 14', '2020-03-30', '2020-06-01', 1);
 
 -- --------------------------------------------------------
 
@@ -534,7 +537,7 @@ INSERT INTO `users` (`id_user`, `name`, `surname`, `mail`, `password`, `telefon`
 (3, 'Lessly', 'Awa', 'Lessly@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 763199480, 2, 1),
 (5, 'Lorenzo', 'Knight', 'joellorenzo.k@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 763199480, 0, 1),
 (6, 'Rebbeca', 'Hjärte', 'rebbeca@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 763199480, 3, 2),
-(8, 'Shael', 'Knight', 'shael@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 763199480, 2, 1);
+(10, 'Shael', 'Knight', 'Shael@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 763199480, 2, 1);
 
 --
 -- Index för dumpade tabeller
@@ -644,13 +647,13 @@ ALTER TABLE `banners`
 -- AUTO_INCREMENT för tabell `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id_counter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=655;
+  MODIFY `id_counter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=716;
 
 --
 -- AUTO_INCREMENT för tabell `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id_course` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_course` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT för tabell `discount`
@@ -668,7 +671,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT för tabell `inscriptions`
 --
 ALTER TABLE `inscriptions`
-  MODIFY `id_insc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=189;
+  MODIFY `id_insc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=252;
 
 --
 -- AUTO_INCREMENT för tabell `package`
@@ -680,7 +683,7 @@ ALTER TABLE `package`
 -- AUTO_INCREMENT för tabell `pack_discount`
 --
 ALTER TABLE `pack_discount`
-  MODIFY `id_p_discount` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_p_discount` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT för tabell `pages`
@@ -710,19 +713,19 @@ ALTER TABLE `site_info`
 -- AUTO_INCREMENT för tabell `students`
 --
 ALTER TABLE `students`
-  MODIFY `id_student` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `id_student` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
 
 --
 -- AUTO_INCREMENT för tabell `term`
 --
 ALTER TABLE `term`
-  MODIFY `id_term` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_term` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT för tabell `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
