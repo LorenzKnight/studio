@@ -1,26 +1,32 @@
 <?php
-$variable_Consulta = "0";
-if (isset($VARIABLE)) {
-  $variable_Consulta = $VARIABLE;
-}
+    $variable_Consulta = "0";
+    if (isset($VARIABLE)) {
+    $variable_Consulta = $VARIABLE;
+    }
 
-$query_DatosSite = sprintf("SELECT * FROM site_info"); 
-$DatosSite = mysqli_query($con, $query_DatosSite) or die(mysqli_error($con));
-$row_DatosSite = mysqli_fetch_assoc($DatosSite);
-$totalRows_DatosSite = mysqli_num_rows($DatosSite);
+    $query_DatosSite = sprintf("SELECT * FROM site_info"); 
+    $DatosSite = mysqli_query($con, $query_DatosSite) or die(mysqli_error($con));
+    $row_DatosSite = mysqli_fetch_assoc($DatosSite);
+    $totalRows_DatosSite = mysqli_num_rows($DatosSite);
 ?>
 <div class="foot">
     <div class="foot_case">
         <div class="social">
+            <?php if($row_DatosSite['facebook'] != "") { ?>
             <div class="icon">
-                <a href="https://www.facebook.com/YandaliDanceStudio/" target="_blank"><img src="/img/icon/fb.svg" class="social_icon"></a>
+                <a href="<?php echo $row_DatosSite['facebook']; ?>" target="_blank"><img src="/img/icon/fb.svg" class="social_icon"></a>
             </div>
+            <?php } ?>
+            <?php if($row_DatosSite['instagram'] != "") { ?>
             <div class="icon">
-                <a href="https://www.instagram.com/yandalistudio/" target="_blank"><img src="/img/icon/ig.svg" class="social_icon"></a>
+                <a href="<?php echo $row_DatosSite['instagram']; ?>" target="_blank"><img src="/img/icon/ig.svg" class="social_icon"></a>
             </div>
-            <!-- <div class="icon">
-                <a href="#" target="_blank"><img src="/img/icon/yt.svg" class="social_icon"></a>
-            </div> -->
+            <?php } ?>
+            <?php if($row_DatosSite['youtube'] != "") { ?>
+            <div class="icon">
+                <a href="<?php echo $row_DatosSite['youtube']; ?>" target="_blank"><img src="/img/icon/yt.svg" class="social_icon"></a>
+            </div>
+            <?php } ?>
         </div>
         <div class="adress">
             <div class="adress_text">
@@ -33,9 +39,7 @@ $totalRows_DatosSite = mysqli_num_rows($DatosSite);
             </div>
         </div>
         <div class="map">
-            <div class="logo">
-                <a href="index.php"><img src="img/yandali_dance_studio.svg" width="" height="70%" style="margin: 0 auto;"></a>
-            </div>
+                <a href="index.php"><img src="img/loops_dance_studio.svg" width="" height="30%" style="margin: 25% 0 25% 50px;"></a>
         </div>
     </div>
 </div>

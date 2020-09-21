@@ -1,7 +1,7 @@
 <?php require_once('../connections/conexion.php');?>
 <?php require_once('inc/seguridad.php');?>
 <?php
- $query_DatosConsulta = sprintf("SELECT * FROM courses ORDER BY id_course AND status DESC"); 
+ $query_DatosConsulta = sprintf("SELECT * FROM courses WHERE status = 1 ORDER BY id_course ASC"); 
  $DatosConsulta = mysqli_query($con, $query_DatosConsulta) or die(mysqli_error($con));
  $row_DatosConsulta = mysqli_fetch_assoc($DatosConsulta);
  $totalRows_DatosConsulta = mysqli_num_rows($DatosConsulta);
@@ -17,14 +17,16 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequest")) {
   $year = date("Y");
 	$month = date("m");
 	$day = date("d");
-  $insertSQL = sprintf("INSERT INTO courses(name, schedule, teacher, category, price, status) 
-                        VALUES (%s, %s, %s, %s, %s, %s)",
+  $insertSQL = sprintf("INSERT INTO courses(name, schedule, teacher, category, price, status, user_rank, id_user) 
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
                         GetSQLValueString($_POST["name"], "text"),                      
                         GetSQLValueString($_POST["schedule"], "text"),
                         GetSQLValueString($_POST["teacher"], "text"),
                         GetSQLValueString($_POST["category"], "int"),
                         GetSQLValueString($_POST["price"], "text"),
-                        GetSQLValueString($_POST["status"], "int"));
+                        GetSQLValueString($_POST["status"], "int"),
+                        GetSQLValueString($_POST["user_rank"], "int"),
+                        GetSQLValueString($_POST["id_user"], "int"));
 
   
   $Result1 = mysqli_query($con,  $insertSQL) or die(mysqli_error($con));

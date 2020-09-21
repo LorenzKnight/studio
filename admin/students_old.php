@@ -262,7 +262,7 @@ header(sprintf("Location: %s", $updateGoTo));
 <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 <!--/////////////////////////////////////////////////FILTER LISTS/////////////////////////////////////////////////////////-->
 <?php
-$query_DatosCourse_filter = sprintf("SELECT * FROM courses WHERE status = 1 ORDER BY id_course ASC"); 
+$query_DatosCourse_filter = sprintf("SELECT * FROM courses WHERE term = 1 ORDER BY id_course ASC"); 
 $DatosCourse_filter = mysqli_query($con, $query_DatosCourse_filter) or die(mysqli_error($con));
 $row_DatosCourse_filter = mysqli_fetch_assoc($DatosCourse_filter);
 $totalRows_DatosCourse_filter = mysqli_num_rows($DatosCourse_filter);

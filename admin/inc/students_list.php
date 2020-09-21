@@ -40,6 +40,13 @@
 // document.addEventListener('click', onClick)
 
 </script>
+<script>
+    function asegurar_borrado()
+    {
+            rc = confirm("Är du säkert på att du vill radera den här register?");
+            return rc;
+    }
+</script>
 
 <?php include("students_form.php")?>
 <div class="search">
@@ -51,12 +58,13 @@
             <input type="hidden" name="MM_search" id="MM_search" value="formsearch" />
         </form>
     </div>
-    <div style="width:100px; text-align:center; padding:5px 0;">
-        <a style="margin: 0;" href="students.php"><button type="" class="button_small" value="">Rensa</button> </a>
+    <div style="width:100px; text-align:center; color:#FFF; font-size:14px;">
+        <a style="margin: 0;" href="students.php"><button type="" class="button_small" value="">Rensa</button> </a><br/>
+        <?php echo $totalRows_DatosConsulta; ?> elev(er)
     </div>
     <div class="filter">
         <form action="students.php" method="get" name="formfilter" id="formfilter">
-            Filtrera efter klass: 
+            Filtrera efter : 
             <select class="textf" style="font-size: 14px; color: #999;" name="course" id="course">
             <?php
             if ($totalRows_DatosCourse_filter > 0) {
@@ -89,24 +97,30 @@
     <?php do { ?>
         <table width="100%" cellspacing="0" class="table_user" style="margin: 0 auto 15px; box-shadow: 0 .15rem 2rem 0 rgba(58,59,69,.15)!important;">
             
-            <tr class="line" height="60">
+            <tr class="line" height="60" style="background-color:<?php if (status($row_DatosConsulta['id_student']) == Inactive) echo "#999"?>;">
                 <td width="12%" nowrap="nowrap" align="left" style="padding: 0 0 0 20px;"><?php echo ObtenerNombreStudent($row_DatosConsulta['id_student']); ?></td>
                 <td width="15%" nowrap="nowrap" align="left" style="padding: 0 0 0 10px;"><?php echo ObtenerApellidoStudent($row_DatosConsulta['id_student']); ?></td>
                 <td width="14%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo ObtenerTelefonoStudent($row_DatosConsulta['id_student']); ?></td>
                 <td width="20%" nowrap="nowrap" align="left" style="padding: 0 0 0 0;"><?php echo ObtenerEmailStudent($row_DatosConsulta['id_student']); ?></td>
                 <td width="5%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo sex($row_DatosConsulta['id_student']); ?></td></td>
-                <td width="15%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo OptenerPaqueteEnLista($row_DatosConsulta['id_student'], $row_DatosTerm['id_term']); ?></td>
+                <td width="15%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo OptenerPaqueteEnLista($row_DatosConsulta['id_insc'], $row_DatosTerm['id_term']); ?></td>
                 <td width="4%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo status($row_DatosConsulta['id_student']); ?></td>
                 <td width="10%" nowrap="nowrap" align="center" style="padding: 0 10px 0 0;">
+                <?php if(showPermissions($_SESSION['std_UserId'], "TSYS-P0001") || showPermissions($_SESSION['std_UserId'], "TSYS-P0003") || $_SESSION['std_Nivel'] < 2) : ?>
                 <div class="arternative">
                     <button class="artbtn">o o o</button>
                     <div class="arternative-content">
-                        <a href="students.php?see=<?php echo $row_DatosConsulta['id_student']; ?>" class="alt_button">See more</a>
+                        <?php if(showPermissions($_SESSION['std_UserId'], "TSYS-P0001") || $_SESSION['std_Nivel'] < 2) : ?>
+                        <a href="students.php?see=<?php echo $row_DatosConsulta['id_student']; ?>&IDinsc=<?php echo $row_DatosConsulta['id_insc']; ?>" class="alt_button">See more</a>
+                        <?php endif ?>
+                        <?php if(showPermissions($_SESSION['std_UserId'], "TSYS-P0003") || $_SESSION['std_Nivel'] < 2) : ?>
                         <a href="students.php?editi=<?php echo $row_DatosConsulta['id_student']; ?>" class="alt_button">Edit info</a>
-                        <a href="students.php?editc=<?php echo $row_DatosConsulta['id_student']; ?>" class="alt_button">Edit course</a>
-                        <a href="student_delete.php?id=<?php echo $row_DatosConsulta['id_insc']; ?>" class="alt_button">Delete</a>
+                        <a href="students.php?editc=<?php echo $row_DatosConsulta['id_insc']; ?>" class="alt_button">Edit course</a>
+                        <a href="student_delete.php?id=<?php echo $row_DatosConsulta['id_insc']; ?>" class="alt_button" onclick="javascript:return asegurar_borrado ();">Delete</a>
+                        <?php endif ?>
                     </div>
                 </div>
+                <?php endif ?>
                 </td>
             </tr>
         </table>
@@ -121,5 +135,6 @@
         </table>
     <?php } ?>
 </div>
-
+<?php if(showPermissions($_SESSION['std_UserId'], "TSYS-P0002") || $_SESSION['std_Nivel'] < 2) : ?>
 <a href="students.php?new=1"><div class="flying_button">+</div></a>
+<?php endif ?>

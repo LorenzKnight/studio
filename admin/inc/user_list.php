@@ -40,26 +40,32 @@
 
 // document.addEventListener('click', onClick)
 </script>
-
+<script>
+    function asegurar_borrado()
+    {
+        rc = confirm("Är du säkert på att du vill radera den här register?");
+        return rc;
+    }
+</script>
 <?php include("user_form.php")?>
-<div class="user_div">
-<table width="100%" cellspacing="0" class="table_user" style="background-color: #F7B500;margin: 20px auto 0; ">
-    <tr height="40" style="color: #FFF;">
-        <td width="12%" nowrap="nowrap" align="left" style="padding: 0 0 0 20px; border-bottom: 1px solid #F7B500;">Name</td>
-        <td width="12%" nowrap="nowrap" align="left" style="padding: 0 0 0 20px; border-bottom: 1px solid #F7B500;">Surname</td>
-        <td width="22%" nowrap="nowrap" align="center" style="padding: 0 0 0 10px; border-bottom: 1px solid #F7B500;">E-Mail</td>
-        <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 10px; border-bottom: 1px solid #F7B500;">Telefone</td>
-        <td width="12%" nowrap="nowrap" align="center" style="padding: 0 0 0 10px; border-bottom: 1px solid #F7B500;"></td>
-        <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 10px; border-bottom: 1px solid #F7B500;">Level</td>
-        <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 10px; border-bottom: 1px solid #F7B500;">Status</td>
-        <td width="12%" nowrap="nowrap" align="center" style="padding: 0 0 0 10px; border-bottom: 1px solid #F7B500;">-</td>
+<div class="user_div_adm">
+<table width="100%" cellspacing="0" class="table_user_adm" style="margin: 20px auto 0; ">
+    <tr height="40" style="color: #FFF; font-weight: 800;">
+        <td width="12%" nowrap="nowrap" align="left" style="padding: 0 0 0 20px; border-bottom: 1px solid #FFF;">Name</td>
+        <td width="12%" nowrap="nowrap" align="left" style="padding: 0 0 0 20px; border-bottom: 1px solid #FFF;">Surname</td>
+        <td width="22%" nowrap="nowrap" align="center" style="padding: 0 0 0 10px; border-bottom: 1px solid #FFF;">E-Mail</td>
+        <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 10px; border-bottom: 1px solid #FFF;">Telefone</td>
+        <td width="12%" nowrap="nowrap" align="center" style="padding: 0 0 0 10px; border-bottom: 1px solid #FFF;"></td>
+        <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 10px; border-bottom: 1px solid #FFF;">Level</td>
+        <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 10px; border-bottom: 1px solid #FFF;">Status</td>
+        <td width="12%" nowrap="nowrap" align="center" style="padding: 0 0 0 10px; border-bottom: 1px solid #FFF;">-</td>
     </tr>
 </table>
     <?php if ($row_DatosConsulta > 0) { // Show if recordset not empty ?>
 
     <?php do { ?>
-<table width="100%" cellspacing="0" class="table_user" style="margin: 0 auto 15px; box-shadow: 0 .15rem 2rem 0 rgba(58,59,69,.15)!important;">
-    <tr class="line" height="60">
+<table width="100%" cellspacing="0" class="table_user_adm" style="margin: 0 auto 15px;">
+    <tr class="line_adm" height="60">
         <td width="12%" nowrap="nowrap" align="left" style="padding: 0 0 0 20px;"><?php echo $row_DatosConsulta['name']; ?></td>
         <td width="12%" nowrap="nowrap" align="left" style="padding: 0 0 0 20px;"> <?php echo $row_DatosConsulta['surname']; ?></td>
         <td width="22%" nowrap="nowrap" align="left" style="padding: 0 0 0 20px;"><?php echo $row_DatosConsulta['mail']; ?></td>
@@ -68,21 +74,30 @@
         <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 10px;"><?php echo rank($row_DatosConsulta['rank']); ?></td>
         <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 10px;"><?php echo statusBinario($row_DatosConsulta['status']); ?></td>
         <td width="12%" nowrap="nowrap" align="center" style="padding: 0 0 0 10px;">
+        <?php if(showPermissions($_SESSION['std_UserId'], "TSYS-P0018") || $_SESSION['std_Nivel'] < 2) : ?>
+            <?php if ((isset($_SESSION['MM_Username'])) && ($_SESSION['MM_Username'] == "") || $row_DatosConsulta['rank'] != 0) { ?>
+                <?php if ($row_DatosConsulta['mail'] != $_SESSION['MM_Username']) { ?>
         <div class="arternative">
             <button class="artbtn">o o o</button>
             <div class="arternative-content">
                 <a href="users.php?edit=<?php echo $row_DatosConsulta['id_user']; ?>" class="alt_button">Edit user</a>
-                <a href="users_delete.php?regdel=<?php echo $row_DatosConsulta['id_user']; ?>" class="alt_button">Delete</a>
+                <?php if(showPermissions($_SESSION['std_UserId'], "TSYS-P0019") || $_SESSION['std_Nivel'] < 1) : ?>
+                <a href="users_delete.php?regdel=<?php echo $row_DatosConsulta['id_user']; ?>" class="alt_button" onclick="javascript:return asegurar_borrado ();">Delete</a>
+                <?php endif ?>
             </div>
         </div>
+                <?php } ?> 
+            <?php } ?> 
+        <?php endif ?>
         </td>
     </tr>
+</table>
     <?php } while ($row_DatosConsulta = mysqli_fetch_assoc($DatosConsulta)); 
     }
     else
     { // Show if recordset is empty ?>
     <?php } ?>
-</table>
 </div>
-
+<?php if(showPermissions($_SESSION['std_UserId'], "TSYS-P0018") || $_SESSION['std_Nivel'] < 2) : ?>
 <a href="users.php?new=1"><div class="flying_button">+</div></a>
+<?php endif ?>

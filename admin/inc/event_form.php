@@ -32,7 +32,14 @@
     // }
 
     // document.addEventListener('click', onClick)
-    </script>
+</script>
+<script>
+    function asegurar()
+    {
+        rc = confirm("Är du säkert på den här ändring?");
+        return rc;
+    }
+</script>
     <?php if ($_GET["newevent"]): ?>
         <div class="subform_cont1">
         <form action="events.php" method="post" name="formnewevent" id="formnewevent">
@@ -170,7 +177,7 @@
                 </tr>
                 <tr height="80">
                     <td colspan="6" valign="middle" align="center" style="color: #666; font-size: 14px; border-top:1px solid #CCC;">
-                            <a href="events.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Updatera" />
+                            <a href="events.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Updatera" onclick="javascript:return asegurar ();"/>
                     </td>
                 </tr>
                 <input type="hidden" name="id_event" id="id_event" value="<?php echo $_GET['edit'];?>"/>

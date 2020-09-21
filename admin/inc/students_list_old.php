@@ -59,7 +59,7 @@
             Filtrera efter klass: 
             <select class="textf" style="font-size: 14px; color: #999;" name="course" id="course">
             <?php
-            if ($totalRows_DatosCourse_filter > 0) {
+            if ($totalRows_DatosCourse_filter > 0) { 
             do { ?>
             <option value="<?php echo $row_DatosCourse_filter['id_course'];?>"><?php echo $row_DatosCourse_filter['name'];?></option>
             <?php } while ($row_DatosCourse_filter = mysqli_fetch_assoc($DatosCourse_filter));

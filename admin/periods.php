@@ -1,14 +1,14 @@
 <?php require_once('../connections/conexion.php');?>
 <?php require_once('inc/seguridad.php');?>
 <?php
-$variable_Consulta = "0";
-if (isset($VARIABLE)) {
-  $variable_Consulta = $VARIABLE;
-}
-$query_DatosPeriod = sprintf("SELECT * FROM term ORDER BY id_term DESC");
-$DatosPeriod = mysqli_query($con, $query_DatosPeriod) or die(mysqli_error($con));
-$row_DatosPeriod = mysqli_fetch_assoc($DatosPeriod);
-$totalRows_DatosPeriod = mysqli_num_rows($DatosPeriod);
+  $variable_Consulta = "0";
+  if (isset($VARIABLE)) {
+    $variable_Consulta = $VARIABLE;
+  }
+  $query_DatosPeriod = sprintf("SELECT * FROM term ORDER BY id_term DESC");
+  $DatosPeriod = mysqli_query($con, $query_DatosPeriod) or die(mysqli_error($con));
+  $row_DatosPeriod = mysqli_fetch_assoc($DatosPeriod);
+  $totalRows_DatosPeriod = mysqli_num_rows($DatosPeriod);
 ?>
 <!--/////////////////////////////////////////////////BACK-END INSERT/////////////////////////////////////////////////////////-->
 

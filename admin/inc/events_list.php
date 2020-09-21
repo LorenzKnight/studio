@@ -10,7 +10,13 @@ $totalRows_DatosEvents = mysqli_num_rows($DatosEvents);
 ?>
 
 <?php include("event_form.php")?>
-
+<script>
+    function asegurar_borrado()
+    {
+        rc = confirm("Är du säkert på att du vill radera den här register?");
+        return rc;
+    }
+</script>
 <div class="user_div">
 <table width="100%" cellspacing="0" class="table_user" style="background-color: #F7B500;margin: 20px auto 0; ">
     <tr height="40" style="color: #FFF;">
@@ -31,13 +37,15 @@ $totalRows_DatosEvents = mysqli_num_rows($DatosEvents);
         <td width="20%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo $row_DatosEvents['name']; ?></td>
         <td width="20%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><a href="<?php echo $row_DatosEvents['link']; ?>" target="_blank">FB Event</a></td>
         <td width="20%" nowrap="nowrap" align="center" style="padding: 0 10px 0 0;">
+        <?php if(showPermissions($_SESSION['std_UserId'], "TSYS-P0012") || $_SESSION['std_Nivel'] < 2) : ?>
             <div class="arternative">
                 <button class="artbtn">o o o</button>
                 <div class="arternative-content">
                     <a href="events.php?edit=<?php echo $row_DatosEvents['id_event']; ?>" class="alt_button">Edit event</a>
-                    <a href="events_delete.php?DeleteID=<?php echo $row_DatosEvents['id_event']; ?>" class="alt_button">Delete</a>
+                    <a href="events_delete.php?DeleteID=<?php echo $row_DatosEvents['id_event']; ?>" class="alt_button" onclick="javascript:return asegurar_borrado ();">Delete</a>
                 </div>
             </div>
+        <?php endif ?>
         </td>
     </tr>
 </table>
@@ -47,6 +55,6 @@ $totalRows_DatosEvents = mysqli_num_rows($DatosEvents);
     { // Show if recordset is empty ?>
     <?php } ?>
 </div>
-
+<?php if(showPermissions($_SESSION['std_UserId'], "TSYS-P0012") || $_SESSION['std_Nivel'] < 2) : ?>
 <a href="events.php?newevent=1"><div class="flying_button">+</div></a>
-
+<?php endif ?>

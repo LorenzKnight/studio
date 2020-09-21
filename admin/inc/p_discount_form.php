@@ -1,3 +1,10 @@
+<script>
+    function asegurar()
+    {
+            rc = confirm("Är du säkert på den här ändring?");
+            return rc;
+    }
+</script>
 <?php if($_GET["new"]):?>
     <div class="subform_cont1">
         <form action="p_discount.php" method="post" name="formrequest" id="formrequest">
@@ -52,7 +59,7 @@
                 </tr>
                 <tr height="80">
                     <td colspan="2" valign="middle" align="center" style="color: #666; font-size: 14px;">
-                            <a href="p_discount.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Uppdatera" />
+                            <a href="p_discount.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Uppdatera" onclick="javascript:return asegurar ();"/>
                     </td>
                 </tr>
                 <tr height="30">

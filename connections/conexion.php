@@ -18,3 +18,8 @@ else
 	include("../inc/funciones.php");
 }
 ?>
+<!-- CAMBIAR EL VALOR DE ESTA VARIABLE PARA QUE LOS LINK FUNCIONEN -->
+<?php
+  $dominio = "localhost:8888";
+  $pageName = "Loops Dance Studio";
+?>

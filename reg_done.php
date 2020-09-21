@@ -30,7 +30,7 @@ $totalRows_DatosRegDone = mysqli_num_rows($DatosRegDone);
 ?>
 <html>
 <head>
-<title>Yandali Studio</title>
+<title>Loops Dance Studio</title>
 <meta charset="ISO-8859-1">
 <link rel="shortcut icon" href="favicon-32x32.png">
 <link href="css/style.css" rel="stylesheet" type="text/css"  media="all" />
@@ -55,14 +55,14 @@ $totalRows_DatosRegDone = mysqli_num_rows($DatosRegDone);
             <p>Vi ser verkligen fram emot vårens termin och är så glada att du vill vara en del av vår dansskola!</p>
             <br/>
             <p>Kurserna startar '; $contenido.=$week; $contenido.='</p>
-            <p>Om du har några frågor inför start så är det bara att höra av dig till oss via mejl på <a href="mailto:info@yandali.se">info@yandali.se</a></p>
+            <p>Om du har några frågor inför start så är det bara att höra av dig till oss via mejl på <a href="mailto:info@loopsdancestudio.se">info@loopsdancestudio.se</a></p>
             <br/>
             <br/>
             <br/>
             <br/>
             <br/>
             <p>Vi ses snart!</p>
-            <p>/ Yandali</p>
+            <p>/ Loops</p>
             <br/>
             <br/>
             <br/>

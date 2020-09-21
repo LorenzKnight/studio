@@ -44,7 +44,7 @@
     event.stopPropagation()
     document.getElementById("popup").style.display="none";
     }
-// GDPR popup
+// GDPR popup 
     function mostrar2() {
     event.stopPropagation()
     document.getElementById("popup2").style.display="block";
@@ -60,8 +60,7 @@
         <h3 style="text-transform:uppercase;">KURSER OCH SOCIALDANS</h3>
         <?php //echo $_SESSION['ydl_UserId'];?>
         <h3>Kurser & paket</h3>
-        <p>Varje kurs-omgångar pågår i 10 veckor.</p>
-        <p>Under våren har vi en första kursomgång mellan v. 3-12 och en andra kursomgång mellan v. 13-22.</p>
+        <p>Varje kurs-omgångar pågår i 12 veckor.</p>
         <br>
         <p>Innan kursstart anmäler du dig till de kurser du vill gå.</p>
         <p>Du kan också anmäla dig i kassan under prova-på-veckan.</p>
@@ -82,7 +81,7 @@
         <h3 style="text-transform:uppercase;">BALETT</h3>
         <p>- Balett: 1 290 kr (90 min klasser, ingår ej i erbjudande om grupprabatt)</p>
         <br/>
-        <input class="button_m" type="submit" onclick="location='registration.php?id=1'" value="Anmäl mig">
+        <input class="button_reg" onclick="location='registration.php?id=1'" value="Anmäl mig">
     </div>
 
 
@@ -102,7 +101,7 @@
                     <td colspan="6" valign="middle" align="center"><input class="textf" type="email" placeholder="Din mailadress..." name="email" id="email" size="70" required/></td>
                 </tr>
                 <tr height="60">
-                    <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Personnummer" name="personal_number" id="personal_number" size="31" required/></td>
+                    <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" minlength="10" maxlength="10" placeholder="Ditt Personnummer (10 siffror)" name="personal_number" id="personal_number" size="31" required/></td>
                     <td width="50%" valign="middle" align="left" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Telefonnummer" name="telephone" id="telephone" size="31" required/></td>
                 </tr>
                 <tr height="60">
@@ -146,87 +145,12 @@
         </div>
     <?php endif ?>
 
-    <?php //if($_GET["exist"]):?>
-        <!-- <div class="form_frame">
-        <form action="registration.php" method="post" name="formrequest" id="formrequest">
-            <table class="formulario" style="top: 50px;" border="0" cellspacing="0" cellpadding="0">
-                <tr height="80">
-                    <td colspan="6" valign="middle" align="center" style="font-size: 16px; padding: 30px 0 0 0;">Aqui</td>
-                </tr>
-                <tr height="60">
-                    <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Namn" name="name" id="name" size="31" required/></td>
-                    <td width="50%" valign="middle" align="left" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Efternamn" name="surname" id="surname" size="31" required/></td>
-                </tr>
-                <tr height="60">
-                    <td colspan="6" valign="middle" align="center"><input class="textf" type="email" placeholder="Din mailadress..." name="email" id="email" size="70" required/></td>
-                </tr>
-                <tr height="60">
-                    <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Personnummer" name="personal_number" id="personal_number" size="31" required/></td>
-                    <td width="50%" valign="middle" align="left" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Telefonnummer" name="telephone" id="telephone" size="31" required/></td>
-                </tr>
-                <tr height="60">
-                    <td colspan="6" valign="middle" align="center" style="width: 100px; font-size: 14px; color: #999;">
-                        Kön:
-                        <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="sex" id="sex" required>
-                        <option value="None">None</option>
-                        <option value="Man">Man</option>
-                        <option value="Kvinna">Kvinna</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr height="60">
-                    <td colspan="6" valign="middle" align="center"><input class="textf" type="text" placeholder="Din adress..." name="adress" id="adress" size="70" required/></td>
-                </tr>
-                <tr height="60">
-                    <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Postnummer" name="post" id="post" size="31" required/></td>
-                    <td width="50%" valign="middle" align="left" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Din Ort" name="city" id="city" size="31" required/></td>
-                </tr>
-                <tr height="60">
-                    <td colspan="6" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
-                        Läs villkor <a href="#" onclick="mostrar()">här</a><br>
-                        <input class="class1_content" type="checkbox" name="agree" value="yes" required> Jag acepterar villkoren 
-                    </td>
-                </tr>
-                <tr height="80">
-                    <td colspan="6" valign="middle" align="center" style="color: #666; font-size: 14px;">
-                            <a href="registration.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Next" />
-                    </td>
-                </tr>
-                <tr height="20">
-                </tr>
-                <input type="hidden" name="package" id="package" value="<?php echo $_GET['id']; ?>"/>
-                <input type="hidden" name="password" id="password" value="newstudent246"/>
-                <input type="hidden" name="status" id="status" value="Active"/>
-                <input type="hidden" name="via" id="via" value="1000"/>
-                <input type="hidden" name="MM_insert" id="MM_insert" value="formrequest" />
-            </table>
-        </form>
-        </div> -->
-    <?php //endif ?>
-    <?php //if($_GET["idConf"]):?>
-
-        <!-- <div class="formulario" style="padding: 20px; text-align: center; top: 250px;">
-        Yandali kommer att skicka via mail kvitto på din anmällning!<br>
-        bekräfta du att <?php //echo $row_DatosReg['email'];?> är ditt mail?<br><br>
-        <form action="price_registration.php" method="post" name="forminsert" id="forminsert"> -->
-
-            <!-- <input type="hidden" name="email" id="email" value="<?php //echo $row_DatosReg['email'];?>"/>
-            <input type="hidden" name="password" id="password" value="<?php //echo $row_DatosReg['password'];?>"/>
-            <input style="width: 180px; padding: 21px 0; text-align: center;" type="submit" class="button" value="Ja"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a>
-            <input type="hidden" name="status" id="status" value="1"/>
-            <input type="hidden" name="MM_insert" id="MM_insert" value="forminsert" /> -->
-            <!--<a href="logout.php">Log out</a>-->
-        <!-- </form>
-        </div> -->
-
-    <?php //endif ?>
-
     <div class="agreement" id="popup">
         <table class="agre_frame" border="0" cellspacing="0" cellpadding="0">
             <tr height="92%">
                 <td>
                     <div style="width: 99%; height: 99%; margin: 0.5%; font-size: 12px; background-color: #F0F0F0; overflow: auto;">
-                    <h3 style="text-align:center;">YANDALI VILLKOREN</h3>
+                    <h3 style="text-align:center;">LOOPS VILLKOREN</h3>
                     <br/>
                     <p>För att kunna genomföra ditt köp måste du först godkänna vårt avtal. Detta gör du genom att läsa avtalet och sedan kryssa i avtalsrutan. 
                     Du kan sedan gå vidare och genomföra ditt köp.</p>
@@ -243,14 +167,14 @@
                     <br/>
                     <br/>
                     <p>3. ÅNGERRÄTT VID KÖP ONLINE</p>
-                    <p>- Yandali förhåller sig till lag om distansavtal och avtal utanför affärslokaler (SFS 2005:59).</p>
+                    <p>- Loops förhåller sig till lag om distansavtal och avtal utanför affärslokaler (SFS 2005:59).</p>
                     <br/>
                     <p>- Du som har köpt en plats på en kurs eller event online på vår hemsida kan frånträda detta avtal utan att ange något skäl inom 14 dagar efter det att köpet gjordes. 
-                    Denna ångerfrist löper ut 14 dagar efter den dag då avtalet ingicks. Om du vill utöva denna ångerrätt så ska du meddela Yandali om ditt beslut att frånträda avtalet via mejl till info@yandali.se .</p>
+                    Denna ångerfrist löper ut 14 dagar efter den dag då avtalet ingicks. Om du vill utöva denna ångerrätt så ska du meddela Loops om ditt beslut att frånträda avtalet via mejl till info@loopsdancestudio.se .</p>
                     <br/>
                     <p>- Vi skickar alltid en bekräftelse via mejl på ditt beslut om att frånträda avtalet, om du inte har fått en bekräftelse så ber vi dig att kontakta oss snarast då du inte räknas som av-anmäld innan vi skickat en bekräftelse.</p>
                     <br/>
-                    <p>- Om du har utövat ångerrätten på detta sätt så kommer Yandali återbetala erlagd ersättning inom 14 dagar, minus en administrationsavgift på 300 kr. 
+                    <p>- Om du har utövat ångerrätten på detta sätt så kommer Loops återbetala erlagd ersättning inom 14 dagar, minus en administrationsavgift på 300 kr. 
                     Observera att för köp av deltagande vid event så gäller denna ångerrätt endast före den tid då eventet äger rum, för köp av kurs så gäller denna ångerrätt endast före kursstart.</p>
                     <br/>
                     <br/>
@@ -260,7 +184,7 @@
                     <br/>
                     <p>5. ATT BYTA KURS</p>
                     <p>-Det är inte möjligt att byta kurs efter att du genomfört ditt köp via hemsidan.</p>
-                    <p>Vid förfrågningar om byte av kurs skicka ett mejl till info@yandali.se så återkommer vi med mer information kring eventuell möjlighet att byta kurs. 
+                    <p>Vid förfrågningar om byte av kurs skicka ett mejl till info@loopsdancestudio.se så återkommer vi med mer information kring eventuell möjlighet att byta kurs. 
                     Observera att denna förfrågan endast beviljas i mån av plats och inte garanteras.</p>
                     <br/>
                     <br/>
@@ -269,14 +193,14 @@
                     <br/>
                     <br/>
                     <p>7. ÄNDRINGAR AV KURSER OCH LÄRARE</p>
-                    <p>- Yandali förbehåller sig rätten att ändra kursuplägg, tider och lärare.</p>
+                    <p>- Loops förbehåller sig rätten att ändra kursuplägg, tider och lärare.</p>
                     <br/>
                     <br/>
                     <p>8. DELTAGANDE I FOTOGRAFERING OCH/ELLER FILMNING</p>
                     <p>-Vid våra kurser och events är det vanligt att vi fotograferar och filmar.</p> 
                     <br/>
                     <p>Detta gör vi både i marknadsföringssyfte och för att visa upp vår verksamhet för våra bidragsgivare. 
-                    Om du inte vill eller får vara med på foton eller filmer så ber vi dig informera oss via mejl på info@yandali.se. 
+                    Om du inte vill eller får vara med på foton eller filmer så ber vi dig informera oss via mejl på info@loopsdancestudio.se. 
                     Vid tillfällen då fotografer och filmare befinner sig i lokalen är det alltid okej att be någon av personalen att ta bort eventuella foton och filmer på dig.</p>
                     <br/>
                     <br/>
@@ -305,10 +229,10 @@
                     <p>Vi behandlar dina personuppgifter enligt dataskyddsförordningen (GDPR) som gäller som lag i samtliga EU:s medlemsländer sedan 2018.</p>
                     <br/>
                     <br/>                 
-                    <p>När du anmäler dig till en kurs på Yandali eller deltar i ett event så samlar vi in information kring vilka kurser du anmält dig eller event du deltagit på till samt personuppgifter så som namn, ålder, personnummer och kontaktuppgifter så som telefonnummer, mejl och adress. Dessa uppgifter använder vi för att för administrativt arbete, insamlande av information till våra bidragsgivare samt för marknadsföring.</p>                   
+                    <p>När du anmäler dig till en kurs på Loops eller deltar i ett event så samlar vi in information kring vilka kurser du anmält dig eller event du deltagit på till samt personuppgifter så som namn, ålder, personnummer och kontaktuppgifter så som telefonnummer, mejl och adress. Dessa uppgifter använder vi för att för administrativt arbete, insamlande av information till våra bidragsgivare samt för marknadsföring.</p>                   
                     <br/>
                     <br/>
-                    <p>Vi värnar om att följa de lagar och regler kring som finns och om att dina personuppgifter ska vara skyddade. Den information som vi lagrar i vårt datasystem är enda tillgänglig för de hos Yandali som arbetar med administration och som har särskild behörighet till personuppgifter. </p>
+                    <p>Vi värnar om att följa de lagar och regler kring som finns och om att dina personuppgifter ska vara skyddade. Den information som vi lagrar i vårt datasystem är enda tillgänglig för de hos Loops som arbetar med administration och som har särskild behörighet till personuppgifter. </p>
                     <br/>
                     <br/>
                     <p>Enligt Personuppgiftslagen 26 § (1998:204) har du som anmält dig till våra kurser eller events rätt att få information kring hur och vilka personuppgifter om dig vi behandlar. En skriftlig begäran ska då skickas till oss och kan max göras en gång per år.</p>
@@ -318,8 +242,8 @@
                     <br/>
                     <br/>
                     <p>FÖR FRÅGOR:</p>
-                    <p>Yandali Idéel förening org nr. 802525-8438</p>
-                    <p>info@yandali.se</p>
+                    <p>Loops Idéel föreningorg nr. 802525-8438</p>
+                    <p>info@loopsdancestudio.se</p>
                     <br/>
                     <br/>
                     </div>
@@ -358,6 +282,7 @@
                                     <?php
                                     if ($totalRows_DatosCourse > 0) {
                                     do { ?>
+                                    <?php if(productosRestantes($_SESSION['ydl_UserId'], $row_DatosCourse['id_course'])) { ?>
                                     <div style="width:100%;">
                                         <a style="font-size: 11px;" href="cart_add.php?courseID=<?php echo $row_DatosCourse['id_course'];?>">
                                             <div style="width:50%; padding:10px 0; text-align:left; float:left;">
@@ -371,6 +296,7 @@
                                             </div>
                                         </a>
                                     </div>
+                                    <?php } ?>
                                     <?php } while ($row_DatosCourse = mysqli_fetch_assoc($DatosCourse));
                                     }
                                     ?>
@@ -380,6 +306,7 @@
                                     <?php
                                     if ($totalRows_DatosCourse2 > 0) {
                                     do { ?>
+                                    <?php if(productosRestantes($_SESSION['ydl_UserId'], $row_DatosCourse2['id_course'])) { ?>
                                     <div style="width:100%;">
                                         <a style="font-size: 11px;" href="cart_add.php?courseID=<?php echo $row_DatosCourse2['id_course'];?>">
                                             <div style="width:50%; padding:10px 0; text-align:left; float:left;">
@@ -393,6 +320,7 @@
                                             </div>
                                         </a>
                                     </div>
+                                    <?php } ?>
                                     <?php } while ($row_DatosCourse2 = mysqli_fetch_assoc($DatosCourse2));
                                     }
                                     ?>
@@ -405,7 +333,7 @@
                                     <?php
                                     if ($totalRows_DatosCart > 0) {
                                     do { ?>
-                                        <div style="width:100%;">
+                                        <div style="width:100%;" >
                                             <a href="cart_delete.php?counterID=<?php echo $row_DatosCart['id_counter'];?>">
                                                 <div style="width:50%; padding:10px 0; text-align:left; float:left;">
                                                     <?php echo ObtenerNombreCurso($row_DatosCart['id_course']);?>
@@ -493,7 +421,7 @@
                     </table>
 
                     <?php $_SESSION["TotalCompra"] = $precioTotal;?>
-                    <?php //$_SESSION["paquete"] = GetPacket($totalRows_DatosParaPaquete);?>
+                    <?php $_SESSION["paquete"] = GetPacket($totalRows_DatosParaPaquete);?>
                     <?php $_SESSION["sex"] = sex($_SESSION['ydl_UserId']);?>
                     
                     <!-- Pay method:<br/>

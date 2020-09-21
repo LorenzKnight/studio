@@ -1,5 +1,8 @@
 <?php require_once('../connections/conexion.php');?>
 <?php require_once('inc/seguridad.php');?>
+<!--/////////////////////////////////////////////////control de permisos/////////////////////////////////////////////////-->
+<?php if(showPermissions($_SESSION['std_UserId'], "TSYS-P0009") || $_SESSION['std_Nivel'] < 2) { ?>
+<!--////////////////////////la otra parte del codigo control de permisos esta al final///////////////////////////////////-->
 <?php
  $query_DatosConsulta = sprintf("SELECT * FROM pack_discount ORDER BY id_p_discount"); 
  $DatosConsulta = mysqli_query($con, $query_DatosConsulta) or die(mysqli_error($con));
@@ -93,3 +96,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
 <?php
 mysqli_free_result($DatosConsulta);
 ?>
+<!--////////////////////////parte 2 del codigo control de permisos esta al final////////////////////////////-->
+<?php } else {
+      header(sprintf("Location: dashboard.php")); exit;
+} ?>

@@ -19,9 +19,10 @@ $editFormAction = $_SERVER['PHP_SELF'];
 if (isset($_SERVER['QUERY_STRING'])) {
   $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
 }
-  $insertSQL = sprintf("INSERT INTO cart(id_student, id_course, course_category, id_term, date) 
-                        VALUES (%s, %s, %s, $TermAct, NOW())",
-                        GetSQLValueString($row_DatosInsc['id_student'], "int"),                      
+  $insertSQL = sprintf("INSERT INTO cart(id_student, sex_student, id_course, course_category, id_term, date) 
+                        VALUES (%s, %s, %s, %s, $TermAct, NOW())",
+                        GetSQLValueString($row_DatosInsc['id_student'], "int"),
+                        GetSQLValueString(sex($row_DatosInsc['id_student']), "text"),                    
                         GetSQLValueString($_GET["courseID"], "int"),
                         GetSQLValueString(CourseCategory($_GET["courseID"]), "int"));
 

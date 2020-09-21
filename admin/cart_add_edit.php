@@ -12,12 +12,13 @@ $editFormAction = $_SERVER['PHP_SELF'];
 if (isset($_SERVER['QUERY_STRING'])) {
   $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
 }
-  $insertSQL = sprintf("INSERT INTO cart(id_student, id_course, course_category, id_term, transaction_made, date) 
-                        VALUES (%s, %s, %s, $TermAct, %s, NOW())",
-                        GetSQLValueString($_GET["editc"], "int"),                      
+  $insertSQL = sprintf("INSERT INTO cart(id_student, sex_student, id_course, course_category, id_term, transaction_made, date) 
+                        VALUES (%s, %s, %s, %s, $TermAct, %s, NOW())",
+                        GetSQLValueString(ObtenerIDstudentDesdeTransaccion($_GET["editc"]), "int"),
+                        GetSQLValueString(sex(ObtenerIDstudentDesdeTransaccion($_GET["editc"])), "text"),                     
                         GetSQLValueString($_GET["courseID"], "int"),
                         GetSQLValueString(CourseCategory($_GET["courseID"]), "int"),
-                        GetSQLValueString(ObtenerTransaccionEdit($_GET["tm"]), "int"));
+                        GetSQLValueString($_GET["tm"], "int"));
 
   
   $Result1 = mysqli_query($con,  $insertSQL) or die(mysqli_error($con));

@@ -1,7 +1,9 @@
 <?php require_once('../connections/conexion.php');?>
 <?php require_once('inc/seguridad.php');?>
-<!--/////////////////////////////////////////////////BACK-END INSERT/////////////////////////////////////////////////////////-->
-
+<!--/////////////////////////////////////////////////control de permisos/////////////////////////////////////////////////-->
+<?php if(showPermissions($_SESSION['std_UserId'], "TSYS-P0012") || $_SESSION['std_Nivel'] < 2) { ?>
+<!--////////////////////////la otra parte del codigo control de permisos esta al final///////////////////////////////////-->
+<!--///////////////////////////////////////////////BACK-END INSERT///////////////////////////////////////////////////////-->
 <?php
 $editFormAction = $_SERVER['PHP_SELF'];
 if (isset($_SERVER['QUERY_STRING'])) {
@@ -102,3 +104,7 @@ $Result1 = mysqli_query($con, $updateSQL) or die(mysqli_error($con));
     </div>
 </body>
 </html>
+<!--////////////////////////parte 2 del codigo control de permisos esta al final////////////////////////////-->
+<?php } else {
+      header(sprintf("Location: dashboard.php")); exit;
+} ?>

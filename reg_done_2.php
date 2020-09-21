@@ -18,7 +18,7 @@ $totalRows_DatosRegDone = mysqli_num_rows($DatosRegDone);
 <html>
 <head>
 <meta charset="iso-8859-1">
-<title>Yandali Studio</title>
+<title>Loops Dance Studio</title>
 <link rel="shortcut icon" href="favicon-32x32.png">
 <link href="css/style.css" rel="stylesheet" type="text/css"  media="all" />
 </head>

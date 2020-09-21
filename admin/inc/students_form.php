@@ -1,3 +1,10 @@
+<script>
+    function asegurar()
+    {
+            rc = confirm("Är du säkert på den här ändring?");
+            return rc;
+    }
+</script>
 <?php if($_GET["new"]):?>
 <div class="subform_cont1">
     <form action="students.php" method="post" name="formrequest" id="formrequest">
@@ -15,7 +22,7 @@
                 <td colspan="2" valign="middle" align="center"><input class="textf" type="email" placeholder="Din mailadress..." name="email" id="email" size="68" required/></td>
             </tr>
             <tr height="60">
-                <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Personnummer" name="personal_number" id="personal_number" size="31" required/></td>
+                <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" minlength="10" maxlength="10" placeholder="Ditt Personnummer (10 siffror)" name="personal_number" id="personal_number" size="31" required/></td>
                 <td width="50%" valign="middle" align="left" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Telefonnummer" name="telephone" id="telephone" size="31" required/></td>
             </tr>
             <tr height="60">
@@ -47,7 +54,7 @@
             </tr>
             <input type="hidden" name="via" id="via" value="<?php echo $_SESSION['std_UserId']; ?>"/>
             <input type="hidden" name="password" id="password" value="newstudent246"/>
-            <input type="hidden" name="status" id="status" value="Active"/> 
+            <input type="hidden" name="status" id="status" value="<?php if (isset($_SESSION['std_Nivel']) && $_SESSION['std_Nivel'] < 2) { ?> Active <?php } else { ?> Inactive <?php } ?>"/> 
             <input type="hidden" name="MM_insert" id="MM_insert" value="formrequest" />
         </table>
     </form>
@@ -60,7 +67,7 @@
             <table class="formulario" style="top: 50px;" border="0" cellspacing="0" cellpadding="0">
                 <tr height="50">
                     <td colspan="2" valign="middle" align="center" style="font-size: 30px; padding: 30px 0 0 0;">
-                        <?php echo ObtenerNombreStudent($studentadmin);?>
+                        <?php echo ObtenerNombreStudent($studentadmin);?> <?php echo ObtenerApellidoStudent($studentadmin);?>
                     </td>
                 </tr>
                 <tr height="30">
@@ -79,6 +86,7 @@
                                 <?php
                                     if ($totalRows_DatosCourse > 0) {
                                     do { ?>
+                                    <?php if(productosRestantes($row_DatosInsc['id_student'], $row_DatosCourse['id_course'])) { ?>
                                     <div style="width:100%;">
                                         <a style="font-size: 11px;" href="cart_add.php?courseID=<?php echo $row_DatosCourse['id_course'];?>">
                                             <div style="width:50%; padding:10px 0; text-align:left; float:left;">
@@ -92,6 +100,7 @@
                                             </div>
                                         </a>
                                     </div>
+                                    <?php } ?>
                                     <?php } while ($row_DatosCourse = mysqli_fetch_assoc($DatosCourse));
                                     }
                                     ?>
@@ -101,6 +110,7 @@
                                     <?php
                                     if ($totalRows_DatosCourse2 > 0) {
                                     do { ?>
+                                    <?php if(productosRestantes($row_DatosInsc['id_student'], $row_DatosCourse['id_course'])) { ?>
                                     <div style="width:100%;">
                                         <a style="font-size: 11px;" href="cart_add.php?courseID=<?php echo $row_DatosCourse2['id_course'];?>">
                                             <div style="width:50%; padding:10px 0; text-align:left; float:left;">
@@ -114,6 +124,7 @@
                                             </div>
                                         </a>
                                     </div>
+                                    <?php } ?>
                                     <?php } while ($row_DatosCourse2 = mysqli_fetch_assoc($DatosCourse2));
                                     }
                                     ?>
@@ -125,46 +136,46 @@
                                 <div class="lista_c">
                                     <?php $SubTotal = 0; ?>
                                     <?php
-                                    if ($totalRows_DatosCart > 0) {
+                                    if ($totalRows_DatosCart3 > 0) {
                                     do { ?>
                                         <div style="width:100%;">
-                                            <a style="font-size: 11px;" href="cart_delete.php?counterID=<?php echo $row_DatosCart['id_counter'];?>">
+                                            <a style="font-size: 11px;" href="cart_delete.php?counterID=<?php echo $row_DatosCart3['id_counter'];?>">
                                                 <div style="width:50%; padding:10px 0; text-align:left; float:left;">
-                                                    <?php echo ObtenerNombreCurso($row_DatosCart['id_course']);?>
+                                                    <?php echo ObtenerNombreCurso($row_DatosCart3['id_course']);?>
                                                 </div>
                                                 <div style="width:40%; padding:10px 0; text-align:left; float:left;">
-                                                    <?php echo ObtenerEsquemaCurso($row_DatosCart['id_course']);?>
+                                                    <?php echo ObtenerEsquemaCurso($row_DatosCart3['id_course']);?>
                                                 </div>
                                                 <div style="width:10%; padding:10px 0; color:red; text-align:left; float:left;">
                                                     ( - )
                                                 </div>
                                             </a>
                                         </div>
-                                    <?php $SubTotal = $SubTotal + ObtenerPrecioCurso($row_DatosCart['id_course']);?>
-                                    <?php } while ($row_DatosCart = mysqli_fetch_assoc($DatosCart));
+                                    <?php $SubTotal = $SubTotal + ObtenerPrecioCurso($row_DatosCart3['id_course']);?>
+                                    <?php } while ($row_DatosCart3 = mysqli_fetch_assoc($DatosCart3));
                                     }
                                     ?>
-                                        <?php if ($totalRows_DatosCart2 > 0) {?>
+                                        <?php if ($totalRows_DatosCart4 > 0) {?>
                                         <p style="font-size:12px; color:#999;">Kurser utan rabatt</p>
                                         <?php } ?>
                                     <?php
-                                    if ($totalRows_DatosCart2 > 0) {
+                                    if ($totalRows_DatosCart4 > 0) {
                                     do { ?>
                                         <div style="width:100%;">
-                                            <a style="font-size: 11px;" href="cart_delete.php?counterID=<?php echo $row_DatosCart2['id_counter'];?>">
+                                            <a style="font-size: 11px;" href="cart_delete.php?counterID=<?php echo $row_DatosCart4['id_counter'];?>">
                                                 <div style="width:50%; padding:10px 0; text-align:left; float:left;">
-                                                    <?php echo ObtenerNombreCurso($row_DatosCart2['id_course']);?>
+                                                    <?php echo ObtenerNombreCurso($row_DatosCart4['id_course']);?>
                                                 </div>
                                                 <div style="width:40%; padding:10px 0; text-align:left; float:left;">
-                                                    <?php echo ObtenerEsquemaCurso($row_DatosCart2['id_course']);?>
+                                                    <?php echo ObtenerEsquemaCurso($row_DatosCart4['id_course']);?>
                                                 </div>
                                                 <div style="width:10%; padding:10px 0; color:red; text-align:left; float:left;">
                                                     ( - )
                                                 </div>
                                             </a>
                                         </div>
-                                    <?php $NoDiscTotal = $NoDiscTotal + ObtenerPrecioCurso($row_DatosCart2['id_course']);?>
-                                    <?php } while ($row_DatosCart2 = mysqli_fetch_assoc($DatosCart2));
+                                    <?php $NoDiscTotal = $NoDiscTotal + ObtenerPrecioCurso($row_DatosCart4['id_course']);?>
+                                    <?php } while ($row_DatosCart4 = mysqli_fetch_assoc($DatosCart4));
                                     }
                                     ?>
 
@@ -180,7 +191,7 @@
 
                                 <?php
                                 $SubTotalPlus = $SubTotal + $NoDiscTotal;
-                                $resprosent = ObtenerPDescuento($totalRows_DatosCart);
+                                $resprosent = ObtenerPDescuento($totalRows_DatosCart3);
                                 $preciorebaja = $SubTotal / 100 * $resprosent;
                                 $precioTotalCR = $SubTotal - $preciorebaja;
                                 $precioTotal = $SubTotal - $preciorebaja + $NoDiscTotal;
@@ -194,7 +205,7 @@
                                         <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#CCC;">Sub Total:</td>
                                         <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#CCC;"><?php echo $SubTotalPlus; ?> SEK</td>
                                     </tr>
-                                    <?php if ($totalRows_DatosCart > 1) {?>
+                                    <?php if ($totalRows_DatosCart3 > 1) {?>
                                     <tr>
                                         <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#CCC;">- <?php //echo ObtenerPDescuento($totalRows_DatosCart); ?> Rabatt:</td>
                                         <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#CCC;"><?php echo $preciorebaja; ?> SEK </td>
@@ -217,7 +228,7 @@
                                 </table>
 
                                 <?php $_SESSION["TotalCompra"] = $precioTotal;?>
-                                <?php //$_SESSION["paquete"] = GetPacket($totalRows_DatosParaPaquete);?>
+                                <?php $_SESSION["paquete"] = GetPacket($totalRows_DatosParaPaquete);?>
                                 <?php $_SESSION["sex"] = sex($studentadmin);?>
                                 
                                 <!-- Pay method:<br/>
@@ -244,12 +255,11 @@
     $TerminStart = $row_DatosTerm["term_start"];
     $TerminStop = $row_DatosTerm["term_stop"];
     $total = $_SESSION["TotalCompra"];
-    $Package = GetPacket($totalRows_DatosCart2);
 
     $fecha2=time()+3600;
     date("H:i:s",$fecha2);
     ?>
-    <?php ConfirmationDone(date('Y'), date('m'), date('d'), date('His',$fecha2), $studentadmin, $sexadmin, $Termin, $TerminStart, $TerminStop, $Package, $total); ?>
+    <?php ConfirmationDone(date('Y'), date('m'), date('d'), date('His',$fecha2), $studentadmin, $sexadmin, $Termin, $TerminStart, $TerminStop, $_SESSION["paquete"], $total); ?>
         <div class="subform_cont1">
             <div class="msn_done">
                 <br/><br/><br/><br/>
@@ -284,8 +294,9 @@
                                     <?php
                                     if ($totalRows_DatosCourse > 0) {
                                     do { ?>
+                                    <?php if(productosRestantes($_GET["id"], $row_DatosCourse['id_course'])) { ?>
                                     <div style="width:100%;">
-                                        <a style="font-size: 11px;" href="cart_add_exist.php?courseID=<?php echo $row_DatosCourse['id_course'];?>">
+                                        <a style="font-size: 11px;" href="cart_add_exist.php?courseID=<?php echo $row_DatosCourse['id_course'];?>&id=<?php echo $_GET["id"];?>">
                                             <div style="width:50%; padding:10px 0; text-align:left; float:left;">
                                                 <?php echo $row_DatosCourse['name'];?>
                                             </div>
@@ -297,6 +308,7 @@
                                             </div>
                                         </a>
                                     </div>
+                                    <?php } ?>
                                     <?php } while ($row_DatosCourse = mysqli_fetch_assoc($DatosCourse));
                                     }
                                     ?>
@@ -306,8 +318,9 @@
                                     <?php
                                     if ($totalRows_DatosCourse2 > 0) {
                                     do { ?>
+                                    <?php if(productosRestantes($_GET["id"], $row_DatosCourse2['id_course'])) { ?>
                                     <div style="width:100%;">
-                                        <a style="font-size: 11px;" href="cart_add_exist.php?courseID=<?php echo $row_DatosCourse2['id_course'];?>">
+                                        <a style="font-size: 11px;" href="cart_add_exist.php?courseID=<?php echo $row_DatosCourse2['id_course'];?>&id=<?php echo $_GET["id"];?>">
                                             <div style="width:50%; padding:10px 0; text-align:left; float:left;">
                                                 <?php echo $row_DatosCourse2['name'];?>
                                             </div>
@@ -319,6 +332,7 @@
                                             </div>
                                         </a>
                                     </div>
+                                    <?php } ?>
                                     <?php } while ($row_DatosCourse2 = mysqli_fetch_assoc($DatosCourse2));
                                     }
                                     ?>
@@ -391,7 +405,7 @@
 
                                 <table style="background-color: ; margin:10px 0;" width="60%" border="0" cellspacing="0" cellpadding="0">
                                     <tr>
-                                        <td colspan="2" valign="middle" align="center" style="font-size:18px; padding:0 0 10px;"><?php echo GetPacket($totalRows_DatosParaPaquete); ?></td>
+                                        <td colspan="2" valign="middle" align="center" style="font-size:18px; padding:0 0 10px;"><?php echo GetPacket($totalRows_DatosParaPaquete2); ?></td>
                                     </tr>
                                     <tr>
                                         <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#CCC;">Sub Total:</td>
@@ -420,7 +434,7 @@
                                 </table>
 
                                 <?php $_SESSION["TotalCompra2"] = $precioTotal2;?>
-                                <?php $_SESSION["paquete2"] = GetPacket($totalRows_DatosParaPaquete);?>
+                                <?php $_SESSION["paquete2"] = GetPacket($totalRows_DatosParaPaquete2);?>
                                 
                                 <!-- Pay method:<br/>
                                 Paypal -->
@@ -446,7 +460,7 @@
     $TerminStop = $row_DatosTerm["term_stop"];
     $total2 = $_SESSION["TotalCompra2"];
     $Package2 = $_SESSION["paquete2"];
-    $studentadmin2 = $_GET["done_exist"];
+    $studentadmin2 = $_GET["done_exist"]; 
 
     $fecha2=time()+3600;
     date("H:i:s",$fecha2);
@@ -582,7 +596,7 @@
                     <td colspan="2" valign="middle" align="center"><input class="textf" type="email" value="<?php echo $row_DatosEdit['email'];?>" placeholder="Din mailadress..." name="email" id="email" size="68" required/></td>
                 </tr>
                 <tr height="60">
-                    <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" value="<?php echo $row_DatosEdit['personal_number'];?>" placeholder="Ditt Personnummer" name="personal_number" id="personal_number" size="31" required/></td>
+                    <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" value="<?php echo $row_DatosEdit['personal_number'];?>" minlength="10" maxlength="10" placeholder="Ditt Personnummer (10 siffror)" name="personal_number" id="personal_number" size="31" required/></td>
                     <td width="50%" valign="middle" align="left" style="padding: 0 10px;"><input class="textf" type="text" value="<?php echo $row_DatosEdit['telephone'];?>" placeholder="Ditt Telefonnummer" name="telephone" id="telephone" size="31" required/></td>
                 </tr>
                 <tr height="60">
@@ -613,7 +627,7 @@
                 </tr>
                 <tr height="80">
                     <td colspan="2" valign="middle" align="center" style="color: #666; font-size: 14px;">
-                            <a href="students.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Uppdatera" />
+                            <a href="students.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Uppdatera" onclick="javascript:return asegurar ();"/>
                     </td>
                 </tr>
                 <tr height="30">
@@ -633,7 +647,7 @@
         <table class="formulario" style="" border="0" cellspacing="0" cellpadding="0">
             <tr height="60">
                 <td colspan="2" valign="middle" align="center" style="font-size: 30px; padding: 20px 0 0 0;">
-                    <?php echo ObtenerNombreStudent($_GET['editc']);?> <?php echo ObtenerApellidoStudent($_GET['editc']);?>
+                    <?php echo ObtenerNombreStudent(ObtenerIDstudentDesdeTransaccion($_GET['editc']));?> <?php echo ObtenerApellidoStudent(ObtenerIDstudentDesdeTransaccion($_GET['editc']));?>
                 </td>
             </tr>
             <tr height="30">
@@ -652,6 +666,7 @@
                                 <?php
                                 if ($totalRows_DatosCourseEdit > 0) {
                                 do { ?>
+                                <?php if(productosRestantesEdit(ObtenerIDstudentDesdeTransaccion($_GET['editc']), $row_DatosCourseEdit['id_course'], $_GET['editc'])) { ?>
                                 <div style="width:100%;">
                                     <a style="font-size: 11px;" href="cart_add_edit.php?editc=<?php echo $_GET['editc'];?>&courseID=<?php echo $row_DatosCourseEdit['id_course'];?>&tm=<?php echo $_GET['editc'];?>">
                                         <div style="width:50%; padding:10px 0; text-align:left; float:left;">
@@ -665,6 +680,7 @@
                                         </div>
                                     </a>
                                 </div>
+                                <?php } ?>
                                 <?php } while ($row_DatosCourseEdit = mysqli_fetch_assoc($DatosCourseEdit));
                                 }
                                 ?>
@@ -674,6 +690,7 @@
                                 <?php
                                 if ($totalRows_DatosCourseEdit2 > 0) {
                                 do { ?>
+                                <?php if(productosRestantesEdit(ObtenerIDstudentDesdeTransaccion($_GET['editc']), $row_DatosCourseEdit2['id_course'], $_GET['editc'])) { ?>
                                 <div style="width:100%;">
                                     <a style="font-size: 11px;" href="cart_add_edit.php?editc=<?php echo $_GET['editc'];?>&courseID=<?php echo $row_DatosCourseEdit2['id_course'];?>&tm=<?php echo $_GET['editc'];?>">
                                         <div style="width:50%; padding:10px 0; text-align:left; float:left;">
@@ -687,6 +704,7 @@
                                         </div>
                                     </a>
                                 </div>
+                                <?php } ?>
                                 <?php } while ($row_DatosCourseEdit2 = mysqli_fetch_assoc($DatosCourseEdit2));
                                 }
                                 ?>
@@ -748,18 +766,50 @@
             </tr>
             <tr height="60">
                 <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
-                <br/>
-                <h4><?php echo GetPacket($totalRows_DatosCartEditPackage); ?></h4>
-                <?php 
-                $resprosent = ObtenerPDescuento($totalRows_DatosCart);
-                $preciorebaja = $SubTotal / 100 * $resprosent;
-                $precioTotal = $SubTotal - $preciorebaja;
-                ?>
-                Sub Total: <?php echo $SubTotal; ?> SEK <br/>
-                <?php echo ObtenerPDescuento($totalRows_DatosCartEditPackage); ?> <?php if ($totalRows_DatosCartEditPackage > 1) {?>% Rabbat: <?php echo $preciorebaja; ?> SEK<br/> <?php } ?>
-                <?php $_SESSION["TotalCompra"] = $precioTotal;?>
-                <?php //$paqueteE = GetPacket($totalRows_DatosCartEditPackage); ?>
-                Total: <?php echo $precioTotal; ?> SEK
+                            
+                            <?php
+                            $SubTotalPlus = $SubTotal + $NoDiscTotal;
+                            $resprosent = ObtenerPDescuento($totalRows_DatosCartEdit);
+                            $preciorebaja = $SubTotal / 100 * $resprosent;
+                            $precioTotalCR = $SubTotal - $preciorebaja;
+                            $precioTotal = $SubTotal - $preciorebaja + $NoDiscTotal;
+                            ?>
+
+                            <table style="background-color: ; margin:10px 0;" width="60%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td colspan="2" valign="middle" align="center" style="font-size:18px; padding:0 0 10px;"><?php echo GetPacket($totalRows_DatosParaPaquete3); ?></td>
+                            </tr>
+                            <tr>
+                                <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#CCC;">Sub Total:</td>
+                                <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#CCC;"><?php echo $SubTotalPlus; ?> SEK</td>
+                            </tr>
+                            <?php if ($totalRows_DatosCartEdit > 1) {?>
+                            <tr>
+                                <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#CCC;">- <?php //echo ObtenerPDescuento($totalRows_DatosCart); ?> Rabatt:</td>
+                                <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#CCC;"><?php echo $preciorebaja; ?> SEK </td>
+                            </tr>
+                            <?php } ?>
+                            <!-- <tr>
+                                <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#999;">= Total efter rabatt:</td>
+                                <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#999;"><?php echo $precioTotalCR; ?> SEK</td>
+                            </tr> -->
+                            <?php if ($totalRows_DatosCartEdit > 0) {?>
+                            <!-- <tr>
+                                <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#999;">+ Kurser utan rabatt:</td>
+                                <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#999;"><?php echo $NoDiscTotal; ?> SEK</td>
+                            </tr> -->
+                            <?php } ?>
+                            <tr>
+                                <td width="50%" valign="middle" align="right" style="font-size:18px; padding:5px 5px 0 0; border-top:1px solid #999;">Total:</td>
+                                <td width="50%" valign="middle" align="left" style="font-size:18px; padding:5px 0 0 5px; border-top:1px solid #999;"><?php echo $precioTotal; ?> SEK</td>
+                            </tr>
+                        </table>
+
+                        <?php $_SESSION["TotalCompra"] = $precioTotal;?>
+                        <?php $_SESSION["paquete3"] = GetPacket($totalRows_DatosParaPaquete3);?>
+                        
+                        <!-- Pay method:<br/>
+                        Paypal -->
                 </td>
             </tr>
             <tr height="85">
@@ -770,8 +820,9 @@
             <tr height="3">
             </tr>
         </table>
+        <input type="hidden" name="package" id="package" value="<?php echo $_SESSION["paquete3"]; ?>"/>
         <input type="hidden" name="total" id="total" value="<?php echo $precioTotal; ?>"/>
-        <input type="hidden" name="id_student" id="id_student" value="<?php echo $_GET['editc'];?>"/>
+        <input type="hidden" name="id_insc" id="id_insc" value="<?php echo $_GET['editc'];?>"/>
         <input type="hidden" name="MM_insert" id="MM_insert" value="formeditc" />
     </form>
     </div>

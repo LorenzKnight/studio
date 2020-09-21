@@ -1,3 +1,10 @@
+<script>
+    function asegurar()
+    {
+            rc = confirm("Är du säkert på den här ändring?");
+            return rc;
+    }
+</script>
 <?php if($_GET["new"]):?>
     <div class="subform_cont1">
         <form action="courses.php" method="post" name="formrequest" id="formrequest">
@@ -47,6 +54,8 @@
                         
                     </td>
                 </tr>
+                <input type="hidden" name="user_rank" id="user_rank" value="<?php echo $_SESSION['std_Nivel'];?>"/>
+                <input type="hidden" name="id_user" id="id_user" value="<?php echo $_SESSION['std_UserId'];?>"/>
                 <input type="hidden" name="MM_insert" id="MM_insert" value="formrequest" />
             </table>
         </form>
@@ -93,7 +102,7 @@
                 </tr>
                 <tr height="80">
                     <td colspan="2" valign="middle" align="center" style="color: #666; font-size: 14px;">
-                            <a href="courses.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Uppdatera" />
+                            <a href="courses.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Uppdatera" onclick="javascript:return asegurar ();"/>
                     </td>
                 </tr>
                 <tr height="30">

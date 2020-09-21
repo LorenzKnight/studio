@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="iso-8859-1">
-<title>Yandali</title>
+<title><?php echo $pageName; ?></title>
 <link rel="shortcut icon" href="favicon-32x32.png">
 <link href="css/style.css" rel="stylesheet" type="text/css"  media="all" />
 
@@ -12,6 +12,7 @@
 <body>
     <?php include("inc/head.php")?>
     <?php include("inc/about_wrap.php")?>
+    <?php include("inc/collaborators.php")?>
     <?php include("inc/foot.php")?>
 </body>
 </html>

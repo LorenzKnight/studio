@@ -1,4 +1,11 @@
 <?php include("periods_form.php")?>
+<script>
+    function asegurar_borrado()
+    {
+        rc = confirm("Är du säkert på att du vill radera den här register?");
+        return rc;
+    }
+</script>
 <div class="user_div">
 <table width="100%" cellspacing="0" class="table_user" style="background-color: #F7B500;margin: 20px auto 0; ">
     <tr height="40" style="color: #FFF;">
@@ -19,13 +26,15 @@
         <td width="20%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo $row_DatosPeriod['term_stop']; ?></td>
         <td width="20%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo statusBinario($row_DatosPeriod['status']); ?></td>
         <td width="20%" nowrap="nowrap" align="center" style="padding: 0 10px 0 0;">
+        <?php if(showPermissions($_SESSION['std_UserId'], "TSYS-P0005") || $_SESSION['std_Nivel'] < 2) : ?>
             <div class="arternative">
                 <button class="artbtn">o o o</button>
                 <div class="arternative-content">
                     <a href="periods.php?editp=<?php echo $row_DatosPeriod['id_term']; ?>" class="alt_button">Edit Termin</a>
-                    <a href="period_delete.php?id=<?php echo $row_DatosPeriod['id_term']; ?>" class="alt_button">Delete</a>
+                    <a href="period_delete.php?id=<?php echo $row_DatosPeriod['id_term']; ?>" class="alt_button" onclick="javascript:return asegurar_borrado ();">Delete</a>
                 </div>
             </div>
+        <?php endif ?>
         </td>
     </tr>
     <?php } while ($row_DatosPeriod = mysqli_fetch_assoc($DatosPeriod)); 
@@ -40,5 +49,6 @@
     <?php } ?>
 </table>
 </div>
-
+<?php if(showPermissions($_SESSION['std_UserId'], "TSYS-P0004") || $_SESSION['std_Nivel'] < 2) : ?>
 <a href="periods.php?new=1"><div class="flying_button">+</div></a>
+<?php endif ?>

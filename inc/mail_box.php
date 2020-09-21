@@ -8,7 +8,7 @@
             Skicka ett meddelande genom att fylla i formuläret här nedan eller skicka ett mejl till <?php echo $row_DatosSite['email']; ?>.<br> 
             <br>
             Vi hörs snart!<br>
-            /Sofia, Lorenz, Marie & Lessly
+            /Sofia & Lorenz
             </div>
         </div>
         <div class="contact_content">
@@ -36,7 +36,7 @@
             </div>
             <div class="contact_info">
             
-                <h4 style="text-transform:uppercase;">Yandali Dance Studio</h4>
+                <h4 style="text-transform:uppercase;"><?php echo $row_DatosSite['name']; ?></h4>
                 <div class="text_cont">
                     <?php echo $row_DatosSite['name']; ?><br>
                     <?php echo $row_DatosSite['adress']; ?><br>

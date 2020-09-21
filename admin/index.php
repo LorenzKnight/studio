@@ -21,7 +21,7 @@ if (isset($_POST['mail'])) {
   $password=md5($_POST['password']);
   $MM_fldUserAuthorization = "rank";
   $MM_redirectLoginSuccess = "dashboard.php";
-  $MM_redirectLoginFailed = "error.php?error=3";
+  $MM_redirectLoginFailed = "error.php?error=1";
   $MM_redirecttoReferrer = false;
   
   	
@@ -71,28 +71,29 @@ if (isset($_POST['mail'])) {
     <div class="adm_login">
         <form action="index.php" method="post" name="forminsert" id="forminsert">
             <table width="100%" align="center" cellspacing="0">
-                <tr>
-                    <td style="" colspan="6" height="30" align="center" valign="middle">
-                        <h3>Studio</h3>
+                <tr valign="baseline" height="60">
+                    <td style="" colspan="6" align="center" valign="middle">
+                        <h3>Studio<br/>
+                            LK-L20</h3>
                     </td>      
                 </tr>
                 <tr valign="baseline" height="60">
                     <td colspan="6" valign="middle" align="center">
-                        <input class="textin" type="email" name="mail" id="mail" size="43" placeholder="Enter your E-Mail..." title="Enter a valid email" required/>
+                        <input class="textin" type="email" name="mail" id="mail" size="35" placeholder="Enter your E-Mail..." title="Enter a valid email" required/>
                     </td>
                 </tr>
                 <tr valign="baseline" height="60">
                     <td style="" colspan="6" valign="middle" align="center">
-                        <input class="textin" type="password" name="password" id="password" size="43" placeholder="Enter your Password..." required/>
+                        <input class="textin" type="password" name="password" id="password" size="35" placeholder="Enter your Password..." required/>
                     </td>
                 </tr>
                 <tr valign="baseline" height="60">
-                    <td style="padding-bottom:10px;" nowrap="nowrap" align="center"><input style="padding: 10px 113px;" type="submit" class="button_in" value="LOGING" /></td>
+                    <td style="padding-bottom:10px;" nowrap="nowrap" align="center"><input style="padding: 10px 105px;" type="submit" class="button_in" value="LOGING" /></td>
                 </tr>
                 <tr valign="baseline" height="40">
                     <td style="font-size: 12px; padding-bottom:10px;" nowrap="nowrap" align="center">
                         Powered by:<br>
-                        <a href="http://lorenzknight.com/">www.lorenzknight.com</a>
+                        <a href="http://lorenzknight.com/" target="_blank">www.lorenzknight.com</a>
                     </td>
                 </tr>
             </table>

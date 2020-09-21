@@ -1,3 +1,10 @@
+<script>
+    function asegurar()
+    {
+            rc = confirm("Är du säkert på den här ändring?");
+            return rc;
+    }
+</script>
 <?php if($_GET["new"]):?>
     <div class="subform_cont1">
         <form action="periods.php" method="post" name="formrequest" id="formrequest">
@@ -195,7 +202,7 @@
                 </tr>
                 <tr height="80">
                     <td colspan="2" valign="middle" align="center" style="color: #666; font-size: 14px;">
-                            <a href="periods.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Uppdatera" />
+                            <a href="periods.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Uppdatera" onclick="javascript:return asegurar ();"/>
                     </td>
                 </tr>
                 <tr height="30">
@@ -207,5 +214,36 @@
                 <input type="hidden" name="MM_insert" id="MM_insert" value="formedit" />
             </table>
         </form>
+    </div>
+<?php endif ?>
+<?php if($_GET["updatepopup"]):?>
+    <div class="subform_cont1">
+        <table class="formulario_user" style="margin-top:200px;" border="0" cellspacing="0" cellpadding="0">
+            <tr height="30">
+                <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
+                    
+                </td>
+            </tr>
+            <tr height="60">
+                <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
+                    <h2 style="color:red;">Important!</h2>
+                </td>
+            </tr>
+            <tr height="30">
+                <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
+                    The period is about to expire or already expired, in order to continue using the system you have to create a new period where the expiration date is not the same or three days before the current one
+                </td>
+            </tr>
+            <tr height="100">
+                <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
+                    <a href="periods.php?new=1"><input class="button_a" style="width: 200px; text-align: center;" value="Create period" /></a>
+                </td>
+            </tr>
+            <tr height="20">
+                <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
+                    
+                </td>
+            </tr>
+        </table>
     </div>
 <?php endif ?>
