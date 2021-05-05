@@ -60,7 +60,7 @@
         <h3 style="text-transform:uppercase;">KURSER OCH SOCIALDANS</h3>
         <?php //echo $_SESSION['ydl_UserId'];?>
         <h3>Kurser & paket</h3>
-        <p>Varje kurs-omgångar pågår i 12 veckor.</p>
+        <p>Varje kurs-omgångar pågår i <?php echo $row_DatosReg['no_weeks']; ?> veckor.</p>
         <br>
         <p>Innan kursstart anmäler du dig till de kurser du vill gå.</p>
         <p>Du kan också anmäla dig i kassan under prova-på-veckan.</p>
@@ -81,7 +81,11 @@
         <h3 style="text-transform:uppercase;">BALETT</h3>
         <p>- Balett: 1 290 kr (90 min klasser, ingår ej i erbjudande om grupprabatt)</p>
         <br/>
+        <?php if($row_DatosReg['registration_off'] == 1) { ?>
+        <input class="button_reg" style="background-color:#999;" value="Anmälninga avstäng">
+        <?php } else { ?>
         <input class="button_reg" onclick="location='registration.php?id=1'" value="Anmäl mig">
+        <?php } ?>
     </div>
 
 
@@ -259,13 +263,32 @@
     <?php if($_GET["idCompl"]):?>
         <div class="form_frame">
         
-            <table class="formulario" style="top: 50px;" border="0" cellspacing="0" cellpadding="0">
-                <tr height="80">
+            <table class="formulario" style="top: 40px;" border="0" cellspacing="0" cellpadding="0">
+                <tr height="60">
                     <td colspan="2" valign="middle" align="center" style="font-size: 30px; padding: 30px 0 0 0;">
                         
                         Hej <?php echo ObtenerNombreStudent($_SESSION['ydl_UserId']);?>
                     </td>
                 </tr>
+        <form action="registration.php" method="post" name="discountrequest" id="discountrequest">
+            <tr height="80">
+                <td colspan="2" valign="middle" align="center">
+                    <?php if (confirmCodeTrue($_SESSION['ydl_UserId'], $TermAct)) { ?>
+                        <?php if ($_GET['idCompl'] < 3 ) { ?>
+                            <input class="textd" type="text" placeholder="Har du en kod?" name="discountcode" id="discountcode" size="25" autocomplete="off" onkeyup="this.value = this.value.toUpperCase();" style="text-align:center;"> <input type="submit" class="button_s" value="Sätta in" />
+                        <?php } ?>
+                        <?php if ($_GET['idCompl'] == 2 ) { ?>
+                            <p style="font-size:12px; padding:0; color:red;">Den här koden är inte giltig</p>
+                        <?php } ?>
+                    <?php } else { ?>
+                        <p style="font-size:12px; padding:0; color:green;">Koden är giltig</p>
+                    <?php } ?>
+                </td>
+            </tr>
+            <input type="hidden" name="id_student" id="id_student" value="<?php echo $_SESSION['ydl_UserId']; ?>"/>
+            <input type="hidden" name="id_term" id="id_term" value="Active"/>
+            <input type="hidden" name="MM_insert" id="MM_insert" value="discountrequest" />
+        </form>
                 <tr height="30">
                     <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
                     Scrolla i listan med valbara kurser och klicka på de kurser du vill anmäla dig till.
@@ -346,7 +369,17 @@
                                                 </div>
                                             </a>
                                         </div>
-                                    <?php $SubTotal = $SubTotal + ObtenerPrecioCurso($row_DatosCart['id_course']);?>
+                                        <!--/////////////////////////codigo que descuenta/////////////////////////-->
+                                    <?php if(getPorDiscount(ObtenerDisc($_SESSION["ydl_UserId"], $TermAct), $row_DatosCart['id_course']) != "") { ?>
+                                        <?php $rebajaCodigo = getPorDiscount(ObtenerDisc($_SESSION["ydl_UserId"], $TermAct), $row_DatosCart['id_course']); ?>
+                                        <?php $discPercentMoney = ObtenerPrecioCurso($row_DatosCart['id_course']) / 100 * $rebajaCodigo ; ?>
+                                    <?php } else { ?>
+                                        <?php $discPercentMoney = getMonDiscount(ObtenerDisc($_SESSION["ydl_UserId"], $TermAct), $row_DatosCart['id_course']);?>
+                                    <?php } ?>
+                                        <!--/////////////////////////codigo resutado sin descuento/////////////////////////-->
+                                    <?php $SubTotalSinCode = $SubTotalSinCode + ObtenerPrecioCurso($row_DatosCart['id_course']); ?>
+
+                                    <?php $SubTotal = $SubTotal + ObtenerPrecioCurso($row_DatosCart['id_course']) - $discPercentMoney; ?>
                                     <?php } while ($row_DatosCart = mysqli_fetch_assoc($DatosCart));
                                     }
                                     ?>
@@ -369,39 +402,60 @@
                                                 </div>
                                             </a>
                                         </div>
-                                    <?php $NoDiscTotal = $NoDiscTotal + ObtenerPrecioCurso($row_DatosCart2['id_course']);?>
+                                        <!--/////////////////////////codigo resutado sin descuento/////////////////////////-->
+                                    <?php if(getPorDiscount(ObtenerDisc($_SESSION["ydl_UserId"], $TermAct), $row_DatosCart2['id_course'])) { ?>
+                                        <?php $rebajaCodigo2 = getPorDiscount(ObtenerDisc($_SESSION["ydl_UserId"], $TermAct), $row_DatosCart2['id_course']); ?>
+                                        <?php $discPercentMoney2 = ObtenerPrecioCurso($row_DatosCart2['id_course']) / 100 * $rebajaCodigo2 ; ?>
+                                    <?php } else { ?>
+                                        <?php $discPercentMoney2 = getMonDiscount(ObtenerDisc($_SESSION["ydl_UserId"], $TermAct), $row_DatosCart2['id_course']);?>
+                                    <?php } ?>
+                                        <!--/////////////////////////codigo resutado sin descuento/////////////////////////-->
+                                    <?php $NoDiscTotalSinCode = $NoDiscTotalSinCode + ObtenerPrecioCurso($row_DatosCart2['id_course']); ?>
+
+                                    <?php $NoDiscTotal = $NoDiscTotal + ObtenerPrecioCurso($row_DatosCart2['id_course']) - $discPercentMoney2;?>
                                     <?php } while ($row_DatosCart2 = mysqli_fetch_assoc($DatosCart2));
                                     }
                                     ?>
                                 </div>
                             </div>
                         </div>
-        <form action="payment_method.php" method="post" name="" id="">
                     </td>
                 </tr>
+        <form action="payment_method.php" method="post" name="" id="">
                 <tr height="60">
                     <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
                     
                     <?php
+                    $sumaNoCode = $SubTotalSinCode + $NoDiscTotalSinCode;
                     $SubTotalPlus = $SubTotal + $NoDiscTotal;
+
+                    $SubTotalNoCode = $sumaNoCode - $SubTotalPlus;
+
                     $resprosent = ObtenerPDescuento($totalRows_DatosCart);
                     $preciorebaja = $SubTotal / 100 * $resprosent;
                     $precioTotalCR = $SubTotal - $preciorebaja;
                     $precioTotal = $SubTotal - $preciorebaja + $NoDiscTotal;
                     ?>
 
-                    <table style="background-color: ; margin:10px 0;" width="60%" border="0" cellspacing="0" cellpadding="0">
+                    <table style="background-color: ; margin:5px 0 0;" width="60%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
                             <td colspan="2" valign="middle" align="center" style="font-size:18px; padding:0 0 10px;"><?php echo GetPacket($totalRows_DatosParaPaquete); ?></td>
                         </tr>
                         <tr>
                             <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#CCC;">Sub Total:</td>
-                            <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#CCC;"><?php echo $SubTotalPlus; ?> SEK</td>
+                            <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#CCC;">&nbsp;<?php echo $SubTotalPlus; ?> SEK</td>
                         </tr>
                         <?php if ($totalRows_DatosCart > 1) {?>
                         <tr>
-                            <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#CCC;">- <?php //echo ObtenerPDescuento($totalRows_DatosCart); ?> Rabatt:</td>
-                            <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#CCC;"><?php echo $preciorebaja; ?> SEK </td>
+                            <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#CCC;"><?php //echo ObtenerPDescuento($totalRows_DatosCart); ?>Mängd rabatt:</td>
+                            <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#CCC;">- <?php echo $preciorebaja; ?> SEK </td>
+                        </tr>
+                        <?php } ?>
+                        <?php if (confirmCodeTrue($_SESSION['ydl_UserId'], $TermAct)) { ?>
+                        <?php } else { ?>
+                        <tr>
+                            <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#CCC;">rabatt kod:</td>
+                            <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#CCC;">- <?php echo $SubTotalNoCode; ?> SEK </td>
                         </tr>
                         <?php } ?>
                         <!-- <tr>

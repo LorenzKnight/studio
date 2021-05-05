@@ -1,10 +1,48 @@
 <?php require_once('../connections/conexion.php');?>
 <?php require_once('inc/seguridad.php');?>
 <?php
- $query_DatosConsulta = sprintf("SELECT * FROM courses WHERE status = 1 ORDER BY id_course ASC"); 
- $DatosConsulta = mysqli_query($con, $query_DatosConsulta) or die(mysqli_error($con));
- $row_DatosConsulta = mysqli_fetch_assoc($DatosConsulta);
- $totalRows_DatosConsulta = mysqli_num_rows($DatosConsulta);
+  $query_DatosTerm_filter = sprintf("SELECT * FROM term ORDER BY id_term DESC"); 
+  $DatosTerm_filter = mysqli_query($con, $query_DatosTerm_filter) or die(mysqli_error($con));
+  $row_DatosTerm_filter = mysqli_fetch_assoc($DatosTerm_filter);
+  $totalRows_DatosTerm_filter = mysqli_num_rows($DatosTerm_filter);
+?>
+<?php
+  if ((isset($_GET["MM_search"])) && ($_GET["MM_search"]=="formsearch"))
+  { 
+    // BLOQUE BUSCADOR INTELIGENTE NOMBRE
+    $porciones = explode(" ", $_GET["search"]);
+    $longitud = count($porciones);
+    $extramodelo=" name LIKE '%".$_GET["search"] ."%'";
+    for($i=0; $i<$longitud; $i++)
+    {
+      $extramodelo.=" OR name LIKE '%".$porciones[$i] ."%'";
+    }
+    //FIN BLOQUE BUSCADOR INTELIGENTE NOMBRE
+
+    $query_DatosConsulta = "SELECT * FROM courses WHERE ".$extramodelo." AND status = 1 ORDER BY id_course ASC";
+    //echo $query_DatosConsulta;
+
+
+    // $query_DatosConsulta = sprintf("SELECT * FROM courses WHERE name = %s AND status = 1 ORDER BY id_course ASC",
+    //                                 GetSQLValueString("%".$_GET["search"]."%", "text"));
+  }
+  else if ((isset($_GET["MM_search"])) && ($_GET["MM_search"]=="formfilter"))
+  {
+    $query_DatosConsulta = sprintf("SELECT * FROM courses WHERE status LIKE %s ORDER BY id_course ASC",
+                                    GetSQLValueString("%".$_GET["statuscurse"]."%", "int"));
+  }
+  else if ((isset($_GET["MM_search"])) && ($_GET["MM_search"]=="formterm"))
+  {
+    $query_DatosConsulta = sprintf("SELECT * FROM courses WHERE term LIKE %s ORDER BY id_course ASC",
+                                    GetSQLValueString("%".$_GET["term"]."%", "int"));
+  }
+  else
+  {
+    $query_DatosConsulta = sprintf("SELECT * FROM courses WHERE status = 1 ORDER BY id_course ASC");
+  }
+    $DatosConsulta = mysqli_query($con, $query_DatosConsulta) or die(mysqli_error($con));
+    $row_DatosConsulta = mysqli_fetch_assoc($DatosConsulta);
+    $totalRows_DatosConsulta = mysqli_num_rows($DatosConsulta);
 ?>
 <!--/////////////////////////////////////////////////BACK-END INSERT/////////////////////////////////////////////////////////-->
 <?php
@@ -87,8 +125,8 @@ if (isset($_SERVER['QUERY_STRING'])) {
     
 </style>
 </head>
-<body>
-    <div class="wrapp">
+<body style="background-color:<?php echo corps(UserAppearance($_SESSION['std_UserId']));?>;">
+    <div class="wrapp" style="background-color:<?php echo corps(UserAppearance($_SESSION['std_UserId']));?>;">
         <?php include("inc/head.php"); ?>
         <div class="container">
           <?php //echo $_SESSION['std_UserId']; ?>

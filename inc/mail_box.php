@@ -1,5 +1,5 @@
 <div class="space">
-        <div class="text_div">
+        <div class="text_div2">
             <h3 style="text-transform:uppercase;">Vill du få kontakt med oss?</h3>
             <div class="text_cont">
 
@@ -8,7 +8,7 @@
             Skicka ett meddelande genom att fylla i formuläret här nedan eller skicka ett mejl till <?php echo $row_DatosSite['email']; ?>.<br> 
             <br>
             Vi hörs snart!<br>
-            /Sofia & Lorenz
+            /Loops
             </div>
         </div>
         <div class="contact_content">

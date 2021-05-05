@@ -62,7 +62,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequest")) {
                         GetSQLValueString($_POST["email"], "text"),
                         GetSQLValueString($_POST["password"], "text"),
                         GetSQLValueString($_POST["personal_number"], "text"),
-                        GetSQLValueString($_POST["telephone"], "int"),
+                        GetSQLValueString($_POST["telephone"], "text"),
                         GetSQLValueString($_POST["adress"], "text"),
                         GetSQLValueString($_POST["post"], "int"),
                         GetSQLValueString($_POST["city"], "text"),

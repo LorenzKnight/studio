@@ -162,8 +162,8 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formpermissionsedit
 <link href="css/style_adm.css" rel="stylesheet" type="text/css"  media="all" />
 
 </head>
-<body>
-    <div class="wrapp">
+<body style="background-color:<?php echo corps(UserAppearance($_SESSION['std_UserId']));?>;">
+    <div class="wrapp" style="background-color:<?php echo corps(UserAppearance($_SESSION['std_UserId']));?>;">
         <?php include("inc/head.php"); ?>
         <div class="container">
           <div class="title"><h2>Users</h2> <?php echo $row_DatosProfil['id_user']; ?></div>

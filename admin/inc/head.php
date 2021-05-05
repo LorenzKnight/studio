@@ -52,7 +52,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
         return rc;
     }
 </script>
-<div class="head">
+<div class="<?php echo headAppear(UserAppearance($_SESSION['std_UserId']));?>">
     <?php include("inc/menu.php"); ?>
     <div class="config_m">
         <ul>
@@ -77,7 +77,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
                         <?php if(showPermissions($_SESSION['std_UserId'], "TSYS-P0017") || $_SESSION['std_Nivel'] < 1) : ?>
                         <li><a href="users.php">Users admin</a></li>
                         <?php endif ?>
-                        <li><a style="border-top: 1px solid #333;" href="inc/logout.php" onclick="javascript:return asegurarlogout ();">Log out</a></li>
+                        <li><a style="border-top: 1px solid #CCC;" href="inc/logout.php" onclick="javascript:return asegurarlogout ();">Log out</a></li>
                         <?php } 
                         else
                         { ?>

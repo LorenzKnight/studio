@@ -16,7 +16,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
 }
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formpageinf")) {
      
-     $updateSQL = sprintf("UPDATE site_info SET name=%s, abbreviated_name=%s, adress=%s, post=%s, city=%s, email=%s, facebook=%s, instagram=%s, youtube=%s, paypal_account=%s WHERE id_site=%s",
+     $updateSQL = sprintf("UPDATE site_info SET name=%s, abbreviated_name=%s, adress=%s, post=%s, city=%s, email=%s, facebook=%s, instagram=%s, youtube=%s, schedule_off=%s, registration_off=%s, paypal_account=%s WHERE id_site=%s",
                           GetSQLValueString($_POST["name"], "text"),
                           GetSQLValueString($_POST["abbreviated_name"], "text"),
                           GetSQLValueString($_POST["adress"], "text"),
@@ -26,6 +26,8 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formpageinf")) {
                           GetSQLValueString($_POST["facebook"], "text"),
                           GetSQLValueString($_POST["instagram"], "text"),
                           GetSQLValueString($_POST["youtube"], "text"),
+                          GetSQLValueString($_POST["schedule_off"], "int"),
+                          GetSQLValueString($_POST["registration_off"], "int"),
                           GetSQLValueString($_POST["paypal_account"], "text"),
                           GetSQLValueString($_POST["id_site"], "int"));
 		
@@ -47,8 +49,8 @@ if (isset($_SERVER['QUERY_STRING'])) {
 <link rel="shortcut icon" href="favicon-32x32.png">
 <link href="css/style_adm.css" rel="stylesheet" type="text/css"  media="all" />
 </head>
-<body>
-    <div class="wrapp">
+<body style="background-color:<?php echo corps(UserAppearance($_SESSION['std_UserId']));?>;">
+    <div class="wrapp" style="background-color:<?php echo corps(UserAppearance($_SESSION['std_UserId']));?>;">
         <?php include("inc/head.php"); ?>
         <div class="container">
           <div class="title"><h2>Settings</h2></div>

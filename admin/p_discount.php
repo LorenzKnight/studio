@@ -82,12 +82,12 @@ if (isset($_SERVER['QUERY_STRING'])) {
     
 </style>
 </head>
-<body>
-    <div class="wrapp">
+<body style="background-color:<?php echo corps(UserAppearance($_SESSION['std_UserId']));?>;">
+    <div class="wrapp" style="background-color:<?php echo corps(UserAppearance($_SESSION['std_UserId']));?>;">
         <?php include("inc/head.php"); ?>
         <div class="container">
           <?php //echo $_SESSION['std_UserId']; ?>
-          <div class="title"><h2>Paket Discounts</h2></div>
+          <div class="title"><h2>Package Discounts</h2></div>
           <?php include("inc/p_discount_list.php"); ?>
         </div>
     </div>

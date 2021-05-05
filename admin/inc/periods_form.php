@@ -14,12 +14,11 @@
                         <h2>Ny Termin</h2>
                     </td>
                 </tr>
-                <tr height="60">
-                    <td colspan="2" valign="middle" align="center"><input class="textf" type="text" placeholder="Termin Namn..." name="term_name" id="term_name" size="52" required/></td>
+                <tr height="50">
+                    <td colspan="2" valign="middle" align="center"><input class="textf" type="text" placeholder="Termin Namn..." name="term_name" id="term_name" size="40" required/></td>
                 </tr>
-                <tr height="60">
-                    <td colspan="2" valign="middle" align="center" style="padding: 0 10px; color: #999; font-size: 14px;">
-                        Vecka: 
+                <tr height="50">
+                    <td width="50%" valign="middle" align="center" style="padding: 0 10px; color: #999; font-size: 14px;"> 
                         <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="start_week" id="start_week" required>
                             <option value="Vecka 1">Vecka 1</option>
                             <option value="Vecka 2">Vecka 2</option>
@@ -75,18 +74,17 @@
                             <option value="Vecka 52">Vecka 52</option>
                         </select>
                     </td>
+                    <td width="50%" valign="middle" align="center" style="padding: 0 10px; color: #999; font-size: 14px;"><input class="textf" style="text-align:center;" type="text" placeholder="No. Veckor" name="no_weeks" id="no_weeks" size="12" required/></td>
                 </tr>
-                <tr height="60">
-                    <td width="50%" valign="middle" align="right" style="padding: 0 10px; color: #999; font-size: 14px;">
-                        Start V: 
-                        <input class="tcal" type="text" placeholder="0000-00-00" name="term_start" id="term_start" size="15" autocomplete="off" required/>
+                <tr height="50">
+                    <td width="50%" valign="middle" align="left" style="padding: 0 0 0 50px; color: #999; font-size: 14px;">
+                        <input class="tcal" style="padding:8px 10px; border-radius:7px; font-size:12px; border: 1px solid #999;" type="text" placeholder="Start V" name="term_start" id="term_start" size="17" autocomplete="off" required/>
                     </td>
-                    <td width="50%" valign="middle" align="left" style="padding: 0 10px; color: #999; font-size: 14px;">
-                        Slut V: 
-                        <input class="tcal" type="text" placeholder="0000-00-00" name="term_stop" id="term_stop" size="15" autocomplete="off" required/>
+                    <td width="50%" valign="middle" align="right" style="padding: 0 50px 0 0; color: #999; font-size: 14px;">
+                        <input class="tcal" style="padding:8px 10px; border-radius:7px; font-size:12px; border: 1px solid #999;" type="text" placeholder="Slut V" name="term_stop" id="term_stop" size="17" autocomplete="off" required/>
                     </td>
                 </tr>
-                <tr height="60">
+                <tr height="50">
                     <td colspan="2" valign="middle" align="center" style="padding: 0 10px; color: #999; font-size: 14px;">
                         Status: 
                         <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="status" id="status" required>
@@ -97,7 +95,7 @@
                 </tr>
                 <tr height="80">
                     <td colspan="2" valign="middle" align="center" style="color: #666; font-size: 14px;">
-                            <a href="periods.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Lägg till" />
+                            <a href="periods.php"><input class="button_a" style="width: 150px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Lägg till" />
                     </td>
                 </tr>
                 <tr height="30">
@@ -119,12 +117,11 @@
                         <h2>Redigera Termin</h2>
                     </td>
                 </tr>
-                <tr height="60">
-                    <td colspan="2" valign="middle" align="center"><input class="textf" type="text" value="<?php echo $row_DatosEdit['term_name'];?>" placeholder="Termin Namn..." name="term_name" id="term_name" size="52" required/></td>
+                <tr height="50">
+                    <td colspan="2" valign="middle" align="center"><input class="textf" type="text" value="<?php echo $row_DatosEdit['term_name'];?>" placeholder="Termin Namn..." name="term_name" id="term_name" size="40" required/></td>
                 </tr>
-                <tr height="60">
-                    <td colspan="2" valign="middle" align="center" style="padding: 0 10px; color: #999; font-size: 14px;">
-                        Vecka: 
+                <tr height="50">
+                    <td width="50%" valign="middle" align="center" style="padding: 0 10px; color: #999; font-size: 14px;">
                         <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="start_week" id="start_week">
                             <option value="Vecka 1" <?php if ($row_DatosEdit['start_week'] == "Vecka 1") echo "selected"; ?>>Vecka 1</option>
                             <option value="Vecka 2" <?php if ($row_DatosEdit['start_week'] == "Vecka 2") echo "selected"; ?>>Vecka 2</option>
@@ -180,18 +177,17 @@
                             <option value="Vecka 52" <?php if ($row_DatosEdit['start_week'] == "Vecka 52") echo "selected"; ?>>Vecka 52</option>
                         </select>
                     </td>
+                    <td width="50%" valign="middle" align="center" style="padding: 0 10px; color: #999; font-size: 14px;"><input class="textf" style="text-align:center;" type="text" value="<?php echo $row_DatosEdit['no_weeks'];?>" placeholder="No. Veckor" name="no_weeks" id="no_weeks" size="12" required/></td>
                 </tr>
-                <tr height="60">
-                    <td width="50%" valign="middle" align="right" style="padding: 0 10px; color: #999; font-size: 14px;">
-                        Start V: 
-                        <input class="tcal" type="text" value="<?php echo $row_DatosEdit['term_start'];?>" placeholder="0000-00-00" name="term_start" id="term_start" size="15" autocomplete="off" required/>
+                <tr height="50">
+                    <td width="50%" valign="middle" align="left" style="padding: 0 0 0 50px; color: #999; font-size: 14px;">
+                        <input class="tcal" style="padding:8px 10px; border-radius:7px; font-size:12px; border: 1px solid #999;" type="text" value="<?php echo $row_DatosEdit['term_start'];?>" placeholder="Start V" name="term_start" id="term_start" size="15" autocomplete="off" required/>
                     </td>
-                    <td width="50%" valign="middle" align="left" style="padding: 0 10px; color: #999; font-size: 14px;">
-                        Slut V: 
-                        <input class="tcal" type="text" value="<?php echo $row_DatosEdit['term_stop'];?>" placeholder="0000-00-00" name="term_stop" id="term_stop" size="15" autocomplete="off" required/>
+                    <td width="50%" valign="middle" align="right" style="padding: 0 50px 0 0; color: #999; font-size: 14px;">
+                        <input class="tcal" style="padding:8px 10px; border-radius:7px; font-size:12px; border: 1px solid #999;" type="text" value="<?php echo $row_DatosEdit['term_stop'];?>" placeholder="Slut V" name="term_stop" id="term_stop" size="15" autocomplete="off" required/>
                     </td>
                 </tr>
-                <tr height="60">
+                <tr height="50">
                     <td colspan="2" valign="middle" align="center" style="padding: 0 10px; color: #999; font-size: 14px;">
                         Status: 
                         <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="status" id="status" required>
@@ -202,7 +198,7 @@
                 </tr>
                 <tr height="80">
                     <td colspan="2" valign="middle" align="center" style="color: #666; font-size: 14px;">
-                            <a href="periods.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Uppdatera" onclick="javascript:return asegurar ();"/>
+                            <a href="periods.php"><input class="button_a" style="width: 150px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" style="padding:22px 33px;" value="Uppdatera" onclick="javascript:return asegurar ();"/>
                     </td>
                 </tr>
                 <tr height="30">

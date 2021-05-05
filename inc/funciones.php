@@ -59,24 +59,119 @@ function comprobaremailunico($email)
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-// function comprobarRegistroUnico($estudianteID, $terminA)
-// {
-// 	global $con;
+function comprobarDiscountCode($discountcode)
+{
+	global $con;
 	
-// 	$query_ConsultaFuncion = sprintf("SELECT * FROM inscriptions WHERE id_student = %s AND term = %s ",
-// 									   GetSQLValueString($estudianteID, "int"),
-// 									   GetSQLValueString($terminA, "int"));
-// 	//echo $query_ConsultaFuncion;
-// 	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
-// 	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
-// 	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	$query_ConsultaFuncion = sprintf("SELECT code FROM discount WHERE code = %s ",
+		 GetSQLValueString($discountcode, "text"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
 	
-// 	if ($totalRows_ConsultaFuncion==0) 
-// 		return true;
-// 	else return false;
+	if ($totalRows_ConsultaFuncion!=0) 
+		return true;
+	else return false;
 	
-// 	mysqli_free_result($ConsultaFuncion);
-// }
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function comprobarcodeunico($codeunico)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT code FROM adm_discount_list WHERE code = %s ",
+		 GetSQLValueString($codeunico, "text"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	if ($totalRows_ConsultaFuncion==0) 
+		return true;
+	else return false;
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function quantiCode($discCode, $cantidadcode)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM discount WHERE code = %s AND quanti > %s ",
+			GetSQLValueString($discCode, "text"),
+			GetSQLValueString($cantidadcode, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	if ($totalRows_ConsultaFuncion!=0) 
+		return true;
+	else return false;
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function dateConfirm($dCode, $startDate, $stopDate)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM discount WHERE code = %s AND start_date <= %s AND stop_date > %s",
+										GetSQLValueString($dCode, "text"),
+										GetSQLValueString($startDate, "text"),
+										GetSQLValueString($stopDate, "text"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con, $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	if ($totalRows_ConsultaFuncion!=0) 
+		return true;
+	else return false;
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function confirmCodeTrue($theUser, $termAct)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM cart WHERE id_student = %s AND id_term = %s AND discountcode IS NOT NULL",
+			GetSQLValueString($theUser, "int"),
+			GetSQLValueString($termAct, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	if ($totalRows_ConsultaFuncion!=0) 
+		return false;
+	else return true;
+	
+	mysqli_free_result($ConsultaFuncion);
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -256,6 +351,30 @@ function showPermissions($multiUserID, $permissionID)
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
+function showCousePCode($pCodeID, $pCourseID)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM discount WHERE id_code = %s AND id_course = %s",
+									GetSQLValueString($pCodeID, "int"),
+									GetSQLValueString($pCourseID, "text"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	if ($totalRows_ConsultaFuncion > 0) 
+		return true;
+	else return false;
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
 function ObtenerNombreParaBuscar($nombresarch)
 {
 	global $con;
@@ -347,12 +466,47 @@ function ObtenerCursos($cursos)
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
+function CursosParaMail($usersCours, $term)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM cart WHERE id_student=%s AND id_term=%s AND discountcode IS NULL AND transaction_made!=0 ORDER BY id_counter DESC",
+										GetSQLValueString($usersCours, "int"),
+										GetSQLValueString($term, "int"));
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+
+	?>
+	<div style="position:absolute; margin:150px 0 0 5px;">
+		<ul style="width:200px; list-style-type: none; margin:0; padding:0;">
+			<?php
+			if ($totalRows_ConsultaFuncion > 0) { 
+				do { 
+			?> 
+				<li style="width:90%; padding:0 0 5px 10%; font-size:14px;"><?php echo ObtenerNombreCurso($row_ConsultaFuncion['id_course']); ?></li>
+			<?php
+				} while ($row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion));
+			}
+			?>
+		</ul>
+	</div>
+	<?php
+		 
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
 function ObtenerNombreTermin($nombreTermin)
 {
 	global $con;
 	
 	$query_ConsultaFuncion = sprintf("SELECT term_name FROM term WHERE id_term = %s ",
-		 GetSQLValueString($nombreTermin, "int"));
+		 								GetSQLValueString($nombreTermin, "int"));
 	//echo $query_ConsultaFuncion;
 	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
 	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
@@ -706,6 +860,20 @@ function statusBinario($statusB)
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
+function statusColors($statusC)
+{
+	if ($statusC == 0) return "border:2px solid rgb(68, 68, 68); color: #888;"; //inactiv
+	//if ($statusC == 1) return ""; //activ
+	if ($statusC == 2) return "border:2px solid rgb(245, 160, 3); color: rgb(245, 160, 3);"; //waiting
+	if ($statusC == 3) return "border:2px solid rgb(221, 36, 3); color: rgb(221, 36, 3);"; //not paid
+	//else return "";
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
 function publicationsSite($site)
 {
 	if ($site == 1) return "Important"; 
@@ -996,7 +1164,7 @@ function OptenerPaqueteEnLista($Paquete)
 {
 	global $con;
 	
-	$query_ConsultaFuncion = sprintf("SELECT * FROM cart WHERE transaction_made = %s ",
+	$query_ConsultaFuncion = sprintf("SELECT * FROM cart WHERE transaction_made = %s AND discountcode IS NULL",
 		 GetSQLValueString($Paquete, "int"));
 	//echo $query_ConsultaFuncion;
 	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
@@ -1238,18 +1406,63 @@ function ObtenerPDescuento($Pdescuento)
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-function ObtenerGift($gift)
+function getPorDiscount($porDiscount, $courseDisc)
 {
 	global $con;
 	
-	$query_ConsultaFuncion = sprintf("SELECT gift FROM discount WHERE code = %s ",
-		 GetSQLValueString($gift, "text"));
+	$query_ConsultaFuncion = sprintf("SELECT * FROM discount WHERE code = %s AND id_course = %s",
+									   GetSQLValueString($porDiscount, "text"),
+									   GetSQLValueString($courseDisc, "int"));
 	//echo $query_ConsultaFuncion;
 	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
 	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
 	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
 	
-	return $row_ConsultaFuncion["gift"];	
+	return $row_ConsultaFuncion["percent"];	
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function getMonDiscount($codDiscount, $courseDescontado)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM discount WHERE code = %s AND id_course = %s",
+									   GetSQLValueString($codDiscount, "text"),
+									   GetSQLValueString($courseDescontado, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["money"];	
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function ObtenerDisc($userSec, $periodA)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT discountcode FROM cart WHERE id_student = %s AND id_term = %s",
+										 GetSQLValueString($userSec, "int"),
+										 GetSQLValueString($periodA, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["discountcode"];	
 	
 	mysqli_free_result($ConsultaFuncion);
 }
@@ -1320,12 +1533,12 @@ function ActualizacionCarrito2($Inscription2, $studentadmin)
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-function ConfirmationDone($ano, $mes, $dia, $hora, $studentadmin, $sexadmin, $Termin, $TerminStart, $TerminStop, $Package, $total)
+function ConfirmationDone($ano, $mes, $dia, $hora, $studentadmin, $sexadmin, $Termin, $TerminStart, $TerminStop, $Package, $total, $status)
 {
 	global $con;
 	
-	$insertSQL = sprintf("INSERT INTO inscriptions (date, year, month, day, time, id_student, sex, term, term_start, term_stop, package, payment, total) 
-									VALUES (NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+	$insertSQL = sprintf("INSERT INTO inscriptions (date, year, month, day, time, id_student, sex, term, term_start, term_stop, package, payment, total, status) 
+									VALUES (NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
 									 GetSQLValueString($ano, "text"),
 									 GetSQLValueString($mes, "int"),
 									 GetSQLValueString($dia, "text"),
@@ -1337,7 +1550,8 @@ function ConfirmationDone($ano, $mes, $dia, $hora, $studentadmin, $sexadmin, $Te
 									 GetSQLValueString($TerminStop, "text"),
 									 GetSQLValueString($Package, "text"),
 									 1,
-									 GetSQLValueString($total, "text"));
+									 GetSQLValueString($total, "text"),
+									 GetSQLValueString($status, "int"));
 	//echo $insertSQL;
 	$Result1 = mysqli_query($con, $insertSQL) or die(mysqli_error($con));
 	$ultimacompra = mysqli_insert_id($con);
@@ -1391,6 +1605,70 @@ function ObtenerIDstudentDesdeTransaccion($transE)
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
+function seeOnFilter($seeFilter)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM inscriptions WHERE id_student = %s",
+		 GetSQLValueString($seeFilter, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["id_insc"];	
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function inscTotal($inscTotal)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM inscriptions WHERE id_insc = %s",
+		 GetSQLValueString($inscTotal, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["total"];	
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function statusInsc($statusInsc, $termSt)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM inscriptions WHERE id_student = %s AND term = %s",
+										GetSQLValueString($statusInsc, "int"),
+										GetSQLValueString($termSt, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["status"];	
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
 function obtenerTerminActivo($terminActiv, $termStatus)
 {
 	global $con;
@@ -1432,9 +1710,449 @@ function terminCaducado($statusTerm)
 	
 	mysqli_free_result($ConsultaFuncion);
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function ncsnID($studID, $ncsn)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM cart WHERE id_student=%s AND id_term=%s",
+										 GetSQLValueString($studID, "int"),
+										 GetSQLValueString($ncsn, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["transaction_made"];	
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function discID($discID)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT id_adm_disc FROM adm_discount_list WHERE code=%s",
+										 GetSQLValueString($discID, "text"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["id_adm_disc"];	
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function discPerc($discPe)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT percent FROM adm_discount_list WHERE code=%s",
+										 GetSQLValueString($discPe, "text"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["percent"];	
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function discMoney($discMo)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT money FROM adm_discount_list WHERE code=%s",
+										 GetSQLValueString($discMo, "text"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["money"];	
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function discQuan($discQ)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT quanti FROM adm_discount_list WHERE code=%s",
+										 GetSQLValueString($discQ, "text"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["quanti"];	
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function discStartd($discStd)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT start_date FROM adm_discount_list WHERE code=%s",
+										 GetSQLValueString($discStd, "text"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["start_date"];	
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function discStopd($discSpd)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT stop_date FROM adm_discount_list WHERE code=%s",
+										 GetSQLValueString($discSpd, "text"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["stop_date"];	
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function codeUses($codeUses)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM cart WHERE discountcode = %s",
+										 GetSQLValueString($codeUses, "text"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $totalRows_ConsultaFuncion ;
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function UserAppearance($UserIDappearance)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM users WHERE id_user = %s",
+										 GetSQLValueString($UserIDappearance, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["appearance"];
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function headAppear($headAppear)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM appearance WHERE id_appearance = %s",
+										 GetSQLValueString($headAppear, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["head"];
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function corps($corps)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM appearance WHERE id_appearance = %s",
+										 GetSQLValueString($corps, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["corps_color"];
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function dashdiv($dashdiv)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM appearance WHERE id_appearance = %s",
+										 GetSQLValueString($dashdiv, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["dash_div"];
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function dashtable($dashtable)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM appearance WHERE id_appearance = %s",
+										 GetSQLValueString($dashtable, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["dash_table"];
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function filters($filter)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM appearance WHERE id_appearance = %s",
+										 GetSQLValueString($filter, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["filters"];
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function divWrapp($divWrapp)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM appearance WHERE id_appearance = %s",
+										 GetSQLValueString($divWrapp, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["wrapp"];
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function appearanceList($appearanceList)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM appearance WHERE id_appearance = %s",
+										 GetSQLValueString($appearanceList, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["list"];
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function appearanceLine($appearanceLine)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM appearance WHERE id_appearance = %s",
+										 GetSQLValueString($appearanceLine, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["line"];
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function buttonSmall($buttonSmall)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM appearance WHERE id_appearance = %s",
+										 GetSQLValueString($buttonSmall, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["button_small"];
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function artbtn($artbtn)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM appearance WHERE id_appearance = %s",
+										 GetSQLValueString($artbtn, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["artbtn"];
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function flyButton($flyButton)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM appearance WHERE id_appearance = %s",
+										 GetSQLValueString($flyButton, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["fly_button"];
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function myAppearance($myAppearance)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM users WHERE id_user = %s",
+										 GetSQLValueString($myAppearance, "int"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	return $row_ConsultaFuncion["appearance"];
+	
+	mysqli_free_result($ConsultaFuncion);
+}
 ?>
-
-
 
 
 

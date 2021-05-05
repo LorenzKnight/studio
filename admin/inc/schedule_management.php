@@ -392,4 +392,5 @@
             <tr>
         </table>
     </div>
-    <a href="schedule.php?new=1"><div class="flying_button">+</div></a>
+    <a href="schedule.php?new=1"><div class="<?php echo flyButton(UserAppearance($_SESSION['std_UserId']));?>">+</div></a>
+    <?php include("inc/appearance_menu.php")?>

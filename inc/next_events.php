@@ -1,25 +1,27 @@
 <?php
-$query_DatosPublications = sprintf("SELECT * FROM events WHERE status= 1 ORDER BY date ASC");
-$DatosPublications = mysqli_query($con, $query_DatosPublications) or die(mysqli_error($con));
-$row_DatosPublications = mysqli_fetch_assoc($DatosPublications);
-$totalRows_DatosPublications = mysqli_num_rows($DatosPublications);
+    $query_DatosPrio = sprintf("SELECT * FROM events WHERE prio= 1 ORDER BY date ASC");
+    $DatosPrio = mysqli_query($con, $query_DatosPrio) or die(mysqli_error($con));
+    $row_DatosPrio = mysqli_fetch_assoc($DatosPrio);
+    $totalRows_DatosPrio = mysqli_num_rows($DatosPrio);
 ?>
-<div class="space">
-    <div class="event_content">
-        <img src="img/news/<?php echo $row_DatosPublications['foto']; ?>" width="130%">
-        <!-- <table width="100%" cellspacing="0" style="background-color: ; margin:0 0 20px; box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;" >
-            <tr height="30">
-                <td width="15%" nowrap="nowrap" align="center">
-                    <div class="date_div">
-                        <h3 style="margin:0;"><?php echo $row_DatosPublications['month']; ?></h3>
-                        <h1 style="margin:0;"><?php echo $row_DatosPublications['day']; ?></h1>
-                        <h4 style="margin:0;"><?php echo $row_DatosPublications['year']; ?></h4>
-                    </div>
-                </td>
-                <td width="25%" nowrap="nowrap" align="center"><img style="margin:5px;" src="img/news/<?php echo $row_DatosPublications['foto']; ?>" height="" width="80%"></td>
-                <td width="35%" nowrap="nowrap" align="center"><h3><?php echo $row_DatosPublications['name']; ?></h3></td>
-                <td width="25%" nowrap="nowrap" align="center"><a href="#" target="_blank">Event on facebook 1</a></td>
-            </tr>
-        </table> -->
+<?php
+    if ($totalRows_DatosPrio > 0) {
+        $query_DatosPublications = sprintf("SELECT * FROM events WHERE prio= 1 AND status= 1 ORDER BY date ASC");
+    } else {
+        $query_DatosPublications = sprintf("SELECT * FROM events WHERE status= 1 ORDER BY date ASC");
+    }
+        $DatosPublications = mysqli_query($con, $query_DatosPublications) or die(mysqli_error($con));
+        $row_DatosPublications = mysqli_fetch_assoc($DatosPublications);
+        $totalRows_DatosPublications = mysqli_num_rows($DatosPublications);
+?>
+<div class="space" style="display:<?php if($totalRows_DatosPublications == 0) { ?>none;<?php } else { ?>block<?php } ?>">
+    <div class="wrapp-event">
+        <h1 style="text-align:center; margin:0 0 10px; padding:0;"><span style="color:#999; font-size:28px;">Snart:</span> <?php echo $row_DatosPublications['name']; ?></h1>
+        <p style="text-align:center; margin:0 0 10px; padding:0;">- <?php echo $row_DatosPublications['date']; ?> -</p>
+        <a href="<?php echo $row_DatosPublications['link']; ?>" target="_blank">
+            <div class="event_content">
+                <img src="img/news/<?php echo $row_DatosPublications['foto']; ?>" width="130%">
+            </div>
+        </a>
     </div>
 </div>

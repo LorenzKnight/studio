@@ -67,14 +67,15 @@ if (isset($_POST['mail'])) {
 <link href="css/style_adm.css" rel="stylesheet" type="text/css"  media="all" />
 
 </head>
-<body>
+<body style="background-color:#000;">
     <div class="adm_login">
         <form action="index.php" method="post" name="forminsert" id="forminsert">
             <table width="100%" align="center" cellspacing="0">
                 <tr valign="baseline" height="60">
                     <td style="" colspan="6" align="center" valign="middle">
-                        <h3>Studio<br/>
-                            LK-L20</h3>
+                        <h2 style="margin:0;">Studio</h2>
+                        <h4 style="margin:0;">LK-LDS20</h4>
+                        <p style="margin:0 0 20px 0;">v1.2</p>
                     </td>      
                 </tr>
                 <tr valign="baseline" height="60">

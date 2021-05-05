@@ -86,8 +86,8 @@ $Result1 = mysqli_query($con, $updateSQL) or die(mysqli_error($con));
     
 </style>
 </head>
-<body>
-    <div class="wrapp">
+<body style="background-color:<?php echo corps(UserAppearance($_SESSION['std_UserId']));?>;">
+    <div class="wrapp" style="background-color:<?php echo corps(UserAppearance($_SESSION['std_UserId']));?>;">
         <?php include("inc/head.php"); ?>
         <div class="container">
           <div class="title"><h2>Collaborators</h2></div>

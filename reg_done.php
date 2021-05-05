@@ -2,10 +2,12 @@
 <!-- Esta linea en conjunto con la funcion "ConfirmacionPago" hace que la celda done cambie su valor-->
 <?php ConfirmacionPago(1, date('Ymd')); ?>
 <?php
-$query_DatosTerm = sprintf("SELECT * FROM term WHERE status=1 ORDER BY id_term ASC");
+$query_DatosTerm = sprintf("SELECT * FROM term WHERE status = 1 ORDER BY id_term ASC");
 $DatosTerm = mysqli_query($con, $query_DatosTerm) or die(mysqli_error($con));
 $row_DatosTerm = mysqli_fetch_assoc($DatosTerm);
 $totalRows_DatosTerm = mysqli_num_rows($DatosTerm);
+
+$TermAct = $row_DatosTerm['id_term'];
 ?>
 <?php
 $query_DatosReg = sprintf("SELECT * FROM students WHERE id_student=%s ORDER BY id_student ASC",
@@ -15,18 +17,21 @@ $row_DatosReg = mysqli_fetch_assoc($DatosReg);
 $totalRows_DatosReg = mysqli_num_rows($DatosReg);
 ?>
 <?php
-$query_DatosCart = sprintf("SELECT * FROM cart WHERE id_student=%s AND transaction_made!=0 ORDER BY id_counter ASC",
-GetSQLValueString($_SESSION['ydl_UserId'], "int"));
-$DatosCart = mysqli_query($con, $query_DatosCart) or die(mysqli_error($con));
-$row_DatosCart = mysqli_fetch_assoc($DatosCart);
-$totalRows_DatosCart = mysqli_num_rows($DatosCart);
+    $query_DatosRegDone = sprintf("SELECT * FROM inscriptions WHERE id_student=%s AND term=%s ORDER BY id_insc ASC",
+                                    GetSQLValueString($_SESSION['ydl_UserId'], "int"),
+                                    GetSQLValueString($TermAct, "int"));
+    $DatosRegDone = mysqli_query($con, $query_DatosRegDone) or die(mysqli_error($con));
+    $row_DatosRegDone = mysqli_fetch_assoc($DatosRegDone);
+    $totalRows_DatosRegDone = mysqli_num_rows($DatosRegDone);
 ?>
 <?php
-$query_DatosRegDone = sprintf("SELECT * FROM inscriptions WHERE id_student=%s ORDER BY id_insc ASC",
-GetSQLValueString($_SESSION['ydl_UserId'], "int"));
-$DatosRegDone = mysqli_query($con, $query_DatosRegDone) or die(mysqli_error($con));
-$row_DatosRegDone = mysqli_fetch_assoc($DatosRegDone);
-$totalRows_DatosRegDone = mysqli_num_rows($DatosRegDone);
+    $query_DatosCart = sprintf("SELECT * FROM cart WHERE id_student=%s AND id_term=%s AND transaction_made!=%s ORDER BY id_counter ASC",
+                                GetSQLValueString($_SESSION['ydl_UserId'], "int"),
+                                GetSQLValueString($TermAct, "int"),
+                                0);
+    $DatosCart = mysqli_query($con, $query_DatosCart) or die(mysqli_error($con));
+    $row_DatosCart = mysqli_fetch_assoc($DatosCart);
+    $totalRows_DatosCart = mysqli_num_rows($DatosCart);
 ?>
 <html>
 <head>
@@ -46,11 +51,15 @@ $totalRows_DatosRegDone = mysqli_num_rows($DatosRegDone);
                 $week = $row_DatosTerm['start_week'];
                 $date = $row_DatosRegDone['date'];
                 $price = $row_DatosRegDone['total'];
+                // $cursos = CursosParaMail($row_DatosRegDone['id_student'], $TermAct);
             ?>
             <?php
             $contenido='<p>Kära '; $contenido.=ObtenerNombreStudent($nombre); $contenido.='&nbsp;'; $contenido.=ObtenerApellidoStudent($nombre);
-            $contenido.='</p><p>Du är anmält f.o.m. '; $contenido.=$date; $contenido.=' med '; $contenido.=$packet; $contenido.='.</p></br>';
-            $contenido.='<p>Priset för din kurspacket är totalt ('; $contenido.=$price; $contenido.=' kr) inkl 0% moms.</p>
+            $contenido.='</p><p>Du är anmält f.o.m. '; $contenido.=$date; $contenido.=' med '; $contenido.=$packet; $contenido.='</p>';
+
+            $contenido.=CursosParaMail($row_DatosRegDone['id_student'], $TermAct); 
+            
+            $contenido.='<p style="margin-top:160px;">Priset för din kurspacket är totalt ('; $contenido.=$price; $contenido.=' kr) inkl 0% moms.</p>
             <br/>
             <p>Vi ser verkligen fram emot vårens termin och är så glada att du vill vara en del av vår dansskola!</p>
             <br/>

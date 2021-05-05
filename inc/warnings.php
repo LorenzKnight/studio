@@ -1,19 +1,75 @@
 <style>
-    .warnings{
-        width: 100%;
-        overflow: auto;
-        display: flex;
-        background-color: #ec7571;
-        /* border-left: 20px solid #d8413c; */
+    @media only screen and (min-width: 320px) and (-webkit-device-pixel-ratio : 2) {
+        .warnings{
+            width: 100%;
+            overflow: auto;
+            display: flex;
+            background-color: #ec7571;
+            /* border-left: 20px solid #d8413c; */
+        }
+        .signals{
+            width: 100px;
+        }
+        .warning_msn{
+            flex: 1;
+            padding: 10px;
+            font-size: 10px;
+            color: #000;
+        }
     }
-    .signals{
-        width: 100px;
+    @media only screen and (device-width : 375px) and (device-height : 812px) and (-webkit-device-pixel-ratio : 3) {
+        .warnings{
+            width: 100%;
+            overflow: auto;
+            display: flex;
+            background-color: #ec7571;
+            /* border-left: 20px solid #d8413c; */
+        }
+        .signals{
+            width: 200px;
+        }
+        .warning_msn{
+            flex: 1;
+            padding: 10px;
+            font-size: 10px;
+            color: #000;
+        }
     }
-    .warning_msn{
-        flex: 1;
-        padding: 10px;
-        font-size: 14px;
-        color: #000;
+    @media (min-width: 768px) {
+        .warnings{
+            width: 100%;
+            overflow: auto;
+            display: flex;
+            background-color: #ec7571;
+            /* border-left: 20px solid #d8413c; */
+        }
+        .signals{
+            width: 100px;
+        }
+        .warning_msn{
+            flex: 1;
+            padding: 10px;
+            font-size: 12px;
+            color: #000;
+        }
+    }
+    @media (min-width: 1024px) {
+        .warnings{
+            width: 100%;
+            overflow: auto;
+            display: flex;
+            background-color: #ec7571;
+            /* border-left: 20px solid #d8413c; */
+        }
+        .signals{
+            width: 100px;
+        }
+        .warning_msn{
+            flex: 1;
+            padding: 10px;
+            font-size: 14px;
+            color: #000;
+        }
     }
 </style>
 <?php
@@ -28,7 +84,6 @@
         <img src="img/icon/alert.png" alt="" height="60px" style="margin:20px;">
     </div>
     <div class="warning_msn">
-        <h4 style="margin:0 0 3px 0; padding:0;"><?php echo $row_DatosWarnings['title']; ?></h4>
         <p><?php echo $row_DatosWarnings['content']; ?></p>
     </div>
 </div>

@@ -24,7 +24,7 @@ if (obtenerTerminActivo($dateFuture, 1) || obtenerTerminActivo($currentDate, 0) 
   $TermAct = $row_DatosTerm['id_term'];
 ?>
 <?php
- $query_DatosConsulta = sprintf("SELECT * FROM inscriptions WHERE term = $TermAct ORDER BY id_insc ASC"); 
+ $query_DatosConsulta = sprintf("SELECT * FROM inscriptions WHERE term = $TermAct AND status != 3 ORDER BY id_insc ASC"); 
  $DatosConsulta = mysqli_query($con, $query_DatosConsulta) or die(mysqli_error($con));
  $row_DatosConsulta = mysqli_fetch_assoc($DatosConsulta);
  $totalRows_DatosConsulta = mysqli_num_rows($DatosConsulta);
@@ -94,8 +94,8 @@ else
     
 </style>
 </head>
-<body>
-    <div class="wrapp">
+<body style="background-color:<?php echo corps(UserAppearance($_SESSION['std_UserId']));?>;">
+    <div class="wrapp" style="background-color:<?php echo corps(UserAppearance($_SESSION['std_UserId']));?>;">
         <?php include("inc/head.php"); ?>
         <div class="container">
           <div class="title"><h2>Dashboard <?php //echo $date?></h2></div>

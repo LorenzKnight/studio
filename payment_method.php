@@ -43,13 +43,14 @@ $TerminStop = $row_DatosTerm["term_stop"];
 $total = $_SESSION["TotalCompra"];
 $Package = $_SESSION["paquete"];
 $sex = $_SESSION["sex"];
+$status = 1;
 
 $fecha2=time()+7200;//2 hora//
 date("H:i:s",$fecha2);
 
 ?>
 <?php //if (comprobarRegistroUnico($_SESSION['ydl_UserId'], $Termin)) { ?>
-    <?php ConfirmationPago(date('Y'), date('m'), date('d'), date('His'), $sex, $Termin, $TerminStart, $TerminStop, $Package, $total); ?>
+    <?php ConfirmationPago(date('Y'), date('m'), date('d'), date('His'), $sex, $Termin, $TerminStart, $TerminStop, $Package, $total, $status); ?>
 <?php //} else { 
     // $insertGoTo = "payment_method.php?exist=1";
     // if (isset($_SERVER['QUERY_STRING'])) {

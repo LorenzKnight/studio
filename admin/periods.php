@@ -22,10 +22,11 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequest")) {
   $year = date("Y");
 	$month = date("m");
 	$day = date("d");
-  $insertSQL = sprintf("INSERT INTO term(date, term_name, start_week, term_start, term_stop, status) 
-                        VALUES (NOW(), %s, %s, %s, %s, %s)",
+  $insertSQL = sprintf("INSERT INTO term(date, term_name, start_week, no_weeks, term_start, term_stop, status) 
+                        VALUES (NOW(), %s, %s, %s, %s, %s, %s)",
                         GetSQLValueString($_POST["term_name"], "text"),                      
                         GetSQLValueString($_POST["start_week"], "text"),
+                        GetSQLValueString($_POST["no_weeks"], "int"),
                         GetSQLValueString($_POST["term_start"], "text"),
                         GetSQLValueString($_POST["term_stop"], "text"),
                         GetSQLValueString($_POST["status"], "int"));
@@ -59,9 +60,10 @@ if (isset($_SERVER['QUERY_STRING'])) {
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formedit")) {
      //if (comprobaridunico($_POST["given_id"]))
     //{
-  $updateSQL = sprintf("UPDATE term SET term_name=%s, start_week=%s, term_start=%s, term_stop=%s, status=%s WHERE id_term=%s",
+  $updateSQL = sprintf("UPDATE term SET term_name=%s, start_week=%s, no_weeks=%s, term_start=%s, term_stop=%s, status=%s WHERE id_term=%s",
                         GetSQLValueString($_POST["term_name"], "text"),                      
                         GetSQLValueString($_POST["start_week"], "text"),
+                        GetSQLValueString($_POST["no_weeks"], "text"),
                         GetSQLValueString($_POST["term_start"], "text"),
                         GetSQLValueString($_POST["term_stop"], "text"),
                         GetSQLValueString($_POST["status"], "int"),
@@ -70,6 +72,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formedit")) {
 
 $Result1 = mysqli_query($con, $updateSQL) or die(mysqli_error($con));
 
+  // $updateGoTo = $_SERVER['HTTP_REFERER'];
   $updateGoTo = "periods.php";
   if (isset($_SERVER['QUERY_STRING'])) {
     $updateGoTo .= (strpos($updateGoTo, '?')) ? "&" : "?";
@@ -98,8 +101,8 @@ $Result1 = mysqli_query($con, $updateSQL) or die(mysqli_error($con));
     
 </style>
 </head>
-<body>
-    <div class="wrapp">
+<body style="background-color:<?php echo corps(UserAppearance($_SESSION['std_UserId']));?>;">
+    <div class="wrapp" style="background-color:<?php echo corps(UserAppearance($_SESSION['std_UserId']));?>;">
         <?php include("inc/head.php"); ?>
         <div class="container">
           <?php //echo $_SESSION['std_UserId']; ?>
@@ -110,5 +113,5 @@ $Result1 = mysqli_query($con, $updateSQL) or die(mysqli_error($con));
 </body>
 </html>
 <?php
-mysqli_free_result($DatosConsulta);
+mysqli_free_result($DatosPeriod);
 ?>

@@ -17,7 +17,7 @@
     }
 </style>
 <div class="space">
-<?php if ($totalRows_Schedule > 0 ) {?>
+<?php if (/* $totalRows_Schedule > 0 || */ $row_DatosReg['schedule_off'] == '') {?>
     <div class="open_calendar">
         <div style="width:3%; float:left;">
             <table width="100%" cellspacing="0" border-spacing="0">

@@ -13,12 +13,12 @@ $totalRows_DatosPublications = mysqli_num_rows($DatosPublications);
                 <a href=""><img style="left: -<?php echo $row_DatosPublications['settings']; ?>px;" src="img/news/<?php echo $row_DatosPublications['foto']; ?>" height="100%" width=""></a>
             </div>
             <div class="text_box_2">
-                <h3 style="margin-bottom:12px;"><?php echo $row_DatosPublications['title']; ?></h3>
+                
 
                     <?php 
                     $texto= $row_DatosPublications['content'];
                     if (strlen($texto) > 0) {
-                    $texto = substr($texto,0,350).'';
+                    $texto = substr($texto,0,450).'';
                     print '<div class="text_cont">'.$texto.'</div>';
                     ?>
                     <?php

@@ -10,13 +10,13 @@
     <form action="students.php" method="post" name="formrequest" id="formrequest">
         <table class="formulario" border="0" cellspacing="0" cellpadding="0">
             <tr height="30">
-                <td colspan="2" valign="middle" align="center" style="color: #333; padding: 30px 0 0 0;">
+                <td colspan="2" valign="middle" align="center" style="color: #333; padding:0;">
                     
                 </td>
             </tr>
             <tr height="60">
-                <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Namn" name="name" id="name" size="31" required/></td>
-                <td width="50%" valign="middle" align="left" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Efternamn" name="surname" id="surname" size="31" required/></td>
+                <td width="50%" valign="middle" align="right" style="padding: 20px 10px 0;"><input class="textf" type="text" placeholder="Ditt Namn" name="name" id="name" size="31" required/></td>
+                <td width="50%" valign="middle" align="left" style="padding: 20px 10px 0;"><input class="textf" type="text" placeholder="Ditt Efternamn" name="surname" id="surname" size="31" required/></td>
             </tr>
             <tr height="60">
                 <td colspan="2" valign="middle" align="center"><input class="textf" type="email" placeholder="Din mailadress..." name="email" id="email" size="68" required/></td>
@@ -54,7 +54,6 @@
             </tr>
             <input type="hidden" name="via" id="via" value="<?php echo $_SESSION['std_UserId']; ?>"/>
             <input type="hidden" name="password" id="password" value="newstudent246"/>
-            <input type="hidden" name="status" id="status" value="<?php if (isset($_SESSION['std_Nivel']) && $_SESSION['std_Nivel'] < 2) { ?> Active <?php } else { ?> Inactive <?php } ?>"/> 
             <input type="hidden" name="MM_insert" id="MM_insert" value="formrequest" />
         </table>
     </form>
@@ -223,11 +222,11 @@
                                     <?php } ?>
                                     <tr>
                                         <td width="50%" valign="middle" align="right" style="font-size:18px; padding:5px 5px 0 0; border-top:1px solid #999;">Total:</td>
-                                        <td width="50%" valign="middle" align="left" style="font-size:18px; padding:5px 0 0 5px; border-top:1px solid #999;"><?php echo $precioTotal; ?> SEK</td>
+                                        <td width="50%" valign="middle" align="left" style="font-size:18px; padding:5px 0 0 5px; border-top:1px solid #999;"><input class="textd" type="text" value="<?php echo $precioTotal; ?>" name="admdiscount1" id="admdiscount1" size="5" autocomplete="off" style="text-align:center; font-size:18px"> SEK</td>
                                     </tr>
                                 </table>
 
-                                <?php $_SESSION["TotalCompra"] = $precioTotal;?>
+                                <?php //$_SESSION["TotalCompra"] = $precioTotal;?>
                                 <?php $_SESSION["paquete"] = GetPacket($totalRows_DatosParaPaquete);?>
                                 <?php $_SESSION["sex"] = sex($studentadmin);?>
                                 
@@ -254,12 +253,13 @@
     $Termin = $row_DatosTerm["id_term"];
     $TerminStart = $row_DatosTerm["term_start"];
     $TerminStop = $row_DatosTerm["term_stop"];
-    $total = $_SESSION["TotalCompra"];
+    $total = $_POST["admdiscount1"];
+    $status = 1;
 
     $fecha2=time()+3600;
     date("H:i:s",$fecha2);
     ?>
-    <?php ConfirmationDone(date('Y'), date('m'), date('d'), date('His',$fecha2), $studentadmin, $sexadmin, $Termin, $TerminStart, $TerminStop, $_SESSION["paquete"], $total); ?>
+    <?php ConfirmationDone(date('Y'), date('m'), date('d'), date('His',$fecha2), $studentadmin, $sexadmin, $Termin, $TerminStart, $TerminStop, $_SESSION["paquete"], $total, $status); ?>
         <div class="subform_cont1">
             <div class="msn_done">
                 <br/><br/><br/><br/>
@@ -409,12 +409,12 @@
                                     </tr>
                                     <tr>
                                         <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#CCC;">Sub Total:</td>
-                                        <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#CCC;"><?php echo $SubTotalPlus2; ?> SEK</td>
+                                        <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#CCC;">&nbsp;<?php echo $SubTotalPlus2; ?> SEK</td>
                                     </tr>
                                     <?php if ($totalRows_DatosCart > 1) {?>
                                     <tr>
-                                        <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#CCC;">- <?php //echo ObtenerPDescuento($totalRows_DatosCart); ?> Rabatt:</td>
-                                        <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#CCC;"><?php echo $preciorebaja2; ?> SEK </td>
+                                        <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#CCC;"><?php //echo ObtenerPDescuento($totalRows_DatosCart); ?> Rabatt:</td>
+                                        <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#CCC;">- <?php echo $preciorebaja2; ?> SEK </td>
                                     </tr>
                                     <?php } ?>
                                     <!-- <tr>
@@ -429,11 +429,11 @@
                                     <?php } ?>
                                     <tr>
                                         <td width="50%" valign="middle" align="right" style="font-size:18px; padding:5px 5px 0 0; border-top:1px solid #999;">Total:</td>
-                                        <td width="50%" valign="middle" align="left" style="font-size:18px; padding:5px 0 0 5px; border-top:1px solid #999;"><?php echo $precioTotal2; ?> SEK</td>
+                                        <td width="50%" valign="middle" align="left" style="font-size:18px; padding:5px 0 0 5px; border-top:1px solid #999;"><input class="textd" type="text" value="<?php echo $precioTotal2; ?>" name="admdiscount" id="admdiscount" size="5" autocomplete="off" style="text-align:center; font-size:18px"> SEK</td>
                                     </tr>
                                 </table>
 
-                                <?php $_SESSION["TotalCompra2"] = $precioTotal2;?>
+                                <?php //$_SESSION["TotalCompra2"] = $_POST["admdiscount"];?>
                                 <?php $_SESSION["paquete2"] = GetPacket($totalRows_DatosParaPaquete2);?>
                                 
                                 <!-- Pay method:<br/>
@@ -458,14 +458,14 @@
     $Termin = $row_DatosTerm["id_term"];
     $TerminStart = $row_DatosTerm["term_start"];
     $TerminStop = $row_DatosTerm["term_stop"];
-    $total2 = $_SESSION["TotalCompra2"];
+    $total2 = $_POST["admdiscount"];
     $Package2 = $_SESSION["paquete2"];
     $studentadmin2 = $_GET["done_exist"]; 
-
+    $status2 = 1;
     $fecha2=time()+3600;
     date("H:i:s",$fecha2);
     ?>
-    <?php ConfirmationDone(date('Y'), date('m'), date('d'), date('His',$fecha2), $studentadmin2, $sexadmin2, $Termin, $TerminStart, $TerminStop, $Package2, $total2); ?>
+    <?php ConfirmationDone(date('Y'), date('m'), date('d'), date('His',$fecha2), $studentadmin2, $sexadmin2, $Termin, $TerminStart, $TerminStop, $Package2, $total2, $status2); ?>
         <div class="subform_cont1">
             <div class="msn_done">
                 <br/><br/><br/><br/>
@@ -569,7 +569,7 @@
                 </tr>
                 <tr height="30">
                     <td colspan="2" valign="middle" align="center" style="color: #333; padding: 30px 0 0 0;">
-                    <a href="students.php"><input class="button_a" style="width: 170px; text-align: center;" value="Stänga" /></a>
+                    <input class="button_a" style="width: 170px; text-align: center;" value="Stänga" onclick="history.back()"/>
                     </td>
                 </tr>
                 <tr height="20">
@@ -588,18 +588,18 @@
                         <?php //echo $row_DatosEdit['id_student'];?>
                     </td>
                 </tr>
-                <tr height="60">
+                <tr height="50">
                     <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" value="<?php echo $row_DatosEdit['name'];?>" placeholder="Ditt Namn" name="name" id="name" size="31" required/></td>
                     <td width="50%" valign="middle" align="left" style="padding: 0 10px;"><input class="textf" type="text" value="<?php echo $row_DatosEdit['surname'];?>" placeholder="Ditt Efternamn" name="surname" id="surname" size="31" required/></td>
                 </tr>
-                <tr height="60">
+                <tr height="50">
                     <td colspan="2" valign="middle" align="center"><input class="textf" type="email" value="<?php echo $row_DatosEdit['email'];?>" placeholder="Din mailadress..." name="email" id="email" size="68" required/></td>
                 </tr>
-                <tr height="60">
+                <tr height="50">
                     <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" value="<?php echo $row_DatosEdit['personal_number'];?>" minlength="10" maxlength="10" placeholder="Ditt Personnummer (10 siffror)" name="personal_number" id="personal_number" size="31" required/></td>
                     <td width="50%" valign="middle" align="left" style="padding: 0 10px;"><input class="textf" type="text" value="<?php echo $row_DatosEdit['telephone'];?>" placeholder="Ditt Telefonnummer" name="telephone" id="telephone" size="31" required/></td>
                 </tr>
-                <tr height="60">
+                <tr height="50">
                     <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
                         Kön: 
                         <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="sex" id="sex" required>
@@ -609,28 +609,35 @@
                         </select>
                     </td>
                 </tr>
-                <tr height="60">
+                <tr height="50">
                     <td colspan="2" valign="middle" align="center"><input class="textf" type="text" value="<?php echo $row_DatosEdit['adress'];?>" placeholder="Din adress..." name="adress" id="adress" size="68" required/></td>
                 </tr>
-                <tr height="60">
+                <tr height="50">
                     <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" value="<?php echo $row_DatosEdit['post'];?>" placeholder="Ditt Postnummer" name="post" id="post" size="31" required/></td>
                     <td width="50%" valign="middle" align="left" style="padding: 0 10px;"><input class="textf" type="text" value="<?php echo $row_DatosEdit['city'];?>" placeholder="Din Ort" name="city" id="city" size="31" required/></td>
                 </tr>
-                <tr height="60">
+                <tr height="50">
                     <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
                         Status: 
                         <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="status" id="status" required>
-                        <option value="Active" <?php if ($row_DatosEdit['status'] == Active) echo "selected"; ?>>Active</option>
-                        <option value="Inactive" <?php if ($row_DatosEdit['status'] == Inactive) echo "selected"; ?>>Inactive</option>
+                            <option value="1" <?php if ($row_DatosInscEdit['status'] == 1) echo "selected"; ?>>Active</option>
+                            <option value="2" <?php if ($row_DatosInscEdit['status'] == 2) echo "selected"; ?>>Waiting</option>
+                            <option value="3" <?php if ($row_DatosInscEdit['status'] == 3) echo "selected"; ?>>Not paid</option>
+                            <option value="0" <?php if ($row_DatosInscEdit['status'] == 0) echo "selected"; ?>>Inactive</option>
                         </select>
                     </td>
                 </tr>
+                <tr height="60">
+                    <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
+                        <textarea name="commentary" id="commentary" rows="5" cols="58"><?php echo $row_DatosInscEdit['commentary']; ?></textarea>
+                    </td>
+                </tr>    
                 <tr height="80">
                     <td colspan="2" valign="middle" align="center" style="color: #666; font-size: 14px;">
-                            <a href="students.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Uppdatera" onclick="javascript:return asegurar ();"/>
+                            <input class="button_a" style="width: 170px; text-align: center;" value="avbryt" onclick="history.back()"/> <input type="submit" class="button" value="Uppdatera" onclick="javascript:return asegurar ();"/>
                     </td>
                 </tr>
-                <tr height="30">
+                <tr height="25">
                     <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
                         
                     </td>
@@ -803,9 +810,12 @@
                                 <td width="50%" valign="middle" align="right" style="font-size:18px; padding:5px 5px 0 0; border-top:1px solid #999;">Total:</td>
                                 <td width="50%" valign="middle" align="left" style="font-size:18px; padding:5px 0 0 5px; border-top:1px solid #999;"><?php echo $precioTotal; ?> SEK</td>
                             </tr>
+                            <tr>
+                                <td width="50%" valign="middle" align="right" style="font-size:18px; padding:5px 5px 0 0; border-top:1px solid #999;">Total Adm:</td>
+                                <td width="50%" valign="middle" align="left" style="font-size:18px; padding:5px 0 0 5px; border-top:1px solid #999;"><input class="textd" type="text" value="<?php echo inscTotal($_GET['editc']); ?>" name="total" id="total" size="5" autocomplete="off" style="text-align:center; font-size:18px"> SEK</td>
+                            </tr>
                         </table>
 
-                        <?php $_SESSION["TotalCompra"] = $precioTotal;?>
                         <?php $_SESSION["paquete3"] = GetPacket($totalRows_DatosParaPaquete3);?>
                         
                         <!-- Pay method:<br/>
@@ -821,7 +831,7 @@
             </tr>
         </table>
         <input type="hidden" name="package" id="package" value="<?php echo $_SESSION["paquete3"]; ?>"/>
-        <input type="hidden" name="total" id="total" value="<?php echo $precioTotal; ?>"/>
+        <!-- <input type="hidden" name="total" id="total" value="<?php //echo inscTotal($_GET['editc']); ?>"/> -->
         <input type="hidden" name="id_insc" id="id_insc" value="<?php echo $_GET['editc'];?>"/>
         <input type="hidden" name="MM_insert" id="MM_insert" value="formeditc" />
     </form>

@@ -10,7 +10,7 @@
     document.getElementById("myForm3").style.display="none";
     }
 </script>
-<div class="user_div">
+<div class="<?php echo divWrapp(UserAppearance($_SESSION['std_UserId']));?>">
     <div class="space">
         <!-- <div class="settings_sb">
             <div class="under_sites">
@@ -65,6 +65,17 @@
                         </tr>
                         <tr height="80">
                             <td colspan="2" valign="middle" align="center" style="color: #333; padding: 30px 0 0 0; border-bottom:1px solid #CCC;">
+                                Applications & schedule
+                            </td>
+                        </tr>
+                        <tr height="60">
+                            <td colspan="2" valign="middle" align="left" style="color: #333; font-size: 14px;">
+                                <input type="checkbox" id="registration_off" name="registration_off" value="1" <?php if($row_DatosPageInfo["registration_off"] == 1) {?>checked<?php } ?>> Applications on/off<br/>
+                                <input type="checkbox" id="schedule_off" name="schedule_off" value="1" <?php if($row_DatosPageInfo["schedule_off"] == 1) {?>checked<?php } ?>> Schedule on/off 
+                            </td>
+                        </tr>
+                        <tr height="80">
+                            <td colspan="2" valign="middle" align="center" style="color: #333; padding: 30px 0 0 0; border-bottom:1px solid #CCC;">
                                 Social networks
                             </td>
                         </tr>
@@ -109,5 +120,5 @@
             </form>
         </div>
     </div>
-    
 </div>
+<?php include("inc/appearance_menu.php")?>

@@ -1,29 +1,9 @@
-<script>
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-  //event.preventDefault()
-  event.stopPropagation()
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
-</script>
-
 <div class="dropdown">
-    <button onclick="myFunction()" class="dropbtn">Menu</button>
+    <!-- <button class="dropbtn" onclick="myFunction()"> -->
+      <label class="hamburger" onclick="myFunction()"></label>
+      <input type="checkbox" id="input-hamburger" hidden/>
+    <!-- </button> -->
+
     <div id="myDropdown" class="dropdown-content">
         <ul>
         <h5>ADMIN</h5>
@@ -38,7 +18,7 @@ window.onclick = function(event) {
           <div class="dropdown2-content">
             <ul>
               <?php if(showPermissions($_SESSION['std_UserId'], "TSYS-P0008") || $_SESSION['std_Nivel'] < 3) : ?>
-              <li><a href="#">Discount codes</a></li>
+              <li><a href="discountcodes.php">Discount codes</a></li>
               <?php endif ?>
               <?php if($_SESSION['std_Nivel'] < 2) : ?>
               <li><a href="p_discount.php">Package discount</a></li>
@@ -50,7 +30,8 @@ window.onclick = function(event) {
           </div>
         </li>
         <?php if(showPermissions($_SESSION['std_UserId'], "TSYS-P0011") || showPermissions($_SESSION['std_UserId'], "TSYS-P0015") || showPermissions($_SESSION['std_UserId'], "TSYS-P0016") || $_SESSION['std_Nivel'] < 2) : ?>
-        <hr>
+        <!-- <hr> -->
+        <div style="width:87%; margin:0 auto; border-top:1px solid #FFF;"></div>
         <h5>SITE</h5>
         <?php endif ?>
         <?php if(showPermissions($_SESSION['std_UserId'], "TSYS-P0011") || $_SESSION['std_Nivel'] < 2) : ?>
@@ -73,3 +54,35 @@ window.onclick = function(event) {
         </ul>
     </div>
 </div>
+
+<script>
+  /* When the user clicks on the button, 
+  toggle between hiding and showing the dropdown content */
+  function myFunction() {
+    //event.preventDefault()
+    event.stopPropagation()
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+
+  // Close the dropdown if the user clicks outside of it
+  // window.onclick = function(event) {
+  //   if (!event.target.matches('.dropbtn')) {
+  //     var dropdowns = document.getElementsByClassName("dropdown-content");
+  //     var i;
+  //     for (i = 0; i < dropdowns.length; i++) {
+  //       var openDropdown = dropdowns[i];
+  //       if (openDropdown.classList.contains('show')) {
+  //         openDropdown.classList.remove('show');
+  //       }
+  //     }
+  //   }
+  // }
+</script>
+
+<script>
+  /* Close animation del menu hamburger */
+  const hamburger = document.querySelector(".hamburger");
+  hamburger.addEventListener("click", function () {
+    this.classList.toggle("close");
+  });
+</script>

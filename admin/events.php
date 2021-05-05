@@ -88,14 +88,10 @@ $Result1 = mysqli_query($con, $updateSQL) or die(mysqli_error($con));
 <link href="css/style_adm.css" rel="stylesheet" type="text/css"  media="all" />
 
 <link rel="stylesheet" type="text/css" href="simple_calendar/tcal.css" />
-<script type="text/javascript" src="simple_calendar/tcal.js"></script> 
-
-<style>
-    
-</style>
+<script type="text/javascript" src="simple_calendar/tcal.js"></script>
 </head>
-<body>
-    <div class="wrapp">
+<body style="background-color:<?php echo corps(UserAppearance($_SESSION['std_UserId']));?>;">
+    <div class="wrapp" style="background-color:<?php echo corps(UserAppearance($_SESSION['std_UserId']));?>;">
         <?php include("inc/head.php"); ?>
         <div class="container">
           <div class="title"><h2>Events</h2></div>

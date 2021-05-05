@@ -1,9 +1,15 @@
 <?php require_once('connections/conexion.php');?>
 <?php
-$query_Schedule = sprintf("SELECT * FROM schedule WHERE day !='' AND sal !='' ORDER BY id_schedule DESC");
-$Schedule = mysqli_query($con, $query_Schedule) or die(mysqli_error($con));
-$row_Schedule = mysqli_fetch_assoc($Schedule);
-$totalRows_Schedule = mysqli_num_rows($Schedule);
+  $query_DatosReg = sprintf("SELECT * FROM site_info");
+  $DatosReg = mysqli_query($con, $query_DatosReg) or die(mysqli_error($con));
+  $row_DatosReg = mysqli_fetch_assoc($DatosReg);
+  $totalRows_DatosReg = mysqli_num_rows($DatosReg);
+?>
+<?php
+// $query_Schedule = sprintf("SELECT * FROM schedule WHERE day !='' AND sal !='' ORDER BY id_schedule DESC");
+// $Schedule = mysqli_query($con, $query_Schedule) or die(mysqli_error($con));
+// $row_Schedule = mysqli_fetch_assoc($Schedule);
+// $totalRows_Schedule = mysqli_num_rows($Schedule);
 ?>
 <?php
 $query_ScheduleMon1 = sprintf("SELECT * FROM schedule WHERE day =1 AND sal =1 ORDER BY id_schedule DESC");

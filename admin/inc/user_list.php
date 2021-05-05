@@ -48,24 +48,24 @@
     }
 </script>
 <?php include("user_form.php")?>
-<div class="user_div_adm">
-<table width="100%" cellspacing="0" class="table_user_adm" style="margin: 20px auto 0; ">
-    <tr height="40" style="color: #FFF; font-weight: 800;">
-        <td width="12%" nowrap="nowrap" align="left" style="padding: 0 0 0 20px; border-bottom: 1px solid #FFF;">Name</td>
-        <td width="12%" nowrap="nowrap" align="left" style="padding: 0 0 0 20px; border-bottom: 1px solid #FFF;">Surname</td>
-        <td width="22%" nowrap="nowrap" align="center" style="padding: 0 0 0 10px; border-bottom: 1px solid #FFF;">E-Mail</td>
-        <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 10px; border-bottom: 1px solid #FFF;">Telefone</td>
-        <td width="12%" nowrap="nowrap" align="center" style="padding: 0 0 0 10px; border-bottom: 1px solid #FFF;"></td>
-        <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 10px; border-bottom: 1px solid #FFF;">Level</td>
-        <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 10px; border-bottom: 1px solid #FFF;">Status</td>
-        <td width="12%" nowrap="nowrap" align="center" style="padding: 0 0 0 10px; border-bottom: 1px solid #FFF;">-</td>
+<div class="<?php echo divWrapp(UserAppearance($_SESSION['std_UserId']));?>">
+<table width="100%" cellspacing="0" class="<?php echo appearanceList(UserAppearance($_SESSION['std_UserId']));?>" style="margin: 20px auto 10px; ">
+    <tr height="40">
+        <td width="12%" nowrap="nowrap" align="left" style="padding: 0 0 0 20px;">Name</td>
+        <td width="12%" nowrap="nowrap" align="left" style="padding: 0 0 0 20px;">Surname</td>
+        <td width="22%" nowrap="nowrap" align="center" style="padding: 0 0 0 10px;">E-Mail</td>
+        <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 10px;">Telefone</td>
+        <td width="12%" nowrap="nowrap" align="center" style="padding: 0 0 0 10px;"></td>
+        <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 10px;">Level</td>
+        <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 10px;">Status</td>
+        <td width="12%" nowrap="nowrap" align="center" style="padding: 0 0 0 10px;">-</td>
     </tr>
 </table>
     <?php if ($row_DatosConsulta > 0) { // Show if recordset not empty ?>
 
     <?php do { ?>
-<table width="100%" cellspacing="0" class="table_user_adm" style="margin: 0 auto 15px;">
-    <tr class="line_adm" height="60">
+<table cellspacing="0" class="<?php echo appearanceLine(UserAppearance($_SESSION['std_UserId']));?>" style="margin: 0 auto 15px;">
+    <tr height="">
         <td width="12%" nowrap="nowrap" align="left" style="padding: 0 0 0 20px;"><?php echo $row_DatosConsulta['name']; ?></td>
         <td width="12%" nowrap="nowrap" align="left" style="padding: 0 0 0 20px;"> <?php echo $row_DatosConsulta['surname']; ?></td>
         <td width="22%" nowrap="nowrap" align="left" style="padding: 0 0 0 20px;"><?php echo $row_DatosConsulta['mail']; ?></td>
@@ -78,7 +78,7 @@
             <?php if ((isset($_SESSION['MM_Username'])) && ($_SESSION['MM_Username'] == "") || $row_DatosConsulta['rank'] != 0) { ?>
                 <?php if ($row_DatosConsulta['mail'] != $_SESSION['MM_Username']) { ?>
         <div class="arternative">
-            <button class="artbtn">o o o</button>
+            <button class="<?php echo artbtn(UserAppearance($_SESSION['std_UserId']));?>">o o o</button>
             <div class="arternative-content">
                 <a href="users.php?edit=<?php echo $row_DatosConsulta['id_user']; ?>" class="alt_button">Edit user</a>
                 <?php if(showPermissions($_SESSION['std_UserId'], "TSYS-P0019") || $_SESSION['std_Nivel'] < 1) : ?>
@@ -99,5 +99,6 @@
     <?php } ?>
 </div>
 <?php if(showPermissions($_SESSION['std_UserId'], "TSYS-P0018") || $_SESSION['std_Nivel'] < 2) : ?>
-<a href="users.php?new=1"><div class="flying_button">+</div></a>
+<a href="users.php?new=1"><div class="<?php echo flyButton(UserAppearance($_SESSION['std_UserId']));?>">+</div></a>
 <?php endif ?>
+<?php include("inc/appearance_menu.php")?>

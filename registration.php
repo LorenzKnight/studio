@@ -1,4 +1,12 @@
 <?php require_once('connections/conexion.php');?>
+<?php
+  $query_DatosPeriod = sprintf("SELECT * FROM term WHERE status = 1 ORDER BY id_term DESC");
+  $DatosPeriod = mysqli_query($con, $query_DatosPeriod) or die(mysqli_error($con));
+  $row_DatosPeriod = mysqli_fetch_assoc($DatosPeriod);
+  $totalRows_DatosPeriod = mysqli_num_rows($DatosPeriod);
+
+  $TermAct = $row_DatosPeriod['id_term'];
+?>
 <!-- /////////////////////////////////// Consulta para optener el lista de cursos que se muestran en el formulario con categoria 1/////////////////////////////////////////// -->
 <?php
   $query_DatosCourse = sprintf("SELECT * FROM courses WHERE category = 1 AND status = 1 ORDER BY id_course ASC"); 
@@ -43,13 +51,23 @@
 <!-- /////////////////////////////////// Final Consulta para optener la lista de cursos seleccionados categoria 2 /////////////////////////////////////////// -->
 <!-- /////////////////////////////////// Consulta para optener la lista de cursos seleccionados para el paquete /////////////////////////////////////////// -->
 <?php
-  $query_DatosParaPaquete = sprintf("SELECT * FROM cart WHERE id_student = %s AND transaction_made = 0 ORDER BY id_counter ASC",
+  $query_DatosParaPaquete = sprintf('SELECT * FROM cart WHERE id_student = %s AND transaction_made = 0 AND discountcode IS NULL ORDER BY id_counter ASC',
                               GetSQLValueString($_SESSION["ydl_UserId"], "int")); 
   $DatosParaPaquete = mysqli_query($con, $query_DatosParaPaquete) or die(mysqli_error($con));
   $row_DatosParaPaquete = mysqli_fetch_assoc($DatosParaPaquete);
   $totalRows_DatosParaPaquete = mysqli_num_rows($DatosParaPaquete);
 ?>
 <!-- /////////////////////////////////// Final Consulta para optener la lista de cursos seleccionados para el paquete /////////////////////////////////////////// -->
+<!-- /////////////////////////////////// Consulta para optener la rebaja del promo code /////////////////////////////////////////// -->
+<?php
+  $query_DatosPromoCode = sprintf("SELECT * FROM cart WHERE id_student = %s AND id_term = %s ORDER BY id_counter ASC",
+                              GetSQLValueString($_SESSION["ydl_UserId"], "int"),
+                              GetSQLValueString($TermAct, "int")); 
+  $DatosPromoCode = mysqli_query($con, $query_DatosPromoCode) or die(mysqli_error($con));
+  $row_DatosPromoCode = mysqli_fetch_assoc($DatosPromoCode);
+  $totalRows_DatosPromoCode = mysqli_num_rows($DatosPromoCode);
+?>
+<!-- /////////////////////////////////// Final Consulta para optener la rebaja del promo code /////////////////////////////////////////// -->
 <!-- /////////////////////////////////// codigo para insertar un registro nuevo /////////////////////////////////////////// -->
 <?php
   $editFormAction = $_SERVER['PHP_SELF'];
@@ -64,8 +82,8 @@
     $year = date("Y");
     $month = date("m");
     $day = date("d");
-    $insertSQL = sprintf("INSERT INTO students(date, year, month, day, time, name, surname, email, password, personal_number, telephone, adress, post, city, sex, agree, status, via) 
-                          VALUES (NOW(), $year, $month, $day, NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+    $insertSQL = sprintf("INSERT INTO students(date, year, month, day, time, name, surname, email, password, personal_number, telephone, adress, post, city, sex, agree, via) 
+                          VALUES (NOW(), $year, $month, $day, NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
                           GetSQLValueString($_POST["name"], "text"),                      
                           GetSQLValueString($_POST["surname"], "text"),
                           GetSQLValueString($_POST["email"], "text"),
@@ -77,7 +95,6 @@
                           GetSQLValueString($_POST["city"], "text"),
                           GetSQLValueString($_POST["sex"], "text"),
                           GetSQLValueString($_POST["agree"], "text"),
-                          GetSQLValueString($_POST["status"], "text"),
                           GetSQLValueString($_POST["via"], "int"));
 
     
@@ -153,68 +170,53 @@
   }
 ?>
 <!-- /////////////////////////////////// Final codigo para insertar un registro nuevo /////////////////////////////////////////// -->
-<!-- /////////////////////////////////// Codigo para acceder con el usuario recien registrado /////////////////////////////////////////// -->
+<!-- /////////////////////////////////// codigo para insertar el codigo de descuento /////////////////////////////////////////// -->
 <?php
-// if (!isset($_SESSION)) {
-//   session_start();
-// }
+  $editFormAction = $_SERVER['PHP_SELF'];
+  if (isset($_SERVER['QUERY_STRING'])) {
+    $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
+  }
 
-// $loginFormAction = $_SERVER['PHP_SELF'];
-// if (isset($_GET['accesscheck'])) {
-//   $_SESSION['PrevUrl'] = $_GET['accesscheck'];
-// }
+  if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "discountrequest")) {
 
-// function mysqli_result($res, $row, $field=0) { 
-//     $res->data_seek($row); 
-//     $datarow = $res->fetch_array(); 
-//     return $datarow[$field]; 
-// }
+    $query_DatosPromoCodeControl = sprintf("SELECT * FROM cart WHERE discountcode = %s ORDER BY discountcode ASC",
+                                GetSQLValueString($_POST["discountcode"], "int")); 
+    $DatosPromoCodeControl = mysqli_query($con, $query_DatosPromoCodeControl) or die(mysqli_error($con));
+    $row_DatosPromoCodeControl = mysqli_fetch_assoc($DatosPromoCodeControl);
+    $totalRows_DatosPromoCodeControl = mysqli_num_rows($DatosPromoCodeControl);
 
-// if (isset($_POST['email'])) {
-//   $loginUsername=$_POST['email'];
-//   //ATENCIÓN USAMOS MD5 para guardar la contraseña.
-//   $password=$_POST['password'];
-//   $MM_fldUserAuthorization = "rank";
-//   $MM_redirectLoginSuccess = "registration.php?idCompl=1";
-//   $MM_redirectLoginFailed = "error.php?error=3";
-//   $MM_redirecttoReferrer = false;
-  
-  	
-//   $LoginRS__query=sprintf("SELECT id_student, email, password, rank FROM students WHERE email=%s AND password=%s",
-//   GetSQLValueString($loginUsername, "text"),
-//   GetSQLValueString($password, "text")); 
-   
-//   $LoginRS = mysqli_query($con,  $LoginRS__query) or die(mysqli_error($con));
-//   $loginFoundUser = mysqli_num_rows($LoginRS);
-//   if ($loginFoundUser) {
-    
-//     $loginStrGroup  = mysqli_result($LoginRS,0,'rank');
-    
-// 	if (PHP_VERSION >= 5.1) {session_regenerate_id(true);} else {session_regenerate_id();}
-//     //declare two session variables and assign them
-//     $_SESSION['MM_Username'] = $loginUsername;
-//     $_SESSION['MM_UserGroup'] = $loginStrGroup;	 
-//     $_SESSION['ydl_UserId'] = mysqli_result($LoginRS,0,'id_student');
-//     $_SESSION['ydl_Mail'] = mysqli_result($LoginRS,0,'email');
-//     $_SESSION['ydl_Nivel'] = mysqli_result($LoginRS,0,'rank');
-// 	//ContabilizarAcceso($_SESSION['vpt_UserId']);
-	
-// 	/* DESCOMENTAR SOLO SI SE USA EL CHECK DE RECORDAR CONTRASEÑA, HABRÁ QUE USAR LA FUNCIÓN generar_cookie()
-// 	if ((isset($_POST["CAMPORECUERDA"])) && ($_POST["CAMPORECUERDA"]=="1"))
-// 	generar_cookie($_SESSION['NOMBREWEB_UserId']);
-// 	*/	     
+    $startD = date("Y-m-d");
+    if (comprobarDiscountCode($_POST["discountcode"]) && quantiCode($_POST["discountcode"], $totalRows_DatosPromoCodeControl) && dateConfirm($_POST["discountcode"], $startD, $startD))
+    {
 
-//     if (isset($_SESSION['PrevUrl']) && false) {
-//       $MM_redirectLoginSuccess = $_SESSION['PrevUrl'];	
-//     }
-//     header("Location: " . $MM_redirectLoginSuccess );
-//   }
-//   else {
-//     header("Location: ". $MM_redirectLoginFailed );
-//   }
-// }
+        $insertSQL = sprintf("INSERT INTO cart(date, discountcode, id_student, id_term) 
+                              VALUES (NOW(), %s, %s, %s)",
+                              GetSQLValueString($_POST["discountcode"], "text"),                      
+                              GetSQLValueString($_POST["id_student"], "int"),
+                              GetSQLValueString($TermAct, "int"));
+
+        
+        $Result1 = mysqli_query($con,  $insertSQL) or die(mysqli_error($con));
+        
+        
+        $insertGoTo = "registration.php?idCompl=3";
+        if (isset($_SERVER['QUERY_STRING'])) {
+          $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
+          $insertGoTo .= $_SERVER['QUERY_STRING'];
+        }
+        header(sprintf("Location: %s", $insertGoTo));
+
+    } else {
+       $insertGoTo = "registration.php?idCompl=2";
+        if (isset($_SERVER['QUERY_STRING'])) {
+          $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
+          $insertGoTo .= $_SERVER['QUERY_STRING'];
+        }
+        header(sprintf("Location: %s", $insertGoTo));
+    }
+  }
 ?>
-<!-- /////////////////////////////////// Final Codigo para acceder con el usuario recien registrado /////////////////////////////////////////// -->
+<!-- /////////////////////////////////// Final del codigo para insertar el codigo de descuento /////////////////////////////////////////// -->
 <!-- /////////////////////////////////// codigo para insertar los cursos del usuario recien registrado /////////////////////////////////////////// -->
 <?php
   $editFormAction = $_SERVER['PHP_SELF'];
@@ -249,12 +251,6 @@
   }
 ?>
 <!-- /////////////////////////////////// Final codigo para insertar los cursos del usuario recien registrado /////////////////////////////////////////// -->
-<?php
-  $query_DatosPeriod = sprintf("SELECT * FROM term WHERE status = 1 ORDER BY id_term DESC");
-  $DatosPeriod = mysqli_query($con, $query_DatosPeriod) or die(mysqli_error($con));
-  $row_DatosPeriod = mysqli_fetch_assoc($DatosPeriod);
-  $totalRows_DatosPeriod = mysqli_num_rows($DatosPeriod);
-?>
 <html>
 <head>
 <meta charset="iso-8859-1">
@@ -263,6 +259,11 @@
 <link href="css/style.css" rel="stylesheet" type="text/css"  media="all" />
 <?php $menuactive= 2;?>
 </head>
+<script>
+  function invalidCode() {
+    console.log("tu codigo no es valido!");
+  }
+</script>
 <body>
     <?php include("inc/head.php")?>
     <?php include("inc/price_info.php")?>
