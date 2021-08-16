@@ -43,6 +43,8 @@ $TerminStop = $row_DatosTerm["term_stop"];
 $total = $_SESSION["TotalCompra"];
 $Package = $_SESSION["paquete"];
 $sex = $_SESSION["sex"];
+$name = $_SESSION["name"];
+$surname = $_SESSION["surname"];
 $status = 1;
 
 $fecha2=time()+7200;//2 hora//
@@ -50,7 +52,7 @@ date("H:i:s",$fecha2);
 
 ?>
 <?php //if (comprobarRegistroUnico($_SESSION['ydl_UserId'], $Termin)) { ?>
-    <?php ConfirmationPago(date('Y'), date('m'), date('d'), date('His'), $sex, $Termin, $TerminStart, $TerminStop, $Package, $total, $status); ?>
+    <?php ConfirmationPago(date('Y'), date('m'), date('d'), date('His'), $name, $surname, $sex, $Termin, $TerminStart, $TerminStop, $Package, $total, $status); ?>
 <?php //} else { 
     // $insertGoTo = "payment_method.php?exist=1";
     // if (isset($_SERVER['QUERY_STRING'])) {
@@ -69,7 +71,7 @@ date("H:i:s",$fecha2);
 <body>
     <?php include("inc/head.php")?>
     <div class="space">
-        <div class="" style="background-color: white; width: 400px; overflow: auto; padding: 20px 0; margin: 0 auto; text-align: center; border: 1px solid #f1f1f1; border-radius: 7px;">           
+        <div class="recibo">           
             
             <h2 style="text-align: center">STEG 2</h2>
             <h4 style="text-align: center">BETALA OCH SLUTFÖR DIN ANMÄLAN</h4>
@@ -81,7 +83,7 @@ date("H:i:s",$fecha2);
             </div>
             
             <h4><?php echo ObtenerNombreStudent($_SESSION['ydl_UserId']); ?> <?php echo ObtenerApellidoStudent($_SESSION['ydl_UserId']); ?></h4>
-                <table width="80%" cellspacing="0" style="background-color: ; margin: 0 auto;">
+                <table width="80%" cellspacing="0" class="recibo_list" style="">
                     <tr height="20">
                         <td nowrap="nowrap" align="center">        
                             <p><?php echo $Package; ?></p>
@@ -92,7 +94,7 @@ date("H:i:s",$fecha2);
                     do { ?>
                     <tr height="20">
                         <td nowrap="nowrap" align="left">
-                            <p style="font-size:12px;"><?php echo ObtenerNombreCurso($row_DatosRegCourse["id_course"]); ?></p>
+                            <?php echo ObtenerNombreCurso($row_DatosRegCourse["id_course"]); ?>
                         </td>
                     </tr>
                     <?php } while ($row_DatosRegCourse = mysqli_fetch_assoc($DatosRegCourse));
@@ -125,7 +127,7 @@ date("H:i:s",$fecha2);
                 <input type="hidden" name="rm" value="2" />
                 <input type="hidden" name="bn" value="PRESTASHOP_WPS" />
                 <input type="hidden" name="cbt" value="Volver a www.loopsdancestudio.se" />
-                <input type="image" src="../img/sys/paypal_button.png" name="image" style="cursor: pointer; width: 260px;" />
+                <input type="image" src="../img/sys/paypal_button.png" name="image" class="paypal_button" />
             </form>
         </div>
         <!-- <a href="reg_done.php?control=<?php //echo $row_DatosReg["id_student"]; ?>">Click test</a> -->

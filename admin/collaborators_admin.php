@@ -81,10 +81,21 @@ $Result1 = mysqli_query($con, $updateSQL) or die(mysqli_error($con));
 <title>Studio</title>
 <link rel="shortcut icon" href="favicon-32x32.png">
 <link href="css/style_adm.css" rel="stylesheet" type="text/css"  media="all" />
-
-<style>
-    
-</style>
+<script type="text/javascript" src="tinymce/tinymce.min.js"></script>
+<script>
+  tinymce.init({
+    mode : "textareas",
+    // selector: '#content',
+    // selector: '#content2',
+    width: 545,
+    height: 200,
+    menubar: 'file edit view insert format tools table',
+    plugins: [
+      'print preview importcss searchreplace autolink autosave save directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable charmap emoticons'
+    ],
+    toolbar: 'undo redo | bold italic underline charmap emoticons removeformat | alignleft aligncenter alignright alignjustify | outdent indent | fontselect fontsizeselect formatselect | numlist bullist | fullscreen  preview print | image media link codesample | ltr rtl'
+  });
+</script>
 </head>
 <body style="background-color:<?php echo corps(UserAppearance($_SESSION['std_UserId']));?>;">
     <div class="wrapp" style="background-color:<?php echo corps(UserAppearance($_SESSION['std_UserId']));?>;">

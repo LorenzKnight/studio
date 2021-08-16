@@ -7,7 +7,7 @@
 <link href="css/style_adm.css" rel="stylesheet" type="text/css"  media="all" />
 
 </head>
-<body>
+<body style="background-color:#000;">
 <?php if ($_GET["error"] == 1) { ?>
     <div class="error">
             <table width="100%" align="center" cellspacing="0">

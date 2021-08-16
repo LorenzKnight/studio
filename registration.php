@@ -101,7 +101,8 @@
     $Result1 = mysqli_query($con,  $insertSQL) or die(mysqli_error($con));
     
     
-    $insertGoTo1 = "registration.php?idConf=1";
+    // $insertGoTo1 = "registration.php?idConf=1";
+    $insertGoTo1 = "registration.php?discountCode=1";
     if (isset($_SERVER['QUERY_STRING'])) {
       $insertGoTo1 .= (strpos($insertGoTo1, '?')) ? "&" : "?";
       $insertGoTo1 .= $_SERVER['QUERY_STRING'];
@@ -129,7 +130,7 @@
     //ATENCIÓN USAMOS MD5 para guardar la contraseña.
     $password=$_POST['password'];
     $MM_fldUserAuthorization = "rank";
-    $MM_redirectLoginSuccess = "registration.php?idCompl=1";
+    $MM_redirectLoginSuccess = "registration.php?discountCode=1";
     $MM_redirectLoginFailed = "error.php?error=3";
     $MM_redirecttoReferrer = false;
     
@@ -199,7 +200,7 @@
         $Result1 = mysqli_query($con,  $insertSQL) or die(mysqli_error($con));
         
         
-        $insertGoTo = "registration.php?idCompl=3";
+        $insertGoTo = "registration.php?idCompl=1";
         if (isset($_SERVER['QUERY_STRING'])) {
           $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
           $insertGoTo .= $_SERVER['QUERY_STRING'];
@@ -207,7 +208,7 @@
         header(sprintf("Location: %s", $insertGoTo));
 
     } else {
-       $insertGoTo = "registration.php?idCompl=2";
+       $insertGoTo = "registration.php?discountCode=2";
         if (isset($_SERVER['QUERY_STRING'])) {
           $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
           $insertGoTo .= $_SERVER['QUERY_STRING'];
@@ -251,6 +252,19 @@
   }
 ?>
 <!-- /////////////////////////////////// Final codigo para insertar los cursos del usuario recien registrado /////////////////////////////////////////// -->
+
+<?php if($_GET['carrieOff']): ?>
+<?php
+  $query_Delete = sprintf("DELETE FROM cart WHERE id_student=%s AND transaction_made=0",
+                            GetSQLValueString($_SESSION['ydl_UserId'], "int"));
+  // echo $query_Delete;
+  $Result1 = mysqli_query($con, $query_Delete) or die(mysqli_error());
+
+    $insertGoTo = "registration.php";
+    header(sprintf("Location: %s", $insertGoTo));
+    mysqli_free_result($Result1);
+?>
+<?php endif ?>
 <html>
 <head>
 <meta charset="iso-8859-1">
@@ -263,6 +277,26 @@
   function invalidCode() {
     console.log("tu codigo no es valido!");
   }
+</script>
+<script>
+  function promocode() {
+    var styles = {
+      // "background-color": "red",
+      "opacity": "1",
+      // "transition": "300ms ease-in-out 100ms",
+      // "animation-delay": "0.1s",
+      "display": "block"
+    };
+    var promoCode = document.getElementById("code");
+    Object.assign(promoCode.style, styles);
+
+    document.getElementById("info").style.display="none";
+  }
+
+  // function ocurtar() {
+  //   event.stopPropagation()
+  //   document.getElementById("popup1").style.display="none";
+  // }
 </script>
 <body>
     <?php include("inc/head.php")?>

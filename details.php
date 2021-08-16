@@ -1,14 +1,16 @@
+<?php require_once('connections/conexion.php');?>
 <html>
 <head>
 <meta charset="iso-8859-1">
-<title>Studio</title>
+<title><?php echo $pageName; ?></title>
 <link rel="shortcut icon" href="favicon-32x32.png">
 <link href="css/style.css" rel="stylesheet" type="text/css"  media="all" />
+<?php $menuactive= 2;?>
 </head>
 <body>
+    <?php //include("inc/head_dinamic.php")?>
     <?php include("inc/head.php")?>
-    <div class="">
-    </div>
+    <?php include("inc/dinamic_content.php")?>
     <?php include("inc/foot.php")?>
 </body>
 </html>

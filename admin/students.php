@@ -9,42 +9,42 @@
   $TermAct = $row_DatosTerm['id_term'];
 ?>
 <?php
-if ((isset($_GET["MM_search"])) && ($_GET["MM_search"]=="formsearch"))
-{   
-              // // BLOQUE BUSCADOR INTELIGENTE NOMBRE
-              // $porciones = explode(" ", ObtenerNombreParaBuscar($_GET["search"]));
-              // $longitud = count($porciones);
-              // $extramodelo=" id_student LIKE '%".ObtenerNombreParaBuscar($_GET["search"]) ."%'";
-              // for($i=0; $i<$longitud; $i++)
-              // {
-              //   $extramodelo.=" OR id_student LIKE '%".$porciones[$i] ."%'";
-              // }
-              // // FIN BLOQUE BUSCADOR INTELIGENTE NOMBRE
+if ((isset($_GET["MM_search"])) && ($_GET["MM_search"]=="formsearch")) {   
+              // BLOQUE BUSCADOR INTELIGENTE
+              $porciones = explode(" ", $_GET["search"]);
+              $longitud = count($porciones);
+              $extramodelo=" name LIKE '%".$_GET["search"] ."%'";
+              for($i=0; $i<$longitud; $i++)
+              {
+                $extramodelo.=" OR surname LIKE '%".$porciones[$i] ."%'";
+              }
+              // FIN BLOQUE BUSCADOR INTELIGENTE
 
-              // $query_DatosConsulta = "SELECT * FROM inscriptions WHERE ".$extramodelo." AND term = $TermAct ORDER BY id_insc ASC";
+              $query_DatosConsulta = "SELECT * FROM inscriptions WHERE ".$extramodelo." AND term = $TermAct ORDER BY id_insc ASC";
               // echo $query_DatosConsulta;
 
-     $query_DatosConsulta = sprintf("SELECT * FROM inscriptions WHERE id_student LIKE %s AND id_student LIKE %s AND term = $TermAct ORDER BY id_insc DESC",
-                              GetSQLValueString("%".ObtenerNombreParaBuscar($_GET["search"])."%", "text"),
-                              GetSQLValueString("%".ObtenerApellidoParaBuscar($_GET["search"])."%", "text"));
+} else if ((isset($_GET["MM_search"])) && ($_GET["MM_search"]=="formfilter")) { 
+         if ($_GET["course"] != "" && $_GET["term"] == "") {
+    $query_DatosConsulta = sprintf("SELECT * FROM cart WHERE id_course = %s ORDER BY id_counter DESC",
+                                    GetSQLValueString($_GET["course"], "int"));
+  } else if ($_GET["course"] == "" && $_GET["term"] != "") {
+    $query_DatosConsulta = sprintf("SELECT * FROM inscriptions WHERE term = %s ORDER BY id_insc DESC",
+                                    GetSQLValueString($_GET["term"], "int"));
+  } else if ($_GET["course"] == "" && $_GET["term"] == "") {
+    $query_DatosConsulta = sprintf("SELECT * FROM inscriptions WHERE term = $TermAct ORDER BY id_insc DESC");
+  } else if ($_GET["course"] != "" && $_GET["term"] != "") {
+    $query_DatosConsulta = sprintf("SELECT * FROM cart WHERE id_course = %s AND id_term = %s ORDER BY id_counter DESC",
+                                    GetSQLValueString($_GET["course"], "int"),
+                                    GetSQLValueString($_GET["term"], "int"));
+  }
+} else {
+
+    $query_DatosConsulta = sprintf("SELECT * FROM inscriptions WHERE term = $TermAct ORDER BY id_insc DESC");
+
 }
-else if ((isset($_GET["MM_search"])) && ($_GET["MM_search"]=="formfilter"))
-{   
-     $query_DatosConsulta = sprintf("SELECT * FROM cart WHERE id_course LIKE %s AND id_term = $TermAct ORDER BY id_counter DESC",
-                              GetSQLValueString("%".$_GET["course"]."%", "text"));
-}
-else if ((isset($_GET["MM_search"])) && ($_GET["MM_search"]=="formterm"))
-{   
-     $query_DatosConsulta = sprintf("SELECT * FROM inscriptions WHERE term LIKE %s ORDER BY id_insc DESC",
-                              GetSQLValueString("%".$_GET["term"]."%", "text"));
-}
-else
-{
- $query_DatosConsulta = sprintf("SELECT * FROM inscriptions WHERE term = $TermAct ORDER BY id_insc DESC");
-}
- $DatosConsulta = mysqli_query($con, $query_DatosConsulta) or die(mysqli_error($con));
- $row_DatosConsulta = mysqli_fetch_assoc($DatosConsulta);
- $totalRows_DatosConsulta = mysqli_num_rows($DatosConsulta);
+    $DatosConsulta = mysqli_query($con, $query_DatosConsulta) or die(mysqli_error($con));
+    $row_DatosConsulta = mysqli_fetch_assoc($DatosConsulta);
+    $totalRows_DatosConsulta = mysqli_num_rows($DatosConsulta);
 ?>
 <!--/////////////////////////////////////////////////BACK-END INSERT/////////////////////////////////////////////////////////-->
 <?php
@@ -177,42 +177,7 @@ $DatosParaPaquete3 = mysqli_query($con, $query_DatosParaPaquete3) or die(mysqli_
 $row_DatosParaPaquete3 = mysqli_fetch_assoc($DatosParaPaquete3);
 $totalRows_DatosParaPaquete3 = mysqli_num_rows($DatosParaPaquete3);
 ?>
-<!-- /////////////////////////////////// Final Consulta para optener la lista de cursos seleccionados para el paquete /////////////////////////////////////////// -->
-<?php
-// $editFormAction = $_SERVER['PHP_SELF'];
-// if (isset($_SERVER['QUERY_STRING'])) {
-//   $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
-// }
 
-// if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formcompl")) {
-//   $year = date("Y");
-// 	$month = date("m");
-// 	$day = date("d");
-//   $insertSQL = sprintf("INSERT INTO inscriptions(date, year, month, day, time, id_student, sex, term, term_start, term_stop, package, status, done, payment) 
-//                         VALUES (NOW(), $year, $month, $day, NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s)",
-//                         GetSQLValueString($_POST["id_student"], "int"),
-//                         GetSQLValueString($_POST["sex"], "text"),                   
-//                         GetSQLValueString($_POST["term"], "int"),
-//                         GetSQLValueString($_POST["term_start"], "text"),
-//                         GetSQLValueString($_POST["term_stop"], "text"),
-//                         GetSQLValueString($_POST["package"], "int"),
-//                         GetSQLValueString($_POST["status"], "text"),
-//                         GetSQLValueString($_POST["done"], "int"),
-//                         GetSQLValueString($_POST["payment"], "int"));
-
-  
-//   $Result1 = mysqli_query($con,  $insertSQL) or die(mysqli_error($con));
-  
-  
-//   $insertGoTo = "students.php?done=1";
-//   if (isset($_SERVER['QUERY_STRING'])) {
-//     $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
-//     $insertGoTo .= $_SERVER['QUERY_STRING'];
-//   }
-//   header(sprintf("Location: %s", $insertGoTo));
-// }
-?>
-<!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 <!--/////////////////////////////////////////////////BACK-END EDIT/////////////////////////////////////////////////////////-->
 <?php
   $query_DatosEdit = sprintf("SELECT * FROM students WHERE id_student=%s", GetSQLValueString($_GET["editi"], "int")); 
@@ -365,7 +330,12 @@ $totalRows_DatosPackage = mysqli_num_rows($DatosPackage);
 <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 <!--/////////////////////////////////////////////////FILTER LISTS/////////////////////////////////////////////////////////-->
 <?php
-  $query_DatosCourse_filter = sprintf("SELECT * FROM courses WHERE status = 1 ORDER BY id_course ASC"); 
+  if($_GET["term"] != "") {
+  $query_DatosCourse_filter = sprintf("SELECT * FROM courses WHERE term = %s ORDER BY id_course ASC",
+                                      GetSQLValueString($_GET["term"], "int"));
+  } else {
+  $query_DatosCourse_filter = sprintf("SELECT * FROM courses WHERE status = 1 ORDER BY id_course ASC");
+  }                                                       
   $DatosCourse_filter = mysqli_query($con, $query_DatosCourse_filter) or die(mysqli_error($con));
   $row_DatosCourse_filter = mysqli_fetch_assoc($DatosCourse_filter);
   $totalRows_DatosCourse_filter = mysqli_num_rows($DatosCourse_filter);
@@ -377,6 +347,28 @@ $totalRows_DatosPackage = mysqli_num_rows($DatosPackage);
   $totalRows_DatosTerm_filter = mysqli_num_rows($DatosTerm_filter);
 ?>
 <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!--///////////////////////////////////////////////// DELETE /////////////////////////////////////////////////////////-->
+<?php
+if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"]=="formdelete"))
+{ 
+  $query_Delete = sprintf("DELETE FROM inscriptions WHERE id_insc=%s", 
+                            GetSQLValueString($_POST["id"], "int"));
+  echo $query_Delete;
+  $Result1 = mysqli_query($con, $query_Delete) or die(mysqli_error());
+
+
+  $query_Delete = sprintf("DELETE FROM cart WHERE transaction_made=%s", 
+                            GetSQLValueString($_POST["id"], "int"));
+  echo $query_Delete;
+  $Result1 = mysqli_query($con, $query_Delete) or die(mysqli_error());
+
+
+  $insertGoTo = "students.php";
+  header(sprintf("Location: %s", $insertGoTo));
+  mysqli_free_result($Result1);
+}
+?>
+<!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 <?php
 if ((isset($_GET["MM_search"])) && ($_GET["MM_search"]=="formtraer"))
 {
@@ -394,7 +386,13 @@ if ((isset($_GET["MM_search"])) && ($_GET["MM_search"]=="formtraer"))
 <title>Studio</title>
 <link rel="shortcut icon" href="favicon-32x32.png">
 <link href="css/style_adm.css" rel="stylesheet" type="text/css"  media="all" />
-
+<script>
+    function validarForm()
+        {
+            form = document.getElementById('formfilter');
+            form.submit();
+        }
+</script>
 </head>
 <body style="background-color:<?php echo corps(UserAppearance($_SESSION['std_UserId']));?>;">
     <div class="wrapp" style="background-color:<?php echo corps(UserAppearance($_SESSION['std_UserId']));?>;">

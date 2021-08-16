@@ -15,7 +15,9 @@
                     </td>
                 </tr>
                 <tr height="100">
-                    <td colspan="3" valign="middle" align="center"><textarea class="textf" type="text" placeholder="Content..." name="content" id="content" maxlength="2000" cols="65" rows="8" required></textarea></td>
+                    <td colspan="3" valign="middle" align="center">
+                        <textarea class="textf" type="text" placeholder="Content..." name="content" id="content" maxlength="2000" cols="65" rows="8"></textarea>
+                    </td>
                 </tr>
                 <tr height="200">
                     <td colspan="2" valign="middle" align="right">
@@ -86,7 +88,7 @@
                                     <option value="1">Important</option>
                                     <option value="2">Publication</option>
                                     <option value="3">Releases</option>
-                                    <option value="4">PR Publication</option>
+                                    <option value="4">Info</option>
                                     </select>
                                 </td>
                             </tr>
@@ -147,7 +149,9 @@
                     </td>
                 </tr>
                 <tr height="100">
-                    <td colspan="3" valign="middle" align="center"><textarea class="textf" type="text" placeholder="Content..." name="content2" id="content2" maxlength="2000" cols="65" rows="8" required><?php echo $row_DatosEdit['content'];?></textarea></td>
+                    <td colspan="3" valign="middle" align="center">
+                        <textarea class="textf" type="text" placeholder="Content..." name="content2" id="content2" maxlength="2000" cols="65" rows="8"><?php echo $row_DatosEdit['content'];?></textarea>
+                    </td>
                 </tr>
                 <tr height="200">
                     <td colspan="2" valign="middle" align="right">
@@ -155,7 +159,7 @@
                             <tr>
                                 <td valign="middle" align="center">
 
-                                    <script src="js/scriptupload.js"></script>
+                                    <script src="../js/scriptupload.js"></script>
                                     <?php 
                                     //***********************BLOQUE INSERCION IMAGEN***********************//
                                     //***********************PARÁMETROS DE IMAGEN**************************//
@@ -218,7 +222,7 @@
                                     <option value="1" <?php if ($row_DatosEdit["site"]=="1") echo "selected"; ?>>Important</option>
                                     <option value="2" <?php if ($row_DatosEdit["site"]=="2") echo "selected"; ?>>Publication</option>
                                     <option value="3" <?php if ($row_DatosEdit["site"]=="3") echo "selected"; ?>>Releases</option>
-                                    <option value="4" <?php if ($row_DatosEdit["site"]=="4") echo "selected"; ?>>PR Publication</option>
+                                    <option value="4" <?php if ($row_DatosEdit["site"]=="4") echo "selected"; ?>>Info</option>
                                     </select>
                                 </td>
                             </tr>

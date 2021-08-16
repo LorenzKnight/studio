@@ -1,0 +1,118 @@
+.container {
+    width: 900px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card {
+    width: 800px;
+    min-height: 600px;
+    background-color: white;
+    transform-style: preserve-3d;
+    border-radius: 4px;
+    padding: 0;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0px 0px 50px rgba(0, 0, 0, 0.2);
+    display: flex;
+}
+.circle {
+    width: 335px;
+    height: 335px;
+    background: linear-gradient(
+        to right,
+        rgba(245, 70, 66, 0.75),
+        rgba(8, 83, 156, 0.75)
+    );
+    border-radius: 50%;
+    position: absolute;
+    margin-left: 45px;
+    z-index: 1;
+}
+.sneaker {
+    width: 300px;
+    min-height: 35vh;
+    /* background-color: firebrick; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sneaker img {
+    width: 20rem;
+    z-index: 2;
+    transition: all 0.75s ease-out;
+}
+.foto {
+    width: 250px;
+    height: 500px;
+    /* background-color: dimgray; */
+    transition: all 0.75s ease-out;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    z-index: 2;
+}
+.foto img {
+    /* position: absolute; */
+    width: 150%;
+    margin: -0 0 0 -45%;
+}
+
+.close {
+    width: 100%;
+    height: 55px;
+    margin-top: 0;
+    transition: all 0.75s ease-out;
+    /* background-color: orchid; */
+}
+.close button {
+    /* width: 100%; */
+    background: #f54642;
+    color: white;
+    font-size: 40px;
+    /* font-weight: bolder; */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50%;
+    float: right;
+    transform: rotate(45deg);
+    cursor: pointer;
+} 
+.info {
+    /* background-color: red; */
+    padding: 10px 40px;
+    flex: 1;
+}
+.info h1 {
+    margin-top: 0;
+    font-size: 22px;
+    transition: all 0.75s ease-out;
+}
+.info p {
+    font-size: 13px;
+    line-height: 30px;
+    padding: 5px 0rem;
+    color: #585858;
+    font-weight: lighter;
+    transition: all 0.75s ease-out;
+}
+.content {
+    width: 100%;
+    /* background-color: orange; */
+    /* display: flex; */
+    /* justify-content: space-between; */
+    transition: all 0.75s ease-out;
+}
+.content button {
+    margin-top: 20px;
+    padding: 5px 2rem;
+    background: none;
+    border: none;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #585858;
+}
+button.active {
+    background: #585858;
+    color: white;
+}

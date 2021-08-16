@@ -46,6 +46,12 @@
 ?>
 <!--/////////////////////////////////////////////////BACK-END INSERT/////////////////////////////////////////////////////////-->
 <?php
+  $query_DatosTerm = sprintf("SELECT * FROM term WHERE status = 1 ORDER BY id_term DESC"); 
+  $DatosTerm = mysqli_query($con, $query_DatosTerm) or die(mysqli_error($con));
+  $row_DatosTerm = mysqli_fetch_assoc($DatosTerm);
+  $totalRows_DatosTerm = mysqli_num_rows($DatosTerm);
+?>
+<?php
 $editFormAction = $_SERVER['PHP_SELF'];
 if (isset($_SERVER['QUERY_STRING'])) {
   $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
@@ -55,10 +61,11 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequest")) {
   $year = date("Y");
 	$month = date("m");
 	$day = date("d");
-  $insertSQL = sprintf("INSERT INTO courses(name, schedule, teacher, category, price, status, user_rank, id_user) 
-                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
+  $insertSQL = sprintf("INSERT INTO courses(name, schedule, term, teacher, category, price, status, user_rank, id_user) 
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
                         GetSQLValueString($_POST["name"], "text"),                      
                         GetSQLValueString($_POST["schedule"], "text"),
+                        GetSQLValueString($_POST["term"], "int"),
                         GetSQLValueString($_POST["teacher"], "text"),
                         GetSQLValueString($_POST["category"], "int"),
                         GetSQLValueString($_POST["price"], "text"),

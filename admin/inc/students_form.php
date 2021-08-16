@@ -249,6 +249,8 @@
 <?php if($_GET["done"]):?>
     <?php
     $studentadmin = $row_DatosInsc['id_student'];
+    $nameAdmin = $row_DatosInsc['name'];
+    $surnameAdmin = $row_DatosInsc['surname'];
     $sexadmin = $row_DatosInsc['sex'];
     $Termin = $row_DatosTerm["id_term"];
     $TerminStart = $row_DatosTerm["term_start"];
@@ -259,7 +261,7 @@
     $fecha2=time()+3600;
     date("H:i:s",$fecha2);
     ?>
-    <?php ConfirmationDone(date('Y'), date('m'), date('d'), date('His',$fecha2), $studentadmin, $sexadmin, $Termin, $TerminStart, $TerminStop, $_SESSION["paquete"], $total, $status); ?>
+    <?php ConfirmationDone(date('Y'), date('m'), date('d'), date('His',$fecha2), $studentadmin, $nameAdmin, $surnameAdmin, $sexadmin, $Termin, $TerminStart, $TerminStop, $_SESSION["paquete"], $total, $status); ?>
         <div class="subform_cont1">
             <div class="msn_done">
                 <br/><br/><br/><br/>
@@ -460,12 +462,14 @@
     $TerminStop = $row_DatosTerm["term_stop"];
     $total2 = $_POST["admdiscount"];
     $Package2 = $_SESSION["paquete2"];
-    $studentadmin2 = $_GET["done_exist"]; 
+    $studentadmin2 = $_GET["done_exist"];
+    $nameAdmin2 = ObtenerNombreStudent($_GET["done_exist"]);
+    $surnameAdmin2 = ObtenerApellidoStudent($_GET["done_exist"]);
     $status2 = 1;
     $fecha2=time()+3600;
     date("H:i:s",$fecha2);
     ?>
-    <?php ConfirmationDone(date('Y'), date('m'), date('d'), date('His',$fecha2), $studentadmin2, $sexadmin2, $Termin, $TerminStart, $TerminStop, $Package2, $total2, $status2); ?>
+    <?php ConfirmationDone(date('Y'), date('m'), date('d'), date('His',$fecha2), $studentadmin2, $nameAdmin2, $surnameAdmin2, $sexadmin2, $Termin, $TerminStart, $TerminStop, $Package2, $total2, $status2); ?>
         <div class="subform_cont1">
             <div class="msn_done">
                 <br/><br/><br/><br/>
@@ -837,3 +841,32 @@
     </form>
     </div>
 <?php endif ?>
+
+<?php if($_GET["deleteID"]):?>
+    <div class="subform_cont1">
+        <div class="alert_msn">
+            <form action="students.php" method="post" name="formdelete" id="formdelete">
+                <table style="" width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr height="85">
+                        <td colspan="2" valign="middle" align="center" style="color: red; font-size: 14px;">
+                            <h2>Delete</h2>
+                            <label>Are you sure you want delete this Inscription?</label> 
+                        </td>
+                    </tr>
+                    <tr height="20">
+                        <td colspan="2" valign="middle" align="center">
+                           
+                        </td>
+                    </tr>
+                    <tr height="85">
+                        <td colspan="2" valign="middle" align="center">
+                            <input class="button_a" style="width: 140px; text-align: center;" value="avbryt" onclick="history.back()"/> <input type="submit" class="button" style="width: 140px;" value="Ok!" />
+                        </td>
+                    </tr>
+                </table>
+                <input type="hidden" name="id" id="id" value="<?php echo $_GET['deleteID'];?>"/>
+                <input type="hidden" name="MM_insert" id="MM_insert" value="formdelete" />
+            </form>
+        </div>
+    </div>
+<?php endif?>

@@ -13,22 +13,31 @@
         </div>
         <div class="contact_content">
             <div class="separador">
-                    <br><br>	
-                            <h3 style="text-transform:uppercase; text-align:center;">Skicka ditt meddelande</h3>
-                    <br>
                 <form action="MAILTO:<?php echo $row_DatosSite['email']; ?>" method="post" enctype="text/plain">
                     <form name="contactform" method="post" action="send_form_email.php">
-                        <table width="100%" border="0" cellspacing="0">
-                            <tr height="60">
-                                <td nowrap="nowrap" align="center" max-width="50%"><input class="textf" type="text" name="first_name" placeholder="Ditt namn..." maxlength="50" size="44" style="width:90%;"></td>
-                                <td nowrap="nowrap" align="center" max-width="50%"><input class="textf" type="text" name="email" placeholder="Din mail..." maxlength="80" size="44" style="width:90%;"></td>
+                        <table class="form_table" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td class="form_line2" colspan="2" nowrap="nowrap" align="center">
+                                    <h3 style="text-transform: uppercase; text-align: center;">Skicka ditt meddelande</h3>
+                                </td>
                             </tr>
-                            <tr height="60">
-                                <td nowrap="nowrap" align="center" colspan="2"><textarea class="textf" name="comments" placeholder="Meddelande..." maxlength="2000" cols="100" rows="2" style="margin: 0 auto; height: 188px; width: 95%;"></textarea></td>
+                            <tr>
+                                <td class="form_line1" nowrap="nowrap" align="center">
+                                    <input class="textf" type="text" name="first_name" placeholder="Ditt namn..." maxlength="50" style="width:98%;">
+                                </td>
+                                <td class="form_line1" nowrap="nowrap" align="center">
+                                    <input class="textf" type="text" name="email" placeholder="Din mail..." maxlength="80" style="width:98%;">
+                                </td>
                             </tr>
-                            <tr height="60">
-                                <td nowrap="nowrap" align="left"><input class="button_m" type="submit" value="Skicka"></td>
-                                <td>&nbsp;</td>
+                            <tr>
+                                <td class="form_line2" colspan="2" nowrap="nowrap" align="center">
+                                    <textarea class="textf" name="comments" placeholder="Meddelande..." maxlength="2000" cols="100" rows="2" style="margin: 0 auto; height: 188px; width: 98%;"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="form_line2" colspan="2" nowrap="nowrap" align="center">
+                                    <input class="button" type="submit" value="Skicka">
+                                </td>
                             </tr>
                         </table>
                     </form>

@@ -21,6 +21,12 @@
   $row_DatosPub3 = mysqli_fetch_assoc($DatosPub3);
   $totalRows_DatosPub3 = mysqli_num_rows($DatosPub3);
 ?>
+<?php
+  $query_DatosPub4 = sprintf("SELECT * FROM publications WHERE site = 4 ORDER BY position DESC");
+  $DatosPub4 = mysqli_query($con, $query_DatosPub4) or die(mysqli_error($con));
+  $row_DatosPub4 = mysqli_fetch_assoc($DatosPub4);
+  $totalRows_DatosPub4 = mysqli_num_rows($DatosPub4);
+?>
 <!--/////////////////////////////////////////////////BACK-END INSERT/////////////////////////////////////////////////////////-->
 
 <?php

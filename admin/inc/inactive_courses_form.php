@@ -103,7 +103,7 @@
                 </tr>
                 <tr height="80">
                     <td colspan="2" valign="middle" align="center" style="color: #666; font-size: 14px;">
-                            <a href="courses.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Uppdatera" onclick="javascript:return asegurar ();"/>
+                            <a href="inactive_courses.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Uppdatera" onclick="javascript:return asegurar ();"/>
                     </td>
                 </tr>
                 <tr height="30">

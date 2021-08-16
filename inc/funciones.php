@@ -879,7 +879,7 @@ function publicationsSite($site)
 	if ($site == 1) return "Important"; 
 	if ($site == 2) return "Publication";
 	if ($site == 3) return "Releases";
-	if ($site == 4) return "PR Publication";
+	if ($site == 4) return "Info";
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -1225,13 +1225,41 @@ function NombreCurso($varcurso)
 
 function NombreCursoColor($varcursocolor)
 {
-	if ($varcursocolor == 1) return "#97d1f7";
-	if ($varcursocolor == 2) return "#2a86d1";
-	if ($varcursocolor == 3) return "rgb(250, 211, 103)";
-	if ($varcursocolor == 4) return "rgb(253, 173, 0)";
-	if ($varcursocolor == 5) return "rgb(240, 121, 100)";
-	if ($varcursocolor == 6) return "rgb(160, 72, 57)";
-	if ($varcursocolor == 7) return "linear-gradient(to right, #999, #CCC, #999)";
+	if ($varcursocolor == 1) return "linear-gradient(
+        to right bottom, 
+        rgba(54, 227, 250, 0.589),
+        rgba(36, 154, 250, 0.795)
+    )";
+	if ($varcursocolor == 2) return "linear-gradient(
+        to right bottom, 
+        rgba(1, 152, 252, 0.363),
+        rgba(0, 80, 126, 0.534)
+	)";
+	if ($varcursocolor == 3) return "linear-gradient(
+        to right bottom,
+        rgba(250, 184, 60, 0.849),
+        rgba(253, 151, 18, 0.63)
+	)";
+	if ($varcursocolor == 4) return "linear-gradient(
+        to right bottom,
+        rgba(250, 145, 60, 0.849),
+        rgba(252, 64, 6, 0.63)
+    )";
+	if ($varcursocolor == 5) return "linear-gradient(
+        to right bottom,
+        rgba(248, 150, 121, 0.795),
+        rgba(250, 91, 52, 0.774)
+    )";
+	if ($varcursocolor == 6) return "linear-gradient(
+        to right bottom,
+        rgba(165, 61, 1, 0.795),
+        rgba(71, 32, 1, 0.774)
+    )";
+	if ($varcursocolor == 7) return "linear-gradient(
+        to right bottom, 
+        rgba(76, 1, 252, 0.363),
+        rgba(38, 0, 126, 0.534)
+    )";
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -1487,17 +1515,19 @@ function ActualizacionCarrito($Inscription)
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-function ConfirmationPago($ano, $mes, $dia, $hora, $sex, $Termin, $TerminStart, $TerminStop, $Package, $total)
+function ConfirmationPago($ano, $mes, $dia, $hora, $name, $surname, $sex, $Termin, $TerminStart, $TerminStop, $Package, $total)
 {
 	global $con;
 	
-	$insertSQL = sprintf("INSERT INTO inscriptions (date, year, month, day, time, id_student, sex, term, term_start, term_stop, package, payment, status, total) 
-									VALUES (NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+	$insertSQL = sprintf("INSERT INTO inscriptions (date, year, month, day, time, id_student, name, surname, sex, term, term_start, term_stop, package, payment, status, total) 
+									VALUES (NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
 									 GetSQLValueString($ano, "text"),
 									 GetSQLValueString($mes, "int"),
 									 GetSQLValueString($dia, "text"),
 									 GetSQLValueString($hora, "text"),
 									 GetSQLValueString($_SESSION["ydl_UserId"], "int"),
+									 GetSQLValueString($name, "text"),
+									 GetSQLValueString($surname, "text"),
 									 GetSQLValueString($sex, "text"),
 									 GetSQLValueString($Termin, "text"),
 									 GetSQLValueString($TerminStart, "text"),
@@ -1533,17 +1563,19 @@ function ActualizacionCarrito2($Inscription2, $studentadmin)
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-function ConfirmationDone($ano, $mes, $dia, $hora, $studentadmin, $sexadmin, $Termin, $TerminStart, $TerminStop, $Package, $total, $status)
+function ConfirmationDone($ano, $mes, $dia, $hora, $studentadmin, $nameAdmin, $surnameAdmin, $sexadmin, $Termin, $TerminStart, $TerminStop, $Package, $total, $status)
 {
 	global $con;
 	
-	$insertSQL = sprintf("INSERT INTO inscriptions (date, year, month, day, time, id_student, sex, term, term_start, term_stop, package, payment, total, status) 
-									VALUES (NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+	$insertSQL = sprintf("INSERT INTO inscriptions (date, year, month, day, time, id_student, name, surname, sex, term, term_start, term_stop, package, payment, total, status) 
+									VALUES (NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
 									 GetSQLValueString($ano, "text"),
 									 GetSQLValueString($mes, "int"),
 									 GetSQLValueString($dia, "text"),
 									 GetSQLValueString($hora, "text"),
 									 GetSQLValueString($studentadmin, "int"),
+									 GetSQLValueString($nameAdmin, "text"),
+									 GetSQLValueString($surnameAdmin, "text"),
 									 GetSQLValueString($sexadmin, "text"),
 									 GetSQLValueString($Termin, "text"),
 									 GetSQLValueString($TerminStart, "text"),

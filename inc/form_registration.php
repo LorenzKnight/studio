@@ -56,96 +56,83 @@
 </script>
 
 <div class="checkin">
-    <div class="register_info">
-        <h3 style="text-transform:uppercase;">KURSER OCH SOCIALDANS</h3>
-        <?php //echo $_SESSION['ydl_UserId'];?>
-        <h3>Kurser & paket</h3>
-        <p>Varje kurs-omgångar pågår i <?php echo $row_DatosReg['no_weeks']; ?> veckor.</p>
-        <br>
-        <p>Innan kursstart anmäler du dig till de kurser du vill gå.</p>
-        <p>Du kan också anmäla dig i kassan under prova-på-veckan.</p>
-        
-        <h3>OBS!</h3>
-        <p>Din anmälan gäller bara den specifika kurs du anmält dig till, man kan ej byta till annan kurs efter köp.</p>
-    </div>
-    
-    <div class="to_register">
-        <h3 style="text-transform:uppercase;">ORDINARIE PRISER</h3>
-        <p>- 1 kurs: 980 kr (gäller ej balett)</p>
-        <br/>
-        <h3 style="text-transform:uppercase;">KÖP FLER KURSER OCH FÅ UPP TILL 30 % RABATT</h3>
-        <p>- Köp 2 kurser, få 10 % rabatt = 1764 kr</p>
-        <p>- Köp 3 kurser, få 20 % rabatt = 2352 kr</p>
-        <p>- Köp 4 eller fler kurser, få 30 % rabatt = 2744 kr</p>
-        <br/>
-        <h3 style="text-transform:uppercase;">BALETT</h3>
-        <p>- Balett: 1 290 kr (90 min klasser, ingår ej i erbjudande om grupprabatt)</p>
-        <br/>
-        <?php if($row_DatosReg['registration_off'] == 1) { ?>
-        <input class="button_reg" style="background-color:#999;" value="Anmälninga avstäng">
-        <?php } else { ?>
-        <input class="button_reg" onclick="location='registration.php?id=1'" value="Anmäl mig">
-        <?php } ?>
-    </div>
-
-
     <?php if($_GET["id"]):?>
         <div class="form_frame">
-        <form action="registration.php" method="post" name="formrequest" id="formrequest">
-            <table class="formulario" style="top: 50px;" border="0" cellspacing="0" cellpadding="0">
-                <tr height="40">
-                    <td colspan="6" valign="middle" align="center" style="font-size: 16px; padding: 30px 0 0 0;">
-                    </td>
-                </tr>
-                <tr height="60">
-                    <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Namn" name="name" id="name" size="31" required/></td>
-                    <td width="50%" valign="middle" align="left" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Efternamn" name="surname" id="surname" size="31" required/></td>
-                </tr>
-                <tr height="60">
-                    <td colspan="6" valign="middle" align="center"><input class="textf" type="email" placeholder="Din mailadress..." name="email" id="email" size="70" required/></td>
-                </tr>
-                <tr height="60">
-                    <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" minlength="10" maxlength="10" placeholder="Ditt Personnummer (10 siffror)" name="personal_number" id="personal_number" size="31" required/></td>
-                    <td width="50%" valign="middle" align="left" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Telefonnummer" name="telephone" id="telephone" size="31" required/></td>
-                </tr>
-                <tr height="60">
-                    <td colspan="6" valign="middle" align="center" style="width: 100px; font-size: 14px; color: #999;">
-                        Kön:
-                        <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="sex" id="sex" required>
-                        <option value="None">None</option>
-                        <option value="Man">Man</option>
-                        <option value="Kvinna">Kvinna</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr height="60">
-                    <td colspan="6" valign="middle" align="center"><input class="textf" type="text" placeholder="Din adress..." name="adress" id="adress" size="70" required/></td>
-                </tr>
-                <tr height="60">
-                    <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Postnummer" name="post" id="post" size="31" required/></td>
-                    <td width="50%" valign="middle" align="left" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Din Ort" name="city" id="city" size="31" required/></td>
-                </tr>
-                <tr height="60">
-                    <td colspan="6" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
-                        Läs villkor <a href="#" onclick="mostrar()">här</a><br>
-                        <input class="class1_content" type="checkbox" name="agree" value="yes" required> Jag acepterar villkoren<br>
-                        <br>
-                        Så här behändla vi lagen om <a href="#" onclick="mostrar2()">GDPR</a>
-                    </td>
-                </tr>
-                <tr height="80">
-                    <td colspan="6" valign="middle" align="center" style="color: #666; font-size: 14px;">
-                            <a href="registration.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Next" />
-                    </td>
-                </tr>
-                <tr height="20">
-                </tr>
-                <input type="hidden" name="password" id="password" value="newstudent246"/>
-                <input type="hidden" name="status" id="status" value="Active"/>
-                <input type="hidden" name="via" id="via" value="1000"/>
-                <input type="hidden" name="MM_insert" id="MM_insert" value="formrequest" />
-            </table>
-        </form>
+            <div class="formulario">
+                <table class="form_table" border="0" cellspacing="0" cellpadding="0">
+                <form action="registration.php" method="post" name="formrequest" id="formrequest">
+                    <tr>
+                        <td class="form_line2" colspan="2" valign="middle" align="center" style="font-size: 16px; padding: 30px 0 0 0;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form_line1" valign="middle" align="right">
+                            <input class="textf" type="text" placeholder="Ditt Namn" name="name" id="name" style="width: 98%;" required/>
+                        </td>
+                        <td class="form_line1" valign="middle" align="left">
+                            <input class="textf" type="text" placeholder="Ditt Efternamn" name="surname" id="surname" style="width: 98%;" required/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form_line2" colspan="2" valign="middle" align="center">
+                            <input class="textf" type="email" placeholder="Din mailadress..." name="email" id="email" style="width: 95%;" required/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form_line1" valign="middle" align="right">
+                            <input class="textf" type="text" minlength="10" maxlength="10" placeholder="Ditt Person No.(10 siffror)" name="personal_number" id="personal_number" style="width: 98%;" required/>
+                        </td>
+                        <td class="form_line1" valign="middle" align="left">
+                            <input class="textf" type="text" placeholder="Ditt Telefonnummer" name="telephone" id="telephone" style="width: 98%;" required/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form_line2" colspan="2" valign="middle" align="center" style="color:#999;">
+                            Kön:
+                            <select class="textf" style="" name="sex" id="sex" required>
+                            <option value="None">None</option>
+                            <option value="Man">Man</option>
+                            <option value="Kvinna">Kvinna</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form_line2" colspan="2" valign="middle" align="center">
+                            <input class="textf" type="text" placeholder="Din adress..." name="adress" id="adress" style="width: 95%;" required/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form_line1" valign="middle" align="right">
+                            <input class="textf" type="text" placeholder="Ditt Postnummer" name="post" id="post" style="width: 98%;" required/>
+                        </td>
+                        <td class="form_line1" valign="middle" align="left">
+                            <input class="textf" type="text" placeholder="Din Ort" name="city" id="city" style="width: 98%;" required/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form_line2" colspan="2" valign="middle" align="center" style="padding: 0 10px;">
+                            Läs villkor <a href="#" onclick="mostrar()">här</a><br>
+                            <input class="checks" type="checkbox" name="agree" value="yes" required> Jag acepterar villkoren<br>
+                            <br>
+                            Så här behändla vi lagen om <a href="#" onclick="mostrar2()">GDPR</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form_line2" colspan="2" valign="middle" align="center">
+                        </td>
+                    </tr>   
+                    <tr>
+                        <td class="form_line2" colspan="2" valign="middle" align="center">
+                            <button class="button_a" onclick="location='registration.php'">avbryt</button> <input type="submit" class="button" value="Next" />
+                        </td>
+                    </tr>
+                    <input type="hidden" name="password" id="password" value="newstudent246"/>
+                    <input type="hidden" name="status" id="status" value="Active"/>
+                    <input type="hidden" name="via" id="via" value="1000"/>
+                    <input type="hidden" name="MM_insert" id="MM_insert" value="formrequest" />
+                </form>
+                </table>
+            </div>
         </div>
     <?php endif ?>
 
@@ -260,237 +247,355 @@
             </tr>
         </table>
     </div>
-    <?php if($_GET["idCompl"]):?>
+
+    <?php if($_GET["discountCode"]):?>
         <div class="form_frame">
-        
-            <table class="formulario" style="top: 40px;" border="0" cellspacing="0" cellpadding="0">
-                <tr height="60">
-                    <td colspan="2" valign="middle" align="center" style="font-size: 30px; padding: 30px 0 0 0;">
-                        
-                        Hej <?php echo ObtenerNombreStudent($_SESSION['ydl_UserId']);?>
-                    </td>
-                </tr>
-        <form action="registration.php" method="post" name="discountrequest" id="discountrequest">
-            <tr height="80">
-                <td colspan="2" valign="middle" align="center">
-                    <?php if (confirmCodeTrue($_SESSION['ydl_UserId'], $TermAct)) { ?>
-                        <?php if ($_GET['idCompl'] < 3 ) { ?>
-                            <input class="textd" type="text" placeholder="Har du en kod?" name="discountcode" id="discountcode" size="25" autocomplete="off" onkeyup="this.value = this.value.toUpperCase();" style="text-align:center;"> <input type="submit" class="button_s" value="Sätta in" />
-                        <?php } ?>
-                        <?php if ($_GET['idCompl'] == 2 ) { ?>
-                            <p style="font-size:12px; padding:0; color:red;">Den här koden är inte giltig</p>
-                        <?php } ?>
-                    <?php } else { ?>
-                        <p style="font-size:12px; padding:0; color:green;">Koden är giltig</p>
-                    <?php } ?>
-                </td>
-            </tr>
-            <input type="hidden" name="id_student" id="id_student" value="<?php echo $_SESSION['ydl_UserId']; ?>"/>
-            <input type="hidden" name="id_term" id="id_term" value="Active"/>
-            <input type="hidden" name="MM_insert" id="MM_insert" value="discountrequest" />
-        </form>
-                <tr height="30">
-                    <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
-                    Scrolla i listan med valbara kurser och klicka på de kurser du vill anmäla dig till.
-                    </td>
-                </tr>
-                <tr height="20">
-                </tr> 
-                <tr>
-                    <td colspan="2" valign="middle" align="center">
-                        <div class="courses">
-                            <div class="class1">
-                                <p>Valbara kurser</p>
-                                <div class="lista_c">
-                                    <?php
-                                    if ($totalRows_DatosCourse > 0) {
-                                    do { ?>
-                                    <?php if(productosRestantes($_SESSION['ydl_UserId'], $row_DatosCourse['id_course'])) { ?>
-                                    <div style="width:100%;">
-                                        <a style="font-size: 11px;" href="cart_add.php?courseID=<?php echo $row_DatosCourse['id_course'];?>">
-                                            <div style="width:50%; padding:10px 0; text-align:left; float:left;">
-                                                <?php echo $row_DatosCourse['name'];?>
-                                            </div>
-                                            <div style="width:40%; padding:10px 0; text-align:left; float:left;">
-                                                <?php echo $row_DatosCourse['schedule'];?>
-                                            </div>
-                                            <div style="width:10%; padding:10px 0; color:green; text-align:left; float:left;">
-                                                ( + )
-                                            </div>
-                                        </a>
-                                    </div>
+            <div class="formulario" style="height: 50%;">
+                <div class="discountcode" id="code" style="display:none; opacity:0;">
+                    <form action="registration.php" method="post" name="discountrequest" id="discountrequest">
+                        <table class="form_table" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td class="form_line2" colspan="2" valign="middle" align="center">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="form_line2" colspan="2" valign="middle" align="center">
+                                    <img class="img_discount" src="<?php //echo $dominio; ?>/img/sys/almost_free.png">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="form_line2" colspan="2" valign="middle" align="center">
+                                    <p>Do you have a code?</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="form_line2" colspan="2" valign="middle" align="center"> 
+                                    <input class="textd" type="text" placeholder="Har du en kod?" name="discountcode" id="discountcode" size="25" autocomplete="off" onkeyup="this.value = this.value.toUpperCase();" style="text-align:center;">
+                                    
+                                    <?php if ($_GET['discountCode'] == 2 ) { ?>
+                                        <p style="font-size:12px; padding:0; color:red;">Den här koden är inte giltig</p>
+                                    <?php } else if ($_GET['discountCode'] == 3 ) { ?>
+                                        <p style="font-size:12px; padding:0; color:green;">Koden är giltig</p>
                                     <?php } ?>
-                                    <?php } while ($row_DatosCourse = mysqli_fetch_assoc($DatosCourse));
-                                    }
-                                    ?>
-                                    <?php if ($totalRows_DatosCourse2 > 0) {?>
-                                    <p style="font-size:12px; color:#999;">Kurser utan rabatt</p>
-                                    <?php } ?>
-                                    <?php
-                                    if ($totalRows_DatosCourse2 > 0) {
-                                    do { ?>
-                                    <?php if(productosRestantes($_SESSION['ydl_UserId'], $row_DatosCourse2['id_course'])) { ?>
-                                    <div style="width:100%;">
-                                        <a style="font-size: 11px;" href="cart_add.php?courseID=<?php echo $row_DatosCourse2['id_course'];?>">
-                                            <div style="width:50%; padding:10px 0; text-align:left; float:left;">
-                                                <?php echo $row_DatosCourse2['name'];?>
-                                            </div>
-                                            <div style="width:40%; padding:10px 0; text-align:left; float:left;">
-                                                <?php echo $row_DatosCourse2['schedule'];?>
-                                            </div>
-                                            <div style="width:10%; padding:10px 0; color:green; text-align:left; float:left;">
-                                                ( + )
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <?php } ?>
-                                    <?php } while ($row_DatosCourse2 = mysqli_fetch_assoc($DatosCourse2));
-                                    }
-                                    ?>
-                                </div>
-                            </div>     
-                            <div class="class1" style="border-left: 1px solid #CCC;">
-                                <p>Dina valda kurser</p>
-                                <div class="lista_C_delete">
-                                    <?php $SubTotal = 0; ?>
-                                    <?php
-                                    if ($totalRows_DatosCart > 0) {
-                                    do { ?>
-                                        <div style="width:100%;" >
-                                            <a href="cart_delete.php?counterID=<?php echo $row_DatosCart['id_counter'];?>">
-                                                <div style="width:50%; padding:10px 0; text-align:left; float:left;">
-                                                    <?php echo ObtenerNombreCurso($row_DatosCart['id_course']);?>
-                                                </div>
-                                                <div style="width:40%; padding:10px 0; text-align:left; float:left;">
-                                                    <?php echo ObtenerEsquemaCurso($row_DatosCart['id_course']);?>
-                                                </div>
-                                                <div style="width:10%; padding:10px 0; color:red; text-align:left; float:left;">
-                                                    ( - )
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <!--/////////////////////////codigo que descuenta/////////////////////////-->
-                                    <?php if(getPorDiscount(ObtenerDisc($_SESSION["ydl_UserId"], $TermAct), $row_DatosCart['id_course']) != "") { ?>
-                                        <?php $rebajaCodigo = getPorDiscount(ObtenerDisc($_SESSION["ydl_UserId"], $TermAct), $row_DatosCart['id_course']); ?>
-                                        <?php $discPercentMoney = ObtenerPrecioCurso($row_DatosCart['id_course']) / 100 * $rebajaCodigo ; ?>
-                                    <?php } else { ?>
-                                        <?php $discPercentMoney = getMonDiscount(ObtenerDisc($_SESSION["ydl_UserId"], $TermAct), $row_DatosCart['id_course']);?>
-                                    <?php } ?>
-                                        <!--/////////////////////////codigo resutado sin descuento/////////////////////////-->
-                                    <?php $SubTotalSinCode = $SubTotalSinCode + ObtenerPrecioCurso($row_DatosCart['id_course']); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="form_line2" colspan="2" valign="middle" align="center">
+                                    <input type="submit" class="button" value="Ok!" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="form_line2" colspan="2" valign="middle" align="center">
+                                </td>
+                            </tr>
+                            <input type="hidden" name="id_student" id="id_student" value="<?php echo $_SESSION['ydl_UserId']; ?>"/>
+                            <input type="hidden" name="id_term" id="id_term" value="Active"/>
+                            <input type="hidden" name="MM_insert" id="MM_insert" value="discountrequest" />
+                        </table>
+                    </form>
+                </div>
 
-                                    <?php $SubTotal = $SubTotal + ObtenerPrecioCurso($row_DatosCart['id_course']) - $discPercentMoney; ?>
-                                    <?php } while ($row_DatosCart = mysqli_fetch_assoc($DatosCart));
-                                    }
-                                    ?>
-                                        <?php if ($totalRows_DatosCart2 > 0) {?>
-                                        <p style="font-size:12px; color:#999;">Kurser utan rabatt</p>
-                                        <?php } ?>
-                                    <?php
-                                    if ($totalRows_DatosCart2 > 0) {
-                                    do { ?>
-                                        <div style="width:100%;">
-                                            <a style="font-size: 11px;" href="cart_delete.php?counterID=<?php echo $row_DatosCart2['id_counter'];?>">
-                                                <div style="width:50%; padding:10px 0; text-align:left; float:left;">
-                                                    <?php echo ObtenerNombreCurso($row_DatosCart2['id_course']);?>
-                                                </div>
-                                                <div style="width:40%; padding:10px 0; text-align:left; float:left;">
-                                                    <?php echo ObtenerEsquemaCurso($row_DatosCart2['id_course']);?>
-                                                </div>
-                                                <div style="width:10%; padding:10px 0; color:red; text-align:left; float:left;">
-                                                    ( - )
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <!--/////////////////////////codigo resutado sin descuento/////////////////////////-->
-                                    <?php if(getPorDiscount(ObtenerDisc($_SESSION["ydl_UserId"], $TermAct), $row_DatosCart2['id_course'])) { ?>
-                                        <?php $rebajaCodigo2 = getPorDiscount(ObtenerDisc($_SESSION["ydl_UserId"], $TermAct), $row_DatosCart2['id_course']); ?>
-                                        <?php $discPercentMoney2 = ObtenerPrecioCurso($row_DatosCart2['id_course']) / 100 * $rebajaCodigo2 ; ?>
-                                    <?php } else { ?>
-                                        <?php $discPercentMoney2 = getMonDiscount(ObtenerDisc($_SESSION["ydl_UserId"], $TermAct), $row_DatosCart2['id_course']);?>
-                                    <?php } ?>
-                                        <!--/////////////////////////codigo resutado sin descuento/////////////////////////-->
-                                    <?php $NoDiscTotalSinCode = $NoDiscTotalSinCode + ObtenerPrecioCurso($row_DatosCart2['id_course']); ?>
-
-                                    <?php $NoDiscTotal = $NoDiscTotal + ObtenerPrecioCurso($row_DatosCart2['id_course']) - $discPercentMoney2;?>
-                                    <?php } while ($row_DatosCart2 = mysqli_fetch_assoc($DatosCart2));
-                                    }
-                                    ?>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-        <form action="payment_method.php" method="post" name="" id="">
-                <tr height="60">
-                    <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
-                    
-                    <?php
-                    $sumaNoCode = $SubTotalSinCode + $NoDiscTotalSinCode;
-                    $SubTotalPlus = $SubTotal + $NoDiscTotal;
-
-                    $SubTotalNoCode = $sumaNoCode - $SubTotalPlus;
-
-                    $resprosent = ObtenerPDescuento($totalRows_DatosCart);
-                    $preciorebaja = $SubTotal / 100 * $resprosent;
-                    $precioTotalCR = $SubTotal - $preciorebaja;
-                    $precioTotal = $SubTotal - $preciorebaja + $NoDiscTotal;
-                    ?>
-
-                    <table style="background-color: ; margin:5px 0 0;" width="60%" border="0" cellspacing="0" cellpadding="0">
+                <div class="discountcode" id="info">
+                    <table class="form_table" border="0" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td colspan="2" valign="middle" align="center" style="font-size:18px; padding:0 0 10px;"><?php echo GetPacket($totalRows_DatosParaPaquete); ?></td>
+                            <td class="form_line2" colspan="2" valign="middle" align="center">
+                            </td>
                         </tr>
                         <tr>
-                            <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#CCC;">Sub Total:</td>
-                            <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#CCC;">&nbsp;<?php echo $SubTotalPlus; ?> SEK</td>
+                            <td class="form_line2" colspan="2" valign="middle" align="center">
+                                <img src="<?php //echo $dominio; ?>/img/loops_dance_studio.svg" alt="" id="" style="margin:0 40px 20px;" width="30%">
+                            </td>
                         </tr>
-                        <?php if ($totalRows_DatosCart > 1) {?>
                         <tr>
-                            <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#CCC;"><?php //echo ObtenerPDescuento($totalRows_DatosCart); ?>Mängd rabatt:</td>
-                            <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#CCC;">- <?php echo $preciorebaja; ?> SEK </td>
+                            <td class="form_line2" colspan="2" valign="middle" align="center">
+                                <p>Ready to enjoy of</p>
+                                <h3 style="font-weight:200; margin:0;">Loops Dance Studio kurs?</h3>
+                            </td>
                         </tr>
-                        <?php } ?>
-                        <?php if (confirmCodeTrue($_SESSION['ydl_UserId'], $TermAct)) { ?>
-                        <?php } else { ?>
                         <tr>
-                            <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#CCC;">rabatt kod:</td>
-                            <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#CCC;">- <?php echo $SubTotalNoCode; ?> SEK </td>
+                            <td class="form_line2" colspan="2" valign="middle" align="center">
+                            </td>
                         </tr>
-                        <?php } ?>
-                        <!-- <tr>
-                            <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#999;">= Total efter rabatt:</td>
-                            <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#999;"><?php echo $precioTotalCR; ?> SEK</td>
-                        </tr> -->
-                        <?php if ($totalRows_DatosCart2 > 0) {?>
-                        <!-- <tr>
-                            <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#999;">+ Kurser utan rabatt:</td>
-                            <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#999;"><?php echo $NoDiscTotal; ?> SEK</td>
-                        </tr> -->
-                        <?php } ?>
                         <tr>
-                            <td width="50%" valign="middle" align="right" style="font-size:18px; padding:5px 5px 0 0; border-top:1px solid #999;">Total:</td>
-                            <td width="50%" valign="middle" align="left" style="font-size:18px; padding:5px 0 0 5px; border-top:1px solid #999;"><?php echo $precioTotal; ?> SEK</td>
+                            <td class="form_line2" colspan="2" valign="middle" align="center">
+                                <Button class="button" onclick="location='registration.php?idCompl=1'">Next</button>
+                                <br>
+                                <button class="button_a" style="text-transform: lowercase;" onclick="promocode()">I have a code!</button>
+                            </td>
                         </tr>
                     </table>
+                </div>
+            </div>
+        </div>
+    <?php endif ?>
 
-                    <?php $_SESSION["TotalCompra"] = $precioTotal;?>
-                    <?php $_SESSION["paquete"] = GetPacket($totalRows_DatosParaPaquete);?>
-                    <?php $_SESSION["sex"] = sex($_SESSION['ydl_UserId']);?>
-                    
-                    <!-- Pay method:<br/>
-                    Paypal -->
-                    </td>
-                </tr>
-                <tr height="80">
-                    <td colspan="2" valign="middle" align="center" style="color: #666; font-size: 14px;">
-                            <a href="registration.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Anmäl mig" />
-                    </td>
-                </tr>
-                <tr height="10">
-                </tr>
-            </table>
-        </form>
+    <?php if($_GET["idCompl"]):?>
+        <div class="form_frame">
+            <div class="formulario">
+                <table class="form_table" border="0" cellspacing="0" cellpadding="0">
+                    <tr height="10">
+                    </tr>
+                    <tr>
+                        <td class="form_line2" colspan="2" valign="middle" align="center">
+                            <h2>Hej <?php echo ObtenerNombreStudent($_SESSION['ydl_UserId']);?></h2>
+                        </td>
+                    </tr>
+                    <?php if (!confirmCodeTrue($_SESSION['ydl_UserId'], $TermAct)) { ?>
+                    <tr>
+                        <td class="form_line2" colspan="2" valign="middle" align="center">
+                            <p style="padding:0; color: green;">Du har en giltig rabattkod</p>
+                        </td>
+                    </tr>
+                    <?php } ?>
+                    <tr>
+                        <td class="form_line2" colspan="2" valign="middle" align="center" style="color: #666; padding: 0 10px;">
+                            <p>Scrolla i listan med valbara kurser och klicka på de kurser du vill anmäla dig till.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form_line2" colspan="2" valign="middle" align="center">
+                        </td>
+                    </tr> 
+                    <tr>
+                        <td class="form_line2" colspan="2" valign="middle" align="center">
+                            <div class="courses">
+                                <div class="class1">
+                                    <p>Valbara kurser</p>
+                                    <div class="lista_c">
+                                        <?php
+                                        if ($totalRows_DatosCourse > 0) {
+                                        do { ?>
+                                        <?php if(productosRestantes($_SESSION['ydl_UserId'], $row_DatosCourse['id_course'])) { ?>
+                                        <div class="course_line">
+                                            <a href="cart_add.php?courseID=<?php echo $row_DatosCourse['id_course'];?>">
+                                                <div class="course_line_div" style="width:50%;">
+                                                    <?php echo $row_DatosCourse['name'];?>
+                                                </div>
+                                                <div class="course_line_div" style="width:40%;">
+                                                    <?php echo $row_DatosCourse['schedule'];?>
+                                                </div>
+                                                <div class="course_line_div" style="width:10%; color: green;">
+                                                    ( + )
+                                                </div>
+                                            </a>
+                                        </div>
+                                    <?php } else { ?>
+                                        <div class="course_line">
+                                            <div class="course_line_div" style="width:50%;">
+                                                <?php echo $row_DatosCourse['name'];?>
+                                            </div>
+                                            <div class="course_line_div" style="width:40%;">
+                                                <?php echo $row_DatosCourse['schedule'];?>
+                                            </div>
+                                            <div class="course_line_div" style="width:10%;">
+                                                ( x )
+                                            </div>
+                                        </div>
+                                        <?php } ?>
+                                        <?php } while ($row_DatosCourse = mysqli_fetch_assoc($DatosCourse));
+                                        }
+                                        ?>
+                                        <?php if ($totalRows_DatosCourse2 > 0) {?>
+                                        <p style="color:#999;">Kurser utan rabatt</p>
+                                        <?php } ?>
+                                        <?php
+                                        if ($totalRows_DatosCourse2 > 0) {
+                                        do { ?>
+                                        <?php if(productosRestantes($_SESSION['ydl_UserId'], $row_DatosCourse2['id_course'])) { ?>
+                                        <div class="course_line">
+                                            <a href="cart_add.php?courseID=<?php echo $row_DatosCourse2['id_course'];?>">
+                                                <div class="course_line_div" style="width:50%;">
+                                                    <?php echo $row_DatosCourse2['name'];?>
+                                                </div>
+                                                <div class="course_line_div" style="width:40%;">
+                                                    <?php echo $row_DatosCourse2['schedule'];?>
+                                                </div>
+                                                <div class="course_line_div" style="width:10%; color:green;">
+                                                    ( + )
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <?php } else { ?>
+                                        <div class="course_line">
+                                            <div class="course_line_div" style="width:50%;">
+                                                <?php echo $row_DatosCourse2['name'];?>
+                                            </div>
+                                            <div class="course_line_div" style="width:40%;">
+                                                <?php echo $row_DatosCourse2['schedule'];?>
+                                            </div>
+                                            <div class="course_line_div" style="width:10%;">
+                                                ( x )
+                                            </div>
+                                        </div>
+                                        <?php } ?>
+                                        <?php } while ($row_DatosCourse2 = mysqli_fetch_assoc($DatosCourse2));
+                                        }
+                                        ?>
+                                    </div>
+                                </div>     
+                                <div class="class1" style="border-left: 1px solid #CCC;">
+                                    <p>Dina valda kurser</p>
+                                    <div class="lista_C_delete">
+                                        <?php $SubTotal = 0; ?>
+                                        <?php
+                                        if ($totalRows_DatosCart > 0) {
+                                        do { ?>
+                                            <div class="course_line">
+                                                <a href="cart_delete.php?counterID=<?php echo $row_DatosCart['id_counter'];?>">
+                                                    <div class="course_line_div" style="width:50%;">
+                                                        <?php echo ObtenerNombreCurso($row_DatosCart['id_course']);?>
+                                                    </div>
+                                                    <div class="course_line_div" style="width:40%;">
+                                                        <?php echo ObtenerEsquemaCurso($row_DatosCart['id_course']);?>
+                                                    </div>
+                                                    <div class="course_line_div" style="width:10%; color:red;">
+                                                        ( - )
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <!--/////////////////////////codigo que descuenta/////////////////////////-->
+                                        <?php if(getPorDiscount(ObtenerDisc($_SESSION["ydl_UserId"], $TermAct), $row_DatosCart['id_course']) != "") { ?>
+                                            <?php $rebajaCodigo = getPorDiscount(ObtenerDisc($_SESSION["ydl_UserId"], $TermAct), $row_DatosCart['id_course']); ?>
+                                            <?php $discPercentMoney = ObtenerPrecioCurso($row_DatosCart['id_course']) / 100 * $rebajaCodigo ; ?>
+                                        <?php } else { ?>
+                                            <?php $discPercentMoney = getMonDiscount(ObtenerDisc($_SESSION["ydl_UserId"], $TermAct), $row_DatosCart['id_course']);?>
+                                        <?php } ?>
+                                            <!--/////////////////////////codigo resutado sin descuento/////////////////////////-->
+                                        <?php $SubTotalSinCode = $SubTotalSinCode + ObtenerPrecioCurso($row_DatosCart['id_course']); ?>
+
+                                        <?php $SubTotal = $SubTotal + ObtenerPrecioCurso($row_DatosCart['id_course']) - $discPercentMoney; ?>
+                                        <?php } while ($row_DatosCart = mysqli_fetch_assoc($DatosCart));
+                                        }
+                                        ?>
+                                            <?php if ($totalRows_DatosCart2 > 0) {?>
+                                            <p style="color:#999;">Kurser utan rabatt</p>
+                                            <?php } ?>
+                                        <?php
+                                        if ($totalRows_DatosCart2 > 0) {
+                                        do { ?>
+                                            <div class="course_line">
+                                                <a href="cart_delete.php?counterID=<?php echo $row_DatosCart2['id_counter'];?>">
+                                                    <div class="course_line_div" style="width: 50%;">
+                                                        <?php echo ObtenerNombreCurso($row_DatosCart2['id_course']);?>
+                                                    </div>
+                                                    <div class="course_line_div" style="width: 40%;">
+                                                        <?php echo ObtenerEsquemaCurso($row_DatosCart2['id_course']);?>
+                                                    </div>
+                                                    <div class="course_line_div" style="width: 10%; color:red;">
+                                                        ( - )
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <!--/////////////////////////codigo resutado sin descuento/////////////////////////-->
+                                        <?php if(getPorDiscount(ObtenerDisc($_SESSION["ydl_UserId"], $TermAct), $row_DatosCart2['id_course'])) { ?>
+                                            <?php $rebajaCodigo2 = getPorDiscount(ObtenerDisc($_SESSION["ydl_UserId"], $TermAct), $row_DatosCart2['id_course']); ?>
+                                            <?php $discPercentMoney2 = ObtenerPrecioCurso($row_DatosCart2['id_course']) / 100 * $rebajaCodigo2 ; ?>
+                                        <?php } else { ?>
+                                            <?php $discPercentMoney2 = getMonDiscount(ObtenerDisc($_SESSION["ydl_UserId"], $TermAct), $row_DatosCart2['id_course']);?>
+                                        <?php } ?>
+                                            <!--/////////////////////////codigo resutado sin descuento/////////////////////////-->
+                                        <?php $NoDiscTotalSinCode = $NoDiscTotalSinCode + ObtenerPrecioCurso($row_DatosCart2['id_course']); ?>
+
+                                        <?php $NoDiscTotal = $NoDiscTotal + ObtenerPrecioCurso($row_DatosCart2['id_course']) - $discPercentMoney2;?>
+                                        <?php } while ($row_DatosCart2 = mysqli_fetch_assoc($DatosCart2));
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+            <form action="payment_method.php" method="post" name="" id="">
+                    <tr>
+                        <td style="background-color: ;" class="form_line2" colspan="2" valign="middle" align="center">
+                        
+                        <?php
+                            $sumaNoCode = $SubTotalSinCode + $NoDiscTotalSinCode;
+                            $SubTotalPlus = $SubTotal + $NoDiscTotal;
+
+                            $SubTotalNoCode = $sumaNoCode - $SubTotalPlus;
+
+                            $resprosent = ObtenerPDescuento($totalRows_DatosCart);
+                            $preciorebaja = $SubTotal / 100 * $resprosent;
+                            $precioTotalCR = $SubTotal - $preciorebaja;
+                            $precioTotal = $SubTotal - $preciorebaja + $NoDiscTotal;
+                        ?>
+
+                        <table style="background-color: ; margin: 5px 0 0;" width="60%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td class="form_line2" colspan="2" valign="middle" align="center" style="padding:0 0 10px;">
+                                    <?php echo GetPacket($totalRows_DatosParaPaquete); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="form_line1" valign="middle" align="right" style="padding:0 5px 0 0; color:#CCC;">
+                                    Sub Total:
+                                </td>
+                                <td class="form_line1" valign="middle" align="left" style="padding:0 0 0 5px; color:#CCC;">
+                                    &nbsp;<?php echo $SubTotalPlus; ?> SEK
+                                </td>
+                            </tr>
+                            <?php if ($totalRows_DatosCart > 1) {?>
+                            <tr>
+                                <td class="form_line1" valign="middle" align="right" style="padding:0 5px 0 0; color:#CCC;">
+                                    <?php //echo ObtenerPDescuento($totalRows_DatosCart); ?>Mängd rabatt:
+                                </td>
+                                <td class="form_line1" valign="middle" align="left" style="padding:0 0 0 5px; color:#CCC;">
+                                    - <?php echo $preciorebaja; ?> SEK
+                                </td>
+                            </tr>
+                            <?php } ?>
+                            <?php if (confirmCodeTrue($_SESSION['ydl_UserId'], $TermAct)) { ?>
+                            <?php } else { ?>
+                            <tr>
+                                <td class="form_line1" valign="middle" align="right" style="padding:0 5px 0 0; color:#CCC;">
+                                    rabatt kod:
+                                </td>
+                                <td class="form_line1" valign="middle" align="left" style="padding:0 0 0 5px; color:#CCC;">
+                                    - <?php echo $SubTotalNoCode; ?> SEK
+                                </td>
+                            </tr>
+                            <?php } ?>
+                            <!-- <tr>
+                                <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#999;">= Total efter rabatt:</td>
+                                <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#999;"><?php echo $precioTotalCR; ?> SEK</td>
+                            </tr> -->
+                            <?php if ($totalRows_DatosCart2 > 0) {?>
+                            <!-- <tr>
+                                <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#999;">+ Kurser utan rabatt:</td>
+                                <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#999;"><?php echo $NoDiscTotal; ?> SEK</td>
+                            </tr> -->
+                            <?php } ?>
+                            <tr>
+                                <td class="form_line1" valign="middle" align="right" style="padding: 5px 5px 0 0; border-top:1px solid #999;">
+                                    Total:
+                                </td>
+                                <td class="form_line1" valign="middle" align="left" style="padding: 5px 0 0 5px; border-top:1px solid #999;">
+                                <?php echo $precioTotal; ?>
+                                 SEK
+                                </td>
+                            </tr>
+                        </table>
+
+                        <?php $_SESSION["TotalCompra"] = $precioTotal;?>
+                        <?php $_SESSION["paquete"] = GetPacket($totalRows_DatosParaPaquete);?>
+                        <?php $_SESSION["sex"] = sex($_SESSION['ydl_UserId']);?>
+
+                        <?php $_SESSION["name"] = ObtenerNombreStudent($_SESSION['ydl_UserId']);?>
+                        <?php $_SESSION["surname"] = ObtenerApellidoStudent($_SESSION['ydl_UserId']);?>
+                        
+                        <!-- Pay method:<br/>
+                        Paypal -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form_line2" colspan="2" valign="middle" align="center" style="color: #666; padding:20px 0;">
+                            <button class="button_a" onclick="location='registration.php'">avbryt</button> <input type="submit" class="button" value="Anmäl mig" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            </div>
         </div>
     <?php endif ?>
 </div>

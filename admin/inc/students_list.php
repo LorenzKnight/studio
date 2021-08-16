@@ -57,38 +57,40 @@
             <input type="hidden" name="MM_search" id="MM_search" value="formsearch" />
         </form>
     </div>
+
+
     <div class="<?php echo filters(UserAppearance($_SESSION['std_UserId']));?>">
-        <form action="students.php" method="get" name="formfilter" id="formfilter">
-            Courses : 
-            <select class="textf" style="font-size: 14px; color: #999;" name="course" id="course">
-                <?php
-                if ($totalRows_DatosCourse_filter > 0) {
-                do { ?>
-                    <option value="<?php echo $row_DatosCourse_filter['id_course'];?>" <?php if ($_GET['course'] == $row_DatosCourse_filter['id_course']) echo "selected"; ?>><?php echo $row_DatosCourse_filter['name'];?></option>
-                <?php } while ($row_DatosCourse_filter = mysqli_fetch_assoc($DatosCourse_filter));
-                }
-                ?>
-            </select>
-            <button type="submit" class="<?php echo buttonSmall(UserAppearance($_SESSION['std_UserId']));?>">Ok</button>
-            <input type="hidden" name="MM_search" id="MM_search" value="formfilter" />
-        </form>
+    <form action="students.php" method="get" name="formfilter" id="formfilter">
+        Periods : 
+        <select class="textf" style="font-size:14px; color:#999; margin-top:10px;" name="term" id="term" onchange="validarForm();">
+                <option value="">None</option>
+            <?php
+            if ($totalRows_DatosTerm_filter > 0) {
+            do { ?>
+                <option value="<?php echo $row_DatosTerm_filter['id_term'];?>" <?php if ($_GET['term'] == $row_DatosTerm_filter['id_term']) echo "selected"; ?>><?php echo $row_DatosTerm_filter['term_name'];?></option>
+            <?php } while ($row_DatosTerm_filter = mysqli_fetch_assoc($DatosTerm_filter));
+            }
+            ?>
+        </select>
+        <!-- <button type="submit" class="<?php echo buttonSmall(UserAppearance($_SESSION['std_UserId']));?>">Ok</button> -->
     </div>
     <div class="<?php echo filters(UserAppearance($_SESSION['std_UserId']));?>">
-        <form action="students.php" method="get" name="formterm" id="formterm">
-            Periods : 
-            <select class="textf" style="font-size: 14px; color: #999;" name="term" id="term">
-                <?php
-                if ($totalRows_DatosTerm_filter > 0) {
-                do { ?>
-                    <option value="<?php echo $row_DatosTerm_filter['id_term'];?>" <?php if ($_GET['term'] == $row_DatosTerm_filter['id_term']) echo "selected"; ?>><?php echo $row_DatosTerm_filter['term_name'];?></option>
-                <?php } while ($row_DatosTerm_filter = mysqli_fetch_assoc($DatosTerm_filter));
-                }
-                ?>
-            </select>
-            <button type="submit" class="<?php echo buttonSmall(UserAppearance($_SESSION['std_UserId']));?>">Ok</button>
-            <input type="hidden" name="MM_search" id="MM_search" value="formterm" />
+        Courses : 
+        <select class="textf" style="font-size:14px; color:#999; margin-top:10px;" name="course" id="course" onchange="validarForm();">
+                <option value="">None</option>
+            <?php
+            if ($totalRows_DatosCourse_filter > 0) {
+            do { ?>
+                <option value="<?php echo $row_DatosCourse_filter['id_course'];?>" <?php if ($_GET['course'] == $row_DatosCourse_filter['id_course']) echo "selected"; ?>><?php echo $row_DatosCourse_filter['name'];?></option>
+            <?php } while ($row_DatosCourse_filter = mysqli_fetch_assoc($DatosCourse_filter));
+            }
+            ?>
+        </select>
+        <!-- <button type="submit" class="<?php echo buttonSmall(UserAppearance($_SESSION['std_UserId']));?>">Ok</button> -->
+        <input type="hidden" name="MM_search" id="MM_search" value="formfilter" />
         </form>
     </div>
+
     <div style="width:100px; text-align:center; color:#FFF; text-shadow: 0px 1px 15px rgba(58, 59, 69, 0.63); font-size:14px;">
         <a style="margin: 0;" href="students.php"><button type="" class="<?php echo buttonSmall(UserAppearance($_SESSION['std_UserId']));?>" value="">Rensa</button> </a><br/>
         <?php echo $totalRows_DatosConsulta; ?> elev(er)
@@ -139,7 +141,7 @@
                 <?php if(showPermissions($_SESSION['std_UserId'], "TSYS-P0003") || $_SESSION['std_Nivel'] < 2) : ?>
                 <a href="students.php?editi=<?php echo $row_DatosConsulta['id_student']; ?>" class="alt_button">Edit info</a>
                 <a href="students.php?editc=<?php echo $row_DatosConsulta['id_insc']; ?> <?php if($_GET['course'] !=""){echo ncsnID($row_DatosConsulta['id_student'], $TermAct);} ?>" class="alt_button">Edit course</a>
-                <a href="student_delete.php?id=<?php echo $row_DatosConsulta['id_insc']; ?> <?php if($_GET['course'] !=""){echo ncsnID($row_DatosConsulta['id_student'], $TermAct);} ?>" class="alt_button" onclick="javascript:return asegurar_borrado ();">Delete</a>
+                <a href="students.php?deleteID=<?php echo $row_DatosConsulta['id_insc']; ?> <?php if($_GET['course'] !=""){echo ncsnID($row_DatosConsulta['id_student'], $TermAct);} ?>" class="alt_button">Delete</a>
                 <?php endif ?>
             </div>
         </div>

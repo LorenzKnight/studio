@@ -52,10 +52,10 @@
                         </select>
                     </td>
                     <td width="50%" valign="middle" align="left" style="padding: 0 10px; color: #999; font-size: 14px;">
-                        Sal: 
+                        Rooms: 
                         <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="sal" id="sal" required>
-                        <option value="1">Sal 1</option>
-                        <option value="2">Sal 2</option>
+                        <option value="1">Room 1</option>
+                        <option value="2">Room 2</option>
                         </select>
                     </td>
                 </tr>
@@ -63,40 +63,40 @@
                     <td width="50%" valign="middle" align="right" style="padding: 0 10px; color: #999; font-size: 14px;">
                         Kl: 
                         <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="hour" id="hour" required>
-                        <option value="0">17:00</option>
-                        <option value="54">17:30</option>
-                        <option value="110">18:00</option>
-                        <option value="165">18:30</option>
-                        <option value="220">19:00</option>
-                        <option value="275">19:30</option>
-                        <option value="330">20:00</option>
-                        <option value="385">20:30</option>
-                        <option value="440">21:00</option>
-                        <option value="495">21:30</option>
-                        <option value="550">22:00</option>
-                        <option value="605">22:30</option>
-                        <option value="660">23:00</option>
-                        <option value="715">23:30</option>
-                        <option value="770">00:00</option>
+                        <option value="1">17:00</option>
+                        <option value="56">17:30</option>
+                        <option value="111">18:00</option>
+                        <option value="166">18:30</option>
+                        <option value="221">19:00</option>
+                        <option value="276">19:30</option>
+                        <option value="331">20:00</option>
+                        <option value="386">20:30</option>
+                        <option value="441">21:00</option>
+                        <option value="496">21:30</option>
+                        <option value="551">22:00</option>
+                        <option value="606">22:30</option>
+                        <option value="661">23:00</option>
+                        <option value="716">23:30</option>
+                        <option value="771">00:00</option>
                         </select>
                     </td>
                     <td width="50%" valign="middle" align="left" style="padding: 0 10px; color: #999; font-size: 14px;">
                         Tid: 
                         <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="duration" id="duration" required>
-                        <option value="54">0.5 timma</option>
-                        <option value="110" selected>1 timma</option>
-                        <option value="165">1.5 timma</option>
-                        <option value="220">2 timma</option>
-                        <option value="275">2.5 timmar</option>
-                        <option value="330">3 timmar</option>
-                        <option value="385">3.5 timmar</option>
-                        <option value="440">4 timmar</option>
-                        <option value="495">4.5 timmar</option>
-                        <option value="550">5 timmar</option>
-                        <option value="605">5.5 timmar</option>
-                        <option value="660">6 timmar</option>
-                        <option value="715">6.5 timmar</option>
-                        <option value="770">7 timmar</option>
+                        <option value="52">0.5 timma</option>
+                        <option value="107" selected>1 timma</option>
+                        <option value="162">1.5 timma</option>
+                        <option value="217">2 timma</option>
+                        <option value="272">2.5 timmar</option>
+                        <option value="327">3 timmar</option>
+                        <option value="382">3.5 timmar</option>
+                        <option value="437">4 timmar</option>
+                        <option value="492">4.5 timmar</option>
+                        <option value="547">5 timmar</option>
+                        <option value="602">5.5 timmar</option>
+                        <option value="657">6 timmar</option>
+                        <option value="712">6.5 timmar</option>
+                        <option value="767">7 timmar</option>
                         </select>
                     </td>
                 </tr>
@@ -165,10 +165,10 @@
                         </select>
                     </td>
                     <td width="50%" valign="middle" align="left" style="padding: 0 10px; color: #999; font-size: 14px;">
-                        Sal: 
+                        Rooms: 
                         <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="sal" id="sal" required>
-                        <option value="1" <?php if ($row_DatosEdit["sal"]=="1") echo "selected"; ?>>Sal 1</option>
-                        <option value="2" <?php if ($row_DatosEdit["sal"]=="2") echo "selected"; ?>>Sal 2</option>
+                        <option value="1" <?php if ($row_DatosEdit["sal"]=="1") echo "selected"; ?>>Room 1</option>
+                        <option value="2" <?php if ($row_DatosEdit["sal"]=="2") echo "selected"; ?>>Room 2</option>
                         </select>
                     </td>
                 </tr>
@@ -176,40 +176,40 @@
                     <td width="50%" valign="middle" align="right" style="padding: 0 10px; color: #999; font-size: 14px;">
                         Kl: 
                         <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="hour" id="hour" required>
-                        <option value="0" <?php if ($row_DatosEdit["hour"]=="0") echo "selected"; ?>>17:00</option>
-                        <option value="54" <?php if ($row_DatosEdit["hour"]=="54") echo "selected"; ?>>17:30</option>
-                        <option value="110" <?php if ($row_DatosEdit["hour"]=="110") echo "selected"; ?>>18:00</option>
-                        <option value="165" <?php if ($row_DatosEdit["hour"]=="165") echo "selected"; ?>>18:30</option>
-                        <option value="220" <?php if ($row_DatosEdit["hour"]=="220") echo "selected"; ?>>19:00</option>
-                        <option value="275" <?php if ($row_DatosEdit["hour"]=="275") echo "selected"; ?>>19:30</option>
-                        <option value="330" <?php if ($row_DatosEdit["hour"]=="330") echo "selected"; ?>>20:00</option>
-                        <option value="385" <?php if ($row_DatosEdit["hour"]=="385") echo "selected"; ?>>20:30</option>
-                        <option value="440" <?php if ($row_DatosEdit["hour"]=="440") echo "selected"; ?>>21:00</option>
-                        <option value="495" <?php if ($row_DatosEdit["hour"]=="495") echo "selected"; ?>>21:30</option>
-                        <option value="550" <?php if ($row_DatosEdit["hour"]=="550") echo "selected"; ?>>22:00</option>
-                        <option value="605" <?php if ($row_DatosEdit["hour"]=="605") echo "selected"; ?>>22:30</option>
-                        <option value="660" <?php if ($row_DatosEdit["hour"]=="660") echo "selected"; ?>>23:00</option>
-                        <option value="715" <?php if ($row_DatosEdit["hour"]=="715") echo "selected"; ?>>23:30</option>
-                        <option value="770" <?php if ($row_DatosEdit["hour"]=="770") echo "selected"; ?>>00:00</option>
+                        <option value="1" <?php if ($row_DatosEdit["hour"]=="1") echo "selected"; ?>>17:00</option>
+                        <option value="56" <?php if ($row_DatosEdit["hour"]=="56") echo "selected"; ?>>17:30</option>
+                        <option value="111" <?php if ($row_DatosEdit["hour"]=="111") echo "selected"; ?>>18:00</option>
+                        <option value="166" <?php if ($row_DatosEdit["hour"]=="166") echo "selected"; ?>>18:30</option>
+                        <option value="221" <?php if ($row_DatosEdit["hour"]=="221") echo "selected"; ?>>19:00</option>
+                        <option value="276" <?php if ($row_DatosEdit["hour"]=="276") echo "selected"; ?>>19:30</option>
+                        <option value="331" <?php if ($row_DatosEdit["hour"]=="331") echo "selected"; ?>>20:00</option>
+                        <option value="386" <?php if ($row_DatosEdit["hour"]=="386") echo "selected"; ?>>20:30</option>
+                        <option value="441" <?php if ($row_DatosEdit["hour"]=="441") echo "selected"; ?>>21:00</option>
+                        <option value="496" <?php if ($row_DatosEdit["hour"]=="496") echo "selected"; ?>>21:30</option>
+                        <option value="551" <?php if ($row_DatosEdit["hour"]=="551") echo "selected"; ?>>22:00</option>
+                        <option value="606" <?php if ($row_DatosEdit["hour"]=="606") echo "selected"; ?>>22:30</option>
+                        <option value="661" <?php if ($row_DatosEdit["hour"]=="661") echo "selected"; ?>>23:00</option>
+                        <option value="716" <?php if ($row_DatosEdit["hour"]=="716") echo "selected"; ?>>23:30</option>
+                        <option value="771" <?php if ($row_DatosEdit["hour"]=="771") echo "selected"; ?>>00:00</option>
                         </select>
                     </td>
                     <td width="50%" valign="middle" align="left" style="padding: 0 10px; color: #999; font-size: 14px;">
                         Tid: 
                         <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="duration" id="duration" required>
-                        <option value="54" <?php if ($row_DatosEdit["duration"]=="54") echo "selected"; ?>>0.5 timma</option>
-                        <option value="110" <?php if ($row_DatosEdit["duration"]=="110") echo "selected"; ?>>1 timma</option>
-                        <option value="165" <?php if ($row_DatosEdit["duration"]=="165") echo "selected"; ?>>1.5 timma</option>
-                        <option value="220" <?php if ($row_DatosEdit["duration"]=="220") echo "selected"; ?>>2 timma</option>
-                        <option value="275" <?php if ($row_DatosEdit["duration"]=="275") echo "selected"; ?>>2.5 timmar</option>
-                        <option value="330" <?php if ($row_DatosEdit["duration"]=="330") echo "selected"; ?>>3 timmar</option>
-                        <option value="385" <?php if ($row_DatosEdit["duration"]=="385") echo "selected"; ?>>3.5 timmar</option>
-                        <option value="440" <?php if ($row_DatosEdit["duration"]=="440") echo "selected"; ?>>4 timmar</option>
-                        <option value="495" <?php if ($row_DatosEdit["duration"]=="495") echo "selected"; ?>>4.5 timmar</option>
-                        <option value="550" <?php if ($row_DatosEdit["duration"]=="550") echo "selected"; ?>>5 timmar</option>
-                        <option value="605" <?php if ($row_DatosEdit["duration"]=="605") echo "selected"; ?>>5.5 timmar</option>
-                        <option value="660" <?php if ($row_DatosEdit["duration"]=="660") echo "selected"; ?>>6 timmar</option>
-                        <option value="715" <?php if ($row_DatosEdit["duration"]=="715") echo "selected"; ?>>6.5 timmar</option>
-                        <option value="770" <?php if ($row_DatosEdit["duration"]=="770") echo "selected"; ?>>7 timmar</option>
+                        <option value="52" <?php if ($row_DatosEdit["duration"]=="52") echo "selected"; ?>>0.5 timma</option>
+                        <option value="107" <?php if ($row_DatosEdit["duration"]=="107") echo "selected"; ?>>1 timma</option>
+                        <option value="162" <?php if ($row_DatosEdit["duration"]=="162") echo "selected"; ?>>1.5 timma</option>
+                        <option value="217" <?php if ($row_DatosEdit["duration"]=="217") echo "selected"; ?>>2 timma</option>
+                        <option value="272" <?php if ($row_DatosEdit["duration"]=="272") echo "selected"; ?>>2.5 timmar</option>
+                        <option value="327" <?php if ($row_DatosEdit["duration"]=="327") echo "selected"; ?>>3 timmar</option>
+                        <option value="382" <?php if ($row_DatosEdit["duration"]=="382") echo "selected"; ?>>3.5 timmar</option>
+                        <option value="437" <?php if ($row_DatosEdit["duration"]=="437") echo "selected"; ?>>4 timmar</option>
+                        <option value="492" <?php if ($row_DatosEdit["duration"]=="492") echo "selected"; ?>>4.5 timmar</option>
+                        <option value="547" <?php if ($row_DatosEdit["duration"]=="547") echo "selected"; ?>>5 timmar</option>
+                        <option value="602" <?php if ($row_DatosEdit["duration"]=="602") echo "selected"; ?>>5.5 timmar</option>
+                        <option value="657" <?php if ($row_DatosEdit["duration"]=="657") echo "selected"; ?>>6 timmar</option>
+                        <option value="712" <?php if ($row_DatosEdit["duration"]=="712") echo "selected"; ?>>6.5 timmar</option>
+                        <option value="767" <?php if ($row_DatosEdit["duration"]=="767") echo "selected"; ?>>7 timmar</option>
                         </select>
                     </td>
                 </tr>
