@@ -51,16 +51,16 @@ $fecha2=time()+7200;//2 hora//
 date("H:i:s",$fecha2);
 
 ?>
-<?php //if (comprobarRegistroUnico($_SESSION['ydl_UserId'], $Termin)) { ?>
+<?php if (comprobarRegistroUnico($_SESSION['ydl_UserId'], $Termin)) { ?>
     <?php ConfirmationPago(date('Y'), date('m'), date('d'), date('His'), $name, $surname, $sex, $Termin, $TerminStart, $TerminStop, $Package, $total, $status); ?>
-<?php //} else { 
+<?php } else { 
     // $insertGoTo = "payment_method.php?exist=1";
     // if (isset($_SERVER['QUERY_STRING'])) {
     // $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
     // $insertGoTo .= $_SERVER['QUERY_STRING'];
     // }
     // header(sprintf("Location: %s", $insertGoTo));
-//} ?>
+} ?>
 <html>
 <head>
 <meta charset="iso-8859-1">
@@ -68,9 +68,29 @@ date("H:i:s",$fecha2);
 <link rel="shortcut icon" href="favicon-32x32.png">
 <link href="css/style.css" rel="stylesheet" type="text/css"  media="all" />
 </head>
+<script>
+    function ocurtar() {
+		event.stopPropagation()
+		document.getElementById("popup1").style.display="none";
+    }
+</script>
 <body>
     <?php include("inc/head.php")?>
     <div class="space">
+        <div class="form_frame" id="popup1">
+            <div class="reminder">
+                <h2>Viktig!</h2>
+            
+                <p>För att få kvitto till ditt mail måste du trycka på följande knapp när Paypal är klar med din betalning.</p>
+                </br>
+                <img src="img/paypal_done_2.png">
+                </br>
+                </br>
+                </br>
+                </br>
+                <button class="button_2" style="" onclick="ocurtar()">Jag har läst och förstått</button>  
+            </div>
+        </div>
         <div class="recibo">           
             
             <h2 style="text-align: center">STEG 2</h2>
@@ -103,6 +123,21 @@ date("H:i:s",$fecha2);
                 </table>
             <h4>Total efter rabatt:</h4>
             <h3><?php echo $total; ?> SEK</h3>
+
+
+            <?php 
+                // include('../paypal_checkout/config.php');
+                // $productName = GetPacket($totalRows_DatosRegCourse);
+                // $currency = "SEK";
+                // $productPrice = $_SESSION["TotalCompra"];
+                // $productId = 123456;
+                // $orderNumber = 546;
+            ?>
+            <?php //include '../paypal_checkout/paypalCheckout.php'; ?>
+
+
+
+
             <?php
             //DATOS FAKE
             $urlpaypal="https://www.sandbox.paypal.com/cgi-bin/webscr";

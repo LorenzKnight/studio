@@ -52,7 +52,7 @@
 <div class="search">
     <div class="<?php echo filters(UserAppearance($_SESSION['std_UserId']));?>">
         <form action="students.php" method="get" name="formsearch" id="formsearch">
-            <input class="textf" placeholder="sök" name="search" id="search" style="min-width:75%;" />
+            <input class="textf" value="<?php echo $_GET['search'];?>" placeholder="sök" name="search" id="search" style="min-width:75%;" />
             <button type="submit" class="<?php echo buttonSmall(UserAppearance($_SESSION['std_UserId']));?>">Sök</button>
             <input type="hidden" name="MM_search" id="MM_search" value="formsearch" />
         </form>
@@ -99,9 +99,10 @@
 <div class="<?php echo divWrapp(UserAppearance($_SESSION['std_UserId']));?>">
     <table width="100%" cellspacing="0" class="<?php echo appearanceList(UserAppearance($_SESSION['std_UserId']));?>" style="margin: 20px auto 10px; ">
         <tr height="40">
+            <td width="2%" nowrap="nowrap" align="left" style="padding: 0 0 0 0;"></td>
             <td width="12%" nowrap="nowrap" align="left" style="padding: 0 0 0 20px;">Name</td>
             <td width="15%" nowrap="nowrap" align="left" style="padding: 0 0 0 10px;">Surname</td>
-            <td width="10%" nowrap="nowrap" align="left" style="padding: 0 0 0 0;">Obs.</td>
+            <td width="8%" nowrap="nowrap" align="left" style="padding: 0 0 0 0;">Obs.</td>
             <td width="14%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;">Telefone</td>
             <td width="19%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;">E-Mail</td>
             <td width="5%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;">sex</td>
@@ -112,11 +113,14 @@
 
     <?php if ($row_DatosConsulta > 0) { // Show if recordset not empty ?>
     <?php do { ?>
-    <table cellspacing="0" class="<?php echo appearanceLine(UserAppearance($_SESSION['std_UserId']));?>" style="margin: 0 auto 15px; <?php if (statusInsc($row_DatosConsulta['id_student'], $TermAct) != 1) { ?><?php echo statusColors(statusInsc($row_DatosConsulta['id_student'], $TermAct))?><?php } ?>">
+    <table cellspacing="0" class="<?php echo appearanceLine(UserAppearance($_SESSION['std_UserId']));?>" style="margin: 0 auto 15px; ">
     <tr height="">
+        <td width="2%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;">
+            <div style="width:5px; height:5px; border-radius:50%; background-color:<?php echo statusColors(statusInsc($row_DatosConsulta['id_student'], $TermAct))?>;" class=""></div>
+        </td>
         <td width="12%" nowrap="nowrap" align="left" style="padding: 0 0 0 20px;"><?php echo ObtenerNombreStudent($row_DatosConsulta['id_student']); ?></td>
         <td width="15%" nowrap="nowrap" align="left" style="padding: 0 0 0 10px;"><?php echo ObtenerApellidoStudent($row_DatosConsulta['id_student']); ?></td>
-        <td width="10%" nowrap="nowrap" align="left" style="padding: 0 0 0 0;">
+        <td width="8%" nowrap="nowrap" align="left" style="padding: 0 0 0 0;">
         <p><?php 
             $texto= $row_DatosConsulta['commentary'];
             if (strlen($texto) > 0) {
@@ -128,9 +132,9 @@
         <td width="14%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo ObtenerTelefonoStudent($row_DatosConsulta['id_student']); ?></td>
         <td width="19%" nowrap="nowrap" align="left" style="padding: 0 0 0 0;"><?php echo ObtenerEmailStudent($row_DatosConsulta['id_student']); ?></td>
         <td width="5%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo sex($row_DatosConsulta['id_student']); ?></td></td>
-        <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo OptenerPaqueteEnLista($row_DatosConsulta['id_insc'], $row_DatosTerm['id_term']); ?> <?php echo OptenerPaqueteEnLista($row_DatosConsulta['transaction_made'], $row_DatosTerm['id_term']); ?></td>
+        <td width="10%" nowrap="nowrap" align="center" style="padding: 0 0 0 0;"><?php echo OptenerPaqueteEnLista($row_DatosConsulta['id_insc'], $row_DatosTerm['id_term']); ?></td>
         
-        <td width="10%" nowrap="nowrap" align="center" style="padding: 0 10px 0 0;">
+        <td width="10%" nowrap="nowrap" align="center" style="border-radius:0 3px 3px 0; border-right:3px solid <?php if($row_DatosConsulta['done'] == 1) { ?> green <?php } else { ?> orange <?php } ?>;">
         <?php if(showPermissions($_SESSION['std_UserId'], "TSYS-P0001") || showPermissions($_SESSION['std_UserId'], "TSYS-P0003") || $_SESSION['std_Nivel'] < 2) : ?>
         <div class="arternative">
             <button class="<?php echo artbtn(UserAppearance($_SESSION['std_UserId']));?>">o o o</button>
@@ -141,6 +145,7 @@
                 <?php if(showPermissions($_SESSION['std_UserId'], "TSYS-P0003") || $_SESSION['std_Nivel'] < 2) : ?>
                 <a href="students.php?editi=<?php echo $row_DatosConsulta['id_student']; ?>" class="alt_button">Edit info</a>
                 <a href="students.php?editc=<?php echo $row_DatosConsulta['id_insc']; ?> <?php if($_GET['course'] !=""){echo ncsnID($row_DatosConsulta['id_student'], $TermAct);} ?>" class="alt_button">Edit course</a>
+                <a href="confirm_insc.php?inscID=<?php echo $row_DatosConsulta['id_insc']; ?>" class="alt_button">Confirm</a>
                 <a href="students.php?deleteID=<?php echo $row_DatosConsulta['id_insc']; ?> <?php if($_GET['course'] !=""){echo ncsnID($row_DatosConsulta['id_student'], $TermAct);} ?>" class="alt_button">Delete</a>
                 <?php endif ?>
             </div>

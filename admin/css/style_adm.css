@@ -1306,6 +1306,17 @@ input[type="checkbox"]:checked + .dropbtn {
   border-radius: 7px;
   box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
   top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.formulario a {
+  font-size: 0.7em;
+}
+.formulario p {
+  font-size: 0.7em;
+  margin: 0;
+  padding-bottom: 0.7em;
 }
 .formulario_e {
   width: 750px;

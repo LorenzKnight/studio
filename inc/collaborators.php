@@ -20,14 +20,14 @@
                     <?php 
                     $texto= $row_DatosPublications['content'];
                     if (strlen($texto) > 0) {
-                    $texto = substr($texto,0,700).'';
-                    print '<p">'.$texto.'</p>';
+                    $texto = substr($texto,0,430).' ...';
+                    print '<p>'.$texto.'</p>';
                     ?>
                     <?php
                     }
                     ?>
                 <br>
-                <!-- <a href="about.php?id=<?php echo $row_DatosPublications['id_collaborators']; ?>">see more</a> -->
+                <a href="about.php?id=<?php echo $row_DatosPublications['id_collaborators']; ?>">läs mer</a>
             </div>
         </div>
         <?php } while ($row_DatosPublications = mysqli_fetch_assoc($DatosPublications));

@@ -20,7 +20,7 @@
         <p style="text-align:center; margin:0 0 10px; padding:0;">- <?php echo $row_DatosPublications['date']; ?> -</p>
         <a href="<?php echo $row_DatosPublications['link']; ?>" target="_blank">
             <div class="event_content">
-                <img src="img/news/<?php echo $row_DatosPublications['foto']; ?>" width="130%">
+                <img src="img/news/<?php echo $row_DatosPublications['foto']; ?>" alt="<?php echo $row_DatosPublications['foto']; ?>" width="130%">
             </div>
         </a>
     </div>

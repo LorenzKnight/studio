@@ -1,7 +1,7 @@
 <style>
 @import url(https://fonts.googleapis.com/css?family=Roboto+Slab:700);
 
-@media only screen and (min-width: 320px) and (-webkit-device-pixel-ratio : 2) {
+@media only screen and (min-device-width : 280px) and (max-device-width : 374px) {
   .tile {
     position: relative;
     float: left;
@@ -49,7 +49,7 @@
       color: rgba(201,172,140,1);
   }
 }
-@media only screen and (device-width : 375px) and (device-height : 812px) and (-webkit-device-pixel-ratio : 3) {
+@media (min-device-width: 375px) and (max-device-width : 767px) {
   .tile {
     position: relative;
     float: left;
@@ -97,55 +97,8 @@
       color: rgba(201,172,140,1);
   }
 }
-@media (min-width: 425px) {
-  .tile {
-    position: relative;
-    float: left;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-  }
-  .photo {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    transform: translate(0%, 10%);
-    transition: transform .5s ease-out;
-    filter: contrast(1000%) sepia(1) hue-rotate() saturate(%);
-  }
-  .photo_b {
-    position: absolute;
-    top: 0;
-    right: 160px;
-    visibility: inherit;
-  }
-  .txt_position {
-    width: 100%;
-    position: absolute;
-    top: 200px;
-    z-index: 1;
-  }
-  .txt {
-    width: 40%;
-    padding: 10%;
-    color: #FFF;
-    text-shadow: 1px 1px 15px #999;
-    font-size: 60px;
-    font-weight: 200;
-    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    text-align: center;
-    margin: 0 auto;
-  }
-  .txt sup {
-      font-size: 20px;
-      font-weight: 200;
-      color: rgba(201,172,140,1);
-  }
-}
-@media (min-width: 768px) {
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1023px) and (-webkit-min-device-pixel-ratio: 2) {
   .tile {
     position: relative;
     float: left;
@@ -194,7 +147,7 @@
       text-shadow: 1px 1px 15px #333;
   }
 }
-@media (min-width: 1024px) {
+@media only screen and (min-device-width: 1024px) {
  .tile {
     position: relative;
     float: left;
@@ -249,8 +202,8 @@
 </style>
 <div class="banner">
   <div class="tile">
-    <img class="photo_b" src="img/banners/pic1.png" alt="" height="" width="">
-    <img class="photo" src="img/banners/nor.png" alt="" height="" width="">
+    <img class="photo_b" src="img/banners/pic1.png" alt="loops Dance Studio" height="" width="">
+    <img class="photo" src="img/banners/nor.png" alt="loops Dance Studio" height="" width="">
       <div class="txt_position">
         <div class="txt">
           <p>Göteborgs</p>

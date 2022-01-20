@@ -1,6 +1,7 @@
 <?php require_once('connections/conexion.php');?>
 <!-- Esta linea en conjunto con la funcion "ConfirmacionPago" hace que la celda done cambie su valor-->
-<?php ConfirmacionPago(1, date('Ymd')); ?>
+<?php ConfirmacionPago(1); ?>
+
 <?php
 $query_DatosTerm = sprintf("SELECT * FROM term WHERE status = 1 ORDER BY id_term ASC");
 $DatosTerm = mysqli_query($con, $query_DatosTerm) or die(mysqli_error($con));
@@ -79,7 +80,9 @@ $totalRows_DatosReg = mysqli_num_rows($DatosReg);
             <br/>
             <br/>';
             $asunto ='Bekräftelse-Anmälan till kurs';
-            SendMailHtml($row_DatosReg['email'], $contenido, $asunto);
+            if ($row_DatosRegDone['done'] == 0) {
+                SendMailHtml($row_DatosReg['email'], $contenido, $asunto);
+            }
             ?>
         </div>
     </div>

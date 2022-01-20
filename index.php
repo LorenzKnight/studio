@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="iso-8859-1">
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 <meta name="keywords" content="Loops Dance studio, dans, dansskolan, bachata, salsa, kizomba, urban kiz, street dans, hiphop, balett, dans i göteborg">
 <meta name="description" content="Loops Dance studio är en dansskola i Göteborg med fokus på Urban Kizomba men med hjärta för fler olika pardanser och dansstilar.">
 <!-- <meta http-equiv="refresh" content="30"> -->

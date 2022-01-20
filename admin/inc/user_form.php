@@ -136,6 +136,9 @@
                     <tr height="60">
                         <td colspan="2" valign="middle" align="center"><input class="textf" type="text" value="<?php echo $row_DatosEdit['telefon'];?>" placeholder="Telefon..." name="telefon" id="telefon" size="42" required/></td>
                     </tr>
+                    <!-- <tr height="60">
+                        <td colspan="2" valign="middle" align="center"><input class="textf" type="text" value="<?php echo $row_DatosEdit['password'];?>" placeholder="password..." name="password" id="password" size="42" required/></td>
+                    </tr> -->
                     <tr height="60">
                         <td width="50%" valign="middle" align="right" style="padding: 0 10px; color: #999; font-size: 14px;">
                             Level: 

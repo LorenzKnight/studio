@@ -101,11 +101,12 @@ if (isset($_SERVER['QUERY_STRING'])) {
 } 
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formpermissionsedit")) {
 
-        $updateSQL = sprintf("UPDATE users SET name=%s, surname=%s, mail=%s, telefon=%s, rank=%s, status=%s WHERE id_user=%s",
+        $updateSQL = sprintf("UPDATE users SET name=%s, surname=%s, mail=%s, telefon=%s, password=%s, rank=%s, status=%s WHERE id_user=%s",
                               GetSQLValueString($_POST["name"], "text"),
                               GetSQLValueString($_POST["surname"], "text"),
                               GetSQLValueString($_POST["mail"], "text"),
                               GetSQLValueString($_POST["telefon"], "text"),
+                              GetSQLValueString($_POST["password"], "text"),
                               GetSQLValueString($_POST["rank"], "int"),
                               GetSQLValueString($_POST["status"], "int"),
                               GetSQLValueString($_POST["id_user"], "int"));

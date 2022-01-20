@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="map">
-                <a href="index.php"><img src="img/loops_dance_studio.svg" width="" height="30%" style="margin: 25% 0 25% 50px;"></a>
+                <a href="index.php"><img src="img/loops_dance_studio.svg" height="70%" style=""></a>
         </div>
     </div>
 </div>

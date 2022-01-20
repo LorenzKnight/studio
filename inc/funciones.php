@@ -201,6 +201,30 @@ function comprobaremailestudiante($EstudianteUnico)
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
+function comprobarRegistroUnico($UsuarioID, $Semestre)
+{
+	global $con;
+	
+	$query_ConsultaFuncion = sprintf("SELECT * FROM inscriptions WHERE id_student = %s AND term = %s",
+			GetSQLValueString($UsuarioID, "text"),
+			GetSQLValueString($Semestre, "text"));
+	//echo $query_ConsultaFuncion;
+	$ConsultaFuncion = mysqli_query($con,  $query_ConsultaFuncion) or die(mysqli_error($con));
+	$row_ConsultaFuncion = mysqli_fetch_assoc($ConsultaFuncion);
+	$totalRows_ConsultaFuncion = mysqli_num_rows($ConsultaFuncion);
+	
+	if ($totalRows_ConsultaFuncion!=0) 
+		return false;
+	else return true;
+	
+	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
 function ObtenerIDUsuario($Umail)
 {
 	global $con;
@@ -862,10 +886,10 @@ function statusBinario($statusB)
 
 function statusColors($statusC)
 {
-	if ($statusC == 0) return "border:2px solid rgb(68, 68, 68); color: #888;"; //inactiv
-	//if ($statusC == 1) return ""; //activ
-	if ($statusC == 2) return "border:2px solid rgb(245, 160, 3); color: rgb(245, 160, 3);"; //waiting
-	if ($statusC == 3) return "border:2px solid rgb(221, 36, 3); color: rgb(221, 36, 3);"; //not paid
+	if ($statusC == 0) return "#CCC"; //inactiv
+	if ($statusC == 1) return "green"; //activ
+	if ($statusC == 2) return "rgb(245, 160, 3)"; //waiting
+	if ($statusC == 3) return "rgb(221, 36, 3);"; //not paid
 	//else return "";
 }
 
@@ -1267,13 +1291,12 @@ function NombreCursoColor($varcursocolor)
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-function ConfirmacionPago($Paid, $now)
+function ConfirmacionPago($Paid)
 {
 	global $con;
-		$updateSQL = sprintf("UPDATE inscriptions SET done=%s WHERE id_student=%s AND date=%s",
+		$updateSQL = sprintf("UPDATE inscriptions SET done=%s WHERE id_student=%s AND date=NOW()",
 			$Paid,
-			$_SESSION["ydl_UserId"],
-			$now);
+			$_SESSION["ydl_UserId"]);
   
   $Result1 = mysqli_query($con, $updateSQL) or die(mysqli_error($con));
 	}
@@ -1289,6 +1312,21 @@ function TerminStop($stop, $datenow)
 		$updateSQL = sprintf("UPDATE term SET status=%s WHERE status=1 AND term_stop<%s",
 			$stop,
 			$datenow);
+  
+  $Result1 = mysqli_query($con, $updateSQL) or die(mysqli_error($con));
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function coursesStop($stop, $termStoped)
+{
+	global $con;
+		$updateSQL = sprintf("UPDATE courses SET status=%s WHERE status=1 AND term<%s",
+			$stop,
+			$termStoped);
   
   $Result1 = mysqli_query($con, $updateSQL) or die(mysqli_error($con));
 }
@@ -1567,8 +1605,8 @@ function ConfirmationDone($ano, $mes, $dia, $hora, $studentadmin, $nameAdmin, $s
 {
 	global $con;
 	
-	$insertSQL = sprintf("INSERT INTO inscriptions (date, year, month, day, time, id_student, name, surname, sex, term, term_start, term_stop, package, payment, total, status) 
-									VALUES (NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+	$insertSQL = sprintf("INSERT INTO inscriptions (date, year, month, day, time, id_student, name, surname, sex, term, term_start, term_stop, package, payment, total, status, done) 
+									VALUES (NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
 									 GetSQLValueString($ano, "text"),
 									 GetSQLValueString($mes, "int"),
 									 GetSQLValueString($dia, "text"),
@@ -1583,7 +1621,8 @@ function ConfirmationDone($ano, $mes, $dia, $hora, $studentadmin, $nameAdmin, $s
 									 GetSQLValueString($Package, "text"),
 									 1,
 									 GetSQLValueString($total, "text"),
-									 GetSQLValueString($status, "int"));
+									 GetSQLValueString($status, "int"),
+									 1);
 	//echo $insertSQL;
 	$Result1 = mysqli_query($con, $insertSQL) or die(mysqli_error($con));
 	$ultimacompra = mysqli_insert_id($con);
@@ -2183,6 +2222,20 @@ function myAppearance($myAppearance)
 	return $row_ConsultaFuncion["appearance"];
 	
 	mysqli_free_result($ConsultaFuncion);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+function funcionDone($studentDone)
+{
+	global $con;
+		$updateSQL = sprintf("UPDATE inscriptions SET done=1 WHERE id_insc=%s AND done=0",
+			$studentDone);
+  
+  $Result1 = mysqli_query($con, $updateSQL) or die(mysqli_error($con));
 }
 ?>
 

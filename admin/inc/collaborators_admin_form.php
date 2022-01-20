@@ -82,7 +82,7 @@
                 
                 <tr height="60">
                     <td colspan="2" valign="middle" align="center" style="color: #666; font-size: 14px;">
-                            <a href="collaborators_admin.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Post it!" />
+                            <a href="collaborators_admin.php"><input class="button_a" style="width: 170px; text-align: center;" value="Cancel" /></a> <input type="submit" class="button" style="width: 170px; text-align: center;" value="Save" />
                     </td>
                 </tr>
                 <tr height="10">
@@ -174,7 +174,7 @@
                 
                 <tr height="60">
                     <td colspan="2" valign="middle" align="center" style="color: #666; font-size: 14px;">
-                            <a href="collaborators_admin.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input type="submit" class="button" value="Redigera !" />
+                            <a href="collaborators_admin.php"><input class="button_a" style="width: 170px; text-align: center;" value="Cancel" /></a> <input type="submit" class="button" style="width: 170px; text-align: center;" value="Save !" />
                     </td>
                 </tr>
                 <tr height="10">

@@ -305,7 +305,7 @@
 
         }
     }
-    @media only screen and (min-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) {
+    @media only screen and (min-width: 1024px) {
         #bgd {
             /* background: linear-gradient(
                 to bottom,

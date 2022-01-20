@@ -1,6 +1,14 @@
 <?php require_once('../connections/conexion.php');?>
 <?php require_once('inc/seguridad.php');?>
 <?php
+  $query_DatosPeriod = sprintf("SELECT * FROM term WHERE status = 1 ORDER BY id_term DESC");
+  $DatosPeriod = mysqli_query($con, $query_DatosPeriod) or die(mysqli_error($con));
+  $row_DatosPeriod = mysqli_fetch_assoc($DatosPeriod);
+  $totalRows_DatosPeriod = mysqli_num_rows($DatosPeriod);
+
+  $TermAct = $row_DatosPeriod['id_term'];
+?>
+<?php
   $query_DatosTerm_filter = sprintf("SELECT * FROM term ORDER BY id_term DESC"); 
   $DatosTerm_filter = mysqli_query($con, $query_DatosTerm_filter) or die(mysqli_error($con));
   $row_DatosTerm_filter = mysqli_fetch_assoc($DatosTerm_filter);
@@ -38,7 +46,8 @@
   }
   else
   {
-    $query_DatosConsulta = sprintf("SELECT * FROM courses WHERE status = 1 ORDER BY id_course ASC");
+    $query_DatosConsulta = sprintf("SELECT * FROM courses WHERE status = 1 AND term = %s ORDER BY id_course ASC",
+                                    GetSQLValueString($TermAct, "int"));
   }
     $DatosConsulta = mysqli_query($con, $query_DatosConsulta) or die(mysqli_error($con));
     $row_DatosConsulta = mysqli_fetch_assoc($DatosConsulta);

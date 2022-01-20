@@ -1,5 +1,5 @@
 <?php if($_GET["id"]):?>
-<div class="form_frame" style="perspective: 1000px; display: flex; align-items: center; justify-content: center;">
+<div class="form_frame">
     <div class="container">
         <div class="card">
             <div class="sneaker">
@@ -11,7 +11,7 @@
             </div>
             <div class="info">
                     <div class="close">
-                        <button onclick="window.history.back();">+</button>
+                        <button onclick="window.location.replace('about');">+</button> 
                     </div>
                     
                     <div class="content">
@@ -28,6 +28,6 @@
             </div>
         </div>
     </div>
-    <script src="../js/card_animation.js"></script> 
+    <script src="../js/card_animation.js"></script>
 </div>
 <?php endif ?>

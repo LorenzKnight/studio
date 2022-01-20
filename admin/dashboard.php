@@ -1,7 +1,18 @@
 <?php require_once('../connections/conexion.php');?>
 <?php require_once('inc/seguridad.php');?>
-<?php studentInactiv(0, date('Ymd')); ?>
-<?php TerminStop(0, date('Ymd')); ?>
+<?php
+  $query_DatosTerm = sprintf("SELECT * FROM term WHERE status = 1 ORDER BY id_term DESC");
+  $DatosTerm = mysqli_query($con, $query_DatosTerm) or die(mysqli_error($con));
+  $row_DatosTerm = mysqli_fetch_assoc($DatosTerm);
+  $totalRows_DatosTerm = mysqli_num_rows($DatosTerm);
+
+  $TermAct = $row_DatosTerm['id_term'];
+?>
+<?php 
+  studentInactiv(0, date('Ymd'));
+  TerminStop(0, date('Ymd'));
+  coursesStop(0, $TermAct);
+?>
 <?php
 $dateFuture = date('Ymd') + 2;
 $currentDate = date('Ymd');
@@ -14,14 +25,6 @@ if (obtenerTerminActivo($dateFuture, 1) || obtenerTerminActivo($currentDate, 0) 
   }
   header(sprintf("Location: %s", $insertGoTo));
 } 
-?>
-<?php
-  $query_DatosTerm = sprintf("SELECT * FROM term WHERE status = 1 ORDER BY id_term DESC");
-  $DatosTerm = mysqli_query($con, $query_DatosTerm) or die(mysqli_error($con));
-  $row_DatosTerm = mysqli_fetch_assoc($DatosTerm);
-  $totalRows_DatosTerm = mysqli_num_rows($DatosTerm);
-
-  $TermAct = $row_DatosTerm['id_term'];
 ?>
 <?php
  $query_DatosConsulta = sprintf("SELECT * FROM inscriptions WHERE term = $TermAct AND status != 3 ORDER BY id_insc ASC"); 

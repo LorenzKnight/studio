@@ -48,71 +48,96 @@ if ((isset($_GET["MM_search"])) && ($_GET["MM_search"]=="formsearch")) {
 ?>
 <!--/////////////////////////////////////////////////BACK-END INSERT/////////////////////////////////////////////////////////-->
 <?php
-$query_DatosCourse = sprintf("SELECT * FROM courses WHERE category = 1 AND status = 1 ORDER BY id_course ASC"); 
-$DatosCourse = mysqli_query($con, $query_DatosCourse) or die(mysqli_error($con));
-$row_DatosCourse = mysqli_fetch_assoc($DatosCourse);
-$totalRows_DatosCourse = mysqli_num_rows($DatosCourse);
+  if ((isset($_GET["MM_search2"])) && ($_GET["MM_search2"]=="formsearchcust")) {   
+    // BLOQUE BUSCADOR INTELIGENTE
+    $porciones = explode(" ", $_GET["search2"]);
+    $longitud = count($porciones);
+    $extramodelo=" name LIKE '%".$_GET["search2"] ."%'";
+    for($i=0; $i<$longitud; $i++)
+    {
+      $extramodelo.=" OR surname LIKE '%".$porciones[$i] ."%'";
+    }
+    // FIN BLOQUE BUSCADOR INTELIGENTE
+
+    $query_DatosExisting = "SELECT * FROM students WHERE ".$extramodelo." AND status IS NOT NULL ORDER BY id_student ASC";
+    // echo $query_DatosConsulta;
+    $DatosExisting = mysqli_query($con, $query_DatosExisting) or die(mysqli_error($con));
+    $row_DatosExisting = mysqli_fetch_assoc($DatosExisting);
+    $totalRows_DatosExisting = mysqli_num_rows($DatosExisting);
+  } 
 ?>
 <?php
-$query_DatosCourse2 = sprintf("SELECT * FROM courses WHERE category = 2 AND status = 1 ORDER BY id_course ASC"); 
-$DatosCourse2 = mysqli_query($con, $query_DatosCourse2) or die(mysqli_error($con));
-$row_DatosCourse2 = mysqli_fetch_assoc($DatosCourse2);
-$totalRows_DatosCourse2 = mysqli_num_rows($DatosCourse2);
+  $query_DatosInExist = sprintf("SELECT * FROM students WHERE id_student=%s", GetSQLValueString($_GET["new"], "int")); 
+  $DatosInExist = mysqli_query($con, $query_DatosInExist) or die(mysqli_error($con));
+  $row_DatosInExist = mysqli_fetch_assoc($DatosInExist);
+  $totalRows_DatosInExist = mysqli_num_rows($DatosInExist);
 ?>
 <?php
-$editFormAction = $_SERVER['PHP_SELF'];
-if (isset($_SERVER['QUERY_STRING'])) {
-  $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
-}
-
-if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequest")) {
-
-  if (comprobaremailestudiante($_POST["email"])) 
-  {
-    
-  $year = date("Y");
-  $month = date("m");
-  $day = date("d");
-  $insertSQL = sprintf("INSERT INTO students(date, year, month, day, time, name, surname, email, password, personal_number, telephone, adress, post, city, sex, agree, via) 
-                        VALUES (NOW(), $year, $month, $day, NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
-                        GetSQLValueString($_POST["name"], "text"),                      
-                        GetSQLValueString($_POST["surname"], "text"),
-                        GetSQLValueString($_POST["email"], "text"),
-                        GetSQLValueString($_POST["password"], "text"),
-                        GetSQLValueString($_POST["personal_number"], "text"),
-                        GetSQLValueString($_POST["telephone"], "text"),
-                        GetSQLValueString($_POST["adress"], "text"),
-                        GetSQLValueString($_POST["post"], "int"),
-                        GetSQLValueString($_POST["city"], "text"),
-                        GetSQLValueString($_POST["sex"], "text"),
-                        GetSQLValueString($_POST["agree"], "text"),
-                        GetSQLValueString($_POST["via"], "int"));
-
-  
-  $Result1 = mysqli_query($con,  $insertSQL) or die(mysqli_error($con));
-  
-  
-  $insertGoTo1 = "students.php?newcompl=1";
+  $query_DatosCourse = sprintf("SELECT * FROM courses WHERE category = 1 AND status = 1 ORDER BY id_course ASC"); 
+  $DatosCourse = mysqli_query($con, $query_DatosCourse) or die(mysqli_error($con));
+  $row_DatosCourse = mysqli_fetch_assoc($DatosCourse);
+  $totalRows_DatosCourse = mysqli_num_rows($DatosCourse);
+?>
+<?php
+  $query_DatosCourse2 = sprintf("SELECT * FROM courses WHERE category = 2 AND status = 1 ORDER BY id_course ASC"); 
+  $DatosCourse2 = mysqli_query($con, $query_DatosCourse2) or die(mysqli_error($con));
+  $row_DatosCourse2 = mysqli_fetch_assoc($DatosCourse2);
+  $totalRows_DatosCourse2 = mysqli_num_rows($DatosCourse2);
+?>
+<?php
+  $editFormAction = $_SERVER['PHP_SELF'];
   if (isset($_SERVER['QUERY_STRING'])) {
-    $insertGoTo1 .= (strpos($insertGoTo1, '?')) ? "&" : "?";
-    $insertGoTo1 .= $_SERVER['QUERY_STRING'];
+    $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
   }
-  header(sprintf("Location: %s", $insertGoTo1));
-}
 
-else {
+  if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formrequest")) {
 
-  $query_DatosIdentidad = sprintf("SELECT * FROM students WHERE email=%s ORDER BY id_student DESC",
-                              GetSQLValueString($_POST["email"], "text")); 
-  $DatosIdentidad = mysqli_query($con, $query_DatosIdentidad) or die(mysqli_error($con));
-  $row_DatosIdentidad = mysqli_fetch_assoc($DatosIdentidad);
-  $totalRows_DatosIdentidad = mysqli_num_rows($DatosIdentidad);
-  
-  $StEmail = $row_DatosIdentidad["id_student"];
-  $insertGoTo1 = "students.php?id=$StEmail";
-  header(sprintf("Location: %s", $insertGoTo1));
- }
-}
+    if (comprobaremailestudiante($_POST["email"])) 
+    {
+      
+    $year = date("Y");
+    $month = date("m");
+    $day = date("d");
+    $insertSQL = sprintf("INSERT INTO students(date, year, month, day, time, name, surname, email, password, personal_number, telephone, adress, post, city, sex, agree, via) 
+                          VALUES (NOW(), $year, $month, $day, NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                          GetSQLValueString($_POST["name"], "text"),                      
+                          GetSQLValueString($_POST["surname"], "text"),
+                          GetSQLValueString($_POST["email"], "text"),
+                          GetSQLValueString($_POST["password"], "text"),
+                          GetSQLValueString($_POST["personal_number"], "text"),
+                          GetSQLValueString($_POST["telephone"], "text"),
+                          GetSQLValueString($_POST["adress"], "text"),
+                          GetSQLValueString($_POST["post"], "int"),
+                          GetSQLValueString($_POST["city"], "text"),
+                          GetSQLValueString($_POST["sex"], "text"),
+                          GetSQLValueString($_POST["agree"], "text"),
+                          GetSQLValueString($_POST["via"], "int"));
+
+    
+    $Result1 = mysqli_query($con,  $insertSQL) or die(mysqli_error($con));
+    
+    
+    $insertGoTo1 = "students.php?newcompl=1";
+    if (isset($_SERVER['QUERY_STRING'])) {
+      $insertGoTo1 .= (strpos($insertGoTo1, '?')) ? "&" : "?";
+      $insertGoTo1 .= $_SERVER['QUERY_STRING'];
+    }
+    header(sprintf("Location: %s", $insertGoTo1));
+  }
+
+  else {
+
+    $query_DatosIdentidad = sprintf("SELECT * FROM students WHERE email=%s ORDER BY id_student DESC",
+                                GetSQLValueString($_POST["email"], "text")); 
+    $DatosIdentidad = mysqli_query($con, $query_DatosIdentidad) or die(mysqli_error($con));
+    $row_DatosIdentidad = mysqli_fetch_assoc($DatosIdentidad);
+    $totalRows_DatosIdentidad = mysqli_num_rows($DatosIdentidad);
+    
+    $StEmail = $row_DatosIdentidad["id_student"];
+    $insertGoTo1 = "students.php?id=$StEmail";
+    header(sprintf("Location: %s", $insertGoTo1));
+  }
+  }
 ?>
 
 <?php

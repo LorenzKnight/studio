@@ -5,65 +5,116 @@
             return rc;
     }
 </script>
-<?php if($_GET["new"]):?>
-<div class="subform_cont1">
-    <form action="students.php" method="post" name="formrequest" id="formrequest">
-        <table class="formulario" border="0" cellspacing="0" cellpadding="0">
+<?php if($_GET["search1"] != "" || $_GET["search2"] != ""):?>
+    <div class="subform_cont1">
+        <table class="formulario" style="width: 500px; margin: 40px auto;" border="0" cellspacing="0" cellpadding="0">
             <tr height="30">
                 <td colspan="2" valign="middle" align="center" style="color: #333; padding:0;">
-                    
-                </td>
-            </tr>
-            <tr height="60">
-                <td width="50%" valign="middle" align="right" style="padding: 20px 10px 0;"><input class="textf" type="text" placeholder="Ditt Namn" name="name" id="name" size="31" required/></td>
-                <td width="50%" valign="middle" align="left" style="padding: 20px 10px 0;"><input class="textf" type="text" placeholder="Ditt Efternamn" name="surname" id="surname" size="31" required/></td>
-            </tr>
-            <tr height="60">
-                <td colspan="2" valign="middle" align="center"><input class="textf" type="email" placeholder="Din mailadress..." name="email" id="email" size="68" required/></td>
-            </tr>
-            <tr height="60">
-                <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" minlength="10" maxlength="10" placeholder="Ditt Personnummer (10 siffror)" name="personal_number" id="personal_number" size="31" required/></td>
-                <td width="50%" valign="middle" align="left" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Telefonnummer" name="telephone" id="telephone" size="31" required/></td>
-            </tr>
-            <tr height="60">
-                <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
-                    Kön: 
-                    <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="sex" id="sex" required>
-                    <option value="None" >None</option>
-                    <option value="Man">Man</option>
-                    <option value="Kvinna">Kvinna</option>
-                    </select>
-                </td>
-            </tr>
-            <tr height="60">
-                <td colspan="2" valign="middle" align="center"><input class="textf" type="text" placeholder="Din adress..." name="adress" id="adress" size="68" required/></td>
-            </tr>
-            <tr height="60">
-                <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Ditt Postnummer" name="post" id="post" size="31" required/></td>
-                <td width="50%" valign="middle" align="left" style="padding: 0 10px;"><input class="textf" type="text" placeholder="Din Ort" name="city" id="city" size="31" required/></td>
-            </tr>
-            <tr height="80">
-                <td colspan="2" valign="middle" align="center" style="color: #666; font-size: 14px;">
-                        <a href="students.php"><input class="button_a" style="width: 170px; text-align: center;" value="avbryt" /></a> <input style="padding: 20px 65px;" type="submit" class="button" value="Nästa" />
                 </td>
             </tr>
             <tr height="30">
-                <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
-                    
+                <td colspan="2" valign="middle" align="center" style="color: #333; padding:0; display:flex; align-items: center;">
+                    <div style="padding: 0;">    
+                        <form action="students.php?new=a" method="get" name="formsearchcust" id="formsearchcust">
+                            <input class="textf" style="margin:15px 0 0;" value="<?php echo $_GET['search2'];?>" placeholder="Skriv elevens namn eller efternam här..." name="search2" id="search2" size="40" />
+                            <input type="hidden" name="MM_search2" id="MM_search2" value="formsearchcust" />
+                        </form>
+                    </div>
+                    <button class="<?php echo buttonSmall(UserAppearance($_SESSION['std_UserId']));?>" onclick="location='students.php?new=1'">Avbryt</button>
                 </td>
             </tr>
-            <input type="hidden" name="via" id="via" value="<?php echo $_SESSION['std_UserId']; ?>"/>
-            <input type="hidden" name="password" id="password" value="newstudent246"/>
-            <input type="hidden" name="MM_insert" id="MM_insert" value="formrequest" />
+            <?php
+            if ($totalRows_DatosExisting > 0) {
+            do { ?>
+            <tr height="40">
+                <td colspan="2" valign="middle" align="center" style="color: #333; padding:0;">
+                    <a href="students.php?new=<?php echo $row_DatosExisting['id_student']; ?>"><?php echo $row_DatosExisting['name']; ?> <?php echo $row_DatosExisting['surname']; ?></a>
+                </td>
+            </tr>
+            <?php } while ($row_DatosExisting = mysqli_fetch_assoc($DatosExisting));
+            }
+            ?>
+            <tr height="30">
+                <td colspan="2" valign="middle" align="center" style="color: #333; padding:0;">
+                </td>
+            </tr>
         </table>
-    </form>
+    </div>
+<?php endif ?>
+
+
+<?php if($_GET["new"] != 0):?>
+<div class="subform_cont1">
+    <div class="formulario">
+        <form action="students.php" method="post" name="formrequest" id="formrequest">
+            <table border="0" cellspacing="0" cellpadding="0">
+                <tr height="20">
+                    <td colspan="2" valign="middle" align="center" style="color: #333; padding:0;">
+                    </td>
+                </tr>
+                <tr height="40">
+                    <td colspan="2" valign="middle" align="center" style="color: #333; font-size:0.9em; text-transform: uppercase; padding:0;">
+                        Ange ny student
+                    </td>
+                </tr>
+                <tr height="30">
+                    <td colspan="2" valign="middle" align="center" style="color: #333; padding:0 0 10px 0; border-bottom:1px solid #CCC;">
+                        <p>eller</p>
+                        <a href="students.php?search1=a">Befintlig elev ?</a>
+                    </td>
+                </tr>
+                <tr height="60">
+                    <td width="50%" valign="middle" align="right" style="padding: 20px 10px 0;"><input class="textf" type="text" value="<?php echo $row_DatosInExist['name'];?>" placeholder="Ditt Namn" name="name" id="name" size="31" required/></td>
+                    <td width="50%" valign="middle" align="left" style="padding: 20px 10px 0;"><input class="textf" type="text" value="<?php echo $row_DatosInExist['surname'];?>" placeholder="Ditt Efternamn" name="surname" id="surname" size="31" required/></td>
+                </tr>
+                <tr height="60">
+                    <td colspan="2" valign="middle" align="center"><input class="textf" type="email" value="<?php echo $row_DatosInExist['email'];?>" placeholder="Din mailadress..." name="email" id="email" size="68" required/></td>
+                </tr>
+                <tr height="60">
+                    <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" value="<?php echo $row_DatosInExist['personal_number'];?>" minlength="10" maxlength="10" placeholder="Ditt Personnummer (10 siffror)" name="personal_number" id="personal_number" size="31" required/></td>
+                    <td width="50%" valign="middle" align="left" style="padding: 0 10px;"><input class="textf" type="text" value="<?php echo $row_DatosInExist['telephone'];?>" placeholder="Ditt Telefonnummer" name="telephone" id="telephone" size="31" required/></td>
+                </tr>
+                <tr height="60">
+                    <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
+                        Kön: 
+                        <select class="textf" style="width: 100px; font-size: 14px; color: #999;" name="sex" id="sex" required>
+                        <option value="None" >None</option>
+                        <option value="Man" <?php if ($row_DatosInExist['sex'] == Man) echo "selected"; ?>>Man</option>
+                        <option value="Kvinna" <?php if ($row_DatosInExist['sex'] == Kvinna) echo "selected"; ?>>Kvinna</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr height="60">
+                    <td colspan="2" valign="middle" align="center"><input class="textf" type="text" value="<?php echo $row_DatosInExist['adress'];?>" placeholder="Din adress..." name="adress" id="adress" size="68" required/></td>
+                </tr>
+                <tr height="60">
+                    <td width="50%" valign="middle" align="right" style="padding: 0 10px;"><input class="textf" type="text" value="<?php echo $row_DatosInExist['post'];?>" placeholder="Ditt Postnummer" name="post" id="post" size="31" required/></td>
+                    <td width="50%" valign="middle" align="left" style="padding: 0 10px;"><input class="textf" type="text" value="<?php echo $row_DatosInExist['city'];?>" placeholder="Din Ort" name="city" id="city" size="31" required/></td>
+                </tr>
+                <tr height="80">
+                    <td colspan="2" valign="middle" align="center" style="color: #666; font-size: 14px; border-top:1px solid #CCC;">
+                        <button class="button_a" style="width: 170px; text-align: center;" onclick="location='students.php'">Avbryt</button> <input style="padding: 20px 65px;" type="submit" class="button" value="Nästa" />
+                    </td>
+                </tr>
+                <tr height="10">
+                    <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
+                        
+                    </td>
+                </tr>
+                <input type="hidden" name="via" id="via" value="<?php echo $_SESSION['std_UserId']; ?>"/>
+                <input type="hidden" name="password" id="password" value="newstudent246"/>
+                <input type="hidden" name="MM_insert" id="MM_insert" value="formrequest" />
+            </table>
+        </form>
+    </div>
 </div>
 <?php endif ?>
 
 <?php if($_GET["newcompl"]):?>
     <?php $studentadmin = $row_DatosInsc['id_student'];?>   
     <div class="subform_cont1">
-            <table class="formulario" style="top: 50px;" border="0" cellspacing="0" cellpadding="0">
+        <div class="formulario">
+            <table style="top: 50px; background-color: red;" border="0" cellspacing="0" cellpadding="0">
                 <tr height="50">
                     <td colspan="2" valign="middle" align="center" style="font-size: 30px; padding: 30px 0 0 0;">
                         <?php echo ObtenerNombreStudent($studentadmin);?> <?php echo ObtenerApellidoStudent($studentadmin);?>
@@ -243,6 +294,7 @@
                 </tr>
             </table>
         </form>
+        </div>
     </div>
 <?php endif ?>
 
@@ -274,7 +326,8 @@
 
 <?php if($_GET["id"]):?>  
     <div class="subform_cont1">
-            <table class="formulario" style="top: 50px;" border="0" cellspacing="0" cellpadding="0">
+        <div class="formulario">
+            <table style="width:100%;" border="0" cellspacing="0" cellpadding="0">
                 <tr height="50">
                     <td colspan="2" valign="middle" align="center" style="font-size: 30px; padding: 30px 0 0 0;">
                         <?php echo ObtenerNombreStudent($_GET["id"]);?> <?php echo ObtenerApellidoStudent($_GET["id"]);?>
@@ -451,6 +504,7 @@
                 </tr>
             </table>
         </form>
+        </div>
     </div>
 <?php endif ?>
 
@@ -655,190 +709,192 @@
 
 <?php if($_GET["editc"]):?>
     <div class="subform_cont1">
-        <table class="formulario" style="" border="0" cellspacing="0" cellpadding="0">
-            <tr height="60">
-                <td colspan="2" valign="middle" align="center" style="font-size: 30px; padding: 20px 0 0 0;">
-                    <?php echo ObtenerNombreStudent(ObtenerIDstudentDesdeTransaccion($_GET['editc']));?> <?php echo ObtenerApellidoStudent(ObtenerIDstudentDesdeTransaccion($_GET['editc']));?>
-                </td>
-            </tr>
-            <tr height="30">
-                <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
-                Scrolla i kurs listan för att välja kurs.
-                </td>
-            </tr>
-            <tr height="5">
-            </tr> 
-            <tr>
-                <td colspan="2" valign="middle" align="center">
-                    <div class="courses">
-                        <div class="class1">
-                            <p>Kurs Lista</p>
-                            <div class="lista_c">
-                                <?php
-                                if ($totalRows_DatosCourseEdit > 0) {
-                                do { ?>
-                                <?php if(productosRestantesEdit(ObtenerIDstudentDesdeTransaccion($_GET['editc']), $row_DatosCourseEdit['id_course'], $_GET['editc'])) { ?>
-                                <div style="width:100%;">
-                                    <a style="font-size: 11px;" href="cart_add_edit.php?editc=<?php echo $_GET['editc'];?>&courseID=<?php echo $row_DatosCourseEdit['id_course'];?>&tm=<?php echo $_GET['editc'];?>">
-                                        <div style="width:50%; padding:10px 0; text-align:left; float:left;">
-                                            <?php echo $row_DatosCourseEdit['name'];?>
-                                        </div>
-                                        <div style="width:40%; padding:10px 0; text-align:left; float:left;">
-                                            <?php echo $row_DatosCourseEdit['schedule'];?>
-                                        </div>
-                                        <div style="width:10%; padding:10px 0; color:green; text-align:left; float:left;">
-                                            ( + )
-                                        </div>
-                                    </a>
-                                </div>
-                                <?php } ?>
-                                <?php } while ($row_DatosCourseEdit = mysqli_fetch_assoc($DatosCourseEdit));
-                                }
-                                ?>
-                                    <?php if ($totalRows_DatosCourseEdit2 > 0) {?>
-                                    <p style="font-size:12px; color:#999;">Kurser utan rabatt</p>
+        <div class="formulario">
+            <table style="width:100%;" border="0" cellspacing="0" cellpadding="0">
+                <tr height="60">
+                    <td colspan="2" valign="middle" align="center" style="font-size: 30px; padding: 20px 0 0 0;">
+                        <?php echo ObtenerNombreStudent(ObtenerIDstudentDesdeTransaccion($_GET['editc']));?> <?php echo ObtenerApellidoStudent(ObtenerIDstudentDesdeTransaccion($_GET['editc']));?>
+                    </td>
+                </tr>
+                <tr height="30">
+                    <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
+                    Scrolla i kurs listan för att välja kurs.
+                    </td>
+                </tr>
+                <tr height="5">
+                </tr> 
+                <tr>
+                    <td colspan="2" valign="middle" align="center">
+                        <div class="courses">
+                            <div class="class1">
+                                <p>Kurs Lista</p>
+                                <div class="lista_c">
+                                    <?php
+                                    if ($totalRows_DatosCourseEdit > 0) {
+                                    do { ?>
+                                    <?php if(productosRestantesEdit(ObtenerIDstudentDesdeTransaccion($_GET['editc']), $row_DatosCourseEdit['id_course'], $_GET['editc'])) { ?>
+                                    <div style="width:100%;">
+                                        <a style="font-size: 11px;" href="cart_add_edit.php?editc=<?php echo $_GET['editc'];?>&courseID=<?php echo $row_DatosCourseEdit['id_course'];?>&tm=<?php echo $_GET['editc'];?>">
+                                            <div style="width:50%; padding:10px 0; text-align:left; float:left;">
+                                                <?php echo $row_DatosCourseEdit['name'];?>
+                                            </div>
+                                            <div style="width:40%; padding:10px 0; text-align:left; float:left;">
+                                                <?php echo $row_DatosCourseEdit['schedule'];?>
+                                            </div>
+                                            <div style="width:10%; padding:10px 0; color:green; text-align:left; float:left;">
+                                                ( + )
+                                            </div>
+                                        </a>
+                                    </div>
                                     <?php } ?>
-                                <?php
-                                if ($totalRows_DatosCourseEdit2 > 0) {
-                                do { ?>
-                                <?php if(productosRestantesEdit(ObtenerIDstudentDesdeTransaccion($_GET['editc']), $row_DatosCourseEdit2['id_course'], $_GET['editc'])) { ?>
-                                <div style="width:100%;">
-                                    <a style="font-size: 11px;" href="cart_add_edit.php?editc=<?php echo $_GET['editc'];?>&courseID=<?php echo $row_DatosCourseEdit2['id_course'];?>&tm=<?php echo $_GET['editc'];?>">
-                                        <div style="width:50%; padding:10px 0; text-align:left; float:left;">
-                                            <?php echo $row_DatosCourseEdit2['name'];?>
-                                        </div>
-                                        <div style="width:40%; padding:10px 0; text-align:left; float:left;">
-                                            <?php echo $row_DatosCourseEdit2['schedule'];?>
-                                        </div>
-                                        <div style="width:10%; padding:10px 0; color:green; text-align:left; float:left;">
-                                            ( + )
-                                        </div>
-                                    </a>
+                                    <?php } while ($row_DatosCourseEdit = mysqli_fetch_assoc($DatosCourseEdit));
+                                    }
+                                    ?>
+                                        <?php if ($totalRows_DatosCourseEdit2 > 0) {?>
+                                        <p style="font-size:12px; color:#999;">Kurser utan rabatt</p>
+                                        <?php } ?>
+                                    <?php
+                                    if ($totalRows_DatosCourseEdit2 > 0) {
+                                    do { ?>
+                                    <?php if(productosRestantesEdit(ObtenerIDstudentDesdeTransaccion($_GET['editc']), $row_DatosCourseEdit2['id_course'], $_GET['editc'])) { ?>
+                                    <div style="width:100%;">
+                                        <a style="font-size: 11px;" href="cart_add_edit.php?editc=<?php echo $_GET['editc'];?>&courseID=<?php echo $row_DatosCourseEdit2['id_course'];?>&tm=<?php echo $_GET['editc'];?>">
+                                            <div style="width:50%; padding:10px 0; text-align:left; float:left;">
+                                                <?php echo $row_DatosCourseEdit2['name'];?>
+                                            </div>
+                                            <div style="width:40%; padding:10px 0; text-align:left; float:left;">
+                                                <?php echo $row_DatosCourseEdit2['schedule'];?>
+                                            </div>
+                                            <div style="width:10%; padding:10px 0; color:green; text-align:left; float:left;">
+                                                ( + )
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <?php } ?>
+                                    <?php } while ($row_DatosCourseEdit2 = mysqli_fetch_assoc($DatosCourseEdit2));
+                                    }
+                                    ?>
                                 </div>
-                                <?php } ?>
-                                <?php } while ($row_DatosCourseEdit2 = mysqli_fetch_assoc($DatosCourseEdit2));
-                                }
-                                ?>
+                            </div>
+        
+                            <div class="class1" style="border-left: 1px solid #CCC;">
+                                <p>Utvaldag Kurser</p>
+                                <div class="lista_c">
+                                    <?php $SubTotal = 0; ?>
+                                    <?php
+                                    if ($totalRows_DatosCartEdit > 0) {
+                                    do { ?>
+                                    <div style="width:100%;">
+                                        <a style="font-size: 11px; margin:0 5px;" href="cart_delete.php?counterID=<?php echo $row_DatosCartEdit['id_counter'];?>">
+                                            <div style="width:50%; padding:10px 0; text-align:left; float:left;">
+                                                <?php echo ObtenerNombreCurso($row_DatosCartEdit['id_course']);?>
+                                            </div>
+                                            <div style="width:40%; padding:10px 0; text-align:left; float:left;">
+                                                <?php echo ObtenerEsquemaCurso($row_DatosCartEdit['id_course']);?>
+                                            </div>
+                                            <div style="width:10%; padding:10px 0; color:red; text-align:left; float:left;">
+                                                ( - )
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <?php $SubTotal = $SubTotal + ObtenerPrecioCurso($row_DatosCartEdit['id_course']);?>
+                                    <?php } while ($row_DatosCartEdit = mysqli_fetch_assoc($DatosCartEdit));
+                                    }
+                                    ?>
+                                        <?php if ($totalRows_DatosCartEdit2 > 0) {?>
+                                        <p style="font-size:12px; color:#999;">Kurser utan rabatt</p>
+                                        <?php } ?>
+                                    <?php
+                                    if ($totalRows_DatosCartEdit2 > 0) {
+                                    do { ?>
+                                    <div style="width:100%;">
+                                        <a style="font-size: 11px; margin:0 5px;" href="cart_delete.php?counterID=<?php echo $row_DatosCartEdit2['id_counter'];?>">
+                                            <div style="width:50%; padding:10px 0; text-align:left; float:left;">
+                                                <?php echo ObtenerNombreCurso($row_DatosCartEdit2['id_course']);?>
+                                            </div>
+                                            <div style="width:40%; padding:10px 0; text-align:left; float:left;">
+                                                <?php echo ObtenerEsquemaCurso($row_DatosCartEdit2['id_course']);?>
+                                            </div>
+                                            <div style="width:10%; padding:10px 0; color:red; text-align:left; float:left;">
+                                                ( - )
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <?php $NoDiscTotal = $NoDiscTotal + ObtenerPrecioCurso($row_DatosCartEdit2['id_course']);?>
+                                    <?php } while ($row_DatosCartEdit2 = mysqli_fetch_assoc($DatosCartEdit2));
+                                    }
+                                    ?>
+                                </div>
                             </div>
                         </div>
-    
-                        <div class="class1" style="border-left: 1px solid #CCC;">
-                            <p>Utvaldag Kurser</p>
-                            <div class="lista_c">
-                                <?php $SubTotal = 0; ?>
+        <form action="students.php" method="post" name="formeditc" id="formeditc">
+                    </td>
+                </tr>
+                <tr height="60">
+                    <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
+                                
                                 <?php
-                                if ($totalRows_DatosCartEdit > 0) {
-                                do { ?>
-                                <div style="width:100%;">
-                                    <a style="font-size: 11px; margin:0 5px;" href="cart_delete.php?counterID=<?php echo $row_DatosCartEdit['id_counter'];?>">
-                                        <div style="width:50%; padding:10px 0; text-align:left; float:left;">
-                                            <?php echo ObtenerNombreCurso($row_DatosCartEdit['id_course']);?>
-                                        </div>
-                                        <div style="width:40%; padding:10px 0; text-align:left; float:left;">
-                                            <?php echo ObtenerEsquemaCurso($row_DatosCartEdit['id_course']);?>
-                                        </div>
-                                        <div style="width:10%; padding:10px 0; color:red; text-align:left; float:left;">
-                                            ( - )
-                                        </div>
-                                    </a>
-                                </div>
-                                <?php $SubTotal = $SubTotal + ObtenerPrecioCurso($row_DatosCartEdit['id_course']);?>
-                                <?php } while ($row_DatosCartEdit = mysqli_fetch_assoc($DatosCartEdit));
-                                }
+                                $SubTotalPlus = $SubTotal + $NoDiscTotal;
+                                $resprosent = ObtenerPDescuento($totalRows_DatosCartEdit);
+                                $preciorebaja = $SubTotal / 100 * $resprosent;
+                                $precioTotalCR = $SubTotal - $preciorebaja;
+                                $precioTotal = $SubTotal - $preciorebaja + $NoDiscTotal;
                                 ?>
-                                    <?php if ($totalRows_DatosCartEdit2 > 0) {?>
-                                    <p style="font-size:12px; color:#999;">Kurser utan rabatt</p>
-                                    <?php } ?>
-                                <?php
-                                if ($totalRows_DatosCartEdit2 > 0) {
-                                do { ?>
-                                <div style="width:100%;">
-                                    <a style="font-size: 11px; margin:0 5px;" href="cart_delete.php?counterID=<?php echo $row_DatosCartEdit2['id_counter'];?>">
-                                        <div style="width:50%; padding:10px 0; text-align:left; float:left;">
-                                            <?php echo ObtenerNombreCurso($row_DatosCartEdit2['id_course']);?>
-                                        </div>
-                                        <div style="width:40%; padding:10px 0; text-align:left; float:left;">
-                                            <?php echo ObtenerEsquemaCurso($row_DatosCartEdit2['id_course']);?>
-                                        </div>
-                                        <div style="width:10%; padding:10px 0; color:red; text-align:left; float:left;">
-                                            ( - )
-                                        </div>
-                                    </a>
-                                </div>
-                                <?php $NoDiscTotal = $NoDiscTotal + ObtenerPrecioCurso($row_DatosCartEdit2['id_course']);?>
-                                <?php } while ($row_DatosCartEdit2 = mysqli_fetch_assoc($DatosCartEdit2));
-                                }
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-    <form action="students.php" method="post" name="formeditc" id="formeditc">
-                </td>
-            </tr>
-            <tr height="60">
-                <td colspan="2" width="100%" valign="middle" align="center" style="color: #666; font-size: 14px; padding: 0 10px;">
+
+                                <table style="background-color: ; margin:10px 0;" width="60%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td colspan="2" valign="middle" align="center" style="font-size:18px; padding:0 0 10px;"><?php echo GetPacket($totalRows_DatosParaPaquete3); ?></td>
+                                </tr>
+                                <tr>
+                                    <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#CCC;">Sub Total:</td>
+                                    <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#CCC;"><?php echo $SubTotalPlus; ?> SEK</td>
+                                </tr>
+                                <?php if ($totalRows_DatosCartEdit > 1) {?>
+                                <tr>
+                                    <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#CCC;">- <?php //echo ObtenerPDescuento($totalRows_DatosCart); ?> Rabatt:</td>
+                                    <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#CCC;"><?php echo $preciorebaja; ?> SEK </td>
+                                </tr>
+                                <?php } ?>
+                                <!-- <tr>
+                                    <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#999;">= Total efter rabatt:</td>
+                                    <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#999;"><?php echo $precioTotalCR; ?> SEK</td>
+                                </tr> -->
+                                <?php if ($totalRows_DatosCartEdit > 0) {?>
+                                <!-- <tr>
+                                    <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#999;">+ Kurser utan rabatt:</td>
+                                    <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#999;"><?php echo $NoDiscTotal; ?> SEK</td>
+                                </tr> -->
+                                <?php } ?>
+                                <tr>
+                                    <td width="50%" valign="middle" align="right" style="font-size:18px; padding:5px 5px 0 0; border-top:1px solid #999;">Total:</td>
+                                    <td width="50%" valign="middle" align="left" style="font-size:18px; padding:5px 0 0 5px; border-top:1px solid #999;"><?php echo $precioTotal; ?> SEK</td>
+                                </tr>
+                                <tr>
+                                    <td width="50%" valign="middle" align="right" style="font-size:18px; padding:5px 5px 0 0; border-top:1px solid #999;">Total Adm:</td>
+                                    <td width="50%" valign="middle" align="left" style="font-size:18px; padding:5px 0 0 5px; border-top:1px solid #999;"><input class="textd" type="text" value="<?php echo inscTotal($_GET['editc']); ?>" name="total" id="total" size="5" autocomplete="off" style="text-align:center; font-size:18px"> SEK</td>
+                                </tr>
+                            </table>
+
+                            <?php $_SESSION["paquete3"] = GetPacket($totalRows_DatosParaPaquete3);?>
                             
-                            <?php
-                            $SubTotalPlus = $SubTotal + $NoDiscTotal;
-                            $resprosent = ObtenerPDescuento($totalRows_DatosCartEdit);
-                            $preciorebaja = $SubTotal / 100 * $resprosent;
-                            $precioTotalCR = $SubTotal - $preciorebaja;
-                            $precioTotal = $SubTotal - $preciorebaja + $NoDiscTotal;
-                            ?>
-
-                            <table style="background-color: ; margin:10px 0;" width="60%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <td colspan="2" valign="middle" align="center" style="font-size:18px; padding:0 0 10px;"><?php echo GetPacket($totalRows_DatosParaPaquete3); ?></td>
-                            </tr>
-                            <tr>
-                                <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#CCC;">Sub Total:</td>
-                                <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#CCC;"><?php echo $SubTotalPlus; ?> SEK</td>
-                            </tr>
-                            <?php if ($totalRows_DatosCartEdit > 1) {?>
-                            <tr>
-                                <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#CCC;">- <?php //echo ObtenerPDescuento($totalRows_DatosCart); ?> Rabatt:</td>
-                                <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#CCC;"><?php echo $preciorebaja; ?> SEK </td>
-                            </tr>
-                            <?php } ?>
-                            <!-- <tr>
-                                <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#999;">= Total efter rabatt:</td>
-                                <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#999;"><?php echo $precioTotalCR; ?> SEK</td>
-                            </tr> -->
-                            <?php if ($totalRows_DatosCartEdit > 0) {?>
-                            <!-- <tr>
-                                <td width="50%" valign="middle" align="right" style="font-size:14px; padding:0 5px 0 0; color:#999;">+ Kurser utan rabatt:</td>
-                                <td width="50%" valign="middle" align="left" style="font-size:14px; padding:0 0 0 5px; color:#999;"><?php echo $NoDiscTotal; ?> SEK</td>
-                            </tr> -->
-                            <?php } ?>
-                            <tr>
-                                <td width="50%" valign="middle" align="right" style="font-size:18px; padding:5px 5px 0 0; border-top:1px solid #999;">Total:</td>
-                                <td width="50%" valign="middle" align="left" style="font-size:18px; padding:5px 0 0 5px; border-top:1px solid #999;"><?php echo $precioTotal; ?> SEK</td>
-                            </tr>
-                            <tr>
-                                <td width="50%" valign="middle" align="right" style="font-size:18px; padding:5px 5px 0 0; border-top:1px solid #999;">Total Adm:</td>
-                                <td width="50%" valign="middle" align="left" style="font-size:18px; padding:5px 0 0 5px; border-top:1px solid #999;"><input class="textd" type="text" value="<?php echo inscTotal($_GET['editc']); ?>" name="total" id="total" size="5" autocomplete="off" style="text-align:center; font-size:18px"> SEK</td>
-                            </tr>
-                        </table>
-
-                        <?php $_SESSION["paquete3"] = GetPacket($totalRows_DatosParaPaquete3);?>
-                        
-                        <!-- Pay method:<br/>
-                        Paypal -->
-                </td>
-            </tr>
-            <tr height="85">
-                <td colspan="2" valign="middle" align="center" style="color: #666; font-size: 14px;">
-                        <input type="submit" class="button" value="Ok!" />
-                </td>
-            </tr>
-            <tr height="3">
-            </tr>
-        </table>
-        <input type="hidden" name="package" id="package" value="<?php echo $_SESSION["paquete3"]; ?>"/>
-        <!-- <input type="hidden" name="total" id="total" value="<?php //echo inscTotal($_GET['editc']); ?>"/> -->
-        <input type="hidden" name="id_insc" id="id_insc" value="<?php echo $_GET['editc'];?>"/>
-        <input type="hidden" name="MM_insert" id="MM_insert" value="formeditc" />
-    </form>
+                            <!-- Pay method:<br/>
+                            Paypal -->
+                    </td>
+                </tr>
+                <tr height="85">
+                    <td colspan="2" valign="middle" align="center" style="color: #666; font-size: 14px;">
+                            <input type="submit" class="button" value="Ok!" />
+                    </td>
+                </tr>
+                <tr height="3">
+                </tr>
+            </table>
+            <input type="hidden" name="package" id="package" value="<?php echo $_SESSION["paquete3"]; ?>"/>
+            <!-- <input type="hidden" name="total" id="total" value="<?php //echo inscTotal($_GET['editc']); ?>"/> -->
+            <input type="hidden" name="id_insc" id="id_insc" value="<?php echo $_GET['editc'];?>"/>
+            <input type="hidden" name="MM_insert" id="MM_insert" value="formeditc" />
+        </form>
+        </div>
     </div>
 <?php endif ?>
 

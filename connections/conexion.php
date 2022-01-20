@@ -21,5 +21,6 @@ else
 <!-- CAMBIAR EL VALOR DE ESTA VARIABLE PARA QUE LOS LINK FUNCIONEN -->
 <?php
   $dominio = "localhost:8888";
+  // $dominio = "http://www.loopsdancestudio.se";
   $pageName = "Loops Dance Studio";
 ?>

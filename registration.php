@@ -9,7 +9,8 @@
 ?>
 <!-- /////////////////////////////////// Consulta para optener el lista de cursos que se muestran en el formulario con categoria 1/////////////////////////////////////////// -->
 <?php
-  $query_DatosCourse = sprintf("SELECT * FROM courses WHERE category = 1 AND status = 1 ORDER BY id_course ASC"); 
+  $query_DatosCourse = sprintf("SELECT * FROM courses WHERE category = 1 AND term = %s AND status = 1 ORDER BY id_course ASC",
+                                GetSQLValueString($TermAct, "int")); 
   $DatosCourse = mysqli_query($con, $query_DatosCourse) or die(mysqli_error($con));
   $row_DatosCourse = mysqli_fetch_assoc($DatosCourse);
   $totalRows_DatosCourse = mysqli_num_rows($DatosCourse);
@@ -17,7 +18,8 @@
 <!-- /////////////////////////////////// Final Consulta para optener el lista de cursos que se muestran en el formulario con categoria 1/////////////////////////////////////////// -->
 <!-- /////////////////////////////////// Consulta para optener el lista de cursos que se muestran en el formulario con categoria 1/////////////////////////////////////////// -->
 <?php
-  $query_DatosCourse2 = sprintf("SELECT * FROM courses WHERE category = 2 AND status = 1 ORDER BY id_course ASC"); 
+  $query_DatosCourse2 = sprintf("SELECT * FROM courses WHERE category = 2 AND term = %s AND status = 1 ORDER BY id_course ASC",
+                                GetSQLValueString($TermAct, "int")); 
   $DatosCourse2 = mysqli_query($con, $query_DatosCourse2) or die(mysqli_error($con));
   $row_DatosCourse2 = mysqli_fetch_assoc($DatosCourse2);
   $totalRows_DatosCourse2 = mysqli_num_rows($DatosCourse2); 
@@ -273,6 +275,37 @@
 <link href="css/style.css" rel="stylesheet" type="text/css"  media="all" />
 <?php $menuactive= 2;?>
 </head>
+<script type="text/javascript" src="js/functions.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" ></script> -->
+<!-- <script src="js/jquery-3.2.1.min.js" ></script> -->
+<script>
+  // // initializing scroll
+  // $(function()
+  // {
+  //   // initializing floating
+  //   var $flotante = $('.floating');
+  //   $flotante.show();
+  //   var altura = $('.button_reg').offset().top;
+  //   var scrollTop = $(window).scrollTop();
+
+  //   console.log(scrollTop)
+  //   console.log(altura)
+  //   // Scroll
+  //   $(window).scroll(function()
+  //   {
+  //     if (scrollTop < altura)
+  //     {
+  //       $flotante.hide();
+  //       console.log('hide');
+  //     }
+  //     else
+  //     {
+  //       $flotante.show();
+  //       console.log('show');
+  //     }
+  //   });
+  // });
+</script>
 <script>
   function invalidCode() {
     console.log("tu codigo no es valido!");
@@ -281,10 +314,7 @@
 <script>
   function promocode() {
     var styles = {
-      // "background-color": "red",
       "opacity": "1",
-      // "transition": "300ms ease-in-out 100ms",
-      // "animation-delay": "0.1s",
       "display": "block"
     };
     var promoCode = document.getElementById("code");
@@ -292,15 +322,66 @@
 
     document.getElementById("info").style.display="none";
   }
+</script>
+<script>
+    // const isElementOrDescendant = function (parent, child) {
+    //     if (parent === child) return true
 
-  // function ocurtar() {
-  //   event.stopPropagation()
-  //   document.getElementById("popup1").style.display="none";
-  // }
+    //     var node = child.parentNode;
+    //     while (node != null) {
+    //     if (node == parent) {
+    //         return true;
+    //     }
+    //     node = node.parentNode;
+    //     }
+    //     return false;
+    // }
+
+    // const onClick = function (e) {
+    //     const el = document.getElementById('formrequest')
+    //     const al = document.getElementById('formrequeste')
+    //     const clickableAreas = Array.from(document.getElementsByClassName('paquetes'))
+    //     clickableAreas.push(el)
+    //     clickableAreas.push(al)
+
+    //     let isClickOutside = true
+
+    //     for (let i = 0; i < clickableAreas.length; i++) {
+    //         if (isElementOrDescendant(clickableAreas[i], e.target)) {
+    //             isClickOutside = false
+    //         }
+    //     }
+
+    //     if (isClickOutside) {
+    //         location = 'price_registration.php'
+    //     }
+    // }
+
+    // document.addEventListener('click', onClick)
+</script>
+<script>
+// Agrement popup
+    function mostrar() {
+    event.stopPropagation()
+    document.getElementById("popup").style.display="block";
+    }
+    function ocurtar() {
+    event.stopPropagation()
+    document.getElementById("popup").style.display="none";
+    }
+// GDPR popup 
+    function mostrar2() {
+    event.stopPropagation()
+    document.getElementById("popup2").style.display="block";
+    }
+    function ocurtar2() {
+    event.stopPropagation()
+    document.getElementById("popup2").style.display="none";
+    }
 </script>
 <body>
     <?php include("inc/head.php")?>
-    <?php include("inc/price_info.php")?>
+    <?php include("inc/wrap_registration.php")?>
     <?php include("inc/foot.php")?>
 </body>
 </html>
